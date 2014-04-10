@@ -1,0 +1,7 @@
+parameters:
+#    unad.example.class: Admin\UnadBundle\Example
+
+services:
+#    unad.example:
+#        class: %unad.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

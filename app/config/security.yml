@@ -1,0 +1,39 @@
+security:
+    encoders:
+        Admin\UserBundle\Entity\User:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
+
+    providers:
+        user_db:
+            entity: { class: Admin\UserBundle\Entity\User, property: username }
+
+    firewalls:
+        dev:
+#            pattern:  ^/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/login$
+            security: false
+
+        secured_area:
+            pattern:    ^/
+#            http_basic:
+#                realm: "Introduzca Usuario y Contraseña"
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: /logout
+                target: /login
+
+    access_control:
+      - { path: ^/avales, roles: ROLE_AVAL }
+      - { path: ^/admin, roles: ROLE_ADMIN }
+      - { path: ^/doc, roles: ROLE_DOC }
+      - { path: ^/dec, roles: ROLE_AVAL }
+      - { path: ^/user, roles: ROLE_USER }
+       

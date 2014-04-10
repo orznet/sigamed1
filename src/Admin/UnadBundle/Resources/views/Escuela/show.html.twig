@@ -1,0 +1,54 @@
+{% block body -%}
+       
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">{{ entity.nombre }}</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+  <table class="table table-bordered table-striped hidden-mobile">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Sigla</th>
+                <td>{{ entity.sigla }}</td>
+            </tr>
+            <tr>
+                <th>Decano</th>
+                <td>{{ entity.decano.nombres }} {{ entity.decano.apellidos }}</td>
+            </tr>
+            <tr>
+                <th>Secretaria Academica</th>
+                <td>{{ entity.secretaria ? entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('escuela') }}">
+            Volver a la lista
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('escuela_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>			<!-- /modal-footer -->
+        
+        <!-- /modal-dialog -->
+
+
+{% endblock %}

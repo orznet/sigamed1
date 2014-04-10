@@ -1,0 +1,3 @@
+_escuela_unad:
+    resource: "@AdminUnadBundle/Controller/EscuelaController.php"
+    type:     annotation

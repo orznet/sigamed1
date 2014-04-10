@@ -1,0 +1,47 @@
+admin_user:
+    pattern:  /lista
+    defaults: { _controller: "AdminUserBundle:User:index" }
+
+admin_user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminUserBundle:User:show" }
+
+admin_user_buscarpor:
+    pattern:  /buscarpor
+    defaults: { _controller: "AdminUserBundle:User:buscarpor" }
+
+admin_user_cedula:
+    pattern:  /{text}/cedula
+    defaults: { _controller: "AdminUserBundle:User:buscarcedula" }
+
+admin_user_apellidos:
+    pattern:  /{text}/apellido
+    defaults: { _controller: "AdminUserBundle:User:buscarapellido" }    
+
+admin_user_nombres:
+    pattern:  /{text}/nombre
+    defaults: { _controller: "AdminUserBundle:User:buscarnombre" }
+    
+
+admin_user_new:
+    pattern:  /new
+    defaults: { _controller: "AdminUserBundle:User:new" }
+
+admin_user_create:
+    pattern:  /create
+    defaults: { _controller: "AdminUserBundle:User:create" }
+    requirements: { _method: post }
+
+admin_user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminUserBundle:User:edit" }
+
+admin_user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminUserBundle:User:update" }
+    requirements: { _method: post|put }
+
+admin_user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminUserBundle:User:delete" }
+    requirements: { _method: post|delete }
