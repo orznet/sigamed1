@@ -54,7 +54,13 @@ protected $decano;
      * onDelete="CASCADE"
      * )
      */
-protected $secretaria; 
+protected $secretaria;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="escuela")
+     */
+    protected $programas;
 
 
     /**

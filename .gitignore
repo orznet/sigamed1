@@ -1,0 +1,13 @@
+/web/uploads/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+/build/
+/vendor/
+/bin/
+/composer.phar
+/src/Acme/*
+/nbproject/
+/nbproject/private/
+*~

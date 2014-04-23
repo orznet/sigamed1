@@ -3437,7 +3437,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => '/Users/omarr/codigo/med/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'ap_',
+            'kernel.name' => 'app',
             'kernel.cache_dir' => '/Users/omarr/codigo/med/app/cache/dev',
             'kernel.logs_dir' => '/Users/omarr/codigo/med/app/logs',
             'kernel.bundles' => array(

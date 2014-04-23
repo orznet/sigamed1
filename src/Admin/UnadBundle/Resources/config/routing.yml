@@ -1,3 +1,15 @@
 _escuela_unad:
     resource: "@AdminUnadBundle/Controller/EscuelaController.php"
     type:     annotation
+    
+_zona_unad:
+    resource: "@AdminUnadBundle/Controller/ZonaController.php"
+    type:     annotation
+    
+_centro_unad:
+    resource: "@AdminUnadBundle/Controller/CentroController.php"
+    type:     annotation        
+    
+_programa_unad:
+    resource: "@AdminUnadBundle/Controller/ProgramaController.php"
+    type:     annotation        

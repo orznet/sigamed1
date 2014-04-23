@@ -76,7 +76,16 @@ class User implements UserInterface,  \Serializable
     
     protected $secretaria;
 
- 
+     /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Zona", mappedBy="director")
+     */
+    protected $directorzona;
+    
+    
+         /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Centro", mappedBy="director")
+     */
+    protected $directorcentro;
     
     public function __construct()
     {
@@ -348,5 +357,137 @@ class User implements UserInterface,  \Serializable
         $this->id = $id;
     
         return $this;
+    }
+
+    /**
+     * Add decano
+     *
+     * @param \Admin\UnadBundle\Entity\Escuela $decano
+     * @return User
+     */
+    public function addDecano(\Admin\UnadBundle\Entity\Escuela $decano)
+    {
+        $this->decano[] = $decano;
+
+        return $this;
+    }
+
+    /**
+     * Remove decano
+     *
+     * @param \Admin\UnadBundle\Entity\Escuela $decano
+     */
+    public function removeDecano(\Admin\UnadBundle\Entity\Escuela $decano)
+    {
+        $this->decano->removeElement($decano);
+    }
+
+    /**
+     * Get decano
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDecano()
+    {
+        return $this->decano;
+    }
+
+    /**
+     * Add secretaria
+     *
+     * @param \Admin\UnadBundle\Entity\Escuela $secretaria
+     * @return User
+     */
+    public function addSecretarium(\Admin\UnadBundle\Entity\Escuela $secretaria)
+    {
+        $this->secretaria[] = $secretaria;
+
+        return $this;
+    }
+
+    /**
+     * Remove secretaria
+     *
+     * @param \Admin\UnadBundle\Entity\Escuela $secretaria
+     */
+    public function removeSecretarium(\Admin\UnadBundle\Entity\Escuela $secretaria)
+    {
+        $this->secretaria->removeElement($secretaria);
+    }
+
+    /**
+     * Get secretaria
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSecretaria()
+    {
+        return $this->secretaria;
+    }
+
+    /**
+     * Add directorzona
+     *
+     * @param \Admin\UnadBundle\Entity\Zona $directorzona
+     * @return User
+     */
+    public function addDirectorzona(\Admin\UnadBundle\Entity\Zona $directorzona)
+    {
+        $this->directorzona[] = $directorzona;
+
+        return $this;
+    }
+
+    /**
+     * Remove directorzona
+     *
+     * @param \Admin\UnadBundle\Entity\Zona $directorzona
+     */
+    public function removeDirectorzona(\Admin\UnadBundle\Entity\Zona $directorzona)
+    {
+        $this->directorzona->removeElement($directorzona);
+    }
+
+    /**
+     * Get directorzona
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDirectorzona()
+    {
+        return $this->directorzona;
+    }
+
+    /**
+     * Add directorcentro
+     *
+     * @param \Admin\UnadBundle\Entity\Centro $directorcentro
+     * @return User
+     */
+    public function addDirectorcentro(\Admin\UnadBundle\Entity\Centro $directorcentro)
+    {
+        $this->directorcentro[] = $directorcentro;
+
+        return $this;
+    }
+
+    /**
+     * Remove directorcentro
+     *
+     * @param \Admin\UnadBundle\Entity\Centro $directorcentro
+     */
+    public function removeDirectorcentro(\Admin\UnadBundle\Entity\Centro $directorcentro)
+    {
+        $this->directorcentro->removeElement($directorcentro);
+    }
+
+    /**
+     * Get directorcentro
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDirectorcentro()
+    {
+        return $this->directorcentro;
     }
 }

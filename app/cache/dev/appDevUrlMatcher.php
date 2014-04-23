@@ -219,6 +219,258 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/zona')) {
+            // zona
+            if (rtrim($pathinfo, '/') === '/zona') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_zona;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'zona');
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::indexAction',  '_route' => 'zona',);
+            }
+            not_zona:
+
+            // zona_create
+            if ($pathinfo === '/zona/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_zona_create;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::createAction',  '_route' => 'zona_create',);
+            }
+            not_zona_create:
+
+            // zona_new
+            if ($pathinfo === '/zona/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_zona_new;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::newAction',  '_route' => 'zona_new',);
+            }
+            not_zona_new:
+
+            // zona_show
+            if (preg_match('#^/zona/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_zona_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'zona_show')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::showAction',));
+            }
+            not_zona_show:
+
+            // zona_edit
+            if (preg_match('#^/zona/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_zona_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'zona_edit')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::editAction',));
+            }
+            not_zona_edit:
+
+            // zona_update
+            if (preg_match('#^/zona/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_zona_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'zona_update')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::updateAction',));
+            }
+            not_zona_update:
+
+            // zona_delete
+            if (preg_match('#^/zona/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_zona_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'zona_delete')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ZonaController::deleteAction',));
+            }
+            not_zona_delete:
+
+        }
+
+        if (0 === strpos($pathinfo, '/centro')) {
+            // centro
+            if (rtrim($pathinfo, '/') === '/centro') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_centro;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'centro');
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::indexAction',  '_route' => 'centro',);
+            }
+            not_centro:
+
+            // centro_create
+            if ($pathinfo === '/centro/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_centro_create;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::createAction',  '_route' => 'centro_create',);
+            }
+            not_centro_create:
+
+            // centro_new
+            if ($pathinfo === '/centro/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_centro_new;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::newAction',  '_route' => 'centro_new',);
+            }
+            not_centro_new:
+
+            // centro_show
+            if (preg_match('#^/centro/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_centro_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'centro_show')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::showAction',));
+            }
+            not_centro_show:
+
+            // centro_edit
+            if (preg_match('#^/centro/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_centro_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'centro_edit')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::editAction',));
+            }
+            not_centro_edit:
+
+            // centro_update
+            if (preg_match('#^/centro/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_centro_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'centro_update')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::updateAction',));
+            }
+            not_centro_update:
+
+            // centro_delete
+            if (preg_match('#^/centro/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_centro_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'centro_delete')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\CentroController::deleteAction',));
+            }
+            not_centro_delete:
+
+        }
+
+        if (0 === strpos($pathinfo, '/programa')) {
+            // programa
+            if (rtrim($pathinfo, '/') === '/programa') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_programa;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'programa');
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::indexAction',  '_route' => 'programa',);
+            }
+            not_programa:
+
+            // programa_create
+            if ($pathinfo === '/programa/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_programa_create;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::createAction',  '_route' => 'programa_create',);
+            }
+            not_programa_create:
+
+            // programa_new
+            if ($pathinfo === '/programa/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_programa_new;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::newAction',  '_route' => 'programa_new',);
+            }
+            not_programa_new:
+
+            // programa_show
+            if (preg_match('#^/programa/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_programa_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'programa_show')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::showAction',));
+            }
+            not_programa_show:
+
+            // programa_edit
+            if (preg_match('#^/programa/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_programa_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'programa_edit')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::editAction',));
+            }
+            not_programa_edit:
+
+            // programa_update
+            if (preg_match('#^/programa/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_programa_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'programa_update')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::updateAction',));
+            }
+            not_programa_update:
+
+            // programa_delete
+            if (preg_match('#^/programa/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_programa_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'programa_delete')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\ProgramaController::deleteAction',));
+            }
+            not_programa_delete:
+
+        }
+
         // admin_user_homepage
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_homepage')), array (  '_controller' => 'Admin\\UserBundle\\Controller\\DefaultController::indexAction',));
