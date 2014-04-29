@@ -12,4 +12,9 @@ _centro_unad:
     
 _programa_unad:
     resource: "@AdminUnadBundle/Controller/ProgramaController.php"
-    type:     annotation        
+    type:     annotation  
+    
+_docente_unad:
+    resource: "@AdminUnadBundle/Controller/DocenteController.php"
+    type:     annotation       
+    

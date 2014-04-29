@@ -7,44 +7,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Admin\UnadBundle\Entity\Programa;
-use Admin\UnadBundle\Form\ProgramaType;
+use Admin\UnadBundle\Entity\Docente;
+use Admin\UnadBundle\Form\DocenteType;
 
 /**
- * Programa controller.
+ * Docente controller.
  *
- * @Route("/programa")
+ * @Route("/docente")
  */
-class ProgramaController extends Controller
+class DocenteController extends Controller
 {
 
     /**
-     * Lists all Programa entities.
+     * Lists all Docente entities.
      *
-     * @Route("/", name="programa")
+     * @Route("/", name="docente")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$entities = $em->getRepository('AdminUnadBundle:Programa')->findAll();
-        $entities = $em->getRepository('AdminUnadBundle:Programa')->ordenEscuela();
+
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Programa entity.
+     * Creates a new Docente entity.
      *
-     * @Route("/", name="programa_create")
+     * @Route("/", name="docente_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Programa:new.html.twig")
+     * @Template("AdminUnadBundle:Docente:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Programa();
+        $entity = new Docente();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class ProgramaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('programa_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('docente_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class ProgramaController extends Controller
     }
 
     /**
-    * Creates a form to create a Programa entity.
+    * Creates a form to create a Docente entity.
     *
-    * @param Programa $entity The entity
+    * @param Docente $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Programa $entity)
+    private function createCreateForm(Docente $entity)
     {
-        $form = $this->createForm(new ProgramaType(), $entity, array(
-            'action' => $this->generateUrl('programa_create'),
+        $form = $this->createForm(new DocenteType(), $entity, array(
+            'action' => $this->generateUrl('docente_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class ProgramaController extends Controller
     }
 
     /**
-     * Displays a form to create a new Programa entity.
+     * Displays a form to create a new Docente entity.
      *
-     * @Route("/new", name="programa_new")
+     * @Route("/new", name="docente_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Programa();
+        $entity = new Docente();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class ProgramaController extends Controller
     }
 
     /**
-     * Finds and displays a Programa entity.
+     * Finds and displays a Docente entity.
      *
-     * @Route("/{id}", name="programa_show")
+     * @Route("/{id}", name="docente_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class ProgramaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Programa entity.');
+            throw $this->createNotFoundException('Unable to find Docente entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class ProgramaController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Programa entity.
+     * Displays a form to edit an existing Docente entity.
      *
-     * @Route("/{id}/edit", name="programa_edit")
+     * @Route("/{id}/edit", name="docente_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class ProgramaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Programa entity.');
+            throw $this->createNotFoundException('Unable to find Docente entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class ProgramaController extends Controller
     }
 
     /**
-    * Creates a form to edit a Programa entity.
+    * Creates a form to edit a Docente entity.
     *
-    * @param Programa $entity The entity
+    * @param Docente $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Programa $entity)
+    private function createEditForm(Docente $entity)
     {
-        $form = $this->createForm(new ProgramaType(), $entity, array(
-            'action' => $this->generateUrl('programa_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new DocenteType(), $entity, array(
+            'action' => $this->generateUrl('docente_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class ProgramaController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Programa entity.
+     * Edits an existing Docente entity.
      *
-     * @Route("/{id}", name="programa_update")
+     * @Route("/{id}", name="docente_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Programa:edit.html.twig")
+     * @Template("AdminUnadBundle:Docente:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Programa entity.');
+            throw $this->createNotFoundException('Unable to find Docente entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class ProgramaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('programa_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('docente_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class ProgramaController extends Controller
         );
     }
     /**
-     * Deletes a Programa entity.
+     * Deletes a Docente entity.
      *
-     * @Route("/{id}", name="programa_delete")
+     * @Route("/{id}", name="docente_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class ProgramaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+            $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Programa entity.');
+                throw $this->createNotFoundException('Unable to find Docente entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('programa'));
+        return $this->redirect($this->generateUrl('docente'));
     }
 
     /**
-     * Creates a form to delete a Programa entity by id.
+     * Creates a form to delete a Docente entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class ProgramaController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('programa_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('docente_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

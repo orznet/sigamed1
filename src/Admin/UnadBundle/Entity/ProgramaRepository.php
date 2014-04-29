@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProgramaRepository extends EntityRepository
 {
+    
+    
+    public function ordenEscuela(){
+     $em = $this->getEntityManager(); 
+    // $centros = $em->getRepository('AdminUnadBundle:Centro')->findAll();
+     $query = $em->createQuery('SELECT a FROM AdminUnadBundle:Programa a ORDER BY a.escuela ASC');
+     $centros = $query->getResult(); 
+     return $centros;        
+  }
 }

@@ -119,5 +119,29 @@ protected $escuela;
     public function getEscuela()
     {
         return $this->escuela;
+
+        }
+
+    /**
+     * Set tipo
+     *
+     * @param string $tipo
+     * @return Programa
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return string 
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
     }
 }

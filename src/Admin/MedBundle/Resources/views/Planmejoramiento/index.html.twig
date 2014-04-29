@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Planes de Mejoramiento</h1>
+
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cédula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Fecha creacion</th>
+                <th>Fecha cierre</th>
+                <th>Observaciones</th>
+                <th>Calificacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('planmejoramiento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.docente.user.id }}</td>
+               <td>{{ entity.docente.user.Nombres }}</td> 
+                <td>{{ entity.docente.user.Apellidos }}</td>
+                <td>{% if entity.fechacreacion %}{{ entity.fechacreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechacierre %}{{ entity.fechacierre|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.observaciones }}</td>
+                <td>{{ entity.calificacion }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('planmejoramiento_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('planmejoramiento_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

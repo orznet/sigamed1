@@ -135,10 +135,10 @@ protected $zona;
     /**
      * Set zona
      *
-     * @param \Admin\UserBundle\Entity\Zona $zona
+     * @param \Admin\UnadBundle\Entity\Zona $zona
      * @return Centro
      */
-    public function setZona(\Admin\UserBundle\Entity\Zona $zona)
+    public function setZona(\Admin\UnadBundle\Entity\Zona $zona)
     {
         $this->zona = $zona;
 

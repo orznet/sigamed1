@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProgramaType extends AbstractType
+class DocenteType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,15 +15,15 @@ class ProgramaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('nivel')
-            ->add('escuela', 'entity', array(
-                 'empty_value' => ' ', 
-                 'class' =>  'AdminUnadBundle:Escuela',
-                'property' => 'nombre',
-                 ))        
-                
-                
+            ->add('id')
+            ->add('modalidad')
+            ->add('vinculacion')
+            ->add('cargo')
+            ->add('resolucion')
+            ->add('perfil')
+            ->add('user')
+            ->add('escuela')
+            ->add('centro')
         ;
     }
     
@@ -33,7 +33,7 @@ class ProgramaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\UnadBundle\Entity\Programa'
+            'data_class' => 'Admin\UnadBundle\Entity\Docente'
         ));
     }
 
@@ -42,6 +42,6 @@ class ProgramaType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_unadbundle_programa';
+        return 'admin_unadbundle_docente';
     }
 }
