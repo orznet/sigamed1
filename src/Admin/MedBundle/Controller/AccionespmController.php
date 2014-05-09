@@ -1,28 +1,26 @@
 <?php
-
-namespace Admin\UnadBundle\Controller;
+namespace Admin\MedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Admin\UnadBundle\Entity\Docente;
-use Admin\UnadBundle\Entity\Escuela;
-use Admin\UnadBundle\Form\DocenteType;
+use Admin\MedBundle\Entity\Accionespm;
+use Admin\MedBundle\Form\AccionespmType;
 
 /**
- * Docente controller.
+ * Accionespm controller.
  *
- * @Route("/docente")
+ * @Route("/planm/acciones")
  */
-class DocenteController extends Controller
+class AccionespmController extends Controller
 {
 
     /**
-     * Lists all Docente entities.
+     * Lists all Accionespm entities.
      *
-     * @Route("/", name="docente")
+     * @Route("/", name="accionespm")
      * @Method("GET")
      * @Template()
      */
@@ -30,51 +28,29 @@ class DocenteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findAll();
+        $entities = $em->getRepository('AdminMedBundle:Accionespm')->findAll();
 
         return array(
             'entities' => $entities,
-        );
-    }
-    
-        /**
-     * Lists all Docente entities.
-     *
-     * @Route("/esc/{id}", name="docente_escuela")
-     * @Method("GET")
-     * @Template("AdminUnadBundle:Docente:porescuela.html.twig")
-     */
-    public function indexEscuelaAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->findOneBy(array('id' => $id));
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
-        $total = count($entities);
-        return array(
-            'entities' => $entities,
-            'total'  => $total,
-            'escuela' => $escuela,
         );
     }
     /**
-     * Creates a new Docente entity.
+     * Creates a new Accionespm entity.
      *
-     * @Route("/", name="docente_create")
+     * @Route("/", name="accionespm_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Docente:new.html.twig")
+     * @Template("AdminMedBundle:Accionespm:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Docente();
+        $entity = new Accionespm();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('docente_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('planmejoramiento_show', array('id' => $entity->getPlan()->getId())));
         }
 
         return array(
@@ -84,46 +60,51 @@ class DocenteController extends Controller
     }
 
     /**
-    * Creates a form to create a Docente entity.
+    * Creates a form to create a Accionespm entity.
     *
-    * @param Docente $entity The entity
+    * @param Accionespm $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Docente $entity)
+    private function createCreateForm(Accionespm $entity)
     {
-        $form = $this->createForm(new DocenteType(), $entity, array(
-            'action' => $this->generateUrl('docente_create'),
+        $form = $this->createForm(new AccionespmType(), $entity, array(
+            'action' => $this->generateUrl('accionespm_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
+        $form->add('submit', 'submit', array('label' => 'Agregar'));
         return $form;
     }
 
     /**
-     * Displays a form to create a new Docente entity.
+     * Displays a form to create a new Accionespm entity.
      *
-     * @Route("/new", name="docente_new")
+     * @Route("/new/{id}", name="accionespm_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new Docente();
+        $entity = new Accionespm();
+        $em = $this->getDoctrine()->getManager();
+        $plan = $em->getRepository('AdminMedBundle:Planmejoramiento')->findOneBy(array('id' => $id));
+        $entity->setPlan($plan);
+        $fecha = new \DateTime();
+        $fecha->modify('+1 month');
+        $entity->setFechaProyectada($fecha);
         $form   = $this->createCreateForm($entity);
-
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'id'    => $id
         );
     }
 
     /**
-     * Finds and displays a Docente entity.
+     * Finds and displays a Accionespm entity.
      *
-     * @Route("/{id}", name="docente_show")
+     * @Route("/{id}", name="accionespm_show")
      * @Method("GET")
      * @Template()
      */
@@ -131,10 +112,10 @@ class DocenteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Docente entity.');
+            throw $this->createNotFoundException('Unable to find Accionespm entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -146,9 +127,9 @@ class DocenteController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Docente entity.
+     * Displays a form to edit an existing Accionespm entity.
      *
-     * @Route("/{id}/edit", name="docente_edit")
+     * @Route("/{id}/edit", name="accionespm_edit")
      * @Method("GET")
      * @Template()
      */
@@ -156,10 +137,10 @@ class DocenteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Docente entity.');
+            throw $this->createNotFoundException('Unable to find Accionespm entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -173,16 +154,16 @@ class DocenteController extends Controller
     }
 
     /**
-    * Creates a form to edit a Docente entity.
+    * Creates a form to edit a Accionespm entity.
     *
-    * @param Docente $entity The entity
+    * @param Accionespm $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Docente $entity)
+    private function createEditForm(Accionespm $entity)
     {
-        $form = $this->createForm(new DocenteType(), $entity, array(
-            'action' => $this->generateUrl('docente_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new AccionespmType(), $entity, array(
+            'action' => $this->generateUrl('accionespm_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -191,20 +172,20 @@ class DocenteController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Docente entity.
+     * Edits an existing Accionespm entity.
      *
-     * @Route("/{id}", name="docente_update")
+     * @Route("/{id}", name="accionespm_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Docente:edit.html.twig")
+     * @Template("AdminMedBundle:Accionespm:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Docente entity.');
+            throw $this->createNotFoundException('Unable to find Accionespm entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -214,7 +195,7 @@ class DocenteController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('docente_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('accionespm_edit', array('id' => $id)));
         }
 
         return array(
@@ -224,9 +205,9 @@ class DocenteController extends Controller
         );
     }
     /**
-     * Deletes a Docente entity.
+     * Deletes a Accionespm entity.
      *
-     * @Route("/{id}", name="docente_delete")
+     * @Route("/{id}", name="accionespm_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -236,21 +217,21 @@ class DocenteController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+            $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Docente entity.');
+                throw $this->createNotFoundException('Unable to find Accionespm entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('docente'));
+        return $this->redirect($this->generateUrl('accionespm'));
     }
 
     /**
-     * Creates a form to delete a Docente entity by id.
+     * Creates a form to delete a Accionespm entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -259,7 +240,7 @@ class DocenteController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('docente_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('accionespm_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

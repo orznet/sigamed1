@@ -53,6 +53,12 @@ protected $director;
      */
 protected $zona;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="centro")
+     */
+    protected $docentes;
+
     /**
      * Get id
      *
@@ -153,5 +159,45 @@ protected $zona;
     public function getZona()
     {
         return $this->zona;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Centro
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

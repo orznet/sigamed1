@@ -1,7 +1,10 @@
-{% extends '::base.html.twig' %}
-
 {% block body -%}
-    <h1>Agrear Plan de Mejoramiento Docentes</h1>
+       
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Agrear Plan de Mejoramiento Docentes</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
@@ -12,8 +15,6 @@
                 <th>Modalidad</th>
                 <th>Vinculacion</th>
                 <th>Cargo</th>
-                <th>Resolucion</th>
-                <th>Perfil</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,8 +27,6 @@
                 <td>{{ entity.modalidad }}</td>
                 <td>{{ entity.vinculacion }}</td>
                 <td>{{ entity.cargo }}</td>
-                <td>{{ entity.resolucion }}</td>
-                <td>{{ entity.perfil }}</td>
                 <td>
                 <a href="{{ path('planmejoramiento_agregar', { 'id': entity.id }) }}">Agregar</a> 
                 </td>
@@ -35,12 +34,11 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('docente_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+    
+      </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>			<!-- /modal-footer -->
+        
+        <!-- /modal-dialog -->
+{% endblock %}

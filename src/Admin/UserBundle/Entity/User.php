@@ -81,11 +81,15 @@ class User implements UserInterface,  \Serializable
      */
     protected $directorzona;
     
-    
          /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Centro", mappedBy="director")
      */
     protected $directorcentro;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="user")
+     */
+    protected $docente; 
     
     public function __construct()
     {
@@ -489,5 +493,38 @@ class User implements UserInterface,  \Serializable
     public function getDirectorcentro()
     {
         return $this->directorcentro;
+    }
+
+    /**
+     * Add docente
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docente
+     * @return User
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docente)
+    {
+        $this->docente[] = $docente;
+
+        return $this;
+    }
+
+    /**
+     * Remove docente
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docente
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docente)
+    {
+        $this->docente->removeElement($docente);
+    }
+
+    /**
+     * Get docente
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocente()
+    {
+        return $this->docente;
     }
 }

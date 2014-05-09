@@ -37,25 +37,145 @@ protected $sigla;
 
       /** 
      * @var Decano 
-     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="miescuela")
+     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="decano")
      * @ORM\JoinColumn(name="decano_id", referencedColumnName="id",
      * nullable=false,
      * onDelete="CASCADE"
      * )
      */
-
 protected $decano;
 
 
       /** 
      * @var Secretaria 
-     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="miescuela")
+     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="secretaria")
      * @ORM\JoinColumn(name="secretaria_id", referencedColumnName="id",
      * nullable=true,
      * onDelete="CASCADE"
      * )
      */
+protected $secretaria;
 
-protected $secretaria; 
 
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="escuela")
+     */
+    protected $programas;
+
+     /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="docente")
+     */
+    protected $docentes;   
+
+    /**
+     * Set id
+     * @param integer $id
+     * @return integer 
+     */
+    public function setId($id)
+    {
+        return $this->id = $id;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Escuela
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set sigla
+     *
+     * @param string $sigla
+     * @return Escuela
+     */
+    public function setSigla($sigla)
+    {
+        $this->sigla = $sigla;
+
+        return $this;
+    }
+
+    /**
+     * Get sigla
+     *
+     * @return string 
+     */
+    public function getSigla()
+    {
+        return $this->sigla;
+    }
+
+    /**
+     * Set decano
+     *
+     * @param \Admin\UserBundle\Entity\User $decano
+     * @return Escuela
+     */
+    public function setDecano(\Admin\UserBundle\Entity\User $decano)
+    {
+        $this->decano = $decano;
+
+        return $this;
+    }
+
+    /**
+     * Get decano
+     *
+     * @return \Admin\UserBundle\Entity\User 
+     */
+    public function getDecano()
+    {
+        return $this->decano;
+    }
+
+    /**
+     * Set secretaria
+     *
+     * @param \Admin\UserBundle\Entity\User $secretaria
+     * @return Escuela
+     */
+    public function setSecretaria(\Admin\UserBundle\Entity\User $secretaria = null)
+    {
+        $this->secretaria = $secretaria;
+
+        return $this;
+    }
+
+    /**
+     * Get secretaria
+     *
+     * @return \Admin\UserBundle\Entity\User 
+     */
+    public function getSecretaria()
+    {
+        return $this->secretaria;
+    }
 }

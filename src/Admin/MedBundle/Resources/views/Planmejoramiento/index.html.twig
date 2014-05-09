@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>Planes de Mejoramiento</h1>
-
+    
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
@@ -14,7 +14,8 @@
                 <th>Fecha cierre</th>
                 <th>Observaciones</th>
                 <th>Calificacion</th>
-                <th>Actions</th>
+                <th>ver</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -29,14 +30,10 @@
                 <td>{{ entity.observaciones }}</td>
                 <td>{{ entity.calificacion }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('planmejoramiento_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+               <a href="{{ path('planmejoramiento_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                </td>
+                <td>
+               <a href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
                 </td>
             </tr>
         {% endfor %}
@@ -45,9 +42,15 @@
 
         <ul>
         <li>
-            <a href="{{ path('planmejoramiento_new') }}">
-                Create a new entry
-            </a>
+    <a data-toggle="modal" href="{{path('planmejoramiento_add')}}" data-target="#myModal"><i class="fa fa-plus-square"></i> Agregar Plan de Mejoramiento</a>
         </li>
     </ul>
+    
+    
+<div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+</div></div></div>
+    
+    
     {% endblock %}

@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\PlanmejoramientoType;
 /**
  * Planmejoramiento controller.
  *
- * @Route("/planmejoramiento")
+ * @Route("/planm")
  */
 class PlanmejoramientoController extends Controller
 {

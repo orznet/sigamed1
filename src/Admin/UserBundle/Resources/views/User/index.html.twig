@@ -63,6 +63,7 @@
                 <th class="data">Nombres</th>
                 <th class="data">Apellidos</th>
                 <th class="data">Email</th>
+               <th class="data">Docente</th>
                 <th class="data">Actions</th>
             </tr>
         </thead>
@@ -73,6 +74,12 @@
                 <td class="data">{{ entity.nombres }}</td>
                 <td class="data">{{ entity.apellidos }}</td>
                 <td class="data">{{ entity.email }}</td>
+                <td class="data">
+                {%if entity.docente %}
+                  si  
+                    {%endif%}
+                    
+                </td>
                 <td class="data">
          
                         <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">edit</a>

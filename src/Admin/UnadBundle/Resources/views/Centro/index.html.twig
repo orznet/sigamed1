@@ -35,7 +35,7 @@
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
-                                <table id="datatable_fixed_column" class="table table-striped table-bordered smart-form">
+       <table id="datatable_fixed_column" class="table table-striped table-bordered smart-form">
 
         <thead>
             <tr>
@@ -102,4 +102,11 @@
             </a>
         </li>
     </ul>
+<script>
+$(document).ready( function() {
+$('#datatable_fixed_column').dataTable( {
+ "iDisplayLength": 25
+} );
+} )
+</script>
     {% endblock %}

@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>User</h1>
 
-    <table class="record_properties">
+      <table class="table table-bordered table-striped hidden-mobile">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -37,8 +37,19 @@
                 <th>Isactive</th>
                 <td>{{ entity.isActive }}</td>
             </tr>
+            <tr>
+                <th>Docente:</th>
+                <td>
+                    {% for entity in entity.getDocente %}
+     <a href="{{ path('docente_show', { 'id': entity.id }) }}">
+    {{entity.id}}
+     </a>
+    {%endfor%}    
+                </td>
+            </tr>
         </tbody>
     </table>
+
 
         <ul class="record_actions">
     <li>

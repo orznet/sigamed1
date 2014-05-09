@@ -1,4 +1,7 @@
 _planmejoramiento:
     resource: "@AdminMedBundle/Controller/PlanmejoramientoController.php"
     type:     annotation
-    
+_accionespm:
+    resource: "@AdminMedBundle/Controller/AccionespmController.php"
+    type:     annotation
+        

@@ -15,15 +15,25 @@ class DocenteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id')
-            ->add('modalidad')
-            ->add('vinculacion')
+            ->add('modalidad', 'choice', array(  
+            'choices'   => array('TC' => 'Tiempo Completo', 'MT' => 'Medio Tiempo'),
+            'required'  => true,
+            ))
+            ->add('vinculacion', 'choice', array(  
+            'choices'   => array('HC' => 'Hora Catedra', 'DO' => 'Ocasional','DC' => 'Carrera' ),
+            'required'  => true,
+            ))    
             ->add('cargo')
             ->add('resolucion')
-            ->add('perfil')
-            ->add('user')
-            ->add('escuela')
-            ->add('centro')
+            ->add('perfil')  
+            ->add('escuela', 'entity', array(
+                 'class' =>  'AdminUnadBundle:Escuela',
+                'property' => 'sigla',
+                 ))       
+            ->add('centro', 'entity', array(
+                 'class' =>  'AdminUnadBundle:Centro',
+                'property' => 'nombre',
+                 ))      
         ;
     }
     

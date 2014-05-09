@@ -56,12 +56,15 @@ protected $decano;
      */
 protected $secretaria;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="escuela")
      */
     protected $programas;
 
+     /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="escuela")
+     */
+    protected $docentes;   
 
     /**
      * Set id
@@ -173,5 +176,79 @@ protected $secretaria;
     public function getSecretaria()
     {
         return $this->secretaria;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->programas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add programas
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programas
+     * @return Escuela
+     */
+    public function addPrograma(\Admin\UnadBundle\Entity\Programa $programas)
+    {
+        $this->programas[] = $programas;
+
+        return $this;
+    }
+
+    /**
+     * Remove programas
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programas
+     */
+    public function removePrograma(\Admin\UnadBundle\Entity\Programa $programas)
+    {
+        $this->programas->removeElement($programas);
+    }
+
+    /**
+     * Get programas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProgramas()
+    {
+        return $this->programas;
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Escuela
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

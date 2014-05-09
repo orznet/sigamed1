@@ -11,9 +11,7 @@
                 <th>Apellidos</th>
                 <th>Modalidad</th>
                 <th>Vinculacion</th>
-                <th>Cargo</th>
-                <th>Resolucion</th>
-                <th>Perfil</th>
+                <th>Escuela</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,18 +23,9 @@
                 <td>{{ entity.user.apellidos }}</td>
                 <td>{{ entity.modalidad }}</td>
                 <td>{{ entity.vinculacion }}</td>
-                <td>{{ entity.cargo }}</td>
-                <td>{{ entity.resolucion }}</td>
-                <td>{{ entity.perfil }}</td>
+                <td>{{ entity.escuela.sigla }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('docente_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
                         <a href="{{ path('docente_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
                 </td>
             </tr>
         {% endfor %}

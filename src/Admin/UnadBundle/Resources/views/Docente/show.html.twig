@@ -1,36 +1,46 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Docente</h1>
+    <h1>Docente:{{ entity.id }}</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Modalidad</th>
-                <td>{{ entity.modalidad }}</td>
-            </tr>
-            <tr>
-                <th>Vinculacion</th>
-                <td>{{ entity.vinculacion }}</td>
-            </tr>
-            <tr>
-                <th>Cargo</th>
-                <td>{{ entity.cargo }}</td>
-            </tr>
-            <tr>
-                <th>Resolucion</th>
-                <td>{{ entity.resolucion }}</td>
-            </tr>
-            <tr>
-                <th>Perfil</th>
-                <td>{{ entity.perfil }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-bordered table-striped hidden-mobile">
+  <tr>
+    <th class="data">Cédula</th>
+    <td class="data">{{ entity.user.id }}</td>
+    <th class="data">Periodo Acádemico</th>
+    <td class="data">2014-1</td>
+  </tr>
+  <tr>
+    <th class="data">Nombres</th>
+    <td class="data">{{ entity.user.nombres }}</td>
+    <th class="data">Vinculación</th>
+    <td class="data">{{ entity.vinculacion }}</td>
+  </tr>
+  <tr>
+    <th class="data">Apellidos</th>
+    <td class="data">{{ entity.user.apellidos }}</td>
+    <th class="data">Centro</th>
+    <td class="data">{{ entity.centro.nombre }}</td>
+  </tr>
+  <tr>
+    <th class="data">Escuela</th>
+    <td class="data">{{ entity.escuela.nombre }}</td>
+    <th class="data">Modalidad</th>
+    <td class="data">{{ entity.modalidad }}</td>
+  </tr>
+  <tr>
+    <th class="data">Programa</th>
+    <td class="data">{{ entity.programa.nombre }}</td>
+    <th class="data">Perfil</th>
+    <td class="data">{{ entity.perfil }}</td>
+  </tr>
+    <tr>
+    <th class="data">Cargo</th>
+    <td class="data">{{ entity.cargo }}</td>
+    <th class="data">Correo</th>
+    <td class="data">{{ entity.user.email }}</td>
+  </tr>
+</table>
 
         <ul class="record_actions">
     <li>

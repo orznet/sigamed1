@@ -66,6 +66,7 @@
                 <a data-toggle="modal" href="{{ path('escuela_show', { 'id': entity.id }) }}" data-target="#myModal">Ver</a>
                 </td>
                  <td>
+                <a  href="{{ path('docente_escuela', { 'id': entity.id }) }}">Ver</a>      
                 </td>
             </tr>
         {% endfor %}

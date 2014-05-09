@@ -25,7 +25,7 @@ class Planmejoramiento{
 protected $fecha_creacion;
 
  /**
-  * @ORM\Column(type="datetime", nullable=true)
+  * @ORM\Column(type="date", nullable=true)
   */
 protected $fecha_cierre;
 
@@ -47,8 +47,13 @@ protected $calificacion;
      * onDelete="CASCADE"
      * )
      */
-
 protected $docente;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Accionespm", mappedBy="plan")
+     */
+    protected $acciones;
 
     /**
      * Get id
@@ -173,5 +178,45 @@ protected $docente;
     public function getDocente()
     {
         return $this->docente;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->acciones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add acciones
+     *
+     * @param \Admin\MedBundle\Entity\Accionespm $acciones
+     * @return Planmejoramiento
+     */
+    public function addAccione(\Admin\MedBundle\Entity\Accionespm $acciones)
+    {
+        $this->acciones[] = $acciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove acciones
+     *
+     * @param \Admin\MedBundle\Entity\Accionespm $acciones
+     */
+    public function removeAccione(\Admin\MedBundle\Entity\Accionespm $acciones)
+    {
+        $this->acciones->removeElement($acciones);
+    }
+
+    /**
+     * Get acciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAcciones()
+    {
+        return $this->acciones;
     }
 }

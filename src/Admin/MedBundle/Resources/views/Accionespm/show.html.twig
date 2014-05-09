@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Planmejoramiento</h1>
+    <h1>Accionespm</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,32 +10,40 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Fecha_creacion</th>
-                <td>{{ entity.fechacreacion|date('Y-m-d H:i:s') }}</td>
+                <th>Oportunidad</th>
+                <td>{{ entity.oportunidad }}</td>
             </tr>
             <tr>
-                <th>Fecha_cierre</th>
-                <td>{{ entity.fechacierre|date('Y-m-d H:i:s') }}</td>
+                <th>Causas</th>
+                <td>{{ entity.causas }}</td>
+            </tr>
+            <tr>
+                <th>Accion</th>
+                <td>{{ entity.accion }}</td>
+            </tr>
+            <tr>
+                <th>Fecha_proyectada</th>
+                <td>{{ entity.fechaproyectada|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Observaciones</th>
                 <td>{{ entity.observaciones }}</td>
             </tr>
             <tr>
-                <th>Calificacion</th>
-                <td>{{ entity.calificacion }}</td>
+                <th>Fecha_cierre</th>
+                <td>{{ entity.fechacierre|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('planmejoramiento') }}">
+        <a href="{{ path('accionespm') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('accionespm_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

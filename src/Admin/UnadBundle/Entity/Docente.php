@@ -31,24 +31,24 @@ protected $modalidad;
 protected $vinculacion;
 
  /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=50)
      */
 protected $cargo;
 
  /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
 protected $resolucion;
  
  /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=15)
      */
 protected $perfil;
 
 
 /** 
      * @var User
-     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="docentes")
+     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="docente")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id",
      * nullable=false,
      * onDelete="CASCADE"
@@ -67,6 +67,16 @@ protected $user;
      */
 protected $escuela;
 
+/** 
+     * @var Programa
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="docentes")
+     * @ORM\JoinColumn(name="programa_id", referencedColumnName="id",
+     * nullable=true,
+     * onDelete="CASCADE"
+     * )
+     */
+protected $programa;
+
 
 /** 
      * @var Centro
@@ -77,6 +87,12 @@ protected $escuela;
      * )
      */
 protected $centro;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Planmejoramiento", mappedBy="docente")
+     */
+    protected $planmejoramiento;
 
 
     /**
@@ -284,5 +300,68 @@ protected $centro;
     public function getCentro()
     {
         return $this->centro;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->planmejoramiento = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set programa
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programa
+     * @return Docente
+     */
+    public function setPrograma(\Admin\UnadBundle\Entity\Programa $programa = null)
+    {
+        $this->programa = $programa;
+
+        return $this;
+    }
+
+    /**
+     * Get programa
+     *
+     * @return \Admin\UnadBundle\Entity\Programa 
+     */
+    public function getPrograma()
+    {
+        return $this->programa;
+    }
+
+    /**
+     * Add planmejoramiento
+     *
+     * @param \Admin\MedBundle\Entity\Planmejoramiento $planmejoramiento
+     * @return Docente
+     */
+    public function addPlanmejoramiento(\Admin\MedBundle\Entity\Planmejoramiento $planmejoramiento)
+    {
+        $this->planmejoramiento[] = $planmejoramiento;
+
+        return $this;
+    }
+
+    /**
+     * Remove planmejoramiento
+     *
+     * @param \Admin\MedBundle\Entity\Planmejoramiento $planmejoramiento
+     */
+    public function removePlanmejoramiento(\Admin\MedBundle\Entity\Planmejoramiento $planmejoramiento)
+    {
+        $this->planmejoramiento->removeElement($planmejoramiento);
+    }
+
+    /**
+     * Get planmejoramiento
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlanmejoramiento()
+    {
+        return $this->planmejoramiento;
     }
 }
