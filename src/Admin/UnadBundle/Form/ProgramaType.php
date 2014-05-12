@@ -22,8 +22,10 @@ class ProgramaType extends AbstractType
                  'class' =>  'AdminUnadBundle:Escuela',
                 'property' => 'nombre',
                  ))        
-                
-                
+            ->add("lider", "text", array(
+             "mapped" => false,
+            'required'  => true,    
+                ))
         ;
     }
     

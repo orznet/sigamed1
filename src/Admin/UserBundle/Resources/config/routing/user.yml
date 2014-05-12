@@ -2,6 +2,10 @@ admin_user:
     pattern:  /lista
     defaults: { _controller: "AdminUserBundle:User:index" }
 
+admin_user_info:
+    pattern:  /info
+    defaults: { _controller: "AdminUserBundle:User:info" }
+
 admin_user_show:
     pattern:  /{id}/show
     defaults: { _controller: "AdminUserBundle:User:show" }

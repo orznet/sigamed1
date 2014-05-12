@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Escuela</th>
+                <th>Lider</th>
                 <th>Nivel</th>
                 <th>Actions</th>
             </tr>
@@ -18,7 +19,14 @@
             <tr>
                 <td><a href="{{ path('programa_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombre }}</td>
-                 <td>{{ entity.escuela? entity.escuela.sigla : 'sin' }}</td>
+                <td>{{ entity.escuela? entity.escuela.sigla : 'sin' }}</td>
+                <td>
+                {%if entity.lider %}
+                <a href="javascript:void(0);" rel="tooltip" data-placement="top" data-original-title="{{entity.lider.user.nombres}} {{entity.lider.user.apellidos}}"><i class="fa fa-arrow-up"></i>{{entity.lider.id}}</a>
+               {%else%}
+                sin
+               {%endif%}
+                </td>
                 <td>{{ entity.nivel }}</td>
                 <td>
                         <a href="{{ path('programa_edit', { 'id': entity.id }) }}">edit</a>

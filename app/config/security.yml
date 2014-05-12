@@ -33,7 +33,7 @@ security:
     access_control:
       - { path: ^/avales, roles: ROLE_AVAL }
       - { path: ^/admin, roles: ROLE_ADMIN }
-      - { path: ^/doc, roles: ROLE_DOC }
-      - { path: ^/dec, roles: ROLE_AVAL }
+      - { path: ^/dec, roles: ROLE_DEC }
       - { path: ^/user, roles: ROLE_USER }
+      - { path: ^/info, roles: ROLE_DEC }
        

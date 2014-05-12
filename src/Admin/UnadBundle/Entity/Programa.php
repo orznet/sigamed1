@@ -42,6 +42,23 @@ protected $nivel;
      */
 protected $escuela;
 
+
+      /** 
+     * @var Lider 
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="lider")
+     * @ORM\JoinColumn(name="lider_id", referencedColumnName="id",
+     * nullable=true,
+     * onDelete="CASCADE"
+     * )
+     */
+protected $lider;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="programa")
+     */
+    protected $docentes;    
+
     /**
      * Get id
      *
@@ -143,5 +160,68 @@ protected $escuela;
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    /**
+     * Set lider
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $lider
+     * @return Programa
+     */
+    public function setLider(\Admin\UnadBundle\Entity\Docente $lider = null)
+    {
+        $this->lider = $lider;
+
+        return $this;
+    }
+
+    /**
+     * Get lider
+     *
+     * @return \Admin\UnadBundle\Entity\Docente 
+     */
+    public function getLider()
+    {
+        return $this->lider;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Programa
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

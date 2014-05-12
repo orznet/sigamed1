@@ -93,6 +93,12 @@ protected $centro;
      * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Planmejoramiento", mappedBy="docente")
      */
     protected $planmejoramiento;
+    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="lider")
+     */
+    protected $lider;    
 
 
     /**
@@ -363,5 +369,38 @@ protected $centro;
     public function getPlanmejoramiento()
     {
         return $this->planmejoramiento;
+    }
+
+    /**
+     * Add lider
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $lider
+     * @return Docente
+     */
+    public function addLider(\Admin\UnadBundle\Entity\Programa $lider)
+    {
+        $this->lider[] = $lider;
+
+        return $this;
+    }
+
+    /**
+     * Remove lider
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $lider
+     */
+    public function removeLider(\Admin\UnadBundle\Entity\Programa $lider)
+    {
+        $this->lider->removeElement($lider);
+    }
+
+    /**
+     * Get lider
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLider()
+    {
+        return $this->lider;
     }
 }

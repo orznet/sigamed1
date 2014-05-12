@@ -5,3 +5,8 @@ admin_user_homepage:
 AdminUserBundle_admin_user:
     resource: "@AdminUserBundle/Resources/config/routing/user.yml"
     prefix:   /admin/user
+    
+admin_user_info:
+    pattern:  /info/user
+    defaults: { _controller: "AdminUserBundle:User:info" }
+    

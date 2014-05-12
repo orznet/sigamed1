@@ -189,6 +189,8 @@ class ProgramaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        $lider = $em->getRepository('AdminUnadBundle:Docente')->find($editForm["lider"]->getData());
+        $entity->setLider($lider);
 
         if ($editForm->isValid()) {
             $em->flush();

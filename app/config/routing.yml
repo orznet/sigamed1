@@ -1,3 +1,11 @@
+_welcome:
+    pattern:  /
+    defaults: { _controller: AdminUserBundle:Default:index }  
+
+admin_med:
+    resource: "@AdminMedBundle/Resources/config/routing.yml"
+    prefix:   /
+
 admin_unad:
     resource: "@AdminUnadBundle/Resources/config/routing.yml"
     prefix:   /

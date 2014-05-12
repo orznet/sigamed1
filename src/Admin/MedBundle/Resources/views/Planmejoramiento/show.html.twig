@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<a href="{{ path('planmejoramiento') }}" class="btn btn-primary btn-xs"><i class="fa fa-backward"> Regresar</i></a>
+    <h1>Plan de Mejoramiento</h1>    
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+
+    <td colspan="2">ID: {{ entity.id }}</td>
+  </tr>
+  <tr>
+    <td>Fecha de Creación: {{ entity.fechacreacion|date('Y-m-d H:i:s') }}</td>
+    <td>Fecha de Cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
+  </tr>
+  <tr>
+    <td>Docente:</td>
+    <td>Cedula: Nombres: Apellidos</td>
+  </tr>
+  <tr>
+    <td colspan='2'>Observaciones del Decano: {{ entity.observaciones }}</td>
+  </tr>
+</table>
+    
+  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+  <tr>
+    <th>No</th> 
+    <th>Oportunidad de mejora</th>
+    <th>Causas identificadas</th>
+    <th>Acción propuesta</th>
+    <th>Fecha proyectada</th>
+    <th>¿Se cumplió?</th>
+    <th>Observaciones del Docente</th>
+    <th>Fecha</th>
+  </tr>
+  {% set num = 0 %}
+  {%for accion in entity.acciones%}
+  {% set num = num+1 %}
+  <tr>
+    <td>{{num}}</td>
+    <td>{{accion.oportunidad}}</td>
+    <td>{{accion.causas}}</td>
+    <td>{{accion.accion}}</td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  {%endfor%}
+</table>    
+        <ul>
+        <li>
+    <a data-toggle="modal" href="{{ path('accionespm_new', { 'id': entity.id })  }}" data-target="#myModal"><i class="fa fa-plus-square"></i> Agregar Acción</a>
+        </li>
+    </ul>
+
+<div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+</div></div></div>
+{% endblock %}

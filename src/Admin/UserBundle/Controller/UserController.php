@@ -40,6 +40,18 @@ class UserController extends Controller
             'buscar_form'   => $Form->createView(),     
         ));
     }
+    
+        /**
+     * Info del usuario logueado
+     *
+     */
+    public function infoAction()
+    {
+    return $this->render('AdminUserBundle:User:info.html.twig');   
+       
+    }
+    
+    
 
     public function buscarporAction(Request $request)
     {

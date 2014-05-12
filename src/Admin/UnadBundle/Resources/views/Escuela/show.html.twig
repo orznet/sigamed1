@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Decano</th>
-                <td>{{ entity.decano.nombres }} {{ entity.decano.apellidos }}</td>
+                <td>{{ entity.decano.username }}: {{ entity.decano.nombres }} {{ entity.decano.apellidos }}</td>
             </tr>
             <tr>
                 <th>Secretaria Academica</th>
@@ -41,7 +41,8 @@
             Editar
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+   
+   {% if is_granted('ROLE_ADMIN') %}  <li>{{ form(delete_form) }}</li> {%endif%}
 </ul>
             </div>			<!-- /modal-body -->
             <div class="modal-footer">
