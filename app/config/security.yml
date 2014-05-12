@@ -35,5 +35,5 @@ security:
       - { path: ^/admin, roles: ROLE_ADMIN }
       - { path: ^/dec, roles: ROLE_DEC }
       - { path: ^/user, roles: ROLE_USER }
-      - { path: ^/info, roles: ROLE_DEC }
+      - { path: ^/info, roles: [ROLE_DEC, ROLE_ADMIN] }
        

@@ -32,7 +32,6 @@ class appDevDebugProjectContainer extends Container
         $this->scopes = array('request' => 'container');
         $this->scopeChildren = array('request' => array());
         $this->methodMap = array(
-            'acme.demo.listener' => 'getAcme_Demo_ListenerService',
             'annotation_reader' => 'getAnnotationReaderService',
             'assetic.asset_factory' => 'getAssetic_AssetFactoryService',
             'assetic.asset_manager' => 'getAssetic_AssetManagerService',
@@ -229,7 +228,6 @@ class appDevDebugProjectContainer extends Container
             'twig' => 'getTwigService',
             'twig.controller.exception' => 'getTwig_Controller_ExceptionService',
             'twig.exception_listener' => 'getTwig_ExceptionListenerService',
-            'twig.extension.acme.demo' => 'getTwig_Extension_Acme_DemoService',
             'twig.loader' => 'getTwig_LoaderService',
             'twig.translation.extractor' => 'getTwig_Translation_ExtractorService',
             'uri_signer' => 'getUriSignerService',
@@ -255,19 +253,6 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.transport' => 'swiftmailer.mailer.default.transport',
             'swiftmailer.transport.real' => 'swiftmailer.mailer.default.transport.real',
         );
-    }
-
-    /**
-     * Gets the 'acme.demo.listener' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Acme\DemoBundle\EventListener\ControllerListener A Acme\DemoBundle\EventListener\ControllerListener instance.
-     */
-    protected function getAcme_Demo_ListenerService()
-    {
-        return $this->services['acme.demo.listener'] = new \Acme\DemoBundle\EventListener\ControllerListener($this->get('twig.extension.acme.demo'));
     }
 
     /**
@@ -491,7 +476,6 @@ class appDevDebugProjectContainer extends Container
 
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'assetic.request_listener', 1 => 'onKernelRequest'), 0);
-        $instance->addListenerService('kernel.controller', array(0 => 'acme.demo.listener', 1 => 'onKernelController'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
@@ -614,14 +598,15 @@ class appDevDebugProjectContainer extends Container
         $d = new \Doctrine\Common\Cache\ArrayCache();
         $d->setNamespace('sf2orm_default_3d3b237d2e911c377aa416d131759b80853a3ec23fbc3731018c917deadd6839');
 
-        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/Users/omarr/codigo/med/src/Admin/UserBundle/Entity', 1 => '/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity'));
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/Users/omarr/codigo/med/src/Admin/UserBundle/Entity', 1 => '/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity', 2 => '/Users/omarr/codigo/med/src/Admin/MedBundle/Entity'));
 
         $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
         $f->addDriver($e, 'Admin\\UserBundle\\Entity');
         $f->addDriver($e, 'Admin\\UnadBundle\\Entity');
+        $f->addDriver($e, 'Admin\\MedBundle\\Entity');
 
         $g = new \Doctrine\ORM\Configuration();
-        $g->setEntityNamespaces(array('AdminUserBundle' => 'Admin\\UserBundle\\Entity', 'AdminUnadBundle' => 'Admin\\UnadBundle\\Entity'));
+        $g->setEntityNamespaces(array('AdminUserBundle' => 'Admin\\UserBundle\\Entity', 'AdminUnadBundle' => 'Admin\\UnadBundle\\Entity', 'AdminMedBundle' => 'Admin\\MedBundle\\Entity'));
         $g->setMetadataCacheImpl($b);
         $g->setQueryCacheImpl($c);
         $g->setResultCacheImpl($d);
@@ -1876,18 +1861,18 @@ class appDevDebugProjectContainer extends Container
 
         $h = new \Symfony\Component\HttpFoundation\RequestMatcher('^/admin');
 
-        $i = new \Symfony\Component\HttpFoundation\RequestMatcher('^/doc');
+        $i = new \Symfony\Component\HttpFoundation\RequestMatcher('^/dec');
 
-        $j = new \Symfony\Component\HttpFoundation\RequestMatcher('^/dec');
+        $j = new \Symfony\Component\HttpFoundation\RequestMatcher('^/user');
 
-        $k = new \Symfony\Component\HttpFoundation\RequestMatcher('^/user');
+        $k = new \Symfony\Component\HttpFoundation\RequestMatcher('^/info');
 
         $l = new \Symfony\Component\Security\Http\AccessMap();
         $l->add($g, array(0 => 'ROLE_AVAL'), NULL);
         $l->add($h, array(0 => 'ROLE_ADMIN'), NULL);
-        $l->add($i, array(0 => 'ROLE_DOC'), NULL);
-        $l->add($j, array(0 => 'ROLE_AVAL'), NULL);
-        $l->add($k, array(0 => 'ROLE_USER'), NULL);
+        $l->add($i, array(0 => 'ROLE_DEC'), NULL);
+        $l->add($j, array(0 => 'ROLE_USER'), NULL);
+        $l->add($k, array(0 => 'ROLE_DEC', 1 => 'ROLE_ADMIN'), NULL);
 
         $m = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
 
@@ -2919,7 +2904,6 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
-        $instance->addExtension($this->get('twig.extension.acme.demo'));
         $instance->addGlobal('app', $this->get('templating.globals'));
 
         return $instance;
@@ -2970,7 +2954,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('/Users/omarr/codigo/med/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/views', 'Doctrine');
         $instance->addPath('/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views', 'AdminUser');
         $instance->addPath('/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views', 'AdminUnad');
-        $instance->addPath('/Users/omarr/codigo/med/src/Acme/DemoBundle/Resources/views', 'AcmeDemo');
+        $instance->addPath('/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views', 'AdminMed');
         $instance->addPath('/Users/omarr/codigo/med/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('/Users/omarr/codigo/med/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
         $instance->addPath('/Users/omarr/codigo/med/app/Resources/views');
@@ -3350,23 +3334,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'twig.extension.acme.demo' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return Acme\DemoBundle\Twig\Extension\DemoExtension A Acme\DemoBundle\Twig\Extension\DemoExtension instance.
-     */
-    protected function getTwig_Extension_Acme_DemoService()
-    {
-        return $this->services['twig.extension.acme.demo'] = new \Acme\DemoBundle\Twig\Extension\DemoExtension($this->get('twig.loader'));
-    }
-
-    /**
      * Gets the 'validator.mapping.class_metadata_factory' service.
      *
      * This service is shared.
@@ -3437,7 +3404,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => '/Users/omarr/codigo/med/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'app',
+            'kernel.name' => 'ap_',
             'kernel.cache_dir' => '/Users/omarr/codigo/med/app/cache/dev',
             'kernel.logs_dir' => '/Users/omarr/codigo/med/app/logs',
             'kernel.bundles' => array(
@@ -3451,7 +3418,7 @@ class appDevDebugProjectContainer extends Container
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'AdminUserBundle' => 'Admin\\UserBundle\\AdminUserBundle',
                 'AdminUnadBundle' => 'Admin\\UnadBundle\\AdminUnadBundle',
-                'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
+                'AdminMedBundle' => 'Admin\\MedBundle\\AdminMedBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',

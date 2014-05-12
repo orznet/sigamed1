@@ -135,6 +135,208 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // _welcome
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', '_welcome');
+            }
+
+            return array (  '_controller' => 'Admin\\UserBundle\\Controller\\DefaultController::indexAction',  '_route' => '_welcome',);
+        }
+
+        if (0 === strpos($pathinfo, '/planm')) {
+            // planmejoramiento
+            if (rtrim($pathinfo, '/') === '/planm') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_planmejoramiento;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'planmejoramiento');
+                }
+
+                return array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::indexAction',  '_route' => 'planmejoramiento',);
+            }
+            not_planmejoramiento:
+
+            // planmejoramiento_create
+            if ($pathinfo === '/planm/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_planmejoramiento_create;
+                }
+
+                return array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::createAction',  '_route' => 'planmejoramiento_create',);
+            }
+            not_planmejoramiento_create:
+
+            // planmejoramiento_new
+            if ($pathinfo === '/planm/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_planmejoramiento_new;
+                }
+
+                return array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::newAction',  '_route' => 'planmejoramiento_new',);
+            }
+            not_planmejoramiento_new:
+
+            if (0 === strpos($pathinfo, '/planm/add')) {
+                // planmejoramiento_add
+                if ($pathinfo === '/planm/add') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_planmejoramiento_add;
+                    }
+
+                    return array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::addAction',  '_route' => 'planmejoramiento_add',);
+                }
+                not_planmejoramiento_add:
+
+                // planmejoramiento_agregar
+                if (preg_match('#^/planm/add/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_planmejoramiento_agregar;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'planmejoramiento_agregar')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::agregarAction',));
+                }
+                not_planmejoramiento_agregar:
+
+            }
+
+            // planmejoramiento_show
+            if (preg_match('#^/planm/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_planmejoramiento_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'planmejoramiento_show')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::showAction',));
+            }
+            not_planmejoramiento_show:
+
+            // planmejoramiento_edit
+            if (preg_match('#^/planm/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_planmejoramiento_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'planmejoramiento_edit')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::editAction',));
+            }
+            not_planmejoramiento_edit:
+
+            // planmejoramiento_update
+            if (preg_match('#^/planm/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_planmejoramiento_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'planmejoramiento_update')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::updateAction',));
+            }
+            not_planmejoramiento_update:
+
+            // planmejoramiento_delete
+            if (preg_match('#^/planm/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_planmejoramiento_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'planmejoramiento_delete')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\PlanmejoramientoController::deleteAction',));
+            }
+            not_planmejoramiento_delete:
+
+            if (0 === strpos($pathinfo, '/planm/acciones')) {
+                // accionespm
+                if (rtrim($pathinfo, '/') === '/planm/acciones') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_accionespm;
+                    }
+
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'accionespm');
+                    }
+
+                    return array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::indexAction',  '_route' => 'accionespm',);
+                }
+                not_accionespm:
+
+                // accionespm_create
+                if ($pathinfo === '/planm/acciones/') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_accionespm_create;
+                    }
+
+                    return array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::createAction',  '_route' => 'accionespm_create',);
+                }
+                not_accionespm_create:
+
+                // accionespm_new
+                if (0 === strpos($pathinfo, '/planm/acciones/new') && preg_match('#^/planm/acciones/new/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_accionespm_new;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'accionespm_new')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::newAction',));
+                }
+                not_accionespm_new:
+
+                // accionespm_show
+                if (preg_match('#^/planm/acciones/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_accionespm_show;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'accionespm_show')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::showAction',));
+                }
+                not_accionespm_show:
+
+                // accionespm_edit
+                if (preg_match('#^/planm/acciones/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_accionespm_edit;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'accionespm_edit')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::editAction',));
+                }
+                not_accionespm_edit:
+
+                // accionespm_update
+                if (preg_match('#^/planm/acciones/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_accionespm_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'accionespm_update')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::updateAction',));
+                }
+                not_accionespm_update:
+
+                // accionespm_delete
+                if (preg_match('#^/planm/acciones/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'DELETE') {
+                        $allow[] = 'DELETE';
+                        goto not_accionespm_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'accionespm_delete')), array (  '_controller' => 'Admin\\MedBundle\\Controller\\AccionespmController::deleteAction',));
+                }
+                not_accionespm_delete:
+
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/unad/escuela')) {
             // escuela
             if (rtrim($pathinfo, '/') === '/unad/escuela') {
@@ -471,6 +673,101 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/docente')) {
+            // docente
+            if (rtrim($pathinfo, '/') === '/docente') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_docente;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'docente');
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::indexAction',  '_route' => 'docente',);
+            }
+            not_docente:
+
+            // docente_escuela
+            if (0 === strpos($pathinfo, '/docente/esc') && preg_match('#^/docente/esc/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_docente_escuela;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'docente_escuela')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::indexEscuelaAction',));
+            }
+            not_docente_escuela:
+
+            // docente_create
+            if ($pathinfo === '/docente/') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_docente_create;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::createAction',  '_route' => 'docente_create',);
+            }
+            not_docente_create:
+
+            // docente_new
+            if ($pathinfo === '/docente/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_docente_new;
+                }
+
+                return array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::newAction',  '_route' => 'docente_new',);
+            }
+            not_docente_new:
+
+            // docente_show
+            if (preg_match('#^/docente/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_docente_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'docente_show')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::showAction',));
+            }
+            not_docente_show:
+
+            // docente_edit
+            if (preg_match('#^/docente/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_docente_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'docente_edit')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::editAction',));
+            }
+            not_docente_edit:
+
+            // docente_update
+            if (preg_match('#^/docente/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
+                    goto not_docente_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'docente_update')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::updateAction',));
+            }
+            not_docente_update:
+
+            // docente_delete
+            if (preg_match('#^/docente/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_docente_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'docente_delete')), array (  '_controller' => 'Admin\\UnadBundle\\Controller\\DocenteController::deleteAction',));
+            }
+            not_docente_delete:
+
+        }
+
         // admin_user_homepage
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_homepage')), array (  '_controller' => 'Admin\\UserBundle\\Controller\\DefaultController::indexAction',));
@@ -552,6 +849,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // admin_user_info
+        if ($pathinfo === '/info/user') {
+            return array (  '_controller' => 'Admin\\UserBundle\\Controller\\UserController::infoAction',  '_route' => 'admin_user_info',);
+        }
+
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
                 // login
@@ -569,79 +871,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // logout
             if ($pathinfo === '/logout') {
                 return array('_route' => 'logout');
-            }
-
-        }
-
-        // _welcome
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', '_welcome');
-            }
-
-            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\WelcomeController::indexAction',  '_route' => '_welcome',);
-        }
-
-        if (0 === strpos($pathinfo, '/demo')) {
-            if (0 === strpos($pathinfo, '/demo/secured')) {
-                if (0 === strpos($pathinfo, '/demo/secured/log')) {
-                    if (0 === strpos($pathinfo, '/demo/secured/login')) {
-                        // _demo_login
-                        if ($pathinfo === '/demo/secured/login') {
-                            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::loginAction',  '_route' => '_demo_login',);
-                        }
-
-                        // _security_check
-                        if ($pathinfo === '/demo/secured/login_check') {
-                            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::securityCheckAction',  '_route' => '_security_check',);
-                        }
-
-                    }
-
-                    // _demo_logout
-                    if ($pathinfo === '/demo/secured/logout') {
-                        return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::logoutAction',  '_route' => '_demo_logout',);
-                    }
-
-                }
-
-                if (0 === strpos($pathinfo, '/demo/secured/hello')) {
-                    // acme_demo_secured_hello
-                    if ($pathinfo === '/demo/secured/hello') {
-                        return array (  'name' => 'World',  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloAction',  '_route' => 'acme_demo_secured_hello',);
-                    }
-
-                    // _demo_secured_hello
-                    if (preg_match('#^/demo/secured/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_secured_hello')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloAction',));
-                    }
-
-                    // _demo_secured_hello_admin
-                    if (0 === strpos($pathinfo, '/demo/secured/hello/admin') && preg_match('#^/demo/secured/hello/admin/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_secured_hello_admin')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::helloadminAction',));
-                    }
-
-                }
-
-            }
-
-            // _demo
-            if (rtrim($pathinfo, '/') === '/demo') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', '_demo');
-                }
-
-                return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::indexAction',  '_route' => '_demo',);
-            }
-
-            // _demo_hello
-            if (0 === strpos($pathinfo, '/demo/hello') && preg_match('#^/demo/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => '_demo_hello')), array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::helloAction',));
-            }
-
-            // _demo_contact
-            if ($pathinfo === '/demo/contact') {
-                return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\DemoController::contactAction',  '_route' => '_demo_contact',);
             }
 
         }

@@ -61,7 +61,7 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
 \t\t\t\t<!-- Note: The activity badge color changes when clicked and resets the number to 0
 \t\t\t\tSuggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-\t\t\t\t<span id=\"activity\" class=\"activity-dropdown\"> <i class=\"fa fa-user\"></i> <b class=\"badge\"> 1 </b> </span>
+\t\t\t\t<span id=\"activity\" class=\"activity-dropdown\"> <i class=\"fa fa-user\"></i> <b class=\"badge\"> 0 </b> </span>
 
 \t\t\t\t<!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
 \t\t\t\t<div class=\"ajax-dropdown\">
@@ -69,14 +69,17 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t<!-- the ID links are fetched via AJAX to the ajax container \"ajax-notifications\" -->
 \t\t\t\t\t<div class=\"btn-group btn-group-justified\" data-toggle=\"buttons\">
 \t\t\t\t\t\t<label class=\"btn btn-default\">
-\t\t\t\t\t\t\t<input type=\"radio\" name=\"activity\" id=\"ajax/notify/mail.html\">
-\t\t\t\t\t\t\tMsgs (14) </label>
+\t\t\t\t\t\t\t<input type=\"radio\" name=\"activity\" id=\"";
+        // line 50
+        echo $this->env->getExtension('routing')->getPath("admin_user_info");
+        echo "\">
+\t\t\t\t\t\t\tUsuario </label>
 \t\t\t\t\t\t<label class=\"btn btn-default\">
 \t\t\t\t\t\t\t<input type=\"radio\" name=\"activity\" id=\"ajax/notify/notifications.html\">
-\t\t\t\t\t\t\tnotify (3) </label>
+\t\t\t\t\t\t\tPendientes </label>
 \t\t\t\t\t\t<label class=\"btn btn-default\">
 \t\t\t\t\t\t\t<input type=\"radio\" name=\"activity\" id=\"ajax/notify/tasks.html\">
-\t\t\t\t\t\t\tTasks (4) </label>
+\t\t\t\t\t\t\tMensajes </label>
 \t\t\t\t\t</div>
 
 \t\t\t\t\t<!-- notification content -->
@@ -114,9 +117,13 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
 \t\t\t\t<!-- logout button -->
 \t\t\t\t<div id=\"logout\" class=\"btn-header transparent pull-right\">
-\t\t\t\t\t<span> <a href=\"login.html\" title=\"Sign Out\"><i class=\"fa fa-sign-out\"></i></a> </span>
+\t\t\t\t\t<span> <a data-logout-msg=\"Usted puede mejorar su seguridad aún más después de cerrar la sesión al cerrar este navegador abierto\" href=\"";
+        // line 95
+        echo $this->env->getExtension('routing')->getPath("logout");
+        echo "\" title=\"Salir\"><i class=\"fa fa-sign-out\"></i></a></span>
 \t\t\t\t</div>
 \t\t\t\t<!-- end logout button -->
+                             
 
 \t\t\t\t<!-- search mobile button (this is hidden till mobile view port) -->
 \t\t\t\t<div id=\"search-mobile\" class=\"btn-header transparent pull-right\">
@@ -148,7 +155,10 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
 \t\t\t\t<ul>
 \t\t\t\t\t<li>
-\t\t\t\t\t\t<a href=\"index.html\" title=\"Dashboard\"><i class=\"fa fa-lg fa-fw fa-home\"></i> <span class=\"menu-item-parent\">Inicio</span></a>
+\t\t\t\t\t\t<a href=\"";
+        // line 130
+        echo $this->env->getExtension('routing')->getPath("_welcome");
+        echo "\" title=\"Dashboard\"><i class=\"fa fa-lg fa-fw fa-home\"></i> <span class=\"menu-item-parent\">Inicio</span></a>
 \t\t\t\t\t</li>
 
 \t\t\t\t\t<li>
@@ -156,22 +166,25 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t\t<ul>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 136
+        // line 137
         echo $this->env->getExtension('routing')->getPath("escuela");
         echo "\">Escuelas</a>
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"index.html\">Programas</a>
+\t\t\t\t\t\t\t\t<a href=\"";
+        // line 140
+        echo $this->env->getExtension('routing')->getPath("programa");
+        echo "\">Programas</a>
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 142
+        // line 143
         echo $this->env->getExtension('routing')->getPath("zona");
         echo "\">Zonas</a>
 \t\t\t\t\t\t\t</li>
                                                         <li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 145
+        // line 146
         echo $this->env->getExtension('routing')->getPath("centro");
         echo "\">Centros</a>
 \t\t\t\t\t\t\t</li>
@@ -189,13 +202,13 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t\t</ul>
 \t\t\t\t\t</li>
 \t\t\t\t\t<li>
-\t\t\t\t\t\t<a href=\"#\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span class=\"menu-item-parent\">Zonas</span></a>
+\t\t\t\t\t\t<a href=\"#\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span class=\"menu-item-parent\">Decanos</span></a>
 \t\t\t\t\t\t<ul>
 \t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"general-elements.html\">General Elements</a>
+\t\t\t\t\t\t\t\t<a href=\"general-elements.html\">Mi Escuela</a>
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"buttons.html\">Buttons</a>
+\t\t\t\t\t\t\t\t<a href=\"buttons.html\">Planes de Mejoramiento</a>
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"#\">Icons</a>
@@ -210,15 +223,6 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"grid.html\">Grid</a>
-\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"treeview.html\">Tree View</a>
-\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"nestable-list.html\">Nestable Lists</a>
-\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t<a href=\"jqui.html\">JQuery UI</a>
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t</ul>
 \t\t\t\t\t</li>
@@ -267,16 +271,16 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t<div class=\"row\">
 
                                         ";
-        // line 238
+        // line 230
         $this->displayBlock('body', $context, $blocks);
-        // line 240
+        // line 232
         echo "                                        </div>\t\t\t
 \t\t\t\t\t<!-- end row -->
 
 ";
-        // line 243
+        // line 235
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 428
+        // line 420
         echo "    </body>
 </html>
 ";
@@ -330,22 +334,22 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
         ";
     }
 
-    // line 238
+    // line 230
     public function block_body($context, array $blocks = array())
     {
-        // line 239
+        // line 231
         echo "                                        ";
     }
 
-    // line 243
+    // line 235
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 244
+        // line 236
         echo "\t\t<!-- END SHORTCUT AREA -->
 \t\t<!--================================================== -->
 \t\t<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 \t\t<script data-pace-options='{ \"restartOnRequestAfter\": true }' src=\"";
-        // line 247
+        // line 239
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/pace/pace.min.js"), "html", null, true);
         echo "\"></script>
 
@@ -369,67 +373,67 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
 \t\t<!-- BOOTSTRAP JS -->
 \t\t<script src=\"";
-        // line 268
+        // line 260
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bootstrap/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- CUSTOM NOTIFICATION -->
 \t\t<script src=\"";
-        // line 271
+        // line 263
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/notification/SmartNotification.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- JARVIS WIDGETS -->
 \t\t<script src=\"";
-        // line 274
+        // line 266
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/smartwidgets/jarvis.widget.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- EASY PIE CHARTS -->
 \t\t<script src=\"";
-        // line 277
+        // line 269
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- SPARKLINES -->
 \t\t<script src=\"";
-        // line 280
+        // line 272
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/sparkline/jquery.sparkline.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- JQUERY VALIDATE -->
 \t\t<script src=\"";
-        // line 283
+        // line 275
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/jquery-validate/jquery.validate.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- JQUERY MASKED INPUT -->
 \t\t<script src=\"";
-        // line 286
+        // line 278
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/masked-input/jquery.maskedinput.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- JQUERY SELECT2 INPUT -->
 \t\t<script src=\"";
-        // line 289
+        // line 281
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/select2/select2.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- JQUERY UI + Bootstrap Slider -->
 \t\t<script src=\"";
-        // line 292
+        // line 284
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/bootstrap-slider/bootstrap-slider.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- browser msie issue fix -->
 \t\t<script src=\"";
-        // line 295
+        // line 287
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/msie-fix/jquery.mb.browser.min.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- FastClick: For mobile devices -->
 \t\t<script src=\"";
-        // line 298
+        // line 290
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/fastclick/fastclick.js"), "html", null, true);
         echo "\"></script>
 
@@ -441,37 +445,37 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
 \t\t<!-- MAIN APP JS FILE -->
 \t\t<script src=\"";
-        // line 307
+        // line 299
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/app.js"), "html", null, true);
         echo "\"></script>
 
 \t\t<!-- PAGE RELATED PLUGIN(S) -->
 \t\t<script src=\"";
-        // line 310
+        // line 302
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/jquery.dataTables-cust.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 311
+        // line 303
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/ColReorder.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 312
+        // line 304
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/FixedColumns.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 313
+        // line 305
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/ColVis.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 314
+        // line 306
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/ZeroClipboard.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 315
+        // line 307
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/media/js/TableTools.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 316
+        // line 308
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugin/datatables/DT_bootstrap.js"), "html", null, true);
         echo "\"></script>
 \t\t
@@ -547,7 +551,7 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 \t\t\t\t\t\t\"sButtonText\" : 'Save <span class=\"caret\" />',
 \t\t\t\t\t\t\"aButtons\" : [\"csv\", \"xls\", \"pdf\"]
 \t\t\t\t\t}],
-\t\t\t\t\t\"sSwfPath\" : \"js/plugin/datatables/media/swf/copy_csv_xls_pdf.swf\"
+\t\t\t\t\t\"sSwfPath\" : \"/js/plugin/datatables/media/swf/copy_csv_xls_pdf.swf\"
 \t\t\t\t},
 \t\t\t\t\"fnInitComplete\" : function(oSettings, json) {
 \t\t\t\t\t\$(this).closest('#dt_table_tools_wrapper').find('.DTTT.btn-group').addClass('table_tools_group').children('a.btn').each(function() {
@@ -599,6 +603,6 @@ class __TwigTemplate_d050bc07ab6519a7832c4af928db33254c6493b8d4b255ade589b88a0db
 
     public function getDebugInfo()
     {
-        return array (  475 => 316,  471 => 315,  467 => 314,  463 => 313,  459 => 312,  455 => 311,  451 => 310,  445 => 307,  433 => 298,  427 => 295,  421 => 292,  415 => 289,  409 => 286,  403 => 283,  397 => 280,  391 => 277,  385 => 274,  379 => 271,  373 => 268,  349 => 247,  344 => 244,  341 => 243,  337 => 239,  334 => 238,  327 => 21,  322 => 19,  316 => 16,  311 => 14,  307 => 13,  302 => 11,  298 => 10,  295 => 9,  292 => 8,  286 => 7,  280 => 428,  278 => 243,  273 => 240,  271 => 238,  175 => 145,  169 => 142,  160 => 136,  58 => 37,  45 => 27,  41 => 26,  37 => 24,  35 => 8,  31 => 7,  23 => 1,);
+        return array (  479 => 308,  475 => 307,  471 => 306,  467 => 305,  463 => 304,  459 => 303,  455 => 302,  449 => 299,  431 => 287,  425 => 284,  419 => 281,  401 => 272,  395 => 269,  389 => 266,  383 => 263,  377 => 260,  353 => 239,  348 => 236,  345 => 235,  338 => 230,  331 => 21,  326 => 19,  320 => 16,  315 => 14,  311 => 13,  306 => 11,  302 => 10,  299 => 9,  296 => 8,  290 => 7,  284 => 420,  282 => 235,  277 => 232,  275 => 230,  188 => 146,  170 => 137,  160 => 130,  58 => 37,  23 => 1,  480 => 162,  474 => 161,  469 => 158,  461 => 155,  457 => 153,  453 => 151,  444 => 149,  440 => 148,  437 => 290,  435 => 146,  430 => 144,  427 => 143,  423 => 142,  413 => 278,  409 => 132,  407 => 275,  402 => 130,  398 => 129,  393 => 126,  387 => 122,  384 => 121,  381 => 120,  379 => 119,  374 => 116,  368 => 112,  365 => 111,  362 => 110,  360 => 109,  355 => 106,  341 => 231,  337 => 103,  322 => 101,  314 => 99,  312 => 98,  309 => 97,  305 => 95,  298 => 91,  294 => 90,  285 => 89,  283 => 88,  278 => 86,  268 => 85,  264 => 84,  258 => 81,  252 => 80,  247 => 78,  241 => 77,  229 => 73,  220 => 70,  214 => 69,  177 => 65,  169 => 60,  140 => 55,  132 => 51,  128 => 49,  107 => 36,  61 => 13,  273 => 96,  269 => 94,  254 => 92,  243 => 88,  240 => 86,  238 => 85,  235 => 74,  230 => 82,  227 => 81,  224 => 71,  221 => 77,  219 => 76,  217 => 75,  208 => 68,  204 => 72,  179 => 69,  159 => 61,  143 => 56,  135 => 53,  119 => 42,  102 => 32,  71 => 19,  67 => 15,  63 => 15,  59 => 14,  38 => 6,  94 => 28,  89 => 20,  85 => 25,  75 => 17,  68 => 14,  56 => 9,  87 => 25,  21 => 2,  26 => 6,  93 => 28,  88 => 6,  78 => 21,  46 => 7,  27 => 4,  44 => 12,  31 => 7,  28 => 2,  201 => 92,  196 => 90,  183 => 82,  171 => 61,  166 => 71,  163 => 62,  158 => 67,  156 => 66,  151 => 63,  142 => 59,  138 => 54,  136 => 56,  121 => 46,  117 => 44,  105 => 40,  91 => 27,  62 => 23,  49 => 19,  24 => 4,  25 => 3,  19 => 1,  79 => 18,  72 => 16,  69 => 25,  47 => 9,  40 => 8,  37 => 24,  22 => 2,  246 => 90,  157 => 56,  145 => 46,  139 => 45,  131 => 52,  123 => 47,  120 => 40,  115 => 43,  111 => 37,  108 => 36,  101 => 32,  98 => 31,  96 => 31,  83 => 25,  74 => 50,  66 => 15,  55 => 15,  52 => 21,  50 => 10,  43 => 8,  41 => 26,  35 => 8,  32 => 4,  29 => 3,  209 => 82,  203 => 78,  199 => 67,  193 => 73,  189 => 71,  187 => 84,  182 => 143,  176 => 140,  173 => 65,  168 => 72,  164 => 59,  162 => 57,  154 => 58,  149 => 51,  147 => 58,  144 => 49,  141 => 48,  133 => 55,  130 => 41,  125 => 44,  122 => 95,  116 => 41,  112 => 42,  109 => 34,  106 => 36,  103 => 32,  99 => 31,  95 => 28,  92 => 21,  86 => 28,  82 => 22,  80 => 19,  73 => 19,  64 => 17,  60 => 6,  57 => 11,  54 => 10,  51 => 14,  48 => 13,  45 => 27,  42 => 7,  39 => 9,  36 => 5,  33 => 4,  30 => 7,);
     }
 }

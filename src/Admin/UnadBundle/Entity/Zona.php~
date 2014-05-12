@@ -1,0 +1,100 @@
+<?php
+namespace Admin\UnadBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="zona")
+ * @ORM\Entity(repositoryClass="Admin\UnadBundle\Entity\ZonaRepository")
+ */
+
+class Zona{
+   
+/**
+ * @ORM\Id
+ * @ORM\Column(name="id", type="integer", nullable=false)
+ * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+protected $id;    
+
+/**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+ 
+protected $nombre;
+
+      /** 
+     * @var Director 
+     * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="directorzona")
+     * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
+     * nullable=false,
+     * onDelete="CASCADE"
+     * )
+     */
+protected $director;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Centro", mappedBy="zona")
+     */
+    protected $centros;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Zona
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set director
+     *
+     * @param \Admin\UserBundle\Entity\User $director
+     * @return Zona
+     */
+    public function setDirector(\Admin\UserBundle\Entity\User $director)
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
+    /**
+     * Get director
+     *
+     * @return \Admin\UserBundle\Entity\User 
+     */
+    public function getDirector()
+    {
+        return $this->director;
+    }
+}
