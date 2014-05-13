@@ -10,3 +10,7 @@
 /src/Acme/*
 /nbproject/
 /nbproject/private/
+
+app/config/deploy.rb
+
+app/logs/prod.log
