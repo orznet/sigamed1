@@ -16,9 +16,19 @@ class DefaultController extends Controller
               } else {
                   $escuela = null;
               } 
+        $user = $this->getUser()->getUsername();
+        
+        if (true === $this->container->get('security.context')->isGranted('ROLE_DOC')) {
+                 $docentes = $this->getUser()->getDocente();
+                 $docente = $docentes[0];
+                 $session->set('docenteid', $docente->getId()); 
+              } else {
+                  $docente = null;
+              } 
         
         return $this->render('AdminUserBundle:Default:index.html.twig',array(
             'escuela'      => $escuela,
+            'user'  => $user,
             ));
     }
 }

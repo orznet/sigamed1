@@ -38,6 +38,10 @@ protected $observaciones;
   */
 protected $calificacion;
 
+ /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+protected $autorid;
 
 /** 
      * @var Docente
@@ -218,5 +222,28 @@ protected $docente;
     public function getAcciones()
     {
         return $this->acciones;
+    }
+
+    /**
+     * Set autorid
+     *
+     * @param integer $autorid
+     * @return Planmejoramiento
+     */
+    public function setAutorid($autorid)
+    {
+        $this->autorid = $autorid;
+
+        return $this;
+    }
+
+    /**
+     * Get autorid
+     *
+     * @return integer 
+     */
+    public function getAutorid()
+    {
+        return $this->autorid;
     }
 }

@@ -26,7 +26,7 @@ class Accionespm{
 protected $oportunidad;
 
  /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
 protected $causas; 
 
@@ -35,9 +35,9 @@ protected $causas;
      * @ORM\Column(type="string", length=512)
      */
 protected $accion;
-
+    
 /**
-  * @ORM\Column(type="date")
+  * @ORM\Column(type="date", nullable=true)
   */
 protected $fecha_proyectada;
  
@@ -50,6 +50,12 @@ protected $observaciones;
   * @ORM\Column(type="datetime", nullable=true)
   */
 protected $fecha_cierre;
+
+
+ /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+protected $estado;
 
 
 /** 
@@ -232,5 +238,28 @@ protected $plan;
     public function getPlan()
     {
         return $this->plan;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param integer $estado
+     * @return Accionespm
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

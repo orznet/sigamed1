@@ -20,9 +20,8 @@ class AccionespmType extends AbstractType
             'property' => 'id',
                  ))     
             ->add('oportunidad', 'textarea', array('required'  => true, 'attr' => array('cols' => '45')))
-            ->add('causas', 'textarea', array('required'  => true, 'attr' => array('cols' => '45')))
+
             ->add('accion', 'textarea', array('required'  => true, 'attr' => array('cols' => '45')))
-            ->add('fecha_proyectada')
         ;
     }
     

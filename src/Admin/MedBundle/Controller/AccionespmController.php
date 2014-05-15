@@ -153,6 +153,73 @@ class AccionespmController extends Controller
         );
     }
 
+       /**
+     * Displays a form to edit an existing Accionespm entity.
+     * @Route("/{id}/editar", name="accionespm_editar")
+     * @Template()
+     */
+    public function editarAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
+        $defaultData = array('id' => $id);
+        $idplan = $entity->getPlan()->getId();
+        $form = $this->createFormBuilder($defaultData)
+        ->add('estado', 'choice', array(
+        'empty_value' => 'Cumplio?',
+        'label' => 'Tipo ',
+        'attr' => array('class' => 'input-lg'),   
+        'choices'   => array(
+        '1' => 'SI', 
+        '0' => 'NO'
+            ),
+        'required'  => true,))      
+        ->add('submit', 'submit', array('label' => 'Actualizar'))      
+        ->getForm();
+         if ($request->isMethod('POST')) {
+            $form->bind($request);
+            $entity->setEstado($form->get('estado')->getData());
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl('planmejoramiento_show', array('id' => $idplan)));
+        }        
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $form->createView(),
+        );
+    } 
+    
+      /**
+     * Docente Actualiza Accion
+     * @Route("/{id}/editdoc", name="accionespm_editdoc")
+     * @Template()
+     */
+    public function editdocAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
+        $defaultData = array('message' => 'Type your message here', 'id' => $id);
+        $idplan = $entity->getPlan()->getId();
+        $form = $this->createFormBuilder($defaultData)
+        ->add('observaciones')         
+        ->add('submit', 'submit', array('label' => 'Actualizar'))      
+        ->getForm();
+         if ($request->isMethod('POST')) {
+            $form->bind($request);
+            $data = $form->getData();
+            $entity->setObservaciones($data[observaciones]);
+            $fecha = new \DateTime();
+            $entity->setFechaCierre($fecha);
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl('planmejoramiento_doc', array('id' => $idplan)));
+        }        
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $form->createView(),
+        );
+    } 
+    
     /**
     * Creates a form to edit a Accionespm entity.
     *
@@ -195,7 +262,7 @@ class AccionespmController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('accionespm_edit', array('id' => $id)));
+        return $this->redirect($this->generateUrl('planmejoramiento_show', array('id' => $entity->getPlan()->getId())));
         }
 
         return array(
@@ -226,8 +293,7 @@ class AccionespmController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
-        return $this->redirect($this->generateUrl('accionespm'));
+        return $this->redirect($this->generateUrl('planmejoramiento_show', array('id' => $entity->getPlan()->getId())));
     }
 
     /**
@@ -242,7 +308,7 @@ class AccionespmController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('accionespm_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar item'))
             ->getForm()
         ;
     }

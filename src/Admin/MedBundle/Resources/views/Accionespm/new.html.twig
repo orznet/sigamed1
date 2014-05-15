@@ -1,10 +1,10 @@
 {% block body -%}
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Agregar Acciones al Plan de Mejoramiento {{id}}</h4>
+               <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+            <h4 class="modal-title">Agregar Acción</h4>
             </div>			<!-- /modal-header -->
-            <div class="modal-body">
-   <form id="arrt"  action="{{ path('accionespm_create') }}" method="post" {{ form_enctype(form) }}>
+            <div class="modal-body">          
+   <form  action="{{ path('accionespm_create') }}" method="post" {{ form_enctype(form) }}>
    <table class="table table-bordered table-striped hidden-mobile">
    <input type="hidden" name="_method" value="POST" />
      {{ form_errors(form) }}
@@ -15,33 +15,17 @@
     <td>Oportunidad</td>
     <td>{{ form_widget(form.oportunidad) }}</td>
   </tr>
-  <tr>
-    <td>Causas</td>
-    <td>{{ form_widget(form.causas) }}</td>
-  </tr>
+
   <tr>
     <td>Acción</td>
     <td>{{ form_widget(form.accion) }}</td>
   </tr>
   <tr>
-    <td>Fecha</td>
-    <td>{{ form_widget(form.fecha_proyectada) }}</td>
-  </tr>
-  <tr>
     <td>Enviar</td>
+    <td>  <button type="hidden" class="btn btn-sm btn-primary">Guardar</button></td>
   </tr>
   {{ form_widget(form._token) }}
   </table>
-      </div><!-- /modal-body -->
-      <div class="modal-footer"> 
-      <input type="submit" id="butt" class="btn btn-success" value="Send"> 
-      </div><!-- /modal-footer -->
-      <!-- /modal-dialog -->
+     
 </form>
-                
-<script type="text/javascript">
-$("#arrt").delegate("#butt", "click", function(e){
-  e.preventDefault();              
-});
-</script>
 {% endblock %}

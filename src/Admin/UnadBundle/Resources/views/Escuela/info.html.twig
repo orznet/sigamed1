@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+            <div class="modal-header">
+                 <h4 class="modal-title">{{ entity.nombre }}</h4>
+            </div>
+  <table class="table table-bordered table-striped hidden-mobile">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Sigla</th>
+                <td>{{ entity.sigla }}</td>
+            </tr>
+            <tr>
+                <th>Decano</th>
+                <td>{{ entity.decano.username }}: {{ entity.decano.nombres }} {{ entity.decano.apellidos }}</td>
+            </tr>
+            <tr>
+                <th>Secretaria Academica</th>
+                <td>{{ entity.secretaria ? entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
+            </tr>
+            <tr>
+                <th>Docentes</th>
+                <td><a  <a  href="{{ path('docente_escuela', { 'id': entity.id }) }}">Ver</a> </td>
+            </tr>
+        </tbody>
+    </table>
+                
+   <div class="modal-header">
+   <h4 class="modal-title">Programas</h4>
+   </div>	
+   <table class="table table-bordered table-striped hidden-mobile">
+        <tbody>
+            <tr>
+                <td>Programa</td>
+                <td>Cursos</td>
+                <td>Docentes</td>
+            </tr>
+         {% for programa in entity.programas %}
+                     <tr>
+                <td>{{programa.nombre}}</td>
+                <td>ver</td>
+                <td>ver</td>
+            </tr> 
+{%endfor%}
+ 
+{% endblock %}

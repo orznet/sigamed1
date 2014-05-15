@@ -148,24 +148,13 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Centros</span></a>
-						<ul>
-							<li>
-								<a href="table.html">Normal Tables</a>
-							</li>
-							<li>
-								<a href="datatables.html">Data Tables</a>
-							</li>
-						</ul>
-					</li>
-					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Decanos</span></a>
 						<ul>
 							<li>
-								<a href="general-elements.html">Mi Escuela</a>
+								<a href="{{ path('escuela_info') }}">Mi Escuela</a>
 							</li>
 							<li>
-								<a href="buttons.html">Planes de Mejoramiento</a>
+								<a href="{{ path('planmejoramiento') }}">Planes de Mejoramiento</a>
 							</li>
 							<li>
 								<a href="#">Icons</a>
@@ -184,7 +173,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="widgets.html"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Instrumentos</span></a>
+						<a href="{{ path('escuela_info') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Mi Escuela</span></a>
 					</li>
 					<li>
 						<a href="gallery.html"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Reportes</span></a>
@@ -398,24 +387,7 @@
                     }
                     });
 		})
-
-                </script>
-
-                <!-- Your GOOGLE ANALYTICS CODE Below -->
-                <script type="text/javascript">
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-                _gaq.push(['_trackPageview']);
-
-                (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-                })();
-                </script>
+                            </script>
 {% endblock %}
     </body>
 </html>

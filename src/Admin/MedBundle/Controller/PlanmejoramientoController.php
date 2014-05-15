@@ -28,8 +28,8 @@ class PlanmejoramientoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:Planmejoramiento')->findAll();
+        $session = $this->getRequest()->getSession();
+        $entities = $em->getRepository('AdminMedBundle:Planmejoramiento')->findBy(array('autorid' => $session->get('escuelaid')));
 
         return array(
             'entities' => $entities,
@@ -110,9 +110,11 @@ class PlanmejoramientoController extends Controller
     public function addAction()
     {
        $em = $this->getDoctrine()->getManager();
-       $entities = $em->getRepository('AdminUnadBundle:Docente')->findAll();
+       $session = $this->getRequest()->getSession();
+       $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+       $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
         return array(
-            'entities' => $entities,
+        'entities' => $entities,
         );
     }
     
@@ -127,9 +129,11 @@ class PlanmejoramientoController extends Controller
     {
        $planm = new Planmejoramiento();
        $em = $this->getDoctrine()->getManager();
+       $session = $this->getRequest()->getSession();
        $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('id' => $id));
        $planm->setDocente($docente);
-       $planm->setFechaCreacion(new \DateTime()); 
+       $planm->setFechaCreacion(new \DateTime());
+       $planm->setAutorid($session->get('escuelaid'));
        $em->persist($planm);
        $em->flush();
        
@@ -160,6 +164,29 @@ class PlanmejoramientoController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        );
+    }
+    
+    
+     /**
+     * Finds and displays a Planmejoramiento entity.
+     *
+     * @Route("/doc/{id}", name="planmejoramiento_doc")
+     * @Method("GET")
+     * @Template()
+     */
+    public function docAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        //$docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        $entity = $em->getRepository('AdminMedBundle:Planmejoramiento')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Planmejoramiento entity.');
+        }
+
+        return array(
+            'entity'      => $entity,
         );
     }
 
@@ -279,7 +306,7 @@ class PlanmejoramientoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('planmejoramiento_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar Plan'))
             ->getForm()
         ;
     }

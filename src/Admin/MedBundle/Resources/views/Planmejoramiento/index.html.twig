@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Planes de Mejoramiento</h1>
+    <h1>Planes de Mejoramiento de la escuela</h1>
     
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
@@ -14,8 +14,7 @@
                 <th>Fecha cierre</th>
                 <th>Observaciones</th>
                 <th>Calificacion</th>
-                <th>ver</th>
-                <th>Editar</th>
+                <th>Ver</th>
             </tr>
         </thead>
         <tbody>
@@ -32,9 +31,6 @@
                 <td>
                <a href="{{ path('planmejoramiento_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                 </td>
-                <td>
-               <a href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -42,15 +38,30 @@
 
         <ul>
         <li>
-    <a data-toggle="modal" href="{{path('planmejoramiento_add')}}" data-target="#myModal"><i class="fa fa-plus-square"></i> Agregar Plan de Mejoramiento</a>
+    <a href="javascript:popUp('{{path('planmejoramiento_add')}}')">Agregar Plan de Mejoramiento</a>
         </li>
     </ul>
-    
-    
+
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 </div></div></div>
-    
+
+<script LANGUAGE="JavaScript">
+<!--
+  
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'directories=no,titlebar=yes,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=1100,height=510,left = 320,top = 150');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+ 
+</script>
     
     {% endblock %}

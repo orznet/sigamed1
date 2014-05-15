@@ -26,7 +26,7 @@ class Accionespm{
 protected $oportunidad;
 
  /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
 protected $causas; 
 
@@ -35,14 +35,14 @@ protected $causas;
      * @ORM\Column(type="string", length=512)
      */
 protected $accion;
-
+    
 /**
   * @ORM\Column(type="date")
   */
 protected $fecha_proyectada;
  
  /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
 protected $observaciones;
 
@@ -50,6 +50,12 @@ protected $observaciones;
   * @ORM\Column(type="datetime", nullable=true)
   */
 protected $fecha_cierre;
+
+
+ /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+protected $estado;
 
 
 /** 

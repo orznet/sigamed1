@@ -129,7 +129,27 @@ class EscuelaController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
-
+    
+     /**
+     * Finds and displays a Escuela entity.
+     *
+     * @Route("/info/info", name="escuela_info")
+     * @Method("GET")
+     * @Template()
+     */
+    public function infoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        if (!$escuela) {
+            throw $this->createNotFoundException('Unable to find Escuela entity.');
+        }
+        return array(
+        'entity'      => $escuela,
+        );
+    }
+    
     /**
      * Displays a form to edit an existing Escuela entity.
      *
