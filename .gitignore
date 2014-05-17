@@ -14,3 +14,5 @@
 app/config/deploy.rb
 
 app/logs/prod.log
+
+app/logs/dev.log
