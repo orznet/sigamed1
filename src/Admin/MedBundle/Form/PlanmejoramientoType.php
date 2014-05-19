@@ -15,11 +15,8 @@ class PlanmejoramientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha_creacion')
-            ->add('fecha_cierre')
-            ->add('observaciones')
-            ->add('calificacion')
-                 ->add('docente', 'entity', array(
+            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))    
+            ->add('docente', 'entity', array(
                  'class' =>  'AdminUnadBundle:Docente',
                 'property' => 'user.nombres',
                  ))       

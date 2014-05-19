@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\MedBundle\Entity\Accionespm;
 use Admin\MedBundle\Form\AccionespmType;
+use Admin\MedBundle\Form\AccionespmdocType;
 
 /**
  * Accionespm controller.
@@ -61,14 +62,29 @@ class AccionespmController extends Controller
 
     /**
     * Creates a form to create a Accionespm entity.
-    *
     * @param Accionespm $entity The entity
-    *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createCreateForm(Accionespm $entity)
     {
         $form = $this->createForm(new AccionespmType(), $entity, array(
+            'action' => $this->generateUrl('accionespm_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Agregar'));
+        return $form;
+    }
+    
+    
+    /**
+    * Creates a form to create a Accionespm entity.
+    * @param Accionespm $entity The entity
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function crearDocenteForm(Accionespm $entity)
+    {
+        $form = $this->createForm(new AccionespmdocType(), $entity, array(
             'action' => $this->generateUrl('accionespm_create'),
             'method' => 'POST',
         ));
@@ -162,9 +178,9 @@ class AccionespmController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
-        $defaultData = array('id' => $id);
+        //$defaultData = array('id' => $id);
         $idplan = $entity->getPlan()->getId();
-        $form = $this->createFormBuilder($defaultData)
+        $form = $this->createFormBuilder($entity)
         ->add('estado', 'choice', array(
         'empty_value' => 'Cumplio?',
         'label' => 'Tipo ',
@@ -198,16 +214,15 @@ class AccionespmController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Accionespm')->find($id);
-        $defaultData = array('message' => 'Type your message here', 'id' => $id);
+
         $idplan = $entity->getPlan()->getId();
-        $form = $this->createFormBuilder($defaultData)
-        ->add('observaciones')         
-        ->add('submit', 'submit', array('label' => 'Actualizar'))      
-        ->getForm();
+        $form = $this->crearDocenteForm($entity);
+        
          if ($request->isMethod('POST')) {
             $form->bind($request);
-            $data = $form->getData();
-            $entity->setObservaciones($data[observaciones]);
+            //$data = $form->getData();
+            $entity->setObservaciones($form->get('observaciones')->getData());
+            
             $fecha = new \DateTime();
             $entity->setFechaCierre($fecha);
             $em->persist($entity);

@@ -208,12 +208,10 @@ class PlanmejoramientoController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -259,7 +257,7 @@ class PlanmejoramientoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('planmejoramiento_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('planmejoramiento_show', array('id' => $id)));
         }
 
         return array(

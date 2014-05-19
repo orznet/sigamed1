@@ -17,7 +17,10 @@
     <td>Cedula: {{ entity.docente.user.id }}</td>
   </tr>
   <tr>
-    <td colspan='3'>Observaciones del Decano: {{ entity.observaciones }}</td>
+    <td colspan='3'>Observaciones del Decano:
+    <a data-toggle="modal" href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+    {{ entity.observaciones }}
+    </td>
   </tr>
     <tr>
     <td colspan='3'>
@@ -35,6 +38,7 @@
     <th>Oportunidad de mejora</th>
     <th>Acción propuesta</th>
     <th>Observaciones del docente</th>
+    <th>Archivo</th>
     <th>Fecha</th>
     <th>¿Se cumplió?</th>
     <th>Editar</th>
@@ -47,10 +51,15 @@
     <td>{{accion.oportunidad}}</td>
     <td>{{accion.accion}}</td>
     <td>{{accion.observaciones}}</td>
+    <td>
+    {%if accion.path %}    
+   <a href="javascript:popUp('../archivos/planm/{{accion.path}}')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+   {%endif%}
+    </td>
     <td>{{ accion.fechaCierre? accion.fechaCierre|date('Y-m-d H:i') : ' ' }}</td>
     <td>
    {%if accion.estado is null %} 
-   <a data-toggle="modal" href="{{ path('accionespm_editar', { 'id': accion.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+<a data-toggle="modal" href="{{ path('accionespm_editar', { 'id': accion.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
      {%elseif accion.estado == 1 %}
         SI
         {%else%}
@@ -75,4 +84,31 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content">  
 </div></div></div>
+    
+<!-- Modal -->
+<div class="modal fade" id="myModalpdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      </div>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script LANGUAGE="JavaScript">
+<!--
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'directories=no,titlebar=yes,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=900,height=600,left = 100,top = 100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+</script>
 {% endblock %}
+
+

@@ -13,15 +13,15 @@ class AccionespmType extends AbstractType
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+       {
         $builder
             ->add('plan','entity', array(
             'class' =>  'AdminMedBundle:Planmejoramiento',
             'property' => 'id',
-                 ))     
-            ->add('oportunidad', 'textarea', array('required'  => true, 'attr' => array('cols' => '45')))
+                 ))
+            ->add('oportunidad', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
 
-            ->add('accion', 'textarea', array('required'  => true, 'attr' => array('cols' => '45')))
+            ->add('accion', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
         ;
     }
     
