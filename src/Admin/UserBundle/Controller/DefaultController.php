@@ -4,11 +4,13 @@ namespace Admin\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class DefaultController extends Controller
 {
-    public function indexAction(){
-        $session = new Session();    
+    public function indexAction(Request $request){
+         $session = $request->getSession();
         if (true === $this->container->get('security.context')->isGranted('ROLE_DEC')) {
                   $escuelas = $this->getUser()->getDecano();
                   $escuela = $escuelas[0];

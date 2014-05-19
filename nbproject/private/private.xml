@@ -3,22 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/info.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Accionespm.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/edit.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/show.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/PlanmejoramientoController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/editdoc.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/Resources/views/basepop.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/editar.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/AccionespmController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/info.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Accionespm.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/AccionespmController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/editar.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/edit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/add.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/doc.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Accionespm/new.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/show.html.twig</file>
         </group>
     </open-files>
 </project-private>
