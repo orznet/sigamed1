@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\PlanmejoramientoType;
 /**
  * Planmejoramiento controller.
  *
- * @Route("/planm")
+ * @Route("/med/planm")
  */
 class PlanmejoramientoController extends Controller
 {
@@ -30,7 +30,7 @@ class PlanmejoramientoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $entities = $em->getRepository('AdminMedBundle:Planmejoramiento')->findBy(array('autorid' => $session->get('escuelaid')));
-
+        
         return array(
             'entities' => $entities,
         );
@@ -253,7 +253,7 @@ class PlanmejoramientoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
+        $entity->setFechaCierre(new \DateTime());
         if ($editForm->isValid()) {
             $em->flush();
 

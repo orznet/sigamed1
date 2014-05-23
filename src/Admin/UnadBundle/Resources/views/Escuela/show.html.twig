@@ -25,17 +25,12 @@
             </tr>
             <tr>
                 <th>Secretaria Academica</th>
-                <td>{{ entity.secretaria ? entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
+                <td>{{ entity.secretaria ? entity.secretaria.username~' '~entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('escuela') }}">
-            Volver a la lista
-        </a>
-    </li>
     <li>
         <a href="{{ path('escuela_edit', { 'id': entity.id }) }}">
             Editar

@@ -41,18 +41,12 @@
     <td class="data">{{ entity.user.email }}</td>
   </tr>
 </table>
-
+         {% if is_granted('ROLE_ADMIN') %}
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('docente') }}">
-            Back to the list
-        </a>
-    </li>
     <li>
         <a href="{{ path('docente_edit', { 'id': entity.id }) }}">
             Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+        </a></li>
 </ul>
+           {%endif%}
 {% endblock %}

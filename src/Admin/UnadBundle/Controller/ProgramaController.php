@@ -13,7 +13,7 @@ use Admin\UnadBundle\Form\ProgramaType;
 /**
  * Programa controller.
  *
- * @Route("/programa")
+ * @Route("/unad/programa")
  */
 class ProgramaController extends Controller
 {
@@ -29,8 +29,14 @@ class ProgramaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         //$entities = $em->getRepository('AdminUnadBundle:Programa')->findAll();
+        if ($this->container->get('security.context')->isGranted('ROLE_SECA')){
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        $entities = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela));   
+        }
+        else{
         $entities = $em->getRepository('AdminUnadBundle:Programa')->ordenEscuela();
-
+        }
         return array(
             'entities' => $entities,
         );
@@ -194,8 +200,14 @@ class ProgramaController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('programa_edit', array('id' => $id)));
+         
+        if ($this->container->get('security.context')->isGranted('ROLE_SECA')){
+         return $this->redirect($this->generateUrl('escuela_info'));  
+        }
+        else{
+            return $this->redirect($this->generateUrl('programa')); 
+        }
+       
         }
 
         return array(
@@ -246,4 +258,24 @@ class ProgramaController extends Controller
             ->getForm()
         ;
     }
+    
+    
+    
+     /**
+     * Seleccionar docente
+     * @Route("/add/lider", name="programa_addlider")
+     * @Method("GET")
+     * @Template()
+     */
+    public function addliderAction()
+    {
+       $em = $this->getDoctrine()->getManager();
+       $session = $this->getRequest()->getSession();
+       $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+       $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
+        return array(
+        'entities' => $entities,
+        );
+    }
+    
 }

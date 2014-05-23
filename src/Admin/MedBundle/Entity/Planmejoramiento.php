@@ -25,22 +25,23 @@ class Planmejoramiento{
 protected $fecha_creacion;
 
  /**
-  * @ORM\Column(type="date", nullable=true)
+  * @ORM\Column(type="datetime", nullable=true)
   */
 protected $fecha_cierre;
 
  /**
-     * @ORM\Column(type="string", length=512, nullable=true)
-     */
-protected $observaciones;
-/**
-  * @ORM\Column(type="float", scale=2, nullable=true)
+  * @ORM\Column(type="string", length=512, nullable=true)
   */
+protected $observaciones;
+
+/**
+ * @ORM\Column(type="float", scale=2, nullable=true)
+ */
 protected $calificacion;
 
  /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+  * @ORM\Column(type="integer", nullable=true)
+  */
 protected $autorid;
 
 /** 

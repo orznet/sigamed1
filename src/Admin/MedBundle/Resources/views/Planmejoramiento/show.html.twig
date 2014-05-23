@@ -16,12 +16,6 @@
     <td>Centro: {{ entity.docente.centro.nombre }}</td>
     <td>Cedula: {{ entity.docente.user.id }}</td>
   </tr>
-  <tr>
-    <td colspan='3'>Observaciones del Decano:
-    <a data-toggle="modal" href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-    {{ entity.observaciones }}
-    </td>
-  </tr>
     <tr>
     <td colspan='3'>
         {%if entity.acciones|length == 0 %}
@@ -44,8 +38,10 @@
     <th>Editar</th>
   </tr>
   {% set num = 0 %}
+  {% set final = 1 %}
   {%for accion in entity.acciones%}
   {% set num = num+1 %}
+  {% if accion.estado is null %}{% set final = 0 %}{%endif%}
   <tr>
     <td>{{num}}</td>
     <td>{{accion.oportunidad}}</td>
@@ -67,19 +63,36 @@
         {%endif%}
     </td>
     <td>
-     {%if accion.fechaCierre is null %}    
+     {%if accion.fechaCierre is not null or accion.plan.fechaCierre is not null%}
+     look
+     {%else%}
     <a data-toggle="modal" href="{{ path('accionespm_edit', { 'id': accion.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>    
     {%endif%}
     </td>
   </tr>
   {%endfor%}
-</table>    
+</table> 
         <ul>
         <li>
     <a data-toggle="modal" href="{{ path('accionespm_new', { 'id': entity.id })  }}" data-target="#myModal"><i class="fa fa-plus-square"></i> Agregar item al plan de mejoramiento</a>
         </li>
     </ul>
 
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+    <tr>
+    <td>Cerrar Plan de Mejoramiento:
+    {%if final%}     
+    <a data-toggle="modal" href="{{ path('planmejoramiento_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+    {%endif%}
+    </td>
+    <td>Observciones: {{ entity.observaciones }}</td>
+    <td>Fecha de Cierre:{{ entity.fechacierre|date('Y-m-d H:i') }}</td>
+    <td>Estado: {{ entity.calificacion }}</td>
+    
+  </tr>    
+    </table>    
+    
+    
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">    
 <div class="modal-dialog modal-lg">
 <div class="modal-content">  
@@ -95,20 +108,6 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script LANGUAGE="JavaScript">
-<!--
-function popUp(URL) {
-
-    if(typeof(popupWin) != "object" || popupWin.closed)  { 
-        popupWin = window.open(URL, 'popupWin', 'directories=no,titlebar=yes,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=900,height=600,left = 100,top = 100');
-    } 
-    else{ 
-        popupWin.location.href = URL; 
-    }
-
-    popupWin.focus(); 
- }
-</script>
 {% endblock %}
 
 

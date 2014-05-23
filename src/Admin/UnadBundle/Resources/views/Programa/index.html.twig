@@ -35,12 +35,11 @@
         {% endfor %}
         </tbody>
     </table>
-
+ {% if is_granted('ROLE_ADMIN') %} 
         <ul>
         <li>
-            <a href="{{ path('programa_new') }}">
-                Create a new entry
-            </a>
+             <a href="{{ path('programa_new') }}"></a>
         </li>
     </ul>
+    {%endif%}
     {% endblock %}

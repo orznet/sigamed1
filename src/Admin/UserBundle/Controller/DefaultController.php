@@ -17,7 +17,16 @@ class DefaultController extends Controller
                  $session->set('escuelaid', $escuela->getId()); 
               } else {
                   $escuela = null;
+              }
+              
+        if (true === $this->container->get('security.context')->isGranted('ROLE_SECA')) {
+                  $escuelas = $this->getUser()->getSecretaria();
+                  $escuela = $escuelas[0];
+                 $session->set('escuelaid', $escuela->getId()); 
+              } else {
+                  $escuela = null;
               } 
+              
         $user = $this->getUser()->getUsername();
         
         if (true === $this->container->get('security.context')->isGranted('ROLE_DOC')) {

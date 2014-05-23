@@ -7,6 +7,6 @@ AdminUserBundle_admin_user:
     prefix:   /admin/user
     
 admin_user_info:
-    pattern:  /info/user
+    pattern:  /unad/user
     defaults: { _controller: "AdminUserBundle:User:info" }
     

@@ -24,7 +24,8 @@ class ProgramaType extends AbstractType
                  ))        
             ->add("lider", "text", array(
              "mapped" => false,
-            'required'  => true,    
+            'required'  => true,
+            'attr' => array('readonly' => 'readonly')    
                 ))
         ;
     }

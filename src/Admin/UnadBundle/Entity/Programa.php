@@ -58,7 +58,14 @@ protected $lider;
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="programa")
      */
     protected $docentes;    
-
+    
+    
+    /**
+      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="programa")
+      */
+    protected $cursos;     
+    
+    
     /**
      * Get id
      *
@@ -160,6 +167,22 @@ protected $lider;
     public function getTipo()
     {
         return $this->tipo;
+    }
+    
+        /**
+     * Get lista para menu
+     *
+     * @return string 
+     */
+    public function getLista()
+    {
+        if ($this->getEscuela()){
+          return $this->getEscuela()->getSigla().'-'.$this->nombre;  
+        }
+      else{
+       return 'Sin-'.$this->nombre;   
+      }      
+        
     }
 
     /**

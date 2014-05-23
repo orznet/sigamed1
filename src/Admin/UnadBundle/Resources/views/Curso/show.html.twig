@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Programa</h1>
+    <h1>Curso</h1>
 
-      <table class="table table-bordered table-striped hidden-mobile">
+    <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -18,25 +18,31 @@
                 <td>{{ entity.nivel }}</td>
             </tr>
             <tr>
-                <th>Lider</th>
-                <td>{{ entity.lider? entity.lider.user.nombres~' '~ entity.lider.user.nombres : 'sin'}}</td>
+                <th>Tipologia</th>
+                <td>{{ entity.tipologia }}</td>
+            </tr>
+            <tr>
+                <th>Creditos</th>
+                <td>{{ entity.creditos }}</td>
+            </tr>
+            <tr>
+                <th>Escuela</th>
+                <td>{{ entity.escuela }}</td>
             </tr>
         </tbody>
     </table>
- {% if is_granted('ROLE_ADMIN') %}
+
         <ul class="record_actions">
     <li>
-         
-        <a href="{{ path('programa_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('curso') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
-   
     <li>{{ form(delete_form) }}</li>
-      {%endif%}
 </ul>
-    
-    
-    
-    
 {% endblock %}

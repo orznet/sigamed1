@@ -1,12 +1,12 @@
 <?php
 
-namespace Admin\MedBundle\Form;
+namespace Admin\UnadBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PlanmejoramientoType extends AbstractType
+class CursoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,14 +15,16 @@ class PlanmejoramientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))    
-            ->add('docente', 'entity', array(
-                 'class' =>  'AdminUnadBundle:Docente',
-                'property' => 'user.nombres',
-                 ))
-            ->add('calificacion', 'choice', array(  
-            'choices'   => array('1' => 'NO', '5' => 'SI'),
-            'required'  => true,))   
+            ->add('nombre')
+            ->add('nivel')
+            ->add('tipologia')
+            ->add('creditos')
+            ->add('escuela')
+            ->add('Programa', 'entity', array(
+            'class' =>  'AdminUnadBundle:Programa',
+            'empty_value' => ' ',
+            'property' => 'lista',
+                 ))        
         ;
     }
     
@@ -32,7 +34,7 @@ class PlanmejoramientoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\MedBundle\Entity\Planmejoramiento'
+            'data_class' => 'Admin\UnadBundle\Entity\Curso'
         ));
     }
 
@@ -41,6 +43,6 @@ class PlanmejoramientoType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_medbundle_planmejoramiento';
+        return 'admin_unadbundle_curso';
     }
 }

@@ -133,7 +133,7 @@ class EscuelaController extends Controller
      /**
      * Finds and displays a Escuela entity.
      *
-     * @Route("/info/info", name="escuela_info")
+     * @Route("/mi/info", name="escuela_info")
      * @Method("GET")
      * @Template()
      */

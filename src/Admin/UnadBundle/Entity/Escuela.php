@@ -39,8 +39,7 @@ protected $sigla;
      * @var Decano 
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="decano")
      * @ORM\JoinColumn(name="decano_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $decano;
@@ -50,8 +49,7 @@ protected $decano;
      * @var Secretaria 
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="secretaria")
      * @ORM\JoinColumn(name="secretaria_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $secretaria;

@@ -13,7 +13,7 @@ use Admin\UnadBundle\Form\CentroType;
 /**
  * Centro controller.
  *
- * @Route("/centro")
+ * @Route("/unad/centro")
  */
 class CentroController extends Controller
 {

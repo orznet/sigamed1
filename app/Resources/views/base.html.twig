@@ -129,8 +129,15 @@
 					<li>
 						<a href="{{ path('_welcome') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
 					</li>
-
-					<li>
+                                        
+                                        {% if is_granted('ROLE_DEC') or is_granted('ROLE_SECA')  %}
+                                        <li>
+						<a href="{{ path('escuela_info') }}"><i class="fa fa-lg fa-fw fa-folder-open"></i> <span class="menu-item-parent">Mi Escuela</span></a>
+					</li>
+                                        {% endif %}
+                                        
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                        <li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Unad</span></a>
 						<ul>
 							<li>
@@ -147,38 +154,21 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Decanos</span></a>
+                                         {%endif%}
+					{% if is_granted('ROLE_DEC')  %}
+                                        <li>
+						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Instrumentos</span></a>
 						<ul>
+						
 							<li>
-								<a href="{{ path('escuela_info') }}">Mi Escuela</a>
+								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
 							</li>
-							<li>
-								<a href="{{ path('planmejoramiento') }}">Planes de Mejoramiento</a>
-							</li>
-							<li>
-								<a href="#">Icons</a>
-								<ul>
-									<li>
-										<a href="fa.html"><i class="fa fa-plane"></i> Font Awesome</a>
-									</li>	
-									<li>
-										<a href="glyph.html"><i class="glyphicon glyphicon-plane"></i> Glyph Icons </a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="grid.html">Grid</a>
-							</li>
+                                                        <li>
+								<a href="#"><i class="fa fa-book"></i> Planes de Gestión</a>
+							</li>   
 						</ul>
 					</li>
-					<li>
-						<a href="{{ path('escuela_info') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Mi Escuela</span></a>
-					</li>
-					<li>
-						<a href="gallery.html"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Reportes</span></a>
-					</li>
-				
+				{%endif%}
 				</ul>
 			</nav>
 			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

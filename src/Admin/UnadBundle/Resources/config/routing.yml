@@ -17,4 +17,7 @@ _programa_unad:
 _docente_unad:
     resource: "@AdminUnadBundle/Controller/DocenteController.php"
     type:     annotation       
-    
+
+_curso_unad:
+    resource: "@AdminUnadBundle/Controller/CursoController.php"
+    type:     annotation           

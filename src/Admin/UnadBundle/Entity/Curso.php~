@@ -50,22 +50,24 @@ protected $escuela;
 
       /** 
      * @var Director 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="director")
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="Director")
      * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
-     * nullable=true
+     * nullable=true,
+     * onDelete="CASCADE"
      * )
      */
-protected $director;
+protected $Director;
 
 
       /** 
      * @var Programa 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="cursos")
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="Cursos")
      * @ORM\JoinColumn(name="programa_id", referencedColumnName="id",
-     * nullable=true
+     * nullable=true,
+     * onDelete="CASCADE"
      * )
      */
-protected $programa;
+protected $Programa;
 
     /**
      * Get id
@@ -200,7 +202,7 @@ protected $programa;
      */
     public function setDirector(\Admin\UnadBundle\Entity\Docente $director = null)
     {
-        $this->director = $director;
+        $this->Director = $director;
 
         return $this;
     }
@@ -212,29 +214,6 @@ protected $programa;
      */
     public function getDirector()
     {
-        return $this->director;
-    }
-
-    /**
-     * Set Programa
-     *
-     * @param \Admin\UnadBundle\Entity\Programa $programa
-     * @return Curso
-     */
-    public function setPrograma(\Admin\UnadBundle\Entity\Programa $programa = null)
-    {
-        $this->programa = $programa;
-
-        return $this;
-    }
-
-    /**
-     * Get Programa
-     *
-     * @return \Admin\UnadBundle\Entity\Programa 
-     */
-    public function getPrograma()
-    {
-        return $this->programa;
+        return $this->Director;
     }
 }

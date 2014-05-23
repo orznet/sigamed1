@@ -14,7 +14,7 @@ use Admin\UnadBundle\Form\DocenteType;
 /**
  * Docente controller.
  *
- * @Route("/docente")
+ * @Route("/unad/docente")
  */
 class DocenteController extends Controller
 {
