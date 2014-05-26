@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\AccionespmdocType;
 /**
  * Accionespm controller.
  *
- * @Route("/planm/acciones")
+ * @Route("/dec/planm/acciones")
  */
 class AccionespmController extends Controller
 {
@@ -207,7 +207,6 @@ class AccionespmController extends Controller
     
       /**
      * Docente Actualiza Accion
-     * @Route("/{id}/editdoc", name="accionespm_editdoc")
      * @Template()
      */
     public function editdocAction(Request $request, $id)

@@ -4,4 +4,11 @@ _planmejoramiento:
 _accionespm:
     resource: "@AdminMedBundle/Controller/AccionespmController.php"
     type:     annotation
-        
+ 
+accionespm_editdoc:
+    pattern:  /doc/planm/acc/{id}/edit
+    defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }
+    
+planmejoramiento_doc:
+    pattern: /doc/planm/{id}
+    defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }

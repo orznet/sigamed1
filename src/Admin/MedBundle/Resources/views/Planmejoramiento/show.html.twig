@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+
 <a href="{{ path('planmejoramiento') }}" class="btn btn-primary btn-xs"><i class="fa fa-backward"> Regresar</i></a>
-    <h1>Plan de Mejoramiento de {{ entity.docente.user.nombres }} {{ entity.docente.user.apellidos }}</h1>    
+<h1>Plan de Mejoramiento de {{ entity.docente.user.nombres }} {{ entity.docente.user.apellidos }}</h1>    
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
 

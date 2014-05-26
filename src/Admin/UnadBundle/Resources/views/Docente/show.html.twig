@@ -49,4 +49,11 @@
         </a></li>
 </ul>
            {%endif%}
+   <table class="table table-bordered table-striped hidden-mobile">
+{% for plan in entity.planmejoramiento %}
+  <tr>
+    <th class="data">1. Plan de Mejoramiento</th>
+    <td class="data"><a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}">Ver</a></td></tr>
+   {% endfor %}
+   </table>
 {% endblock %}

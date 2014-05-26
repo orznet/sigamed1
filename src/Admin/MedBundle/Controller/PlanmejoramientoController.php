@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\PlanmejoramientoType;
 /**
  * Planmejoramiento controller.
  *
- * @Route("/med/planm")
+ * @Route("/dec/planm")
  */
 class PlanmejoramientoController extends Controller
 {
@@ -171,14 +171,13 @@ class PlanmejoramientoController extends Controller
      /**
      * Finds and displays a Planmejoramiento entity.
      *
-     * @Route("/doc/{id}", name="planmejoramiento_doc")
      * @Method("GET")
      * @Template()
      */
     public function docAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $session = $this->getRequest()->getSession();
+        //$session = $this->getRequest()->getSession();
         //$docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
         $entity = $em->getRepository('AdminMedBundle:Planmejoramiento')->find($id);
         if (!$entity) {

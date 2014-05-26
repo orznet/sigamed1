@@ -4,5 +4,14 @@ MED
 
 Escuela: {{ escuela? escuela.nombre : 'sin escuela' }}
 
-username: {{user}}
+username: {{app.user.nombres}}
+
+Docente
+
+{% if is_granted('ROLE_DOC') %}
+{%for docente in app.user.docente %}
+{{docente.id}}
+{%endfor%}
+{%endif%}
+
 {% endblock %}
