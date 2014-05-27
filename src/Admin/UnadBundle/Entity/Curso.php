@@ -32,7 +32,7 @@ protected $nombre;
 protected $nivel;
 
 /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=25)
      */
 protected $tipologia;
 
@@ -66,6 +66,12 @@ protected $director;
      * )
      */
 protected $programa;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="tutoria")
+     */
+  protected $docentes;
 
     /**
      * Get id
@@ -236,5 +242,45 @@ protected $programa;
     public function getPrograma()
     {
         return $this->programa;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Curso
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

@@ -31,8 +31,10 @@ class ProgramaController extends Controller
         //$entities = $em->getRepository('AdminUnadBundle:Programa')->findAll();
         if ($this->container->get('security.context')->isGranted('ROLE_SECA')){
         $session = $this->getRequest()->getSession();
-        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
-        $entities = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela));   
+       // $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+       // $entities = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela));   
+        $entities = $em->getRepository('AdminUnadBundle:Programa')->getPorEscuela($session->get('escuelaid'));
+        
         }
         else{
         $entities = $em->getRepository('AdminUnadBundle:Programa')->ordenEscuela();

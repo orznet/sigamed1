@@ -32,7 +32,7 @@ protected $nombre;
 protected $nivel;
 
 /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=25)
      */
 protected $tipologia;
 
@@ -50,24 +50,28 @@ protected $escuela;
 
       /** 
      * @var Director 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="Director")
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="director")
      * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
-protected $Director;
+protected $director;
 
 
       /** 
      * @var Programa 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="Cursos")
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="cursos")
      * @ORM\JoinColumn(name="programa_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
-protected $Programa;
+protected $programa;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="tutoria")
+     */
+  protected $docentes;
 
     /**
      * Get id
@@ -202,7 +206,7 @@ protected $Programa;
      */
     public function setDirector(\Admin\UnadBundle\Entity\Docente $director = null)
     {
-        $this->Director = $director;
+        $this->director = $director;
 
         return $this;
     }
@@ -214,6 +218,29 @@ protected $Programa;
      */
     public function getDirector()
     {
-        return $this->Director;
+        return $this->director;
+    }
+
+    /**
+     * Set Programa
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programa
+     * @return Curso
+     */
+    public function setPrograma(\Admin\UnadBundle\Entity\Programa $programa = null)
+    {
+        $this->programa = $programa;
+
+        return $this;
+    }
+
+    /**
+     * Get Programa
+     *
+     * @return \Admin\UnadBundle\Entity\Programa 
+     */
+    public function getPrograma()
+    {
+        return $this->programa;
     }
 }

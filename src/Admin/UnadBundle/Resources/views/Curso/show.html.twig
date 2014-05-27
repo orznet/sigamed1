@@ -2,16 +2,19 @@
 
 {% block body -%}
     <h1>Curso</h1>
-
-    <table class="record_properties">
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Código</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
                 <th>Nombre</th>
                 <td>{{ entity.nombre }}</td>
+            </tr>
+           <tr>
+                <th>Programa</th>
+                <td>{{ entity.programa? entity.programa.nombre : 'Sin' }}</td>
             </tr>
             <tr>
                 <th>Nivel</th>
@@ -29,20 +32,31 @@
                 <th>Escuela</th>
                 <td>{{ entity.escuela }}</td>
             </tr>
+             <tr>
+                <th>Director</th>
+                <td>{{ entity.director? entity.director.user.nombres~' '~entity.director.user.apellidos : 'No' }}</td>
+            </tr>
         </tbody>
     </table>
+    Tutores:
+        <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <tbody>
+          <tr>
+              <th>ID</th>
+                <th>Nombre</th>
+                <td>Centro</td>
+            </tr>
+        {%for docente in entity.docentes %}
+            <tr>
+                <td>{{docente.id}}</td>
+                <td>{{docente.user.nombres}} {{docente.user.nombres}}</td>
+                <td>{{docente.centro.nombre}}</td>
+            </tr>
+        {%endfor%}   
+        </tbody>
+        </table>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('curso') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+    {% if is_granted('ROLE_ADMIN') %} <li>{{ form(delete_form) }}</li> {%endif%}
 </ul>
 {% endblock %}

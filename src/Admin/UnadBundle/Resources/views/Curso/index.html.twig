@@ -45,7 +45,8 @@
                 <th>Nivel</th>
                 <th>Tipologia</th>
                 <th>Creditos</th>
-                <th>Escuela</th>
+                <th>Programa</th>
+                <th>Director</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -57,11 +58,22 @@
                 <td>{{ entity.nivel }}</td>
                 <td>{{ entity.tipologia }}</td>
                 <td>{{ entity.creditos }}</td>
-                <td>{{ entity.escuela }}</td>
                 <td>
-
-                        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">edit</a>
- 
+                {% if entity.programa %}
+                <i class="fa  fa-check txt-color-green"></i>
+                {%else%}
+                <i class="fa fa-times txt-color-red"></i>
+                {%endif%}
+                </td>
+                <td>
+                {% if entity.director %}
+                <i class="fa  fa-check txt-color-green"></i>
+                {%else%}
+                <i class="fa fa-times txt-color-red"></i>
+                {%endif%}
+                </td>
+                <td>
+ <a data-toggle="modal" href="{{ path('curso_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% endfor %}
@@ -80,4 +92,8 @@
                     </section>
                     <!-- end widget grid -->                         
 
+<div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">    
+<div class="modal-dialog modal-lg">
+<div class="modal-content">  
+</div></div></div>
     {% endblock %}

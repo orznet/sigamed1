@@ -105,6 +105,12 @@ protected $centro;
     protected $director;    
 
 
+     /**
+     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="docentes")
+     * @ORM\JoinTable(name="docente_curso")
+     */
+    protected $tutoria;
+    
     /**
      * Set id
      *
@@ -406,5 +412,71 @@ protected $centro;
     public function getLider()
     {
         return $this->lider;
+    }
+
+    /**
+     * Add director
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $director
+     * @return Docente
+     */
+    public function addDirector(\Admin\UnadBundle\Entity\Curso $director)
+    {
+        $this->director[] = $director;
+
+        return $this;
+    }
+
+    /**
+     * Remove director
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $director
+     */
+    public function removeDirector(\Admin\UnadBundle\Entity\Curso $director)
+    {
+        $this->director->removeElement($director);
+    }
+
+    /**
+     * Get director
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDirector()
+    {
+        return $this->director;
+    }
+
+    /**
+     * Add tutoria
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $tutoria
+     * @return Docente
+     */
+    public function addTutorium(\Admin\UnadBundle\Entity\Curso $tutoria)
+    {
+        $this->tutoria[] = $tutoria;
+
+        return $this;
+    }
+
+    /**
+     * Remove tutoria
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $tutoria
+     */
+    public function removeTutorium(\Admin\UnadBundle\Entity\Curso $tutoria)
+    {
+        $this->tutoria->removeElement($tutoria);
+    }
+
+    /**
+     * Get tutoria
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTutoria()
+    {
+        return $this->tutoria;
     }
 }

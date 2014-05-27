@@ -12,8 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProgramaRepository extends EntityRepository
 {
-    
-    
     public function ordenEscuela(){
      $em = $this->getEntityManager(); 
     // $centros = $em->getRepository('AdminUnadBundle:Centro')->findAll();
@@ -21,4 +19,13 @@ class ProgramaRepository extends EntityRepository
      $centros = $query->getResult(); 
      return $centros;        
   }
+  
+      public function getPorEscuela($escuelaId){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM AdminUnadBundle:Programa a WHERE a.escuela = :escuelaid')->setParameter('escuelaid', $escuelaId);    
+        $programas = $query->getResult(); 
+        return $programas;   
+      }
+  
+  
 }

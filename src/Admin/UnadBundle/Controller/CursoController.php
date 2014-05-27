@@ -1,7 +1,6 @@
 <?php
 
 namespace Admin\UnadBundle\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\UnadBundle\Entity\Curso;
 use Admin\UnadBundle\Form\CursoType;
+use Admin\UnadBundle\Form\CursoprogType;
 
 /**
  * Curso controller.
@@ -28,9 +28,7 @@ class CursoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('AdminUnadBundle:Curso')->findAll();
-
         return array(
             'entities' => $entities,
         );
@@ -72,7 +70,6 @@ class CursoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('curso_show', array('id' => $entity->getId())));
         }
 
@@ -160,8 +157,9 @@ class CursoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Curso entity.');
         }
-
-        $editForm = $this->createEditForm($entity);
+        
+        $editForm = $this->createEditarForm($entity);
+        $editForm->get('director')->setData($entity->getDirector()->getId());
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -189,6 +187,30 @@ class CursoController extends Controller
 
         return $form;
     }
+    
+    
+    /**
+    * Creates a form to edit a Curso entity.
+    *
+    * @param Curso $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditarForm(Curso $entity)
+    {
+        $session = $this->getRequest()->getSession();
+        $escuelaid = $session->get('escuelaid');
+        $form = $this->createForm(new CursoprogType($escuelaid), $entity, array(
+            'action' => $this->generateUrl('curso_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+                )
+                );
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
+        return $form;
+    
+   }
+    
+    
     /**
      * Edits an existing Curso entity.
      *

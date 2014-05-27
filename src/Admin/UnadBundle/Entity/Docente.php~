@@ -50,8 +50,7 @@ protected $perfil;
      * @var User
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="docente")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $user;
@@ -61,8 +60,7 @@ protected $user;
      * @var Escuela
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Escuela", inversedBy="docentes")
      * @ORM\JoinColumn(name="escuela_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $escuela;
@@ -71,8 +69,7 @@ protected $escuela;
      * @var Programa
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="docentes")
      * @ORM\JoinColumn(name="programa_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $programa;
@@ -82,8 +79,7 @@ protected $programa;
      * @var Centro
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Centro", inversedBy="docentes")
      * @ORM\JoinColumn(name="centro_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $centro;
@@ -98,9 +94,23 @@ protected $centro;
     /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="lider")
      */
-    protected $lider;    
+    protected $lider;
+    
+    
+    
+    
+        /**
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="director")
+     */
+    protected $director;    
 
 
+     /**
+     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="docentes")
+     * @ORM\JoinTable(name="docente_curso")
+     */
+    protected $tutoria;
+    
     /**
      * Set id
      *
@@ -369,5 +379,38 @@ protected $centro;
     public function getPlanmejoramiento()
     {
         return $this->planmejoramiento;
+    }
+
+    /**
+     * Add lider
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $lider
+     * @return Docente
+     */
+    public function addLider(\Admin\UnadBundle\Entity\Programa $lider)
+    {
+        $this->lider[] = $lider;
+
+        return $this;
+    }
+
+    /**
+     * Remove lider
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $lider
+     */
+    public function removeLider(\Admin\UnadBundle\Entity\Programa $lider)
+    {
+        $this->lider->removeElement($lider);
+    }
+
+    /**
+     * Get lider
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLider()
+    {
+        return $this->lider;
     }
 }

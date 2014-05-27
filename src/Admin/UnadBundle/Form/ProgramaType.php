@@ -15,8 +15,15 @@ class ProgramaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('nivel')
+            ->add('nombre', 'text',  array(
+            'attr' => array('size' => '100')
+            ))
+            ->add('nivel', 'choice', array(
+            'empty_value' => ' ',    
+            'choices'   => array('Diplomado' => 'Diplomado', 'Especialización' => 'Especialización','Licenciatura' => 'Licenciatura', 'Maestria' => 'Maestria','Profesional' => 'Profesional','Tecnologia' => 'Tecnologia','Unidad'=>'Unidad'),
+            'required'  => true,
+            ))    
+                
             ->add('escuela', 'entity', array(
                  'empty_value' => ' ', 
                  'class' =>  'AdminUnadBundle:Escuela',

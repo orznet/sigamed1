@@ -247,4 +247,37 @@ protected $lider;
     {
         return $this->docentes;
     }
+
+    /**
+     * Add cursos
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $cursos
+     * @return Programa
+     */
+    public function addCurso(\Admin\UnadBundle\Entity\Curso $cursos)
+    {
+        $this->cursos[] = $cursos;
+
+        return $this;
+    }
+
+    /**
+     * Remove cursos
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $cursos
+     */
+    public function removeCurso(\Admin\UnadBundle\Entity\Curso $cursos)
+    {
+        $this->cursos->removeElement($cursos);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
 }

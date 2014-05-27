@@ -40,6 +40,16 @@
     <th class="data">Correo</th>
     <td class="data">{{ entity.user.email }}</td>
   </tr>
+  <tr>
+   <th>Dirección de curso</th>
+      <td colspan="3">{%for curso in entity.director%} {{curso.nombre}} | {%endfor%}
+   </td>
+  </tr> 
+  <tr>
+      <th>Tutorias</th>
+      <td colspan="3">{%for curso in entity.tutoria%} {{curso.nombre}} | {%endfor%}
+   </td>
+  </tr>
 </table>
          {% if is_granted('ROLE_ADMIN') %}
         <ul class="record_actions">
