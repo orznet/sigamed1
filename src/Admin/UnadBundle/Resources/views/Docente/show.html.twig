@@ -1,8 +1,6 @@
 {% extends '::base.html.twig' %}
-
 {% block body -%}
-    <h1>Docente:{{ entity.id }}</h1>
-
+   <h1>Docente:{{ entity.id }}</h1>
   <table class="table table-bordered table-striped hidden-mobile">
   <tr>
     <th class="data">Cédula</th>
@@ -42,12 +40,12 @@
   </tr>
   <tr>
    <th>Dirección de curso</th>
-      <td colspan="3">{%for curso in entity.director%} {{curso.nombre}} | {%endfor%}
+      <td colspan="3">{%for curso in entity.director%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
    </td>
   </tr> 
   <tr>
       <th>Tutorias</th>
-      <td colspan="3">{%for curso in entity.tutoria%} {{curso.nombre}} | {%endfor%}
+      <td colspan="3">{%for curso in entity.tutoria%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
    </td>
   </tr>
 </table>

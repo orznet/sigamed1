@@ -26,7 +26,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $dql = "select a from AdminUserBundle:User a";
         $query = $em->createQuery($dql);
-        $query->setMaxResults(300);
+        $query->setMaxResults(50);
         $entities = $query->getResult();
         $total = count($entities);
         
