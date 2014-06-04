@@ -4,11 +4,27 @@ _planmejoramiento:
 _accionespm:
     resource: "@AdminMedBundle/Controller/AccionespmController.php"
     type:     annotation
- 
+    
+_plangestion:
+    resource: "@AdminMedBundle/Controller/PlangestionController.php"
+    type:     annotation
+    
+_actividadesrol:
+    resource: "@AdminMedBundle/Controller/ActividadrolController.php"
+    type:     annotation   
+
+_rolacedemico:
+    resource: "@AdminMedBundle/Controller/RolacademicoController.php"
+    type:     annotation       
+
+_actividadplang:
+    resource: "@AdminMedBundle/Controller/ActividadplangController.php"
+    type:     annotation    
+    
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit
     defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }
     
 planmejoramiento_doc:
     pattern: /doc/planm/{id}
-    defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }
+    defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }    

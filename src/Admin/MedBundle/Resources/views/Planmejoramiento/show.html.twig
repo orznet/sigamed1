@@ -50,7 +50,7 @@
     <td>{{accion.observaciones}}</td>
     <td>
     {%if accion.path %}    
-   <a href="javascript:popUp('../archivos/planm/{{accion.path}}')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+   <a href="javascript:popUp('../../{{accion.webpath}}')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
    {%endif%}
     </td>
     <td>{{ accion.fechaCierre? accion.fechaCierre|date('Y-m-d H:i') : ' ' }}</td>
@@ -108,6 +108,22 @@
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+    
+<script LANGUAGE="JavaScript">
+
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'directories=no,titlebar=yes,toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=900,height=600,left = 100,top = 100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+</script>
 
 {% endblock %}
 

@@ -1,4 +1,4 @@
-/web/uploads/
+/web/archivos/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml

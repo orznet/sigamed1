@@ -74,7 +74,7 @@ protected $estado;
      *     mimeTypesMessage = "Tipo de archivo no válido"
      * )
      */
-    private $file;
+ private $file;
 
 
 /** 

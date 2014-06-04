@@ -33,7 +33,8 @@ public function __construct ($escuelaid)
             'required'  => true,
             ))     
             ->add('creditos')
-            ->add('escuela')
+            ->add("escuela", "text", array(
+            'attr' => array('readonly' => 'readonly')))    
             ->add("director", "text", array(
              "mapped" => false,
             'required'  => true,
@@ -43,7 +44,7 @@ public function __construct ($escuelaid)
             'required' => true,
             'empty_value' => ' ', 
             'class' => 'AdminUnadBundle:Programa',
-            'property' => 'lista',     
+            'property' => 'nombre',     
             'query_builder' => function(\Admin\UnadBundle\Entity\ProgramaRepository $er) use ($escuelaid) {
             return $er->createQueryBuilder('c')
             ->where('c.escuela = :escuelaid')

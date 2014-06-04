@@ -97,13 +97,17 @@ protected $centro;
     protected $lider;
     
     
-    
-    
-        /**
+    /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="director")
      */
     protected $director;    
 
+    
+   /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="id") 
+    */
+   protected $plangestion;
+   
 
      /**
      * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="docentes")
@@ -478,5 +482,28 @@ protected $centro;
     public function getTutoria()
     {
         return $this->tutoria;
+    }
+
+    /**
+     * Set plangestion
+     *
+     * @param \Admin\MedBundle\Entity\Plangestion $plangestion
+     * @return Docente
+     */
+    public function setPlangestion(\Admin\MedBundle\Entity\Plangestion $plangestion = null)
+    {
+        $this->plangestion = $plangestion;
+
+        return $this;
+    }
+
+    /**
+     * Get plangestion
+     *
+     * @return \Admin\MedBundle\Entity\Plangestion 
+     */
+    public function getPlangestion()
+    {
+        return $this->plangestion;
     }
 }
