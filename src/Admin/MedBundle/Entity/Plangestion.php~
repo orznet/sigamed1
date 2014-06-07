@@ -50,6 +50,19 @@ protected $autoevaluacion;
   */
 protected $estado;
 
+
+/**
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Actividadplang", mappedBy="plang")
+ */
+protected $actividades;
+
+
+
+/**
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
+ */
+protected $avales;
+
     /**
      * Set fecha_creacion
      *
@@ -186,5 +199,68 @@ protected $estado;
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * Set id
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $id
+     * @return Plangestion
+     */
+    public function setId(\Admin\UnadBundle\Entity\Docente $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return \Admin\UnadBundle\Entity\Docente 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add actividades
+     *
+     * @param \Admin\MedBundle\Entity\Actividadplang $actividades
+     * @return Plangestion
+     */
+    public function addActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
+    {
+        $this->actividades[] = $actividades;
+
+        return $this;
+    }
+
+    /**
+     * Remove actividades
+     *
+     * @param \Admin\MedBundle\Entity\Actividadplang $actividades
+     */
+    public function removeActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
+    {
+        $this->actividades->removeElement($actividades);
+    }
+
+    /**
+     * Get actividades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActividades()
+    {
+        return $this->actividades;
     }
 }

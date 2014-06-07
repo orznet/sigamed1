@@ -6,34 +6,25 @@
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Fecha creacion</th>
                 <th>Fecha cierre</th>
                 <th>Fecha autoevaluacion</th>
                 <th>Observaciones</th>
                 <th>Autoevaluacion</th>
                 <th>Estado</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('plangestion_show', { 'id': entity.id }) }}">{{ entity.fechacreacion }}</a></td>
+                <td><a href="{{ path('plangestion_show', { 'id': entity.id.id }) }}">Ver</a></td>
                 <td>{% if entity.fechacierre %}{{ entity.fechacierre|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.fechaautoevaluacion %}{{ entity.fechaautoevaluacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>Fa</td>
                 <td>{{ entity.observaciones }}</td>
                 <td>{{ entity.autoevaluacion }}</td>
                 <td>{{ entity.estado }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('plangestion_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('plangestion_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

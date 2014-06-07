@@ -1,48 +1,103 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Plangestion</h1>
+    <h1>Plan de Gestión de {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}} </h1>
 
-    <table class="record_properties">
+     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
-                <th>Fecha_creacion</th>
-                <td>{{ entity.fechacreacion|date('Y-m-d H:i:s') }}</td>
+                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Fecha_cierre</th>
-                <td>{{ entity.fechacierre|date('Y-m-d H:i:s') }}</td>
+                <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>Autoevaluación: {{ entity.autoevaluacion }}</td>
             </tr>
             <tr>
-                <th>Fecha_autoevaluacion</th>
-                <td>{{ entity.fechaautoevaluacion|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Observaciones</th>
-                <td>{{ entity.observaciones }}</td>
-            </tr>
-            <tr>
-                <th>Autoevaluacion</th>
-                <td>{{ entity.autoevaluacion }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ entity.estado }}</td>
+                <td colspan="2">Observaciones: {{ entity.observaciones }}</td>
             </tr>
         </tbody>
+    </table>  
+    
+  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Actividad</th>
+                <th>Horas</th>
+                <th>Auto</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
+        {% for actividad in entity.actividades %}
+           <tr>
+                    {%if temp != actividad.actividad.rol.nombre %} 
+                <td>
+                    <b>ROL:
+                    {{actividad.actividad.rol.nombre}}
+                    {% set temp = actividad.actividad.rol.nombre %}        
+                    </b>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    {%endif%}
+               </tr>     
+            <tr>
+                {% set num = num+1 %}
+                <td>{{num}}.     
+                {{ actividad.actividad.descripcion }}
+                {%if actividad.actividad.textoampliacion %}
+                <font color="#F87217">{{actividad.descripcion}}</font>
+                {%endif%}
+                </td>
+                <td>{{actividad.horas}} {% set totalhoras = totalhoras+actividad.horas %}</td>
+                <td>
+                  {%if actividad.autoevaluacion is null%}
+                   <a data-toggle="modal" href="{{ path('actividadplang_edit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>     
+                {%else%}
+                   {{actividad.autoevaluacion}}
+                    {%endif%}   
+                </td>
+               </tr>
+        {% endfor %}
+               <tr>
+                   <td align="right">Total Horas: </td>
+                   <td>{{totalhoras}}</td>
+               </tr>     
+        </tbody>
     </table>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+  <tr>
+    <th>Avalador</th>
+    <th>Perfil</th>
+    <th>Fecha de Aval</th>
+    <th>Estado</th>
+  </tr>
+  {% for aval in entity.avales %}
+  <tr>
+    <td>{{aval.user.nombres}} {{aval.user.apellidos}}</td>
+    <td>{{aval.perfil}}</td>
+    <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
+    <td>
+{%if aval.avalado == 1%}
+Aprobado
+{%elseif aval.avalado == 2%}
+<font color="#F87217">No aprobado</font>
+{%else%}
+Sin revisar
+{%endif%}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('plangestion') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('plangestion_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </td>
+  </tr>
+    <tr>
+    <td  colspan="5"><b>Observaciones: </b>{{aval.observaciones}}</td>
+  </tr>
+  {% endfor %}  
+</table>
+    
+<div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+</div></div></div>    
+    
 {% endblock %}

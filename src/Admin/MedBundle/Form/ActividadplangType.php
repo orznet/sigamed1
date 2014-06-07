@@ -15,11 +15,12 @@ class ActividadplangType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('horas')
-            ->add('descripcion')
-            ->add('observaciones')
-            ->add('autoevaluacion')
-            ->add('plang')
+            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
+            ->add('autoevaluacion', 'choice', array(
+            'empty_value' => ' ',    
+            'choices'   => array('5' => 'Siempre', '4' => 'Casi Siempre', '3' => 'Aveces', '2' => 'Casi Nunca', '1' => 'Nunca' ),
+            'required'  => true,))
+           ->add('file')     
         ;
     }
     

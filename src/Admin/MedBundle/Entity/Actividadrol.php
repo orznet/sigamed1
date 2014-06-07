@@ -103,7 +103,7 @@ protected $rol;
      * @param \Admin\MedBundle\Entity\Rol $rol
      * @return Actividadrol
      */
-    public function setRol(\Admin\MedBundle\Entity\Rol $rol)
+    public function setRol(\Admin\MedBundle\Entity\Rolacademico $rol)
     {
         $this->rol = $rol;
 

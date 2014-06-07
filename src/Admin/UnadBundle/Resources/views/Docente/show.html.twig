@@ -64,4 +64,11 @@
     <td class="data"><a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}">Ver</a></td></tr>
    {% endfor %}
    </table>
+   
+  <table class="table table-bordered table-striped hidden-mobile">
+
+  <tr>
+    <th class="data">1. Plan de Gestión/Plan de activiades</th>
+    <td class="data"><a href="{{ path('plangestion_show', { 'id': entity.id }) }}">Ver</a></td></tr>
+  </table>
 {% endblock %}

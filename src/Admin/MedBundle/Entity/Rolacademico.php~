@@ -92,4 +92,44 @@ protected $actividades;
     {
         return $this->categoria;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add actividades
+     *
+     * @param \Admin\MedBundle\Entity\actividadrol $actividades
+     * @return Rolacademico
+     */
+    public function addActividade(\Admin\MedBundle\Entity\actividadrol $actividades)
+    {
+        $this->actividades[] = $actividades;
+
+        return $this;
+    }
+
+    /**
+     * Remove actividades
+     *
+     * @param \Admin\MedBundle\Entity\actividadrol $actividades
+     */
+    public function removeActividade(\Admin\MedBundle\Entity\actividadrol $actividades)
+    {
+        $this->actividades->removeElement($actividades);
+    }
+
+    /**
+     * Get actividades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActividades()
+    {
+        return $this->actividades;
+    }
 }

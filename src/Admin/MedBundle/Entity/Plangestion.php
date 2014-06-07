@@ -56,6 +56,13 @@ protected $estado;
  */
 protected $actividades;
 
+
+
+/**
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
+ */
+protected $avales;
+
     /**
      * Set fecha_creacion
      *
@@ -215,5 +222,78 @@ protected $actividades;
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add actividades
+     *
+     * @param \Admin\MedBundle\Entity\Actividadplang $actividades
+     * @return Plangestion
+     */
+    public function addActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
+    {
+        $this->actividades[] = $actividades;
+
+        return $this;
+    }
+
+    /**
+     * Remove actividades
+     *
+     * @param \Admin\MedBundle\Entity\Actividadplang $actividades
+     */
+    public function removeActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
+    {
+        $this->actividades->removeElement($actividades);
+    }
+
+    /**
+     * Get actividades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActividades()
+    {
+        return $this->actividades;
+    }
+
+    /**
+     * Add avales
+     *
+     * @param \Admin\MedBundle\Entity\Avalplang $avales
+     * @return Plangestion
+     */
+    public function addAvale(\Admin\MedBundle\Entity\Avalplang $avales)
+    {
+        $this->avales[] = $avales;
+
+        return $this;
+    }
+
+    /**
+     * Remove avales
+     *
+     * @param \Admin\MedBundle\Entity\Avalplang $avales
+     */
+    public function removeAvale(\Admin\MedBundle\Entity\Avalplang $avales)
+    {
+        $this->avales->removeElement($avales);
+    }
+
+    /**
+     * Get avales
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAvales()
+    {
+        return $this->avales;
     }
 }

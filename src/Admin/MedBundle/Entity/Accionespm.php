@@ -65,7 +65,7 @@ protected $estado;
      * @Assert\Length( max = "255" )
      */
     
- protected $path;
+protected $path;
 
     /**
      * @Assert\File(
