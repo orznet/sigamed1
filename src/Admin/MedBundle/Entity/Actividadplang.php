@@ -50,8 +50,8 @@ protected $path;
 
     /**
      * @Assert\File(
-     *     maxSize = "3000000",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     maxSize = "4000000",
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/zip"},
      *     mimeTypesMessage = "Tipo de archivo no válido"
      * )
      */
@@ -249,7 +249,7 @@ protected $actividad;
      */
     public function setFile(UploadedFile $file = null)     {
         $this->file = $file;
-        $this->descripcion = 'adjunto';
+     //   $this->descripcion = 'adjunto';
 
         if (isset($this->path)) {
             // store the old name to delete after the update

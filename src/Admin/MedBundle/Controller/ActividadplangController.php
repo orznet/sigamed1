@@ -143,11 +143,36 @@ class ActividadplangController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $borrarForm = $this->createBorrarForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'borrar_form' => $borrarForm->createView(), 
+        );
+    }
+    
+     /**
+     *
+     * @Route("/borrar/{id}", name="actividadplang_borrar")
+     * @Method("GET")
+     * @Template()
+     */
+    public function borrarAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminMedBundle:Actividadplang')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Actividadplang entity.');
+        }
+        $borrarForm = $this->createBorrarForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'borrar_form' => $borrarForm->createView(), 
         );
     }
 
@@ -228,6 +253,31 @@ class ActividadplangController extends Controller
         return $this->redirect($this->generateUrl('actividadplang'));
     }
 
+     /**
+     * Deletes a Actividadplang entity.
+     * @Route("/borrar/{id}", name="actividadplang_borrarreg")
+     * @Method("DELETE")
+     */
+    public function borrarregAction(Request $request, $id)
+    {
+        $form = $this->createBorrarForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AdminMedBundle:Actividadplang')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Actividadplang entity.');
+            }
+            $entity->setObservaciones(NULL);
+            $entity->setAutoevaluacion(NULL);
+            $entity->removeUpload();
+            $em->flush();
+        }
+        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $entity->getPlang()->getId()->getId())));
+    }
+    
     /**
      * Creates a form to delete a Actividadplang entity by id.
      *
@@ -241,6 +291,22 @@ class ActividadplangController extends Controller
             ->setAction($this->generateUrl('actividadplang_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
+    }
+    
+    
+        /**
+     * Creates a form to delete a Actividadplang entity by id.
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createBorrarForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('actividadplang_borrar', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Borrar'))
             ->getForm()
         ;
     }

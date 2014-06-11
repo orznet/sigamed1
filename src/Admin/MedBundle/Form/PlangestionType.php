@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin\MedBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,13 +14,7 @@ class PlangestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha_creacion')
-            ->add('fecha_cierre')
-            ->add('fecha_autoevaluacion')
-            ->add('observaciones')
-            ->add('autoevaluacion')
-            ->add('estado')
-            ->add('id')
+            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
         ;
     }
     

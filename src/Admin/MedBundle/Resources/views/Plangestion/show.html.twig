@@ -10,16 +10,12 @@
                 <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
-                <td>Autoevaluación: {{ entity.autoevaluacion }}</td>
-            </tr>
-            <tr>
                 <td colspan="2">Observaciones: {{ entity.observaciones }}</td>
             </tr>
         </tbody>
     </table>  
     
-  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+  <table class="table table-bordered hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Actividad</th>
@@ -29,6 +25,7 @@
         </thead>
         <tbody>
         {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
+        {% set termino = 1 %}
         {% for actividad in entity.actividades %}
            <tr>
                     {%if temp != actividad.actividad.rol.nombre %} 
@@ -47,16 +44,25 @@
                 <td>{{num}}.     
                 {{ actividad.actividad.descripcion }}
                 {%if actividad.actividad.textoampliacion %}
-                <font color="#F87217">{{actividad.descripcion}}</font>
+                <font color="#a57225">{{actividad.descripcion}}</font>
+                {%endif%}
+                {%if actividad.observaciones %}
+                <br><font color="#058dc7">DESCRIPCIÓN DEL AVANCE: {{actividad.observaciones}}</font><br>
+                {%if actividad.path %}
+                <a href="../../{{actividad.webpath}}" target="_blank"><i class="fa fa-download"></i> Evidencia</a>
+                {%endif%}
                 {%endif%}
                 </td>
                 <td>{{actividad.horas}} {% set totalhoras = totalhoras+actividad.horas %}</td>
                 <td>
-                  {%if actividad.autoevaluacion is null%}
-                   <a data-toggle="modal" href="{{ path('actividadplang_edit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>     
-                {%else%}
+                  {%if actividad.plang.autoevaluacion %}
                    {{actividad.autoevaluacion}}
-                    {%endif%}   
+                {%elseif actividad.autoevaluacion is null%}
+                    {% set termino = 0 %}
+                <a data-toggle="modal" href="{{ path('actividadplang_edit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                  {%else%}
+                      <a data-toggle="modal" href="{{ path('actividadplang_borrar', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-default btn-xs txt-color-red"><i class="fa fa-trash-o"></i></a>  
+                      {%endif%}   
                 </td>
                </tr>
         {% endfor %}
@@ -94,6 +100,31 @@ Sin revisar
   </tr>
   {% endfor %}  
 </table>
+    <h1>Autoevaluación</h1>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                {%if termino == 1 and entity.autoevaluacion is null %}
+                <a data-toggle="modal" href="{{ path('plangestion_edit', { 'id': entity.id.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Autoevaluación</a>
+                {%elseif entity.autoevaluacion is  null %}
+                <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert">×</button>
+                <i class="fa-fw fa fa-times"></i>
+                <strong>Importante!</strong> No a finalizado su autoevaluación. Registre su auoevaluación por cada actividad y luego oprima el boton "Cerrar Autoevaluación".
+                </div>
+                {%endif%}               
+                </td>    
+            </tr>
+            <tr>
+                <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>Autoevaluación: {{ entity.autoevaluacion }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Observaciones: {{ entity.observaciones }}</td>
+            </tr>
+        </tbody>
+    </table>   
     
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">

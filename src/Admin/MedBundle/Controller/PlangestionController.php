@@ -160,7 +160,7 @@ class PlangestionController extends Controller
     private function createEditForm(Plangestion $entity)
     {
         $form = $this->createForm(new PlangestionType(), $entity, array(
-            'action' => $this->generateUrl('plangestion_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('plangestion_update', array('id' => $entity->getId()->getId())),
             'method' => 'PUT',
         ));
 
@@ -184,21 +184,26 @@ class PlangestionController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Plangestion entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
+        
+        $actividades = $entity->getActividades();
+        $suma = $aux = 0;
+        foreach ($actividades as $actividad ){
+        $suma = $suma + $actividad->getAutoevaluacion();
+        $aux++;
+        }
+        $entity->setAutoevaluacion($suma/$aux);
+        $entity->setFechaAutoevaluacion(new \DateTime());
+        $entity->setEstado(10);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('plangestion_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
     /**
