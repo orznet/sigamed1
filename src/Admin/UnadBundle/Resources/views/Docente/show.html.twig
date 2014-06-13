@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-   <h1>Docente:{{ entity.id }}</h1>
+   <h1>Docente Id:{{ entity.id }}</h1>
   <table class="table table-bordered table-striped hidden-mobile">
   <tr>
     <th class="data">Cédula</th>
@@ -68,7 +68,13 @@
   <table class="table table-bordered table-striped hidden-mobile">
 
   <tr>
-    <th class="data">1. Plan de Gestión/Plan de activiades</th>
+    <th class="data">
+    {%if entity.vinculacion == 'DC'%}
+    1. Plan de Gestión      
+    {%else%}
+    1. Plan de Activiades
+    {%endif%}
+        </th>
     <td class="data"><a href="{{ path('plangestion_show', { 'id': entity.id }) }}">Ver</a></td></tr>
   </table>
 {% endblock %}
