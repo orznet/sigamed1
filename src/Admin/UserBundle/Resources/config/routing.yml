@@ -6,3 +6,14 @@ admin_user_info:
     pattern:  /info/user
     defaults: { _controller: "AdminUserBundle:User:info" }
     
+admin_user_home:
+    pattern:  /home
+    defaults: { _controller: "AdminUserBundle:Default:home" }
+    
+admin_user_send:
+    pattern:  /home/send
+    defaults: { _controller: "AdminUserBundle:Default:send" }
+    
+admin_user_inicio:
+    pattern:  /unad/inicio
+    defaults: { _controller: "AdminUserBundle:Default:index" }    

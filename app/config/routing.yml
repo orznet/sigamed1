@@ -1,6 +1,6 @@
 _welcome:
     pattern:  /
-    defaults: { _controller: AdminUserBundle:Default:index }
+    defaults: { _controller: AdminUserBundle:Default:home }
 
 admin_med:
     resource: "@AdminMedBundle/Resources/config/routing.yml"
