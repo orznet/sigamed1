@@ -74,6 +74,11 @@ protected $programa;
   protected $docentes;
 
     /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="curso") 
+    */
+   protected $evaldetutor; 
+  
+    /**
      * Get id
      *
      * @return integer 
@@ -282,5 +287,38 @@ protected $programa;
     public function getDocentes()
     {
         return $this->docentes;
+    }
+
+    /**
+     * Add evaldetutor
+     *
+     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
+     * @return Curso
+     */
+    public function addEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
+    {
+        $this->evaldetutor[] = $evaldetutor;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaldetutor
+     *
+     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
+     */
+    public function removeEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
+    {
+        $this->evaldetutor->removeElement($evaldetutor);
+    }
+
+    /**
+     * Get evaldetutor
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvaldetutor()
+    {
+        return $this->evaldetutor;
     }
 }

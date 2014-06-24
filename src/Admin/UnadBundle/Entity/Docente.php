@@ -115,6 +115,12 @@ protected $centro;
      */
     protected $tutoria;
     
+  
+   /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="tutor") 
+    */
+   protected $evaladirector;
+    
     /**
      * Set id
      *
@@ -505,5 +511,38 @@ protected $centro;
     public function getPlangestion()
     {
         return $this->plangestion;
+    }
+
+    /**
+     * Add evaladirector
+     *
+     * @param \Admin\MedBundle\Entity\redTutores $evaladirector
+     * @return Docente
+     */
+    public function addEvaladirector(\Admin\MedBundle\Entity\redTutores $evaladirector)
+    {
+        $this->evaladirector[] = $evaladirector;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaladirector
+     *
+     * @param \Admin\MedBundle\Entity\redTutores $evaladirector
+     */
+    public function removeEvaladirector(\Admin\MedBundle\Entity\redTutores $evaladirector)
+    {
+        $this->evaladirector->removeElement($evaladirector);
+    }
+
+    /**
+     * Get evaladirector
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvaladirector()
+    {
+        return $this->evaladirector;
     }
 }

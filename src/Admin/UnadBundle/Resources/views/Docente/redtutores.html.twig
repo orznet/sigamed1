@@ -1,0 +1,66 @@
+
+{% extends '::base.html.twig' %}
+{% block body -%}
+<h3><a href="{{ path('admin_user_inicio') }}"> << Regresar</a>
+    <h1>Evaluación de la red de Tutores (Heteroevaluación)</h1>
+    <h3>IMPORTANTE:</h3>
+    <h3>1. Cursos para evaluar</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th>Nombre</th>
+                <th>Director</th>
+                <th>Evaluar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluacion in entity.getEvaladirector() %}
+            <tr>
+                <td>{{evaluacion.curso.id}}</td>
+                <td>{{evaluacion.curso.nombre}}</td>
+                <td>{{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}</td>
+                <td>
+                {%if evaluacion.fecha %}
+                Evaluado ({{evaluacion.f0}})
+                {%else%}
+                <a href="{{ path('heteroeval2', { 'id': evaluacion.id }) }}">Evaluar...</a>
+                 {%endif%}
+                 </td>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>2. Cursos a cargo como director:</h3>
+{%set final=0%} {%set aux=0%}
+{%for curso in cursos%}            
+<h3>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h3>    
+{%if cont > 0%}
+<table>
+        <thead>
+            <tr>
+                <th>Tutor</th>
+                <th>Correo</th>
+                <th>Evaluo?</th>
+            </tr>
+        </thead>
+            <tbody>    
+            {%for tutor in curso.evaldetutor%}
+            {%if tutor.f0%}{%set final=final+tutor.f0%}{%set aux=aux+1%}{%endif%}        
+            <tr>
+                            <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
+                            <td>{{tutor.tutor.user.email}}</td>
+                            <td>{{tutor.f0? 'Si' : 'No'}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+</table>
+{%endif%}
+{%endfor%}
+<table>
+    <tr>
+        <td>Calificación Final</td> 
+        <td>{%if final > 0%}{%set final = final/aux%} {{final}}{%endif%}</td>
+    </tr>    
+</table>
+<p>Apreciado docente: solicite a sus tutores evaluar su curso para poder obtener una calificación final de este instrumento</p>
+{% endblock %}

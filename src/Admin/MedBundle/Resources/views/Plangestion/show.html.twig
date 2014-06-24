@@ -19,7 +19,6 @@
         <thead>
             <tr>
                 <th>Actividad</th>
-                <th>Horas</th>
                 <th>Auto</th>
             </tr>
         </thead>
@@ -35,7 +34,6 @@
                     {% set temp = actividad.actividad.rol.nombre %}        
                     </b>
                     </td>
-                    <td></td>
                     <td></td>
                     {%endif%}
                </tr>     
@@ -53,7 +51,6 @@
                 {%endif%}
                 {%endif%}
                 </td>
-                <td>{{actividad.horas}} {% set totalhoras = totalhoras+actividad.horas %}</td>
                 <td>
                   {%if actividad.plang.autoevaluacion %}
                    {{actividad.autoevaluacion}}
@@ -65,11 +62,7 @@
                       {%endif%}   
                 </td>
                </tr>
-        {% endfor %}
-               <tr>
-                   <td align="right">Total Horas: </td>
-                   <td>{{totalhoras}}</td>
-               </tr>     
+        {% endfor %}  
         </tbody>
     </table>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">

@@ -4,6 +4,10 @@ _planmejoramiento:
 _accionespm:
     resource: "@AdminMedBundle/Controller/AccionespmController.php"
     type:     annotation
+
+_redtutores:
+    resource: "@AdminMedBundle/Controller/redTutoresController.php"
+    type:     annotation
     
 _plangestion:
     resource: "@AdminMedBundle/Controller/PlangestionController.php"

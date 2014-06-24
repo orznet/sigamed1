@@ -74,6 +74,11 @@ protected $programa;
   protected $docentes;
 
     /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="curso") 
+    */
+   protected $evaldetutor; 
+  
+    /**
      * Get id
      *
      * @return integer 
@@ -242,5 +247,45 @@ protected $programa;
     public function getPrograma()
     {
         return $this->programa;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Curso
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

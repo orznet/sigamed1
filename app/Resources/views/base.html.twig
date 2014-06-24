@@ -137,7 +137,7 @@
                                       {% if is_granted('ROLE_DOC') %}
                                         <li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
-						<ul>
+						<ul style="display: block;">
 							<li>
 								<a href="{{ path('docente_show', { 'id': app.session.get('docenteid') }) }}">Perido 2014-1</a>
 							</li>

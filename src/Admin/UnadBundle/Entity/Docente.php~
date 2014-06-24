@@ -104,7 +104,7 @@ protected $centro;
 
     
    /**
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="plangestion") 
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="id") 
     */
    protected $plangestion;
    
@@ -114,6 +114,12 @@ protected $centro;
      * @ORM\JoinTable(name="docente_curso")
      */
     protected $tutoria;
+    
+  
+   /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="tutor") 
+    */
+   protected $evaladirector;
     
     /**
      * Set id
@@ -482,5 +488,28 @@ protected $centro;
     public function getTutoria()
     {
         return $this->tutoria;
+    }
+
+    /**
+     * Set plangestion
+     *
+     * @param \Admin\MedBundle\Entity\Plangestion $plangestion
+     * @return Docente
+     */
+    public function setPlangestion(\Admin\MedBundle\Entity\Plangestion $plangestion = null)
+    {
+        $this->plangestion = $plangestion;
+
+        return $this;
+    }
+
+    /**
+     * Get plangestion
+     *
+     * @return \Admin\MedBundle\Entity\Plangestion 
+     */
+    public function getPlangestion()
+    {
+        return $this->plangestion;
     }
 }
