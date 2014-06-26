@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
    <h1>Docente Id:{{ entity.id }}</h1>
-  <table class="table table-bordered table-striped hidden-mobile">
+  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
   <tr>
     <th class="data">Cédula</th>
     <td class="data">{{ entity.user.id }}</td>
@@ -57,7 +57,7 @@
         </a></li>
 </ul>
            {%endif%}
-   <table class="table table-bordered table-striped hidden-mobile">
+   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
 {% for plan in entity.planmejoramiento %}
   <tr>
     <th class="data">1. Plan de Mejoramiento</th>
@@ -65,17 +65,28 @@
    {% endfor %}
    </table>
    
-  <table class="table table-bordered table-striped hidden-mobile">
-
-  <tr>
-    <th class="data">
+  <table class="table table-bordered hidden-mobile" style="width: 95%">
+      <tr>
+          <th>Instrumento de Evaluación</th>
+          <th>Descripción</th>
+          <th>Ingreso</th>
+      </tr>
+    <tr>
+    <th>
     {%if entity.vinculacion == 'DC'%}
     1. Plan de Gestión      
     {%else%}
     1. Plan de Activiades
     {%endif%}
         </th>
-    <td class="data"><a href="{{ path('plangestion_show', { 'id': entity.id }) }}">Ver</a></td></tr>
+    <td>Realice su autoevaluación</td>    
+    <td><a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
+  <tr>
+    <th>
+2. Evaluación de la red de tutores
+        </th>
+        <td>El tutor evalua al director de curso</td> 
+    <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
   </table>
 {% endblock %}
    

@@ -36,8 +36,7 @@ protected $nivel;
      * @var Escuela 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Escuela", inversedBy="programas")
      * @ORM\JoinColumn(name="escuela_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $escuela;
@@ -47,8 +46,7 @@ protected $escuela;
      * @var Lider 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="lider")
      * @ORM\JoinColumn(name="lider_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $lider;

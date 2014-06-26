@@ -20,4 +20,8 @@ _docente_unad:
 
 _curso_unad:
     resource: "@AdminUnadBundle/Controller/CursoController.php"
-    type:     annotation           
+    type:     annotation
+    
+docente_redtutores:
+    pattern:  /doc/redtutor
+    defaults: { _controller: "AdminUnadBundle:Docente:redtutores" }    

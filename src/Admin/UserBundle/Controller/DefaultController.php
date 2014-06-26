@@ -32,7 +32,10 @@ class DefaultController extends Controller
         if (true === $this->container->get('security.context')->isGranted('ROLE_DOC')) {
                  $docentes = $this->getUser()->getDocente();
                  $docente = $docentes[0];
-                 $session->set('docenteid', $docente->getId()); 
+                 $session->set('docenteid', $docente->getId());
+                 return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
+                    'entity'  => $docente,
+                    ));
               } else {
                   $docente = null;
               } 

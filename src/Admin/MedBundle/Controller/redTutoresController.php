@@ -200,7 +200,7 @@ class redTutoresController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('redtutores'));
+            return $this->redirect($this->generateUrl('docente_redtutores'));
         }
 
         return array(

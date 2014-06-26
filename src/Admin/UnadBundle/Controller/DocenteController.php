@@ -268,14 +268,14 @@ class DocenteController extends Controller
     
     
      /**
-     * @Route("/red/{id}", name="docente_redtutores")
      * @Method("GET")
      * @Template()
      */
-    public function redtutoresAction($id)
+    public function redtutoresAction()
     {
        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+       $session = $this->getRequest()->getSession();
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
         $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
 
         return array(

@@ -1,11 +1,10 @@
 
 {% extends '::base.html.twig' %}
 {% block body -%}
-<h3><a href="{{ path('admin_user_inicio') }}"> << Regresar</a>
+<h4><a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a>
     <h1>Evaluación de la red de Tutores (Heteroevaluación)</h1>
-    <h3>IMPORTANTE:</h3>
-    <h3>1. Cursos para evaluar</h3>
-    <table>
+    <h1>1. Cursos para evaluar</h1>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Curso</th>
@@ -24,18 +23,18 @@
                 {%if evaluacion.fecha %}
                 Evaluado ({{evaluacion.f0}})
                 {%else%}
-                <a href="{{ path('heteroeval2', { 'id': evaluacion.id }) }}">Evaluar...</a>
+                <a href="{{ path('redtutores_edit', { 'id': evaluacion.id }) }}">Evaluar...</a>
                  {%endif%}
                  </td>
         {% endfor %}
         </tbody>
     </table>
-    <h3>2. Cursos a cargo como director:</h3>
+    <h1>2. Cursos a cargo como director:</h1>
 {%set final=0%} {%set aux=0%}
 {%for curso in cursos%}            
-<h3>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h3>    
+<h4>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h4>    
 {%if cont > 0%}
-<table>
+<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Tutor</th>
@@ -56,7 +55,7 @@
 </table>
 {%endif%}
 {%endfor%}
-<table>
+<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
     <tr>
         <td>Calificación Final</td> 
         <td>{%if final > 0%}{%set final = final/aux%} {{final}}{%endif%}</td>

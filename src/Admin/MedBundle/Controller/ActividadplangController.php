@@ -270,8 +270,9 @@ class ActividadplangController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Actividadplang entity.');
             }
-            $entity->setObservaciones(NULL);
+            $entity->setObservaciones('');
             $entity->setAutoevaluacion(NULL);
+            $entity->setPath(NULL);
             $entity->removeUpload();
             $em->flush();
         }
