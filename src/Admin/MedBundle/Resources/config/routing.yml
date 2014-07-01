@@ -31,4 +31,17 @@ accionespm_editdoc:
     
 planmejoramiento_doc:
     pattern: /doc/planm/{id}
-    defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }    
+    defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }
+ 
+plangestion_info:
+    pattern:  /unad/doc/{id}/plan
+    defaults: { _controller: "AdminMedBundle:Plangestion:info" }
+
+plangestion_autoeval:
+    pattern:  /unad/doc/{id}/autoeval
+    defaults: { _controller: "AdminMedBundle:Plangestion:autoeval" }  
+    
+redtutores_info:
+    pattern:  /unad/doc/{id}/redtutor
+    defaults: { _controller: "AdminUnadBundle:Docente:redtutoresinfo" }      
+    

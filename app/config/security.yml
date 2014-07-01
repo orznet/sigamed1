@@ -45,4 +45,5 @@ security:
       - { path: ^/user, roles: ROLE_USER }
       - { path: ^/unad, roles: [ROLE_DEC, ROLE_ADMIN, ROLE_DOC, ROLE_SECA] }
       - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/doc, roles: ROLE_DOC }
        

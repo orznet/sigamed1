@@ -1,7 +1,6 @@
 <?php
 
 namespace Admin\UnadBundle\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,13 +11,11 @@ use Admin\UnadBundle\Entity\Escuela;
 use Admin\UnadBundle\Form\DocenteType;
 
 /**
- * Docente controller.
- *
+ * Docente controller
  * @Route("/unad/docente")
  */
 class DocenteController extends Controller
 {
-
     /**
      * Lists all Docente entities.
      *
@@ -51,9 +48,9 @@ class DocenteController extends Controller
         $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
         $total = count($entities);
         return array(
-            'entities' => $entities,
-            'total'  => $total,
-            'escuela' => $escuela,
+           'entities' => $entities,
+           'total'  => $total,
+           'escuela' => $escuela,
         );
     }
     /**
@@ -121,8 +118,7 @@ class DocenteController extends Controller
     }
 
     /**
-     * Finds and displays a Docente entity.
-     *
+     * Finds and displays a Docente entity
      * @Route("/{id}", name="docente_show")
      * @Method("GET")
      * @Template()
@@ -142,6 +138,26 @@ class DocenteController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        );
+    }
+    
+        /**
+     * Finds and displays a Docente entity
+     * @Route("/{id}/info", name="docente_info")
+     * @Method("GET")
+     * @Template()
+     */
+    public function infoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Docente entity.');
+        }
+        return array(
+            'entity'      => $entity,
         );
     }
 
@@ -277,6 +293,22 @@ class DocenteController extends Controller
        $session = $this->getRequest()->getSession();
         $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
         $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
+
+        return array(
+            'entity' => $entity,
+            'cursos'  => $cursos,
+         );
+    }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function redtutoresinfoAction($id)
+    {
+       $em = $this->getDoctrine()->getManager();
+       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+       $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
 
         return array(
             'entity' => $entity,

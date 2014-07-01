@@ -122,6 +122,38 @@ class PlangestionController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function infoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+        return array(
+            'entity'      => $entity,
+        );
+    }
+    
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function autoevalAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+        return array(
+            'entity'      => $entity,
+        );
+    }
 
     /**
      * Displays a form to edit an existing Plangestion entity.

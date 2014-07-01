@@ -1,0 +1,95 @@
+{% block body -%}
+<body>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+<table>
+    <tr>
+    <td align="center" colspan="3"><img src="/img/logo-med-unad.png" alt="MED"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">
+        <h3>Plan de
+        {%if entity.id.vinculacion == 'DC'%}
+            Gestión de
+            {%else%}
+            Activiades de
+            {%endif%}
+ {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}  </h3>   
+        </td>
+    </tr>
+               <tr>
+                <td>Periodo: 2014-1</td>
+                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr> 
+</table>
+  <table>
+        <thead>
+            <tr>
+                <th>Actividad</th>
+                <th>Horas</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
+        {% set termino = 1 %}
+        {% for actividad in entity.actividades %}
+           <tr>
+                    {%if temp != actividad.actividad.rol.nombre %} 
+                <td>
+                    <b>ROL:
+                    {{actividad.actividad.rol.nombre}}
+                    {% set temp = actividad.actividad.rol.nombre %}        
+                    </b>
+                    </td>
+                    <td></td>
+                    {%endif%}
+               </tr>     
+            <tr>
+                {% set num = num+1 %}
+                <td>{{num}}.     
+                {{ actividad.actividad.descripcion }}
+                {%if actividad.actividad.textoampliacion %}
+                <font color="#a57225">{{actividad.descripcion}}</font>
+                {%endif%}
+                </td>
+                <td>{{actividad.horas}}
+                    {% set totalhoras = totalhoras + actividad.horas%}
+                </td>
+               </tr>
+        {% endfor %}
+               <tr>
+                   <td>Total Horas:</td>
+                    <td>{{totalhoras}}</td>
+               </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+  <tr>
+    <th>Avalador</th>
+    <th>Perfil</th>
+    <th>Fecha de Aval</th>
+    <th>Estado</th>
+  </tr>
+  {% for aval in entity.avales %}
+  <tr>
+    <td>{{aval.user.nombres}} {{aval.user.apellidos}}</td>
+    <td>{{aval.perfil}}</td>
+    <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
+    <td>
+{%if aval.avalado == 1%}
+Aprobado
+{%elseif aval.avalado == 2%}
+<font color="#F87217">No aprobado</font>
+{%else%}
+Sin revisar
+{%endif%}
+
+    </td>
+  </tr>
+    <tr>
+    <td  colspan="5"><b>Observaciones: </b>{{aval.observaciones}}</td>
+  </tr>
+  {% endfor %}  
+</table>
+    </body>
+{% endblock %}

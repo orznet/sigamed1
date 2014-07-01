@@ -20,7 +20,7 @@ class redTutores{
 private $id;
  
 /**
-  * @ORM\Column(type="float", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $f0;
  /**
