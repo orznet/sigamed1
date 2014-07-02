@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+<h3><a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a> | Evaluación de pares (Coevaluación)</h3>
+    {%set temp = 0%}
+    {% for evaluado in entity.ternado %}
+    {%set temp = temp+1%}
+    {%endfor%}
+    {%if temp > 0%}
+
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Docente</th>
+                <th>Centro</th>
+                <th>Evaluar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluacion in entity.ternado %}
+            <tr>
+                <td>
+                {{evaluacion.evaluado.user.id}}</td>
+                <td>{{evaluacion.evaluado.user.nombres}} {{evaluacion.evaluado.user.apellidos}}</td>
+                <td>{{evaluacion.evaluado.centro.nombre}}</td>
+                <td>
+                {%if evaluacion.fecha %}
+                Evaluado ({{evaluacion.f0}})
+                {%else%}
+                <a href="{{ path('coevalpares_edit', { 'id': evaluacion.id }) }}">Evaluar...</a>
+                 {%endif%}
+                 </td>
+        {% endfor %}
+        </tbody>
+    </table>
+    {%endif%}
+    <h3>Terna que lo evaluara:</h3>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Docente</th>
+                <th>Centro</th>
+                <th>Correo</th>
+                <th>Evaluo?</th>
+            </tr>
+        </thead>
+        <tbody>
+         {%set final = 0%}  
+        {% for evaluacion in entity.coevaldepar %}
+           {%set final = final+evaluacion.f0%}
+                <tr>
+                <td>{{evaluacion.evaluador.user.id}}</td>
+                <td>{{evaluacion.evaluador.user.nombres}} {{evaluacion.evaluador.user.apellidos}}</td>
+                <td>{{evaluacion.evaluador.centro.nombre}}</td>
+                <td>{{evaluacion.evaluador.user.email}}</td>
+                <td>{{evaluacion.f0? 'Si' : 'No'}}</td>
+            </tr>
+            {% endfor %}
+            {%set final = final/3%}
+            <tr>
+                <td colspan="4">Calificación Final:</td>
+                <td>{{final}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <p>Apreciado docente: solicite a estos docentes que lo evaluen para obtener una calificación final de este instrumento</p>
+   {% endblock %}

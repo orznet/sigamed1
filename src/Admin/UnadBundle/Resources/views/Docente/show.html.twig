@@ -3,40 +3,40 @@
    <h1>Docente Id:{{ entity.id }}</h1>
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
   <tr>
-    <th class="data">Cédula</th>
-    <td class="data">{{ entity.user.id }}</td>
-    <th class="data">Periodo Acádemico</th>
-    <td class="data">2014-1</td>
+    <th>Cédula</th>
+    <td>{{ entity.user.id }}</td>
+    <th>Periodo Acádemico</th>
+    <td>2014-1</td>
   </tr>
   <tr>
-    <th class="data">Nombres</th>
-    <td class="data">{{ entity.user.nombres }}</td>
-    <th class="data">Vinculación</th>
-    <td class="data">{{ entity.vinculacion }}</td>
+    <th>Nombres</th>
+    <td>{{ entity.user.nombres }}</td>
+    <th>Vinculación</th>
+    <td>{{ entity.vinculacion }}</td>
   </tr>
   <tr>
-    <th class="data">Apellidos</th>
-    <td class="data">{{ entity.user.apellidos }}</td>
-    <th class="data">Centro</th>
-    <td class="data">{{ entity.centro.nombre }}</td>
+    <th>Apellidos</th>
+    <td>{{ entity.user.apellidos }}</td>
+    <th>Centro</th>
+    <td>{{ entity.centro.nombre }}</td>
   </tr>
   <tr>
-    <th class="data">Escuela</th>
-    <td class="data">{{ entity.escuela.nombre }}</td>
-    <th class="data">Modalidad</th>
-    <td class="data">{{ entity.modalidad }}</td>
+    <th>Escuela</th>
+    <td>{{ entity.escuela.nombre }}</td>
+    <th>Modalidad</th>
+    <td>{{ entity.modalidad }}</td>
   </tr>
   <tr>
-    <th class="data">Programa</th>
-    <td class="data">{{ entity.programa.nombre }}</td>
-    <th class="data">Perfil</th>
-    <td class="data">{{ entity.perfil }}</td>
+    <th>Programa</th>
+    <td>{{ entity.programa.nombre }}</td>
+    <th>Perfil</th>
+    <td>{{ entity.perfil }}</td>
   </tr>
     <tr>
-    <th class="data">Cargo</th>
-    <td class="data">{{ entity.cargo }}</td>
-    <th class="data">Correo</th>
-    <td class="data">{{ entity.user.email }}</td>
+    <th>Cargo</th>
+    <td>{{ entity.cargo }}</td>
+    <th>Correo</th>
+    <td>{{ entity.user.email }}</td>
   </tr>
   <tr>
    <th>Dirección de curso</th>
@@ -60,8 +60,8 @@
    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
 {% for plan in entity.planmejoramiento %}
   <tr>
-    <th class="data">1. Plan de Mejoramiento</th>
-    <td class="data"><a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}">Ver</a></td></tr>
+    <th>1. Plan de Mejoramiento</th>
+    <td><a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}">Ver</a></td></tr>
    {% endfor %}
    </table>
    
@@ -85,8 +85,29 @@
     <th>
 2. Evaluación de la red de tutores
         </th>
-        <td>El tutor evalua al director de curso</td> 
+        <td>Evalue a sus directores de curso diferentes a usted</td> 
     <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
+  <tr>
+    <th>
+3. Coevaluación - Director de curso a tutores
+        </th>
+        <td>Evalue a los tutores de sus cursos diferentes a usted</td> 
+    <td>
+    <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    </td>
+  </tr>
+        {% if entity.vinculacion == 'DC'%}
+       <tr>
+           <th>
+           4.  Evaluación de Pares 
+           </th>
+           <td>Evaluae a los docentes de carrera de su escuela</td>
+           <td>
+           <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
+           </td>
+       </tr>
+       {%endif%}
   </table>
+   
 {% endblock %}
    

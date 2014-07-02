@@ -120,7 +120,23 @@ protected $centro;
     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="tutor") 
     */
    protected $evaladirector;
-    
+   
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalTutor", mappedBy="tutor") 
+    */
+   protected $evaldedirector;
+   
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluado") 
+    */
+   protected $coevaldepar;
+   
+   
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluador") 
+    */
+   protected $ternado;
+   
     /**
      * Set id
      *
@@ -544,5 +560,104 @@ protected $centro;
     public function getEvaladirector()
     {
         return $this->evaladirector;
+    }
+
+    /**
+     * Add evaldedirector
+     *
+     * @param \Admin\MedBundle\Entity\coevalTutor $evaldedirector
+     * @return Docente
+     */
+    public function addEvaldedirector(\Admin\MedBundle\Entity\coevalTutor $evaldedirector)
+    {
+        $this->evaldedirector[] = $evaldedirector;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaldedirector
+     *
+     * @param \Admin\MedBundle\Entity\coevalTutor $evaldedirector
+     */
+    public function removeEvaldedirector(\Admin\MedBundle\Entity\coevalTutor $evaldedirector)
+    {
+        $this->evaldedirector->removeElement($evaldedirector);
+    }
+
+    /**
+     * Get evaldedirector
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvaldedirector()
+    {
+        return $this->evaldedirector;
+    }
+
+    /**
+     * Add coevaldepar
+     *
+     * @param \Admin\MedBundle\Entity\coevalPares $coevaldepar
+     * @return Docente
+     */
+    public function addCoevaldepar(\Admin\MedBundle\Entity\coevalPares $coevaldepar)
+    {
+        $this->coevaldepar[] = $coevaldepar;
+
+        return $this;
+    }
+
+    /**
+     * Remove coevaldepar
+     *
+     * @param \Admin\MedBundle\Entity\coevalPares $coevaldepar
+     */
+    public function removeCoevaldepar(\Admin\MedBundle\Entity\coevalPares $coevaldepar)
+    {
+        $this->coevaldepar->removeElement($coevaldepar);
+    }
+
+    /**
+     * Get coevaldepar
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCoevaldepar()
+    {
+        return $this->coevaldepar;
+    }
+
+    /**
+     * Add ternado
+     *
+     * @param \Admin\MedBundle\Entity\coevalPares $ternado
+     * @return Docente
+     */
+    public function addTernado(\Admin\MedBundle\Entity\coevalPares $ternado)
+    {
+        $this->ternado[] = $ternado;
+
+        return $this;
+    }
+
+    /**
+     * Remove ternado
+     *
+     * @param \Admin\MedBundle\Entity\coevalPares $ternado
+     */
+    public function removeTernado(\Admin\MedBundle\Entity\coevalPares $ternado)
+    {
+        $this->ternado->removeElement($ternado);
+    }
+
+    /**
+     * Get ternado
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTernado()
+    {
+        return $this->ternado;
     }
 }

@@ -1,0 +1,182 @@
+<?php
+namespace Admin\MedBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="coeval_pares")
+ * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\coevalParesRepository")
+ */
+class coevalPares{
+    
+/**
+ * @ORM\Id
+ * @ORM\Column(name="id", type="integer", nullable=false)
+ * @ORM\GeneratedValue(strategy="AUTO")
+ */
+private $id;
+
+
+/**
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  */
+protected $f0;
+
+/**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f1; 
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f2;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f3;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f4;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f5;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f6;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f7;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f8;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f9;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f10;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f11;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f12;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f13;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f14;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f15;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f16; 
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f17;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f18;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f19;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f20;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f21;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f22;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f23;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f24;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f25;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f26;
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f27;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f28;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f29;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $f30;
+
+ /**
+  * @ORM\Column(type="datetime", nullable=true)
+  */
+protected $fecha;
+ /**
+  * @ORM\Column(type="string", length=512, nullable=true)
+  */
+protected $observaciones;
+
+ /** 
+    * @var Evaluado 
+    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="coevaldepar")
+    * @ORM\JoinColumn(name="evaluado_id", referencedColumnName="id",
+    * nullable=false
+    * )
+    */
+protected $evaluado;
+
+ /** 
+    * @var Evaluador 
+    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="ternado")
+    * @ORM\JoinColumn(name="evaluador_id", referencedColumnName="id",
+    * nullable=false
+    * )
+    */
+protected $evaluador;
+}

@@ -315,4 +315,36 @@ class DocenteController extends Controller
             'cursos'  => $cursos,
          );
     }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function coevaltutorAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $session = $this->getRequest()->getSession();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+      $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
+
+        return array(
+            'entity' => $entity,
+            'cursos'  => $cursos,
+         );  
+    }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function coevalparesAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $session = $this->getRequest()->getSession();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+
+        return array(
+            'entity' => $entity,
+         );  
+    }
 }

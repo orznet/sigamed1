@@ -25,6 +25,14 @@ _actividadplang:
     resource: "@AdminMedBundle/Controller/ActividadplangController.php"
     type:     annotation    
     
+_coevaltutor:
+    resource: "@AdminMedBundle/Controller/coevalTutorController.php"
+    type:     annotation        
+
+_coevalpares:
+    resource: "@AdminMedBundle/Controller/coevalParesController.php"
+    type:     annotation     
+    
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit
     defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }

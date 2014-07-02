@@ -24,4 +24,12 @@ _curso_unad:
     
 docente_redtutores:
     pattern:  /doc/redtutor
-    defaults: { _controller: "AdminUnadBundle:Docente:redtutores" } 
+    defaults: { _controller: "AdminUnadBundle:Docente:redtutores" }
+
+docente_coevaltutor:
+    pattern:  /doc/coevaltutor
+    defaults: { _controller: "AdminUnadBundle:Docente:coevaltutor" }
+    
+docente_coevalpares:
+    pattern:  /doc/coevalpares
+    defaults: { _controller: "AdminUnadBundle:Docente:coevalpares" }         

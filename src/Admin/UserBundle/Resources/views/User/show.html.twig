@@ -41,7 +41,7 @@
                 <th>Docente:</th>
                 <td>
                     {% for entity in entity.getDocente %}
-     <a href="{{ path('docente_show', { 'id': entity.id }) }}">
+     <a href="{{ path('docente_info', { 'id': entity.id }) }}">
     {{entity.id}}
      </a>
     {%endfor%}    

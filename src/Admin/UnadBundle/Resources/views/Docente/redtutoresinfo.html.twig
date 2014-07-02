@@ -42,7 +42,7 @@
                 <th>Curso</th>
                 <th>Nombre</th>
                 <th>Director</th>
-                <th>Evaluar</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -53,9 +53,9 @@
                 <td>{{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}</td>
                 <td>
                 {%if evaluacion.fecha %}
-                Evaluado ({{evaluacion.f0}})
+                Evaluado
                 {%else%}
-                <a href="{{ path('redtutores_edit', { 'id': evaluacion.id }) }}">Evaluar...</a>
+                Sin evaluar
                  {%endif%}
                  </td>
         {% endfor %}
