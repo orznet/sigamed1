@@ -5,34 +5,36 @@
  
     <h3>1. Evaluaciones recibidas como Director:</h3>
 {%set final=0%} {%set aux=0%}
-{%for curso in cursos%}            
-<h4>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h4>    
-{%if cont > 0%}
 <table>
+{%for curso in cursos%}    
         <thead>
+           <tr>
+           <th colspan="3"><h4>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h4></th>
+            </tr>
             <tr>
                 <th>Tutor</th>
                 <th>Observaciones</th>
                 <th>Calificación</th>
             </tr>
         </thead>
+        {%if cont > 0%}
             <tbody>    
             {%for tutor in curso.evaldetutor%}
             {%if tutor.f0%}{%set final=final+tutor.f0%}{%set aux=aux+1%}{%endif%}        
             <tr>
                             <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
                             <td>{{tutor.observaciones}}</td>
-                            <td>{{tutor.f0? tutor.f0 : 'No'}}</td>
+                            <td>{{tutor.f0? tutor.f0 : 'Sin'}}</td>
             </tr>
             {%endfor%}
-            </tbody>
 
 {%endif%}
 {%endfor%}
             <tr>
                 <td colspan="2" align="right"><b>Calificación Final:</b></td>
-                <td>{%if final > 0%}{%set final = final/aux%} {{final}}{%endif%}</td>
+                <td>{%if final > 0%}{%set final = final/aux%} {{final|number_format(2, '.', ',')}}{%endif%}</td>
             </tr>
+            </tbody>
 </table>
 
    <h3>2. Cursos que evaluo</h3>

@@ -345,6 +345,21 @@ class DocenteController extends Controller
 
         return array(
             'entity' => $entity,
-         );  
+         ); 
+    }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function coevaldirectorAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $session = $this->getRequest()->getSession();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+
+        return array(
+            'entity' => $entity,
+         ); 
     }
 }

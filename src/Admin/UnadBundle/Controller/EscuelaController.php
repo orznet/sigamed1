@@ -277,4 +277,23 @@ class EscuelaController extends Controller
             ->getForm()
         ;
     }
+    
+     /**
+     * Finds and displays a Escuela entity.
+     *
+     * @Method("GET")
+     * @Template()
+     */
+    public function coevalliderAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        if (!$escuela) {
+            throw $this->createNotFoundException('Unable to find Escuela entity.');
+        }
+        return array(
+        'entity'      => $escuela,
+        );
+    }
 }

@@ -57,11 +57,13 @@
         </a></li>
 </ul>
            {%endif%}
-   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
 {% for plan in entity.planmejoramiento %}
   <tr>
-    <th>1. Plan de Mejoramiento</th>
-    <td><a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}">Ver</a></td></tr>
+    <th>Plan de Mejoramiento</th>
+    <td>
+   <a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a> 
+    </td></tr>
    {% endfor %}
    </table>
    
@@ -89,13 +91,25 @@
     <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
   <tr>
     <th>
-3. Coevaluación - Director de curso a tutores
+3.1 Coevaluación - Director de curso a tutores
         </th>
         <td>Evalue a los tutores de sus cursos diferentes a usted</td> 
     <td>
     <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     </td>
   </tr>
+         {% if entity.lider|length > 0 %}
+       <tr>
+           <th>
+           3.2  Evaluación de Lider o Cordinador Nacional a Directores de Curso 
+           </th>
+           <td>Evaluae a los directores de curso</td>
+           <td>
+           <a href="{{ path('docente_coevaldirector') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
+           </td>
+       </tr>
+       {%endif%}
+  
         {% if entity.vinculacion == 'DC'%}
        <tr>
            <th>
@@ -107,6 +121,7 @@
            </td>
        </tr>
        {%endif%}
+       
   </table>
    
 {% endblock %}

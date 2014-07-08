@@ -16,8 +16,8 @@
 		<!-- We recommend you use "your_style.css" to override SmartAdmin
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
 		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/your_style.css"') }}> -->
-		<!-- GOOGLE FONT -->
-		<link rel="stylesheet" href="{{ asset('http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700') }}">
+		<!-- GOOGLE FONT
+		<link rel="stylesheet" href="{{ asset('http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700') }}">-->
 
         {% endblock %}
                 
@@ -170,13 +170,13 @@
 					{% if is_granted('ROLE_DEC')  %}
                                         <li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Instrumentos</span></a>
-						<ul>
+						<ul style="display: block;">
 						
 							<li>
 								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
 							</li>
                                                         <li>
-								<a href="#"><i class="fa fa-book"></i> Planes de Gestión</a>
+								<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a>
 							</li>   
 						</ul>
 					</li>

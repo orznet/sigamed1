@@ -36,8 +36,7 @@ protected $nivel;
      * @var Escuela 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Escuela", inversedBy="programas")
      * @ORM\JoinColumn(name="escuela_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $escuela;
@@ -47,8 +46,7 @@ protected $escuela;
      * @var Lider 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="lider")
      * @ORM\JoinColumn(name="lider_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $lider;
@@ -63,7 +61,13 @@ protected $lider;
     /**
       * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="programa")
       */
-    protected $cursos;     
+    protected $cursos;
+    
+    
+    /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalLider", mappedBy="programa") 
+    */
+   protected $coeval;
     
     
     /**
@@ -246,5 +250,38 @@ protected $lider;
     public function getDocentes()
     {
         return $this->docentes;
+    }
+
+    /**
+     * Add cursos
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $cursos
+     * @return Programa
+     */
+    public function addCurso(\Admin\UnadBundle\Entity\Curso $cursos)
+    {
+        $this->cursos[] = $cursos;
+
+        return $this;
+    }
+
+    /**
+     * Remove cursos
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $cursos
+     */
+    public function removeCurso(\Admin\UnadBundle\Entity\Curso $cursos)
+    {
+        $this->cursos->removeElement($cursos);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
     }
 }

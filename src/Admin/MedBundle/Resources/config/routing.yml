@@ -32,6 +32,14 @@ _coevaltutor:
 _coevalpares:
     resource: "@AdminMedBundle/Controller/coevalParesController.php"
     type:     annotation     
+
+_coevaldirector:
+    resource: "@AdminMedBundle/Controller/coevalDirectorController.php"
+    type:     annotation   
+
+_coevallider:
+    resource: "@AdminMedBundle/Controller/coevalLiderController.php"
+    type:     annotation   
     
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit

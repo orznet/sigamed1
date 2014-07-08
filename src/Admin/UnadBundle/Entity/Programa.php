@@ -61,7 +61,13 @@ protected $lider;
     /**
       * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="programa")
       */
-    protected $cursos;     
+    protected $cursos;
+    
+    
+    /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalLider", mappedBy="programa") 
+    */
+   protected $coeval;
     
     
     /**
@@ -277,5 +283,28 @@ protected $lider;
     public function getCursos()
     {
         return $this->cursos;
+    }
+
+    /**
+     * Set coeval
+     *
+     * @param \Admin\MedBundle\Entity\coevalLider $coeval
+     * @return Programa
+     */
+    public function setCoeval(\Admin\MedBundle\Entity\coevalLider $coeval = null)
+    {
+        $this->coeval = $coeval;
+
+        return $this;
+    }
+
+    /**
+     * Get coeval
+     *
+     * @return \Admin\MedBundle\Entity\coevalLider 
+     */
+    public function getCoeval()
+    {
+        return $this->coeval;
     }
 }

@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+<a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a>
+    <h1>Evaluación de Lider a Directores de Curso</h1>
+    {%for programa in entity.lider%}
+    <h1>Programa {{programa.nombre}}</h1>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Curso</th>
+                <th>Director</th>
+                <th>Observaciones</th>
+                <th>Evaluación</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for curso in programa.cursos %}
+            <tr>
+                <td>{{curso.id}}</td>
+                <td>{{curso.nombre}}</td>
+                <td>{{curso.director.user.nombres}} {{curso.director.user.apellidos}}</td>
+                <td>{%if curso.coeval %}
+               {{curso.coeval.observaciones}}
+                {%endif%}                    
+                </td>
+                <td>
+                {%if curso.coeval %}
+                {%if curso.coeval.f0 is not null %}
+                {{curso.coeval.f0}}
+                {%else%}
+                <a href="{{ path('coevaldirector_edit', { 'id': curso.coeval.id }) }}">Evaluar...</a>
+                 {%endif%}
+                {%endif%}
+                 </td>
+        {% endfor %}
+        </tbody>
+    </table>
+ {%endfor%}
+{% endblock %}

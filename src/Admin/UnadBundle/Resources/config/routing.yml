@@ -32,4 +32,12 @@ docente_coevaltutor:
     
 docente_coevalpares:
     pattern:  /doc/coevalpares
-    defaults: { _controller: "AdminUnadBundle:Docente:coevalpares" }         
+    defaults: { _controller: "AdminUnadBundle:Docente:coevalpares" }
+    
+docente_coevaldirector:
+    pattern:  /doc/coevaldirector
+    defaults: { _controller: "AdminUnadBundle:Docente:coevaldirector" }
+ 
+decano_coevallider:
+    pattern:  /dec/coevallider
+    defaults: { _controller: "AdminUnadBundle:Escuela:coevallider" }        

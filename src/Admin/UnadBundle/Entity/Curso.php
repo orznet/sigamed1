@@ -82,7 +82,13 @@ protected $programa;
     /**
     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalTutor", mappedBy="curso") 
     */
-   protected $evalatutor; 
+   protected $evalatutor;
+   
+   
+    /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="curso") 
+    */
+   protected $coeval;
   
     /**
      * Get id
@@ -359,5 +365,28 @@ protected $programa;
     public function getEvalatutor()
     {
         return $this->evalatutor;
+    }
+
+    /**
+     * Set coeval
+     *
+     * @param \Admin\MedBundle\Entity\coevalDirector $coeval
+     * @return Curso
+     */
+    public function setCoeval(\Admin\MedBundle\Entity\coevalDirector $coeval = null)
+    {
+        $this->coeval = $coeval;
+
+        return $this;
+    }
+
+    /**
+     * Get coeval
+     *
+     * @return \Admin\MedBundle\Entity\coevalDirector 
+     */
+    public function getCoeval()
+    {
+        return $this->coeval;
     }
 }
