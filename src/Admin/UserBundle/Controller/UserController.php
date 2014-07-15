@@ -62,16 +62,21 @@ class UserController extends Controller
     $param = $Form->get('parametro')->getData();
     
     if ($param == 'ced'){
-    return $this->redirect($this->generateUrl('admin_user_cedula', array('text' => $cadena)));
+    //return $this->redirect($this->generateUrl('admin_user_cedula', array('text' => $cadena)));
+    return $this->buscarcedulaAction($cadena);
     }
     else if ($param == 'nom'){
-    return $this->redirect($this->generateUrl('admin_user_nombres', array('text' => $cadena)));
+    //return $this->redirect($this->generateUrl('admin_user_nombres', array('text' => $cadena)));
+    return $this->buscarnombreAction($cadena);
     }
     else if ($param == 'apell'){
-    return $this->redirect($this->generateUrl('admin_user_apellidos', array('text' => $cadena)));
+    return $this->buscarapellidoAction($cadena);
+    //return $this->redirect($this->generateUrl('admin_user_apellidos', array('text' => $cadena)));
     }
     return $this->redirect($this->generateUrl('admin_docente_buscar'));
     }
+ 
+    
    public function buscarapellidoAction($text)
     {             
     $em = $this->getDoctrine()->getManager();

@@ -2,7 +2,7 @@
 
 {% block body -%}
     <table class="table table-bordered table-striped" style="width: 550px">
-    <form action="{{ path('admin_user_buscarpor')}}" method="post" {{ form_enctype(buscar_form) }}>
+    <form action="{{ path('unad_user_buscarpor')}}" method="post" {{ form_enctype(buscar_form) }}>
         <input type="hidden" name="_method" value="PUT" /> 
         <tr>
          <td>Usuarios({{totale}})</td>    
@@ -70,26 +70,30 @@
         <tbody>
         {% for entity in entities %}
             <tr table class="data">
-                <td class="data"><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td class="data">
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+                {%else%}{{ entity.id }}{%endif%}
+                </td>
                 <td class="data">{{ entity.nombres }}</td>
                 <td class="data">{{ entity.apellidos }}</td>
                 <td class="data">{{ entity.email }}</td>
                 <td class="data">
-                {%if entity.docente %}
-                  si  
-                    {%endif%}
-                    
+                    {% for entity in entity.getDocente %}
+     <a href="{{ path('docente_info', { 'id': entity.id }) }}">
+    {{entity.id}}
+     </a>
+    {%endfor%}  
                 </td>
                 <td class="data">
          
-                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">edit</a>
        
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+{% if is_granted('ROLE_ADMIN') %}  
         <ul>
         <li>
             <a href="{{ path('admin_user_new') }}">
@@ -97,4 +101,5 @@
             </a>
         </li>
     </ul>
+    {%endif%}
     {% endblock %}

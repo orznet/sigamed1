@@ -86,6 +86,17 @@
         <td><a href="javascript:popUp('{{ path('redtutores_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a></td> 
     <td></td>
   </tr>
+    <tr>
+    <th>
+3. Evaluación de estudiantes
+        </th>
+        <td>
+           {%if entity.heteroeval%} 
+            <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%else%} Sin registros {%endif%}
+        </td> 
+    <td></td>
+  </tr>
   </table>
    
    <script>

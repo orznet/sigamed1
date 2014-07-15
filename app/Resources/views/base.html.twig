@@ -145,7 +145,7 @@
 					</li>
                                          {%endif%}
                                         
-                        {% if is_granted('ROLE_ADMIN') %}
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')%}
                         <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Unad</span></a>
                         <ul>
@@ -162,7 +162,7 @@
                         <a href="{{ path('centro') }}">Centros</a>
                         </li>
                         <li>
-                        <a href="{{ path('admin_user') }}">Users</a>
+                        <a href="{{ path('unad_user_lista') }}">Usuarios</a>
                         </li>
                         </ul>
                         </li>

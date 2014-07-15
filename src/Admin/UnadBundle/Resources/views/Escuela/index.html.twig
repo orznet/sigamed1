@@ -50,7 +50,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Sigla</th>
-                <th>Programas</th>
+                <th>Decano</th>
                 <th>Docentes</th>
             </tr>
         </thead>
@@ -63,7 +63,7 @@
                 <td>{{ entity.nombre }}</td>
                 <td>{{ entity.sigla }}</td>
                 <td>
-                <a data-toggle="modal" href="{{ path('escuela_show', { 'id': entity.id }) }}" data-target="#myModal">Ver</a>
+               {{ entity.decano.nombres }} {{ entity.decano.apellidos }}
                 </td>
                  <td>
                 <a  href="{{ path('docente_escuela', { 'id': entity.id }) }}">Ver</a>      
@@ -80,7 +80,7 @@
         </div>
         <!-- end widget -->
                                                                         
-
+ {% if is_granted('ROLE_ADMIN') %}  
         <ul>
         <li>
             <a href="{{ path('escuela_new') }}">
@@ -88,7 +88,7 @@
             </a>
         </li>
     </ul>
-        
+    {%endif%}     
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">

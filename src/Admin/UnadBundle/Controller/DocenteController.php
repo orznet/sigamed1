@@ -362,4 +362,17 @@ class DocenteController extends Controller
             'entity' => $entity,
          ); 
     }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
+    public function heteroevalAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        return array(
+            'entity' => $entity,
+         ); 
+    }
 }

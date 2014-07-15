@@ -16,4 +16,13 @@ admin_user_send:
     
 admin_user_inicio:
     pattern:  /unad/inicio
-    defaults: { _controller: "AdminUserBundle:Default:index" }    
+    defaults: { _controller: "AdminUserBundle:Default:index" }
+    
+unad_user_lista:
+    pattern:  /unad/user/lista
+    defaults: { _controller: "AdminUserBundle:User:index" }
+    requirements: { _method: get }
+
+unad_user_buscarpor:
+    pattern:  /unad/user/lista
+    defaults: { _controller: "AdminUserBundle:User:buscarpor" }         

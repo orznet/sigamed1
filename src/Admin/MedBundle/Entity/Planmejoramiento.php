@@ -48,8 +48,7 @@ protected $autorid;
      * @var Docente
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="planmejoramiento")
      * @ORM\JoinColumn(name="docente_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $docente;

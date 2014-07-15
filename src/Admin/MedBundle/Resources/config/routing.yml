@@ -59,5 +59,8 @@ plangestion_autoeval:
     
 redtutores_info:
     pattern:  /unad/doc/{id}/redtutor
-    defaults: { _controller: "AdminUnadBundle:Docente:redtutoresinfo" }      
+    defaults: { _controller: "AdminUnadBundle:Docente:redtutoresinfo" }
     
+heteroeval_info:
+    pattern:  /unad/doc/{id}/heteroeval
+    defaults: { _controller: "AdminUnadBundle:Docente:heteroeval" }       

@@ -133,6 +133,11 @@ protected $centro;
    
    
     /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Heteroeval", mappedBy="docente") 
+    */
+   protected $heteroeval;
+   
+    /**
     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluador") 
     */
    protected $ternado;
@@ -659,5 +664,28 @@ protected $centro;
     public function getTernado()
     {
         return $this->ternado;
+    }
+
+    /**
+     * Set heteroeval
+     *
+     * @param \Admin\MedBundle\Entity\Heteroeval $heteroeval
+     * @return Docente
+     */
+    public function setHeteroeval(\Admin\MedBundle\Entity\Heteroeval $heteroeval = null)
+    {
+        $this->heteroeval = $heteroeval;
+
+        return $this;
+    }
+
+    /**
+     * Get heteroeval
+     *
+     * @return \Admin\MedBundle\Entity\Heteroeval 
+     */
+    public function getHeteroeval()
+    {
+        return $this->heteroeval;
     }
 }
