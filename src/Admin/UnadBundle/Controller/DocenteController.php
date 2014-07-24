@@ -367,6 +367,20 @@ class DocenteController extends Controller
      * @Method("GET")
      * @Template()
      */
+    public function coevalinfoAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+
+        return array(
+            'entity' => $entity,
+         ); 
+    }
+    
+     /**
+     * @Method("GET")
+     * @Template()
+     */
     public function heteroevalAction($id)
     {
       $em = $this->getDoctrine()->getManager();

@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>{% block title %}Unad MED 2014  V2{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+        <title>{% if page_title is defined %} {{ page_title }} {%else%}Unad MED 2014  V2{% endif %}</title>
         {% block stylesheets %}
                 <!-- Basic Styles -->
 		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/bootstrap.min.css') }}">
@@ -131,6 +131,11 @@
                                         {% if is_granted('ROLE_DEC') or is_granted('ROLE_SECA')  %}
                                         <li>
 						<a href="{{ path('escuela_info') }}"><i class="fa fa-lg fa-fw fa-folder-open"></i> <span class="menu-item-parent">Mi Escuela</span></a>
+                                                <ul style="display: block;">
+                                                    <li>
+                                                  <a href="{{ path('escuela_resultados') }}">Resultados</a>      
+                                                    </li>    
+                                                </ul>
 					</li>
                                         {% endif %}
                                         

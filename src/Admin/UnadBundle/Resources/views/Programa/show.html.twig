@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>Programa</h1>
-      <table class="table table-bordered table-striped hidden-mobile">
+        <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -18,7 +18,8 @@
             </tr>
             <tr>
                 <th>Lider</th>
-                <td>{{ entity.lider? entity.lider.user.nombres~' '~ entity.lider.user.nombres : 'sin'}}</td>
+                <td>[{{ entity.lider? entity.lider.user.id}}]
+                {{ entity.lider? entity.lider.user.nombres~' '~ entity.lider.user.apellidos : 'sin'}}</td>
             </tr>
         </tbody>
     </table>
@@ -32,8 +33,27 @@
     {%endif%}
     
     Cursos:
-    {%for curso in entity.cursos %}
-    {{curso.nombre}}
+    
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+    <tr>
+    <th>id</th>
+    <th>Curso</th>
+    <th>Director</th>
+    <th>Cedula</th>
+    </tr>     
+     {%for curso in entity.cursos %}
+    
+     <tr>
+    <td>{{curso.id}}</td>
+    <td>{{curso.nombre}}</td>
+    <td>{{curso.director.id}}</td>
+    <td>{{curso.director.user.id}}</td>
+    </tr>
+    
     {%endfor%}
+
+    
+    </table>
+
     
 {% endblock %}

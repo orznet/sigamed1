@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Planmejoramiento/add.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Heteroeval.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/DocenteController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/porescuela.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Form/ProgramaType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/addlider.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Escuela/index.html.twig</file>
         </group>
     </open-files>
 </project-private>

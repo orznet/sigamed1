@@ -1,0 +1,94 @@
+{% block body -%}
+<body>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+ 
+    <h3>1. Evaluaciones recibidas como Tutor:</h3>
+    {%if entity.evaldedirector|length > 0 %}
+    <table>
+            <tr>
+                <th>Curso</th>
+                <th>Director</th>
+                <th>Observaciones</th>
+                <th>Calificación</th>
+            </tr>
+            <tbody>
+           {%set final = 0%} {%set aux = 0%}       
+            {%for evaluacion in entity.evaldedirector%}
+             {%set aux = aux + 1 %}   
+             {%set final = final+evaluacion.f0%}   
+            <tr>
+            <td>{{evaluacion.curso.nombre}}</td>    
+             <td>{{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}</td>
+             <td>{{evaluacion.observaciones}}</td>
+             <td>{{evaluacion.f0}}</td>
+            </tr>
+        {%endfor%}
+        {%set final = final/aux%}
+        <tr>
+        <td colspan="3" align="right"><b>Calificación Final:</b></td>
+        <td>{{final}}</td>
+        </tr>
+        </tbody>
+        </table>
+   {%else%}No es tutor de curso{%endif%}
+    
+    <h3>2. Evaluaciones recibidas como Director:</h3>
+    {%if entity.director|length > 0 %}
+        <table>
+            <tr>
+                <th>Curso</th>
+                <th>Lider</th>
+                <th>Observaciones</th>
+                <th>Calificación</th>
+            </tr>
+            <tbody>
+           {%set final = 0%} {%set aux = 0%}       
+            {%for curso in entity.director%}
+             {%set aux = aux + 1 %}   
+             
+            <tr>
+            <td>{{curso.nombre}}</td>    
+             <td>{{curso.programa.lider.user.nombres}} {{curso.programa.lider.user.apellidos}}</td>
+             <td>{{curso.coeval? curso.coeval.observaciones : 'N/A'}}</td>
+             <td>{{curso.coeval? curso.coeval.f0 : 'N/A'}}</td>
+            </tr>
+        {%endfor%}
+  
+        <tr>
+        <td colspan="3" align="right"><b>Calificación Final:</b></td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+   {%else%}No es director de curso{%endif%}
+   
+       <h3>3. Evaluaciones recibidas como Lider:</h3>
+    {%if entity.lider|length > 0 %}
+        <table>
+            <tr>
+                <th>Programa</th>
+                <th>Observaciones</th>
+                <th>Calificación</th>
+            </tr>
+            <tbody>
+           {%set final = 0%} {%set aux = 0%}       
+            {%for programa in entity.lider%}
+             {%set aux = aux + 1 %}   
+             
+            <tr>
+            <td>{{programa.nombre}}</td>    
+             <td>{{programa.coeval? programa.coeval.observaciones : 'N/A'}}</td>
+             <td>{{programa.coeval? programa.coeval.f0 : 'N/A'}}</td>
+            </tr>
+        {%endfor%}
+  
+        <tr>
+        <td colspan="2" align="right"><b>Calificación Final:</b></td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+   {%else%}No es Lider de Programa{%endif%}
+   
+   
+{% endblock %}

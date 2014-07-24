@@ -63,4 +63,8 @@ redtutores_info:
     
 heteroeval_info:
     pattern:  /unad/doc/{id}/heteroeval
-    defaults: { _controller: "AdminUnadBundle:Docente:heteroeval" }       
+    defaults: { _controller: "AdminUnadBundle:Docente:heteroeval" }
+    
+coeval_info:
+    pattern:  /unad/doc/{id}/coeval
+    defaults: { _controller: "AdminUnadBundle:Docente:coevalinfo" }           

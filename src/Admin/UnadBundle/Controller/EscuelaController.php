@@ -296,4 +296,47 @@ class EscuelaController extends Controller
         'entity'      => $escuela,
         );
     }
+    
+    
+    
+    
+     /**
+     * Lista la evaluacion de estudiantes
+     * @Route("/mi/heteroeval", name="escuela_heteroeval")
+     * @Method("GET")
+     * @Template()
+     */
+    public function heteroevalAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findby(array( 'escuela' => $session->get('escuelaid')));
+        if (!$escuela) {
+            throw $this->createNotFoundException('Unable to find Escuela entity.');
+        }
+        return array(
+        'escuela'      => $escuela,
+        'docentes'    => $docentes,
+        );
+    }
+    
+    
+      /**
+     * @Route("/mi/resultados", name="escuela_resultados")
+     * @Method("GET")
+     * @Template()
+     */
+    public function resultadosAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        if (!$escuela) {
+            throw $this->createNotFoundException('Unable to find Escuela entity.');
+        }
+        return array(
+        'escuela'      => $escuela,
+        );
+    }
 }
