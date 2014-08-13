@@ -103,10 +103,30 @@
         </th>
         <td>
             <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
-
         </td> 
     <td></td>
   </tr>
+  {%if entity.vinculacion == 'De Carrera'%}
+        <tr>
+    <th>
+5. Informe de Evaluación Final DC
+        </th>
+        <td>
+            <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        </td> 
+    <td></td>
+  </tr>
+  {%else%}
+          <tr>
+    <th>
+5. Informe de Evaluación Final
+        </th>
+        <td>
+            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        </td> 
+    <td></td>
+  </tr>
+  {%endif%}
   </table>
    
    <script>

@@ -240,7 +240,7 @@ protected $actividad;
     }
 
     protected function getUploadDir() {
-        return 'archivos/plang/'.$this->getPlang()->getId()->getId();
+        return 'archivos/plang/plan_'.$this->getPlang()->getId()->getId();
     }
       /**
      * Sets file.

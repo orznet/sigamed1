@@ -2,6 +2,7 @@
 
 namespace Admin\UnadBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -387,6 +388,34 @@ class DocenteController extends Controller
       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
         return array(
             'entity' => $entity,
+         ); 
+    }
+    
+     /**
+     * @Route("/finaldc/{id}", name="docente_finaldc")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Docente:finaldc.html.twig")
+     */
+    public function finaldcAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        return array(
+            'docente' => $entity,
+         ); 
+    }
+    
+     /**
+     * @Route("/final/{id}", name="docente_final")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Docente:final.html.twig")
+     */
+    public function finalAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        return array(
+            'docente' => $entity,
          ); 
     }
 }

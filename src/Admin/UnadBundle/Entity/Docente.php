@@ -138,6 +138,11 @@ protected $centro;
    protected $heteroeval;
    
     /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Evaluacion", mappedBy="docente") 
+    */
+   protected $evaluacion;
+   
+    /**
     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluador") 
     */
    protected $ternado;
@@ -185,7 +190,18 @@ protected $centro;
      */
     public function getModalidad()
     {
-        return $this->modalidad;
+            if ($this->modalidad == 'TC'){
+            return 'Tiempo Completo';   
+        }
+        Elseif($this->modalidad == 'MT'){
+            return 'Medio Tiempo';
+        }
+        Elseif($this->modalidad == 'HC'){
+            return 'Hora Catedra';
+        }
+        Else {
+          return $this->modalidad;  
+        }
     }
 
     /**
@@ -208,7 +224,18 @@ protected $centro;
      */
     public function getVinculacion()
     {
-        return $this->vinculacion;
+        if ($this->vinculacion == 'DC'){
+            return 'De Carrera';   
+        }
+        Elseif($this->vinculacion == 'DO'){
+            return 'Ocasional';
+        }
+        Elseif($this->vinculacion == 'HC'){
+            return 'Hora Catedra';
+        }
+        Else {
+          return $this->vinculacion;  
+        }
     }
 
     /**
@@ -687,5 +714,28 @@ protected $centro;
     public function getHeteroeval()
     {
         return $this->heteroeval;
+    }
+
+    /**
+     * Set evaluacion
+     *
+     * @param \Admin\MedBundle\Entity\Evaluacion $evaluacion
+     * @return Docente
+     */
+    public function setEvaluacion(\Admin\MedBundle\Entity\Evaluacion $evaluacion = null)
+    {
+        $this->evaluacion = $evaluacion;
+
+        return $this;
+    }
+
+    /**
+     * Get evaluacion
+     *
+     * @return \Admin\MedBundle\Entity\Evaluacion 
+     */
+    public function getEvaluacion()
+    {
+        return $this->evaluacion;
     }
 }

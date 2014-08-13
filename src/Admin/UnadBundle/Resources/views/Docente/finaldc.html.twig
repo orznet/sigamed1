@@ -1,0 +1,153 @@
+<head>
+<title>{% block title %}{{docente.escuela.sigla}}-{{docente.user.id}}{% endblock %}</title>
+</head>
+{% block body -%}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+
+<table class="table table-bordered table-striped hidden-mobile" style="width: 98%">
+  <tr>
+    <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
+        <br>INFORME FINAL DE EVALUACIÓN INDIVIDUAL -    DOCENTES DE CARRERA
+    </td>
+  </tr>
+  <tr>
+    <td>Cédula</td>
+    <td>{{docente.user.id}}</td>
+    <td>Periodo Acádemico</td>
+    <td>2014-1</td>
+  </tr>
+  <tr>
+    <td>Nombres</td>
+    <td>{{docente.user.nombres}}</td>
+    <td>Programa</td>
+    <td>{{docente.programa.nombre}}</td>
+  </tr>
+  <tr>
+    <td>Apellidos</td>
+    <td>{{docente.user.apellidos}}</td>
+    <td>Cargo</td>
+    <td>{{docente.cargo}}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Vinculación: {{docente.vinculacion}} - Modalidad: {{docente.modalidad}}</td>
+    <td colspan="2">Resolución: {{docente.resolucion}} - Perfil: {{docente.perfil}}</td>
+  </tr>
+  <tr>
+    <td colspan="4">Escuela: {{docente.escuela.nombre}}<br>
+                     Decano: {{docente.escuela.decano.nombres}} {{docente.escuela.decano.apellidos}}
+    </td>
+  </tr>
+  <tr>
+      <td colspan="2">Centro: {{docente.centro.nombre}}</td>
+    <td colspan="2">
+      Director:
+    {%if docente.centro.director%}
+{{docente.centro.director.nombres}} {{docente.centro.director.apellidos}}
+    {%endif%}
+    </td>
+  </tr>
+</table>
+  <table class="data" width="100%" border="0">
+    <tr>  
+    <td><b>1. Observaciones Plan de Gestión</b></td>
+    <td>Perfil</td>
+    <td>Fecha</td>
+    <td>Estado</td>
+  </tr>
+  {% for avales in docente.plangestion.avales %}
+  <tr>
+    <td>{{avales.user.nombres}} {{avales.user.apellidos}}</td>
+    <td>{{avales.perfil}}</td>
+    <td>{{avales.fechaAval|date('Y-m-d H:i   ')}}</td>
+    <td>
+{%if avales.avalado == 1%}
+Aprobado
+    {%else%} - {%endif%}
+    </td>
+  </tr>
+    <tr>
+        <td colspan="5">{{avales.observaciones}}</td>
+  </tr>
+  {% endfor %}                  
+    </table>
+ <table  class="data" widtd="100%" border="0">
+  <tr>
+    <td>Item</td>
+    <td>Instrumento</td>
+    <td>Tipo</td>
+    <td>Evalua</td>
+    <td>Calificación</td>
+  </tr>
+  <tr>
+    <td>A1</td>
+    <td>Plan de Gestión</td>
+    <td>Autoevaluación</td>
+    <td>Docente</td>
+    <td>{{docente.evaluacion.auto? docente.evaluacion.auto : 'Sin Autoevaluación' }}</td>
+  </tr>
+  <tr>
+    <td>H1</td>
+    <td>Evaluación de Estudiantes</td>
+    <td>Heteroevaluación</td>
+    <td>Estudiante</td>
+    <td>{{docente.evaluacion.hetero1? docente.evaluacion.hetero1 : 'Sin registros'}}</td>
+  </tr>
+    <tr>
+    <td>H2</td>
+    <td>Productividad Académica</td>
+    <td>Heteroevaluación</td>
+    <td>CIARP</td>
+    <td>{{docente.evaluacion.hetero2}}</td>
+  </tr>
+    <tr>
+    <td>C1</td>
+    <td>Evaluación de Pares</td>
+    <td>Coevaluación</td>
+    <td>Terna de Pares</td>
+    <td>{{docente.evaluacion.co1}}</td>
+      <tr>
+    <td>C2</td>
+    <td>Evaluación de Red Tutores</td>
+    <td>Heteroevaluación</td>
+    <td>Tutor</td>
+    <td>{{docente.evaluacion.co5? docente.evaluacion.co5: 'n/a' }}</td>
+  </tr>
+  </tr>
+</table>
+       
+<table  class="data" widtd="100%" border="0">
+  <tr>
+    <td>Tipo de Evaluación</td>
+    <td>Ponderación:</td>
+    <td>Porcentil</td>
+  </tr>
+  <tr>
+    <td>Autoevaluación (A1)</td>
+    <td>25%</td>
+    <td>{{(docente.evaluacion.auto*0.25)|number_format(2, '.', ',')}}</td>
+  </tr>
+  <tr>
+    <td>Heteroevaluación (H1 y H2)</td>
+    <td>50%</td>
+    <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : 'sin'}}</td>
+  </tr>
+  <tr>
+    <td>Coevaluación (C1 y C2)</td>
+    <td>25%</td>
+    <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): 'sin'}}</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>Evaluación Final del Desempeño</td>
+    <td>{{docente.evaluacion.final|number_format(1, '.', ',')}}</td>
+    </tr>
+</table>
+<table>
+  <tr>
+    <td colspan="3">Observaciones Decano de la Escuela: {{docente.evaluacion.observaciones}}</td>
+    </tr>
+    <tr>
+    <td colspan="3" align="center">Evaluación Número:{{docente.id}} -  Fecha y hora de consulta: {{ "now"|date("m/d/Y H:m") }}</td>
+  </tr>
+</table>
+{% endblock %}

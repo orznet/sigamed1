@@ -37,6 +37,10 @@ docente_coevalpares:
 docente_coevaldirector:
     pattern:  /doc/coevaldirector
     defaults: { _controller: "AdminUnadBundle:Docente:coevaldirector" }
+    
+docente_infofinal_dc:
+    pattern:  /info/finaldc/{id}
+    defaults: { _controller: "AdminUnadBundle:Docente:finaldc" }    
  
 decano_coevallider:
     pattern:  /dec/coevallider

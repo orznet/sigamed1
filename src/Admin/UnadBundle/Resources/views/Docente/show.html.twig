@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-   <h1>Docente Id:{{ entity.id }}</h1>
+   <h1>Docente ID:{{ entity.id }}</h1>
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
   <tr>
     <th>Cédula</th>
@@ -66,7 +66,7 @@
     </td></tr>
    {% endfor %}
    </table>
-   
+ {%if 0 %}  
   <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
           <th>Instrumento de Evaluación</th>
@@ -123,6 +123,6 @@
        {%endif%}
        
   </table>
-   
+   {%endif%}
 {% endblock %}
    
