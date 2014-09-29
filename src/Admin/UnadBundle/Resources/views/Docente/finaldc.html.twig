@@ -1,5 +1,5 @@
 <head>
-<title>{% block title %}{{docente.escuela.sigla}}-{{docente.user.id}}{% endblock %}</title>
+<title>{% block title %}{{docente.user.id}}-{{docente.periodo}}{% endblock %}</title>
 </head>
 {% block body -%}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
@@ -70,6 +70,30 @@ Aprobado
   </tr>
   {% endfor %}                  
     </table>
+<table class="data" width="100%" border="0">
+  <tr>
+    <td class="data" align="center" colspan="7">Heteroevaluación de Estudiantes - Compentencias Evaluadas</td>
+  </tr>
+  <tr>
+    <td class="data">Cognitiva</td>
+    <td class="data">Comunicativa</td>
+    <td class="data">Metodológicas</td>
+    <td class="data">Pedagógico - Didácticas</td>
+    <td class="data">Socioafectiva</td>
+    <td class="data">Tecnológica</td>
+    <td class="data">Calificación Final H1</td>
+  </tr>
+  <tr>
+      <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia2/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia3/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia5/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia6/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(2, '.', ',')}}</td>
+  </tr>
+</table>
+
  <table  class="data" widtd="100%" border="0">
   <tr>
     <td>Item</td>
@@ -138,8 +162,9 @@ Aprobado
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>Evaluación Final del Desempeño</td>
-    <td>{{docente.evaluacion.final|number_format(1, '.', ',')}}</td>
+    <td><h3>Evaluación Final del Desempeño</h3></td>
+    <td><h3>{{docente.evaluacion.final? docente.evaluacion.final|number_format(1, '.', ',') : '*'}}</h3>
+    </td>
     </tr>
 </table>
 <table>

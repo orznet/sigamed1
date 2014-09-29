@@ -7,63 +7,46 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Admin\MedBundle\Entity\Actividadrol;
-use Admin\MedBundle\Form\ActividadrolType;
+use Admin\MedBundle\Entity\Avalplang;
+use Admin\MedBundle\Form\AvalplangType;
 
 /**
- * Actividadrol controller.
+ * Avalplang controller.
  *
- * @Route("/doc/actividadrol")
+ * @Route("/avales")
  */
-class ActividadrolController extends Controller
+class AvalplangController extends Controller
 {
 
     /**
-     * Lists all Actividadrol entities.
-     * @Route("/", name="actividadrol")
+     * Lists all Avalplang entities.
+     *
+     * @Route("/", name="avalplang")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $user = $this->get('security.context')->getToken()->getUser();
 
-        $entities = $em->getRepository('AdminMedBundle:Actividadrol')->findAll();
+        $entities = $em->getRepository('AdminMedBundle:Avalplang')->findby(array('user' => $user));
 
         return array(
             'entities' => $entities,
         );
     }
-    
-        /**
-     * Lists all Actividadrol entities.
-     * @Route("/select/{id}", name="actividadrol_select")
-     * @Method("GET")
-     * @Template()
-     */
-    public function selectAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:Actividadrol')->decarrera();
-        $roles = $em->getRepository('AdminMedBundle:Rolacademico')->findAll();
-        return array(
-            'entities' => $entities,
-            'id'  => $id,
-            'roles' => $roles 
-        );
-    }
-    
     /**
-     * Creates a new Actividadrol entity.
+     * Creates a new Avalplang entity.
      *
-     * @Route("/", name="actividadrol_create")
+     * @Route("/", name="avalplang_create")
      * @Method("POST")
-     * @Template("AdminMedBundle:Actividadrol:new.html.twig")
+     * @Template("AdminMedBundle:Avalplang:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Actividadrol();
+        $entity = new Avalplang();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -72,7 +55,7 @@ class ActividadrolController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('actividadrol_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('avalplang_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -82,16 +65,16 @@ class ActividadrolController extends Controller
     }
 
     /**
-    * Creates a form to create a Actividadrol entity.
+    * Creates a form to create a Avalplang entity.
     *
-    * @param Actividadrol $entity The entity
+    * @param Avalplang $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Actividadrol $entity)
+    private function createCreateForm(Avalplang $entity)
     {
-        $form = $this->createForm(new ActividadrolType(), $entity, array(
-            'action' => $this->generateUrl('actividadrol_create'),
+        $form = $this->createForm(new AvalplangType(), $entity, array(
+            'action' => $this->generateUrl('avalplang_create'),
             'method' => 'POST',
         ));
 
@@ -101,15 +84,15 @@ class ActividadrolController extends Controller
     }
 
     /**
-     * Displays a form to create a new Actividadrol entity.
+     * Displays a form to create a new Avalplang entity.
      *
-     * @Route("/new", name="actividadrol_new")
+     * @Route("/new", name="avalplang_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Actividadrol();
+        $entity = new Avalplang();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -119,9 +102,9 @@ class ActividadrolController extends Controller
     }
 
     /**
-     * Finds and displays a Actividadrol entity.
+     * Finds and displays a Avalplang entity.
      *
-     * @Route("/{id}", name="actividadrol_show")
+     * @Route("/{id}", name="avalplang_show")
      * @Method("GET")
      * @Template()
      */
@@ -129,10 +112,10 @@ class ActividadrolController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminMedBundle:Actividadrol')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Avalplang')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Actividadrol entity.');
+            throw $this->createNotFoundException('Unable to find Avalplang entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -144,9 +127,9 @@ class ActividadrolController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Actividadrol entity.
+     * Displays a form to edit an existing Avalplang entity.
      *
-     * @Route("/{id}/edit", name="actividadrol_edit")
+     * @Route("/{id}/edit", name="avalplang_edit")
      * @Method("GET")
      * @Template()
      */
@@ -154,33 +137,33 @@ class ActividadrolController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminMedBundle:Actividadrol')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Avalplang')->find($id);
+        
+        $texto =  explode('\n', $entity->getObservaciones());
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Actividadrol entity.');
+            throw $this->createNotFoundException('Unable to find Avalplang entity.');
         }
-
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
+            'texto'       => $texto,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Actividadrol entity.
+    * Creates a form to edit a Avalplang entity.
     *
-    * @param Actividadrol $entity The entity
+    * @param Avalplang $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Actividadrol $entity)
+    private function createEditForm(Avalplang $entity)
     {
-        $form = $this->createForm(new ActividadrolType(), $entity, array(
-            'action' => $this->generateUrl('actividadrol_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new AvalplangType(), $entity, array(
+            'action' => $this->generateUrl('avalplang_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -189,42 +172,59 @@ class ActividadrolController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Actividadrol entity.
+     * Edits an existing Avalplang entity.
      *
-     * @Route("/{id}", name="actividadrol_update")
+     * @Route("/{id}", name="avalplang_update")
      * @Method("PUT")
-     * @Template("AdminMedBundle:Actividadrol:edit.html.twig")
+     * @Template("AdminMedBundle:Avalplang:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminMedBundle:Actividadrol')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:Avalplang')->find($id);
+        $plan = $entity->getPlan();
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Actividadrol entity.');
+            throw $this->createNotFoundException('Unable to find Avalplang entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
+        
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        
+        if ($entity->getObservaciones() != null){    
+       $date = (new \DateTime());
+        $texto = $entity->getObservaciones(). '|' .$date->format('Y-m-d H:i').' - '.$editForm->get('observaciones')->getData();
+        } 
+       else {
+       $date = (new \DateTime());
+       $texto = $date->format('Y-m-d H:i').' - '.$editForm->get('observaciones')->getData();   
+       }
 
-        if ($editForm->isValid()) {
+        $entity->setObservaciones($texto);
+        if ($editForm->get('avalado')->getData() == 1){
+        $entity->setFechaAval(new \DateTime());   
+        }
+        if ($editForm->get('avalado')->getData() == 2){
+        $plan->setEstado(0);    
+        }
+        
+        if ($editForm->isValid()) {  
+            
             $em->flush();
 
-            return $this->redirect($this->generateUrl('actividadrol_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('avalplang'));
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
     /**
-     * Deletes a Actividadrol entity.
+     * Deletes a Avalplang entity.
      *
-     * @Route("/{id}", name="actividadrol_delete")
+     * @Route("/{id}", name="avalplang_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -234,21 +234,21 @@ class ActividadrolController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AdminMedBundle:Actividadrol')->find($id);
+            $entity = $em->getRepository('AdminMedBundle:Avalplang')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Actividadrol entity.');
+                throw $this->createNotFoundException('Unable to find Avalplang entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('actividadrol'));
+        return $this->redirect($this->generateUrl('avalplang'));
     }
 
     /**
-     * Creates a form to delete a Actividadrol entity by id.
+     * Creates a form to delete a Avalplang entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -257,7 +257,7 @@ class ActividadrolController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('actividadrol_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('avalplang_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

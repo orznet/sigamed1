@@ -1,11 +1,12 @@
 <?php
+
 namespace Admin\MedBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PlangestionType extends AbstractType
+class ActividadplangAddType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -14,7 +15,18 @@ class PlangestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
+         ->add("actividad", "text", array(
+         "mapped" => false,
+         'required'  => true,
+         /* 'attr' => array('readonly' => 'readonly')*/
+                 )) 
+         ->add('horas')
+         ->add('descripcion', 'textarea', array('attr' => array('cols' => '60')))
+        
+         ->add('actividad', 'entity', array(
+          'class' =>  'AdminMedBundle:Actividadrol',
+          'property' => 'id',
+          ))         
         ;
     }
     
@@ -24,7 +36,7 @@ class PlangestionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\MedBundle\Entity\Plangestion'
+            'data_class' => 'Admin\MedBundle\Entity\Actividadplang'
         ));
     }
 
@@ -33,6 +45,6 @@ class PlangestionType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_medbundle_plangestion';
+        return 'admin_medbundle_actividadplang';
     }
 }

@@ -74,7 +74,7 @@
                 <td><a href="{{ path('centro_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
                 <td>{{ entity.zona.id? entity.zona.nombre : 'sin' }}</td>
                 <td>{{ entity.tipo }}</td>
-                 <td>{{ entity.director.id? entity.director.id : 'sin' }}</td>
+                 <td>{{ entity.director? entity.director.id : 'sin' }}</td>
                 <td>
 
                         <a href="{{ path('centro_edit', { 'id': entity.id }) }}">edit</a>

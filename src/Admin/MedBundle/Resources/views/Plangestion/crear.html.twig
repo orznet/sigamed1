@@ -1,0 +1,140 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+    <h3>Actividades del Plan de Gestión de  {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}</h3>
+
+     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <tbody>
+            <tr>
+                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Estado: 
+                {{entity.estado}}    
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+    
+ </table>
+  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Actividad</th>
+                <th>Horas</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
+        {% set termino = 1 %}
+        {% for actividad in actividades %}
+           <tr>
+                    {%if temp != actividad.actividad.rol.nombre %} 
+                <td>
+                    <b>ROL:
+                    {{actividad.actividad.rol.nombre}}
+                    {% set temp = actividad.actividad.rol.nombre %}        
+                    </b>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    {%endif%}
+               </tr>     
+            <tr>
+                {% set num = num+1 %}
+                <td>{{num}}.     
+                {{ actividad.actividad.descripcion }}
+                {%if actividad.actividad.textoampliacion %}
+                <font color="#a57225">{{actividad.descripcion}}</font>
+                {%endif%}
+                </td>
+                <td>{{actividad.horas}}
+                    {% set totalhoras = totalhoras + actividad.horas%}
+                </td>
+                                <td>
+                {%if entity.estado == 'Sin Cerrar'%}
+                <a href="{{ path('actividadplang_delete', { 'id': actividad.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
+                {%endif%}
+                </td>
+               </tr>
+        {% endfor %}
+               <tr>
+                   <td style="text-align: right"><b>Total Horas:</b></td>
+                   <td><b>{{totalhoras}}</b></td>
+                    <td></td>
+               </tr>
+               {%if entity.estado == 'Sin Cerrar'%}
+               <tr>
+                <td colspan="3">
+                <a href="{{ path('actividadrol_select', { 'id': entity.id.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Actividad</a>  
+                {%if totalhoras > 40 %}
+                <div class="alert alert-danger fade in">
+                 <i class="fa-fw fa fa-warning"></i>
+                 <strong>ATENCIÓN</strong> No debe exceder las 40 horas para poder cerrar su plan de gestión.
+                </div>
+    {%else%}
+     <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Plan de Gestión</a>
+    {%endif%}
+                   </td>
+               </tr>
+               {%endif%}
+        </tbody>
+    </table>
+ <br>
+ <br>
+ <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+  <tr>
+    <th>Avalador</th>
+    <th>Perfil</th>
+    <th>Fecha Aprobado</th>
+    <th>Estado</th>
+  </tr>
+  {% for aval in entity.avales %}
+  <tr>
+    <td>{{aval.user.nombres}} {{aval.user.apellidos}}</td>
+    <td>{{aval.perfil}}</td>
+    <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
+    <td>
+{%if aval.avalado == 1%}
+<font color="#468847">Aprobado</font>
+{%elseif aval.avalado == 2%}
+<font color="#F87217">No aprobado</font>
+{%else%}
+Sin revisar
+{%endif%}
+
+    </td>
+  </tr>
+    <tr>
+    <td  colspan="5"><b>Observaciones:</b><br>
+   {% set texto = aval.observaciones|split('|') %} 
+   {% for obs in texto%}
+   {{obs}}<br>
+   {%endfor%}
+    </td>
+  </tr>
+  {% endfor %}  
+</table>
+ 
+ <div class="modal fade" data-refresh="true" id="ModalCerrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title">Cerrar Plan de Gestión</h4>
+                </div>			<!-- /modal-header -->
+                <div class="modal-body">
+                IMPORTANTE: Al cerrar su plan de gestión ya no podra modificarlo, si esta seguro cierre su plan de gestión y solicite la aprobación de los avaladores para poder relizar su autoevaluación.
+                </div>
+                <div class="modal-footer">
+               <form  action="{{ path('plangestion_cerrar', { 'id': entity.id.id }) }}" method="get">     
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                </button>
+               <td><button type="hidden" class="btn btn-primary">Cerrar Plan</button></td>    
+               </form> 
+                </div>
+</div></div>    
+    
+{% endblock %}

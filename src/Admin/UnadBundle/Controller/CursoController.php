@@ -140,6 +140,23 @@ class CursoController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+     /** en modal
+     * @Route("/{id}/modal", name="curso_modal")
+     * @Method("GET")
+     * @Template()
+     */
+    public function modalAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminUnadBundle:Curso')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Curso entity.');
+        }
+        return array(
+            'entity'      => $entity,
+        );
+    }
 
     /**
      * Displays a form to edit an existing Curso entity.

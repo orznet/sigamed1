@@ -1,54 +1,9 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-   <h1>Docente ID:{{ entity.id }}</h1>
-  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-  <tr>
-    <th>Cédula</th>
-    <td>{{ entity.user.id }}</td>
-    <th>Periodo Acádemico</th>
-    <td>2014-1</td>
-  </tr>
-  <tr>
-    <th>Nombres</th>
-    <td>{{ entity.user.nombres }}</td>
-    <th>Vinculación</th>
-    <td>{{ entity.vinculacion }}</td>
-  </tr>
-  <tr>
-    <th>Apellidos</th>
-    <td>{{ entity.user.apellidos }}</td>
-    <th>Centro</th>
-    <td>{{ entity.centro.nombre }}</td>
-  </tr>
-  <tr>
-    <th>Escuela</th>
-    <td>{{ entity.escuela.nombre }}</td>
-    <th>Modalidad</th>
-    <td>{{ entity.modalidad }}</td>
-  </tr>
-  <tr>
-    <th>Programa</th>
-    <td>{{ entity.programa.nombre }}</td>
-    <th>Perfil</th>
-    <td>{{ entity.perfil }}</td>
-  </tr>
-    <tr>
-    <th>Cargo</th>
-    <td>{{ entity.cargo }}</td>
-    <th>Correo</th>
-    <td>{{ entity.user.email }}</td>
-  </tr>
-  <tr>
-   <th>Dirección de curso</th>
-      <td colspan="3">{%for curso in entity.director%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
-   </td>
-  </tr> 
-  <tr>
-      <th>Tutorias</th>
-      <td colspan="3">{%for curso in entity.tutoria%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
-   </td>
-  </tr>
-</table>
+        {{ include(
+            'AdminUnadBundle:Docente:detalle.html.twig',
+            {'entity': entity}
+        ) }}
          {% if is_granted('ROLE_ADMIN') %}
         <ul class="record_actions">
     <li>
@@ -66,29 +21,56 @@
     </td></tr>
    {% endfor %}
    </table>
- {%if 0 %}  
+ {%if 1 %}  
   <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
           <th>Instrumento de Evaluación</th>
           <th>Descripción</th>
           <th>Ingreso</th>
+          <th>Estado</th>
       </tr>
+
     <tr>
     <th>
-    {%if entity.vinculacion == 'DC'%}
-    1. Plan de Gestión      
+    {%if entity.vinculacion == 'De Carrera'%}
+    1. Plan de Gestión           
     {%else%}
     1. Plan de Activiades
     {%endif%}
+   
+    </th>
+    <td>Realice su plan de gestión</td>    
+    <td>
+    {%if entity.plangestion %}    
+    <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%else%}
+    <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>   
+    {%endif%}    
+    </td>
+    <td>
+     {%if entity.plangestion %}
+     {{entity.plangestion.estado}}   
+        {%endif%}
+    </td>
+    </tr>   
+    <tr>
+    <th>
+    2. Autoevaluación
         </th>
     <td>Realice su autoevaluación</td>    
-    <td><a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
+    <td><a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    </td>
+    <td></td>
+    </tr>
   <tr>
     <th>
 2. Evaluación de la red de tutores
         </th>
         <td>Evalue a sus directores de curso diferentes a usted</td> 
-    <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a></td></tr>
+    <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    </td>
+  <td></td>
+  </tr>
   <tr>
     <th>
 3.1 Coevaluación - Director de curso a tutores
@@ -97,6 +79,7 @@
     <td>
     <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     </td>
+  <td></td>  
   </tr>
          {% if entity.lider|length > 0 %}
        <tr>
@@ -107,10 +90,11 @@
            <td>
            <a href="{{ path('docente_coevaldirector') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
            </td>
+      <td></td>     
        </tr>
        {%endif%}
   
-        {% if entity.vinculacion == 'DC'%}
+        {% if entity.vinculacion == 'De Carrera'%}
        <tr>
            <th>
            4.  Evaluación de Pares 
@@ -119,10 +103,97 @@
            <td>
            <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
            </td>
+        <td></td>           
        </tr>
        {%endif%}
        
   </table>
    {%endif%}
+   
+   <table class="table table-bordered hidden-mobile" style="width: 95%">
+      <tr>
+          <th colspan="3">Resultados por Instrumento de Evaluación</th>
+      </tr>
+    <tr>
+    <th>
+    {%if entity.vinculacion == 'De Carrera'%}
+    1. Plan de Gestión      
+    {%else%}
+    1. Plan de Activiades
+    {%endif%}
+        </th>
+        <td>
+        <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>    
+        </td>    
+    <td>
+<a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+    </td>
+    </tr>
+  <tr>
+    <th>
+2. Evaluación de la red de tutores
+        </th>
+        <td><a href="javascript:popUp('{{ path('redtutores_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a></td> 
+    <td></td>
+  </tr>
+    <tr>
+    <th>
+3. Evaluación de estudiantes
+        </th>
+        <td>
+           {%if entity.heteroeval%} 
+            <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%else%} Sin registros {%endif%}
+        </td> 
+    <td></td>
+  </tr>
+      <tr>
+    <th>
+4. Coevaluación por roles
+        </th>
+        <td>
+            <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        </td> 
+    <td></td>
+  </tr>
+  {%if entity.vinculacion == 'De Carrera'%}
+        <tr>
+    <th>
+5. Informe de Evaluación Final DC
+        </th>
+        <td>
+            <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        </td> 
+    <td></td>
+  </tr>
+  {%else%}
+          <tr>
+    <th>
+5. Informe de Evaluación Final
+        </th>
+        <td>
+            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        </td> 
+    <td></td>
+  </tr>
+  {%endif%}
+  </table>
+   
+ <script>
+  
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+ 
+</script>
+   
 {% endblock %}
    

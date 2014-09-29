@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/Admin/MedBundle/Controller/ActividadplangController.php</url>
+            <bookmark id="1">
+                <name/>
+                <line>150</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadrol.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/coevalPares.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Evaluacion.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Heteroeval.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/finaldc.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/info.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/autoeval.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadplang.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/final.html.twig</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

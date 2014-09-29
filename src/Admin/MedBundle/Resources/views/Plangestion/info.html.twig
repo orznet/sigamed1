@@ -8,7 +8,7 @@
     <tr>
         <td align="center" colspan="3">
         <h3>Plan de
-        {%if entity.id.vinculacion == 'DC'%}
+        {%if entity.id.vinculacion == 'De Carrera'%}
             Gestión de
             {%else%}
             Activiades de
@@ -63,7 +63,7 @@
                </tr>
         </tbody>
     </table>
-    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+    <table>
   <tr>
     <th>Avalador</th>
     <th>Perfil</th>
@@ -87,7 +87,12 @@ Sin revisar
     </td>
   </tr>
     <tr>
-    <td  colspan="5"><b>Observaciones: </b>{{aval.observaciones}}</td>
+    <td  colspan="5"><b>Observaciones:</b><br>
+   {% set texto = aval.observaciones|split('|') %} 
+   {% for obs in texto%}
+   {{obs}}<br>
+   {%endfor%}
+   </td>
   </tr>
   {% endfor %}  
 </table>

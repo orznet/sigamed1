@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class activiadrolRepository extends EntityRepository
 {
+    public function decarrera(){
+     $em = $this->getEntityManager(); 
+    // $centros = $em->getRepository('AdminUnadBundle:Centro')->findAll();
+     $query = $em->createQuery('SELECT a FROM AdminMedBundle:Actividadrol a WHERE a.id < 500 ORDER BY a.rol, a.id ASC');
+     $actividades = $query->getResult(); 
+     return $actividades;        
+  }
+    
 }

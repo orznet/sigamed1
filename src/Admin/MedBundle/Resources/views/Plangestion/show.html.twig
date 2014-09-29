@@ -65,6 +65,7 @@
         {% endfor %}  
         </tbody>
     </table>
+    
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
   <tr>
     <th>Avalador</th>
@@ -114,7 +115,14 @@ Sin revisar
                 <td>Autoevaluación: {{ entity.autoevaluacion }}</td>
             </tr>
             <tr>
-                <td colspan="2">Observaciones: {{ entity.observaciones }}</td>
+                <td colspan="2">Observaciones:<br>
+                
+   {% set texto = aval.observaciones|split('|') %} 
+   {% for obs in texto%}
+   {{obs}}<br>    
+   {%endfor%}   
+                    
+                </td>
             </tr>
         </tbody>
     </table>   

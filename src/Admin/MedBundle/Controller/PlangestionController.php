@@ -8,6 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\MedBundle\Entity\Plangestion;
+use Admin\MedBundle\Entity\Actividadplang;
+use Admin\MedBundle\Entity\Avalplang;
+use Admin\MedBundle\Entity\actividadplanglRepository;
 use Admin\MedBundle\Form\PlangestionType;
 
 /**
@@ -18,23 +21,6 @@ use Admin\MedBundle\Form\PlangestionType;
 class PlangestionController extends Controller
 {
 
-    /**
-     * Lists all Plangestion entities.
-     *
-     * @Route("/", name="plangestion")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:Plangestion')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
     /**
      * Creates a new Plangestion entity.
      *
@@ -82,25 +68,61 @@ class PlangestionController extends Controller
 
     /**
      * Displays a form to create a new Plangestion entity.
-     *
-     * @Route("/new", name="plangestion_new")
+     * @Route("/add", name="plangestion_add")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function addAction()
     {
         $entity = new Plangestion();
-        $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        if (!$docente) {
+            throw $this->createNotFoundException('Docente no encontrado');
+        }
+        $plangestion = $em->getRepository('AdminMedBundle:Plangestion')->find($session->get('docenteid'));
+        if ($plangestion) {
+            throw $this->createNotFoundException('Plan ya creado');
+        }
+        
+        $entity->setId($docente);
+        $entity->setEstado('0');
+        $entity->setFechaCreacion(new \Datetime());
+        $em->persist($entity);
+        $em->flush();
+        
+      //agregar avalador Decano N
+       $aval = new Avalplang();
+       $aval->setPlan($entity);
+       $aval->setUser($entity->getId()->getEscuela()->getDecano());
+       $aval->setPerfil('DECN');
+        $em->persist($aval);
+       
+        //agregar avalador Director de Zona
+       if ($entity->getId()->getCentro()->getId() != 89999){
+       $aval1 = new Avalplang();
+       $aval1->setPlan($entity);
+       $aval1->setUser($entity->getId()->getCentro()->getZona()->getDirector());
+       $aval1->setPerfil('DIRZ');
+       $em->persist($aval1);
+       
+       if ($entity->getId()->getCentro()->getZona()->getDirector() != $entity->getId()->getCentro()->getDirector() ){
+       $aval2 = new Avalplang();
+       $aval2->setPlan($entity);
+       $aval2->setUser($entity->getId()->getCentro()->getDirector());
+       $aval2->setPerfil('DIRC');
+       $em->persist($aval2);  
+       }
+       
+       }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+       $em->flush();
+        
+       return $this->redirect($this->generateUrl('docente_show', array('id' => $session->get('docenteid'))));
     }
 
     /**
-     * Finds and displays a Plangestion entity.
-     *
      * @Route("/{id}", name="plangestion_show")
      * @Method("GET")
      * @Template()
@@ -112,16 +134,34 @@ class PlangestionController extends Controller
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+            throw $this->createNotFoundException('Entidad no encontrada');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         );
     }
+    
+        /**
+     * @Route("/crear/{id}", name="plangestion_crear")
+     * @Method("GET")
+     * @Template()
+     */
+    public function crearAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        $actividades = $em->getRepository('AdminMedBundle:Actividadplang')->findBy(array('plang' => $id),array('actividad' => 'ASC'));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Entidad no encontrada');
+        }
+        return array(
+            'entity'      => $entity,
+            'actividades' => $actividades
+        );
+    }
+    
      /**
      * @Method("GET")
      * @Template()
@@ -238,6 +278,25 @@ class PlangestionController extends Controller
             'edit_form'   => $editForm->createView(),
         );
     }
+    
+    /** Cerrar plan
+     * @Route("/{id}/cerrar", name="plangestion_cerrar")
+     * @Method("GET")
+     */
+    public function cerrarAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Entidad No encontrada');
+        }
+        $entity->setFechaCierre(new \DateTime());
+        $entity->setEstado(1);
+        $em->flush();
+        return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $id)));
+    }
+    
+    
     /**
      * Deletes a Plangestion entity.
      *

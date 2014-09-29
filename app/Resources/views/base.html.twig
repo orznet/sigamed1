@@ -144,7 +144,7 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
 						<ul style="display: block;">
 							<li>
-								<a href="{{ path('docente_show', { 'id': app.session.get('docenteid') }) }}">Perido 2014-1</a>
+						        <a href="{{ path('docente_show', { 'id': app.session.get('docenteid') }) }}">Perido 2014-1</a>
 							</li>
 						</ul>
 					</li>
@@ -189,30 +189,12 @@
 				</ul>
 			</nav>
 			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
-
+<span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Precaución! Reiniciar consulta" data-html="true"><i class="fa fa-refresh"></i></span> </span>
 		</aside>
 		<!-- END NAVIGATION -->
 
 		<!-- MAIN PANEL -->
 		<div id="main" role="main">
-
-			<!-- RIBBON -->
-			<div id="ribbon">
-
-				<span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Precaución! Reiniciar consulta" data-html="true"><i class="fa fa-refresh"></i></span> </span>
-				<!-- You can also add more buttons to the
-				ribbon for further usability
-
-				Example below:
-
-				<span class="ribbon-button-alignment pull-right">
-				<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-				<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-				<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-				</span> -->
-
-			</div>
-			<!-- END RIBBON -->
 
 			<!-- MAIN CONTENT -->
 			<div id="content">
@@ -227,6 +209,14 @@
                                         {% endblock %}
                                         </div>			
 					<!-- end row -->
+                                </section>
+                                
+                            <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            </div></div></div>    
+                                
+                        </div>
 
 {% block javascripts %}
 		<!-- END SHORTCUT AREA -->
@@ -394,7 +384,7 @@
                     }
                     });
 		})
-                            </script>
+                </script>
 {% endblock %}
     </body>
 </html>

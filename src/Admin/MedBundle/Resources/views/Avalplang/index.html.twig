@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Aval Planes de Gestión</h1>
+
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Plan Gestión</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <th>{{ entity.plan.id.user.id }}</th> 
+                <td>{{ entity.plan.id.user.nombres }} {{ entity.plan.id.user.nombres }}</td>
+                <td>
+        <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.id.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>   
+                </td>
+                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estado }}</td>
+                <td>
+                    {%if entity.plan.estado == 'Cerrado' and entity.avalado != 1 %}
+                    <a data-toggle="modal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" data-target="#myModal">Aprobar</a>
+                    {%else%}
+                    
+                    {%endif%}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+     <script>
+  
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+ 
+</script>
+    {% endblock %}

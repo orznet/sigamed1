@@ -45,6 +45,10 @@ protected $resolucion;
      */
 protected $perfil;
 
+    /**
+    * @ORM\Column(type="smallint", nullable=true)
+    */
+protected $periodo;
 
 /** 
      * @var User
@@ -737,5 +741,28 @@ protected $centro;
     public function getEvaluacion()
     {
         return $this->evaluacion;
+    }
+
+    /**
+     * Set periodo
+     *
+     * @param integer $periodo
+     * @return Docente
+     */
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return integer 
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
     }
 }

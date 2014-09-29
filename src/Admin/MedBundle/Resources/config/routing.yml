@@ -39,7 +39,11 @@ _coevaldirector:
 
 _coevallider:
     resource: "@AdminMedBundle/Controller/coevalLiderController.php"
-    type:     annotation   
+    type:     annotation
+    
+_avales:
+    resource: "@AdminMedBundle/Controller/AvalplangController.php"
+    type:     annotation       
     
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit

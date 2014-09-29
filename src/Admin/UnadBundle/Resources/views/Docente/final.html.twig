@@ -1,10 +1,10 @@
 <head>
-<title>{% block title %}{{docente.escuela.sigla}}-{{docente.user.id}}{% endblock %}</title>
+<title>{% block title %}{{docente.user.id}}-{{docente.periodo}}{% endblock %}</title>
 </head>
 {% block body -%}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
 
-<table class="table table-bordered table-striped hidden-mobile" style="width: 98%">
+ <table  class="data" widtd="100%" border="0">
   <tr>
     <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
         <br>INFORME FINAL DE EVALUACIÓN INDIVIDUAL
@@ -46,26 +46,44 @@
     {%endif%}
     </td>
   </tr>
-</table>
-  <table class="data" width="100%" border="0">
-    <tr>  
-    <td><b>1. Observaciones Plan de Gestión</b></td>
-    <td>Perfil</td>
-    <td>Fecha</td>
-    <td>Estado</td>
-  </tr>
-  {% for avales in docente.plangestion.avales %}
-  <tr>
-    <td>{{avales.user.nombres}} {{avales.user.apellidos}}</td>
-    <td>{{avales.perfil}}</td>
-    <td>{{avales.fechaAval|date('Y-m-d H:i   ')}}</td>
-    <td>{{avales.avalado}}</td>
+      <tr>
+    <td>Tutorias de curso:</td>
+    <td colspan="3">{%for curso in docente.tutoria%} 
+      {{curso.id}}:
+      {{curso.nombre}} - {%endfor%}
+   </td>
   </tr>
     <tr>
-        <td colspan="5">{{avales.observaciones}}</td>
+   <td>Direcciones de curso:</td>
+      <td colspan="3">
+      {%for curso in docente.director%}
+      {{curso.id}} {{curso.nombre}} <br> {%endfor%}
+   </td>
   </tr>
-  {% endfor %}                  
-    </table>
+</table>
+<table class="data" width="100%" border="0">
+  <tr>
+    <td class="data" align="center" colspan="7">Heteroevaluación de Estudiantes - Compentencias Evaluadas</td>
+  </tr>
+  <tr>
+    <td class="data">Cognitiva</td>
+    <td class="data">Comunicativa</td>
+    <td class="data">Metodológicas</td>
+    <td class="data">Pedagógico - Didácticas</td>
+    <td class="data">Socioafectiva</td>
+    <td class="data">Tecnológica</td>
+    <td class="data">Calificación Final H1</td>
+  </tr>
+  <tr>
+      <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia2/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia3/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia5/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia6/20)|number_format(2, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(2, '.', ',')}}</td>
+  </tr>
+</table>
  <table  class="data" widtd="100%" border="0">
   <tr>
     <td>Item</td>
@@ -90,18 +108,38 @@
   </tr>
   <tr>
     <td>C1</td>
-    <td>Evaluación de Red Tutores</td>
-    <td>Heteroevaluación</td>
+    <td>Coevaluación de la Red Tutores</td>
+    <td>Coevaluación</td>
     <td>Tutor</td>
-    <td>{{docente.evaluacion.hetero3? docente.evaluacion.hetero3: 'n/a' }}</td>
+    <td>{{docente.evaluacion.co5? docente.evaluacion.co5: 'n/a' }}</td>
   </tr>
+  {%if  docente.evaluacion.co2%}
     <tr>
     <td>C2</td>
-    <td>Coevaluación por roles</td>
+    <td>Coevaluación cómo Tutor</td>
     <td>Coevaluación</td>
-    <td>Superior</td>
-    <td>{{docente.evaluacion.co}}</td>
+    <td>Director de Curso</td>
+    <td>{{docente.evaluacion.co2}}</td>
   </tr>
+  {%endif%}
+    {%if  docente.evaluacion.co3%}
+    <tr>
+    <td>C3</td>
+    <td>Coevaluación cómo Director</td>
+        <td>Coevaluación</td>
+    <td>Lider de Programa</td>
+    <td>{{docente.evaluacion.co3}}</td>
+  </tr>
+  {%endif%}
+    {%if  docente.evaluacion.co4%}
+    <tr>
+    <td>C4</td>
+    <td>Coevaluación Lider de Programa</td>
+    <td>Coevaluación</td>
+    <td>Decano Nacional</td>
+    <td>{{docente.evaluacion.co4}}</td>
+  </tr>
+  {%endif%}
 </table>
        
 <table  class="data" widtd="100%" border="0">
@@ -121,17 +159,18 @@
     <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : ''}}</td>
   </tr>
   <tr>
-    <td>Coevaluación (C1 y C2)</td>
+    <td>Coevaluación (C1,C2,C3 y C4)</td>
     <td>25%</td>
     <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): ''}}</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>Evaluación Final del Desempeño</td>
-    <td>{{docente.evaluacion.final? docente.evaluacion.final|number_format(1, '.', ',') : '*'}}
+    <td><h3>Evaluación Final del Desempeño</h3></td>
+    <td><h3>{{docente.evaluacion.final? docente.evaluacion.final|number_format(1, '.', ',') : '*'}}</h3>
     </td>
     </tr>
 </table>
+
 <table>
     <tr>
     <td colspan="3" align="center">Evaluación Número:{{docente.id}} -  Fecha y hora de consulta: {{ "now"|date("m/d/Y H:m") }}</td>

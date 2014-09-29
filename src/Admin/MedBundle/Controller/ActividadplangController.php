@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\MedBundle\Entity\Actividadplang;
 use Admin\MedBundle\Form\ActividadplangType;
+use Admin\MedBundle\Form\ActividadplangAddType;
 
 /**
  * Actividadplang controller.
@@ -37,12 +38,11 @@ class ActividadplangController extends Controller
     }
     /**
      * Creates a new Actividadplang entity.
-     *
      * @Route("/", name="actividadplang_create")
      * @Method("POST")
      * @Template("AdminMedBundle:Actividadplang:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id)
     {
         $entity = new Actividadplang();
         $form = $this->createCreateForm($entity);
@@ -54,7 +54,7 @@ class ActividadplangController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('actividadplang_show', array('id' => $entity->getId())));
-        }
+     }
 
         return array(
             'entity' => $entity,
@@ -62,6 +62,43 @@ class ActividadplangController extends Controller
         );
     }
 
+     /**
+     * Creates a new Actividadplang entity.
+     * @Route("/add/{id}", name="actividadplang_add")
+     * @Method("POST")
+     * @Template("AdminMedBundle:Actividadplang:new.html.twig")
+     */
+    public function addAction(Request $request, $id)
+    {
+        $entity = new Actividadplang();
+        $em = $this->getDoctrine()->getManager();
+        $plang = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        #$actividad = $em->getRepository('AdminMedBundle:Actividadplang')->find($ida);
+        $entity->setPlang($plang);
+        $form = $this->createAddForm($entity, $id);
+        $form->handleRequest($request);
+        
+       # $actividad = $em->getRepository('AdminMedBundle:Actividadrol')->find($form->get('actividad')->getData());
+
+        
+        #$entity->setActividad($actividad);
+        
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $id)));
+     }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'id'   => $id,
+        );
+    } 
+    
+    
     /**
     * Creates a form to create a Actividadplang entity.
     *
@@ -80,22 +117,46 @@ class ActividadplangController extends Controller
 
         return $form;
     }
+    
+        /**
+    * Creates a form to create a Actividadplang entity.
+    *
+    * @param Actividadplang $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createAddForm(Actividadplang $entity, $id)
+    {
+        $form = $this->createForm(new ActividadplangAddType(), $entity, array(
+            'action' => $this->generateUrl('actividadplang_add', array('id' => $id)),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+        return $form;
+    }
 
     /**
      * Displays a form to create a new Actividadplang entity.
      *
-     * @Route("/new", name="actividadplang_new")
+     * @Route("/new/{id}/{ida}", name="actividadplang_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id,$ida)
     {
         $entity = new Actividadplang();
-        $form   = $this->createCreateForm($entity);
-
+        $em = $this->getDoctrine()->getManager();
+        $plang = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        $actividad = $em->getRepository('AdminMedBundle:Actividadrol')->find($ida);
+        $entity->setActividad($actividad);
+        $entity->setPlang($plang);
+        $form   = $this->createAddForm($entity, $id);
+  
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'id'     => $id,
         );
     }
 
@@ -228,29 +289,24 @@ class ActividadplangController extends Controller
         );
     }
     /**
-     * Deletes a Actividadplang entity.
+     * Delete Actividad
      *
-     * @Route("/{id}", name="actividadplang_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="actividadplang_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AdminMedBundle:Actividadplang')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Actividadplang entity.');
-            }
-
+            $session = $this->getRequest()->getSession();
+            $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        if ($docente->getPlangestion() == $entity->getPlang()) {
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('actividadplang'));
+            return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $docente->getId())));
     }
 
      /**

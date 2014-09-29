@@ -27,12 +27,12 @@ class Actividadplang{
 protected $horas;
  
 /**
-* @ORM\Column(type="string", length=2500)
+* @ORM\Column(type="string", length=2500, nullable=true)
 */
 protected $descripcion; 
  
 /**
-* @ORM\Column(type="string", length=2500)
+* @ORM\Column(type="string", length=2500, nullable=true)
 */
 protected $observaciones;
 

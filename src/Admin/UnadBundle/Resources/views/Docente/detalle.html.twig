@@ -1,0 +1,55 @@
+
+  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+      <tr>
+          <td colspan="4">
+          <h4>Información de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h4>   
+          </td>    
+      </tr>
+  <tr>
+    <th>Cédula</th>
+    <td>{{ entity.user.id }}</td>
+    <th>Vinculación</th>
+    <td>{{ entity.vinculacion }}</td>
+  </tr>
+  <tr>
+    <th>Cargo</th>
+    <td>{{ entity.cargo }}</td>
+    <th>Correo</th>
+    <td>{{ entity.user.email }}</td>
+  </tr>
+   <tr>
+    <th>Modalidad</th>
+    <td>{{ entity.modalidad }}</td>
+    <th>Perfil</th>
+    <td>{{ entity.perfil }}</td>
+  </tr> 
+  <tr>
+      <td colspan="2"><b>Escuela:</b> {{ entity.escuela.nombre }}<br>
+    Decano: {{ entity.escuela.decano.nombres }} {{ entity.escuela.decano.apellidos }}
+    </td>   
+    <td colspan="2"><b>Centro:</b> {{ entity.centro.nombre }}<br>
+    Director:{%if entity.centro.director %} {{ entity.centro.director.nombres }} {{ entity.centro.director.apellidos }}{%endif%}
+    </td>
+  </tr>
+  <tr>
+    <th>Programa</th>
+    <td  colspan="3">{{ entity.programa.nombre }}</td>
+  </tr>
+
+  <tr>
+   <th>Direcciones de curso</th>
+      <td colspan="3">
+      {%for curso in entity.director%}
+      <a data-toggle="modal" href="{{ path('curso_modal', { 'id': curso.id }) }}" data-target="#myModal">{{curso.id}}</a>
+      
+      {{curso.nombre}} <br> {%endfor%}
+   </td>
+  </tr> 
+  <tr>
+      <th>Tutorias de curso</th>
+      <td colspan="3">{%for curso in entity.tutoria%} 
+      {{curso.id}}:
+      {{curso.nombre}} Director: {{curso.director.user.nombres}} {{curso.director.user.apellidos}} <br>{%endfor%}
+   </td>
+  </tr>
+</table>

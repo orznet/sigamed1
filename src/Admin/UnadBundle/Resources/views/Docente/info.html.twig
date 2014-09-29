@@ -1,54 +1,10 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-   Id:{{ entity.id }}<h1>Información del Docente: </h1>
-  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-  <tr>
-    <th class="data">Cédula</th>
-    <td class="data">{{ entity.user.id }}</td>
-    <th class="data">Periodo Acádemico</th>
-    <td class="data">2014-1</td>
-  </tr>
-  <tr>
-    <th class="data">Nombres</th>
-    <td class="data">{{ entity.user.nombres }}</td>
-    <th class="data">Vinculación</th>
-    <td class="data">{{ entity.vinculacion }}</td>
-  </tr>
-  <tr>
-    <th class="data">Apellidos</th>
-    <td class="data">{{ entity.user.apellidos }}</td>
-    <th class="data">Centro</th>
-    <td class="data">{{ entity.centro.nombre }}</td>
-  </tr>
-  <tr>
-    <th class="data">Escuela</th>
-    <td class="data">{{ entity.escuela.nombre }}</td>
-    <th class="data">Modalidad</th>
-    <td class="data">{{ entity.modalidad }}</td>
-  </tr>
-  <tr>
-    <th class="data">Programa</th>
-    <td class="data">{{ entity.programa.nombre }}</td>
-    <th class="data">Perfil</th>
-    <td class="data">{{ entity.perfil }}</td>
-  </tr>
-    <tr>
-    <th class="data">Cargo</th>
-    <td class="data">{{ entity.cargo }}</td>
-    <th class="data">Correo</th>
-    <td class="data">{{ entity.user.email }}</td>
-  </tr>
-  <tr>
-   <th>Dirección de curso</th>
-      <td colspan="3">{%for curso in entity.director%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
-   </td>
-  </tr> 
-  <tr>
-      <th>Tutorias</th>
-      <td colspan="3">{%for curso in entity.tutoria%} {{curso.id}}:{{curso.nombre}} | {%endfor%}
-   </td>
-  </tr>
-</table>
+        {{ include(
+            'AdminUnadBundle:Docente:detalle.html.twig',
+            {'entity': entity}
+        ) }}
+
          {% if is_granted('ROLE_ADMIN') %}
         <ul class="record_actions">
     <li>
@@ -139,10 +95,8 @@ function popUp(URL) {
     else{ 
         popupWin.location.href = URL; 
     }
-
     popupWin.focus(); 
  }
- 
 </script>
 
 {% endblock %}

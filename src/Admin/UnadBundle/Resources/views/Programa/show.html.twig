@@ -44,7 +44,9 @@
      {%for curso in entity.cursos %}
     
      <tr>
-    <td>{{curso.id}}</td>
+    <td>
+    <a href="{{ path('curso_show', { 'id': curso.id }) }}">{{curso.id}}</a>
+    </td>
     <td>{{curso.nombre}}</td>
     <td>{{curso.director.id}}</td>
     <td>{{curso.director.user.id}}</td>

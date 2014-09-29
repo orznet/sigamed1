@@ -198,7 +198,12 @@ protected $avales;
      */
     public function getEstado()
     {
-        return $this->estado;
+        if ($this->estado == 0 )
+        return 'Sin Cerrar';
+        elseif ($this->estado == 1)
+        return 'Cerrado';    
+        else
+         return $this->estado;   
     }
 
     /**

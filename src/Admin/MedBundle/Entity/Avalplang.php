@@ -26,7 +26,7 @@ class Avalplang{
 protected $perfil;
 
  /**
-  * @ORM\Column(type="text", length=1024, nullable=false)
+  * @ORM\Column(type="text", length=1024, nullable=true)
   * 
   */
 protected $observaciones;
@@ -159,6 +159,24 @@ protected $user;
     public function getAvalado()
     {
         return $this->avalado;
+    }
+    
+     /**
+     * Get avalado
+     *
+     * @return integer 
+     */
+    public function getEstado()
+    {
+        if ($this->avalado == 1){
+        return 'Aprobado';
+        }
+        else if ($this->avalado == 2){
+        return 'Rechazado';  
+        }
+        else 
+        return 'Sin Revisar';    
+        
     }
 
     /**
