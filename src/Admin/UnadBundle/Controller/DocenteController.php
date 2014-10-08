@@ -305,22 +305,6 @@ class DocenteController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function redtutoresinfoAction($id)
-    {
-       $em = $this->getDoctrine()->getManager();
-       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-       $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
-
-        return array(
-            'entity' => $entity,
-            'cursos'  => $cursos,
-         );
-    }
-    
-     /**
-     * @Method("GET")
-     * @Template()
-     */
     public function coevaltutorAction()
     {
       $em = $this->getDoctrine()->getManager();
@@ -370,12 +354,14 @@ class DocenteController extends Controller
      */
     public function coevalinfoAction($id)
     {
-      $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-
+       $em = $this->getDoctrine()->getManager();
+       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+       $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
         return array(
             'entity' => $entity,
-         ); 
+            'cursos'  => $cursos,
+         );
+        
     }
     
      /**

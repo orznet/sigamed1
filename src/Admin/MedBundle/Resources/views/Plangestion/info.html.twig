@@ -63,7 +63,9 @@
                </tr>
         </tbody>
     </table>
-    <table>
+  
+{%if entity.id.vinculacion == 'De Carrera'%}
+<table>
   <tr>
     <th>Avalador</th>
     <th>Perfil</th>
@@ -96,5 +98,6 @@ Sin revisar
   </tr>
   {% endfor %}  
 </table>
+{%endif%}
     </body>
 {% endblock %}

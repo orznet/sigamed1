@@ -25,8 +25,9 @@
     {%if entity.vinculacion == 'DC'%}
     1. Plan de Gestión      
     {%else%}
-    1. Plan de Activiades
+    1. Plan de Actividades
     {%endif%}
+    (Autoevaluación)
         </th>
         <td>
         <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>    
@@ -35,16 +36,9 @@
 <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
     </td>
     </tr>
-  <tr>
-    <th>
-2. Evaluación de la red de tutores
-        </th>
-        <td><a href="javascript:popUp('{{ path('redtutores_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a></td> 
-    <td></td>
-  </tr>
     <tr>
     <th>
-3. Evaluación de estudiantes
+2. Evaluación de estudiantes (Heteroevaluación)
         </th>
         <td>
            {%if entity.heteroeval%} 
@@ -55,7 +49,7 @@
   </tr>
       <tr>
     <th>
-4. Coevaluación por roles
+3. Coevaluaciones
         </th>
         <td>
             <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
