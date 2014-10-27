@@ -1,41 +1,50 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Aval Planes de Gestión</h1>
+    <h1>Aval Planes de Gestión de Docentes de Carrera</h1>
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Cédula</th>
                 <th>Nombre</th>
+                <th>Centro</th>
                 <th>Plan Gestión</th>
+                <th>Estado Plan</th>
+                <th>Estado de Aval</th>
                 <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <th>{{ entity.plan.id.user.id }}</th> 
-                <td>{{ entity.plan.id.user.nombres }} {{ entity.plan.id.user.nombres }}</td>
+                <td>{{ entity.plan.id.user.nombres }} {{ entity.plan.id.user.apellidos }}</td>
+                <td>{{entity.plan.id.centro.nombre}}</td>
                 <td>
         <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.id.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>   
                 </td>
-                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.estado }}</td>
+                
+
                 <td>
                     {%if entity.plan.estado == 'Cerrado' and entity.avalado != 1 %}
                     <a data-toggle="modal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" data-target="#myModal">Aprobar</a>
                     {%else%}
-                    
+                    Sin Cerrar
                     {%endif%}
                 </td>
+                <td>{{ entity.estado }}</td>
+                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    
+    <ul>
+        <li>
+        <p>Si el <b>Estado del Plan</b> es "Sin Cerrar" es porque el docente requiere cerrar Plan de Gestión para porderlo Avalar.</p> 
+        </li>
+        <li><p>Al <b>No Aprobar</b> un plan de gestión este queda habilitado nuevamente para que el docente realice los cambios correspondientes.</p></li>
+    </ul>
      <script>
   
 function popUp(URL) {

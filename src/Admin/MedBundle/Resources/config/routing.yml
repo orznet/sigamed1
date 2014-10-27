@@ -43,7 +43,15 @@ _coevallider:
     
 _avales:
     resource: "@AdminMedBundle/Controller/AvalplangController.php"
-    type:     annotation       
+    type:     annotation
+
+_archivo:
+    resource: "@AdminMedBundle/Controller/ArchivoController.php"
+    type:     annotation        
+
+_instrumento:
+    resource: "@AdminMedBundle/Controller/InstrumentoController.php"
+    type:     annotation     
     
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit
@@ -71,4 +79,4 @@ heteroeval_info:
     
 coeval_info:
     pattern:  /unad/doc/{id}/coeval
-    defaults: { _controller: "AdminUnadBundle:Docente:coevalinfo" }           
+    defaults: { _controller: "AdminUnadBundle:Docente:coevalinfo" }

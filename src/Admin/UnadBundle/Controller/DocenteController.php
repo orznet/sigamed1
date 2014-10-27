@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\UnadBundle\Entity\Docente;
 use Admin\UnadBundle\Entity\Escuela;
+use Admin\MedBundle\Entity\Instrumento;
 use Admin\UnadBundle\Form\DocenteType;
 
 /**
@@ -129,6 +130,7 @@ class DocenteController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Docente entity.');
@@ -139,6 +141,7 @@ class DocenteController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'instrumentos' => $instrumentos,
         );
     }
     

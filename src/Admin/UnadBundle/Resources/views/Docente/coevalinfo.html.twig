@@ -1,7 +1,7 @@
 {% block body -%}
 <body>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-    <h3>Coevaluaciones</h3>
+    <h3>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h3>  
  
     <table>
         <tr>
@@ -91,7 +91,11 @@
              
             <tr>
             <td>{{curso.nombre}}</td>    
-             <td>{{curso.programa.lider.user.nombres}} {{curso.programa.lider.user.apellidos}}</td>
+             <td>
+            {%if curso.programa.lider%}  
+            {{curso.programa.lider.user.nombres}} {{curso.programa.lider.user.apellidos}}
+             {%endif%}  
+             </td>
              <td>{{curso.coeval? curso.coeval.observaciones : 'N/A'}}</td>
              <td>{{curso.coeval? curso.coeval.f0 : 'N/A'}}</td>
             </tr>

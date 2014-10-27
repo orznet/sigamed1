@@ -1,5 +1,4 @@
-
-    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
            <td colspan="4"><h4>Información del Curso: {{ entity.id }} - {{ entity.nombre }}</h4></td>
             <tr>
@@ -12,10 +11,7 @@
             </tr>
             <tr>
                 <td colspan="2"><b>Nivel:</b> {{ entity.nivel }} <b>Tipologia:</b> {{ entity.tipologia }} <b>Creditos:</b> {{ entity.creditos }}</td>
-
             </tr>
-
-
         </tbody>
     </table>
     <b>Tutores del curso:</b>
@@ -29,7 +25,7 @@
         {%for docente in entity.docentes %}
             <tr>
                 <td>{{docente.id}}</td>
-                <td>{{docente.user.nombres}} {{docente.user.apellidos}}</td>
+                <td>{{docente.user.id}} - {{docente.user.nombres}} {{docente.user.apellidos}}</td>
                 <td>{{docente.centro.nombre}}</td>
             </tr>
         {%endfor%}   

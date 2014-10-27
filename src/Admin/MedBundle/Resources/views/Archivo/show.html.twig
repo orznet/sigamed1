@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Archivo</h1>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+                <th>Periodo</th>
+                <td>{{ entity.periodo }}</td>
+            </tr>
+            <tr>
+                <th>Cedula</th>
+                <td>{{ entity.cedula }}</td>
+                <th>Nombres</th>
+                <td>{{ entity.nombres }}</td>
+            </tr>
+
+            <tr>
+                <th>Apellidos</th>
+                <td>{{ entity.apellidos }}</td>
+                                <th>Vinculacion</th>
+                <td>{{ entity.vinculacion }}</td>
+            </tr>
+            <tr>
+                <th>Escuela</th>
+                <td>{{ entity.sigla }}</td>
+                <th>Centro</th>
+                <td>{{ entity.centro }} - {{ entity.zona }}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <th>Final</th>
+                <td>{{ entity.final }}</td>
+                <th>Informe Final</th>
+                <td><a href="/archivo/{{entity.periodo}}/informe/{{entity.cedula}}-{{entity.periodo}}.pdf">Ver...</a></td>
+            </tr>
+            <tr>
+            <th>Plan de Gestión</th>
+            <td>
+            {%if plan%}    
+            <a href="{{plan}}">Ver...</a>
+            {%endif%}
+            </td>
+            <th>Autoevaluación</th>
+            <td>
+            {%if plan%}    
+            <a href="{{plan}}">Ver...</a>
+            {%endif%}
+            </td>
+            </tr>           
+            <tr>
+            <th>Heteroevaluación (Evaluación de estudiantes)</th>
+            <td>
+            {%if plan%}    
+            <a href="{{plan}}">Ver...</a>
+            {%endif%}
+            </td>
+            <th>Coevaluaciones</th>
+            <td>
+            {%if plan%}    
+            <a href="{{plan}}">Ver...</a>
+            {%endif%}
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('archivo_docente')}}">
+            Regresar
+            
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,25 +1,25 @@
 {% block body -%}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-<table>
-  <tr>
-    <td align="center" class="data" colspan="4"><h1>UNIVERSIDAD NACIONAL ABIERTA Y A DISTANCIA<br/>
-    EVALUACIÓN DEL DESEMPEÑO DOCENTE</h1></td>
+<table class="data" width="100%" border="0">
+      <tr>
+    <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
+    </td>
   </tr>
   <tr>
       <td align="center" class="data" colspan="4"><h3>Instrumento 2: Evaluación Estudiantil (Heteroevalación)</h3></td>
   </tr>
   <tr>
-    <td class="data"><b>Fecha de la evaluación:</b></td>
-    <td class="data">{{entity.heteroeval.fecha|date('Y-m-d H:i   ')}}</td>
-    <td class="data"><b>Momento de la evaluación:</b> Final del periodo académico</td>
-    <td class="data"><b>Fecha y hora de consulta:</b> {{"now"|date('Y-m-d H:i   ')}}</td>
+    <td><b>Fecha de la evaluación:</b></td>
+    <td>{{entity.heteroeval.fecha|date('Y-m-d H:i   ')}}</td>
+    <td><b>Momento de la evaluación:</b> Final del periodo académico</td>
+    <td><b>Fecha y hora de consulta:</b> {{"now"|date('Y-m-d H:i   ')}}</td>
   </tr>
   <tr>
-    <td class="data"><b>Descripción del Instrumento:</b></td>
+    <td><b>Descripción del Instrumento:</b></td>
     <td class="data" colspan="3">Instrumento dirigido a garantizar la participación de los estudiantes en la evaluación de calidad de las actividades formativas del docente en las responsabilidades institucionales que le correspondan y en cada curso a su cargo, en particular sus competencias, relacionadas con la calidad de los contenidos y su planificación y desarrollo, la calidad de la interacción formativa, las formas de evaluación en el mismo y los propios resultados del aprendizaje.</td>
   </tr>
   <tr>
-    <td class="data"><b>Escala de Evaluación:</b></td>
+    <td><b>Escala de Evaluación:</b></td>
     <td class="data" colspan="3">0 - 100%</td>
   </tr>
 </table>
@@ -29,39 +29,36 @@
     <td align="center" class="data" colspan="4"><h3>Información del docente que se evaluá:</h3></td>
   </tr>
   <tr>
-    <td class="data"><b>Cédula:</b></td>
-    <td class="data">{{entity.user.id}}</td>
-    <td class="data"><b>Nombres:</b></td>
-    <td class="data">{{entity.user.nombres}} {{entity.user.apellidos}}</td>
+    <td><b>Cédula:</b></td>
+    <td>{{entity.user.id}}</td>
+    <td><b>Nombres:</b></td>
+    <td>{{entity.user.nombres}} {{entity.user.apellidos}}</td>
   </tr>
   <tr>
-    <td class="data"><b>Tipo de vinculación</b></td>
-    <td class="data">{{entity.vinculacion}}</td>
-    <td class="data"><b>Escuela o Vicerrectoria:</b></td>
-    <td class="data">{{entity.escuela.nombre}}</td>
+    <td><b>Tipo de vinculación</b></td>
+    <td>{{entity.vinculacion}}</td>
+    <td><b>Escuela o Vicerrectoria:</b></td>
+    <td>{{entity.escuela.nombre}}</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td class="data"><b>Decano o Vicerrector:</b></td>
-    <td class="data">{{entity.escuela.decano.nombres}} {{entity.escuela.decano.apellidos}}</td>
+    <td><b>Decano o Vicerrector:</b></td>
+    <td>{{entity.escuela.decano.nombres}} {{entity.escuela.decano.apellidos}}</td>
   </tr>
 </table>
 <table class="data" width="100%" border="0">
   <tr>
-    <td class="data" align="center" colspan="6">COMPETENCIA QUE SE EVALUA</td>
-    <td class="data">&nbsp;</td>
-    <td class="data">&nbsp;</td>
+    <td class="data" align="center" colspan="7">COMPETENCIA QUE SE EVALUA</td>
   </tr>
   <tr>
-    <td class="data">COMPETENCIA COGNITIVA</td>
-    <td class="data">COMPETENCIA COMUNICATIVA</td>
-    <td class="data">COMPETENCIA METODOLÓGICA</td>
-    <td class="data">COMPETENCIA PEDAGÓGICO - DIDÁCTICAS</td>
-    <td class="data">COMPETENCIA SOCIOAFECTIVA</td>
-    <td class="data">COMPETENCIA TECNOLÓGICA</td>
-    <td class="data">CALIFICACIÓN OBTENIDA</td>
-    <td class="data">CALIFICACIÓN FINAL DEL INSTRUMENTO 2</td>
+    <td>COGNITIVA</td>
+    <td>COMUNICATIVA</td>
+    <td>METODOLÓGICA</td>
+    <td>PEDAGÓGICO-DIDÁCTICAS</td>
+    <td>SOCIOAFECTIVA</td>
+    <td>TECNOLÓGICA</td>
+    <td>Calificación</td>
   </tr>
   <tr>
     <td class="data" align="center">{{entity.heteroeval.competencia1}}%</td>
@@ -70,7 +67,6 @@
     <td class="data" align="center">{{entity.heteroeval.competencia4}}%</td>
     <td class="data" align="center">{{entity.heteroeval.competencia5}}%</td>
     <td class="data" align="center">{{entity.heteroeval.competencia6}}%</td>
-    <td class="data" align="center">{{entity.heteroeval.calificacion}}%</td>
     <td class="data" align="center">{{entity.heteroeval.calificacion/20}}</td>
   </tr>
 </table>

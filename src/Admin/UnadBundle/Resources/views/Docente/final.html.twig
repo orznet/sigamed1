@@ -61,6 +61,7 @@
    </td>
   </tr>
 </table>
+{%if docente.heteroeval%}
 <table class="data" width="100%" border="0">
   <tr>
     <td class="data" align="center" colspan="7">Heteroevaluación de Estudiantes - Compentencias Evaluadas</td>
@@ -75,7 +76,7 @@
     <td class="data">Calificación Final H1</td>
   </tr>
   <tr>
-      <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(2, '.', ',')}}</td>
+   <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(2, '.', ',')}}</td>
     <td class="data" align="center">{{(docente.heteroeval.competencia2/20)|number_format(2, '.', ',')}}</td>
     <td class="data" align="center">{{(docente.heteroeval.competencia3/20)|number_format(2, '.', ',')}}</td>
     <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(2, '.', ',')}}</td>
@@ -84,6 +85,7 @@
     <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(2, '.', ',')}}</td>
   </tr>
 </table>
+{%endif%}
  <table  class="data" widtd="100%" border="0">
   <tr>
     <td>Item</td>

@@ -29,66 +29,83 @@
           <th>Ingreso</th>
           <th>Estado</th>
       </tr>
-
+{%if entity.vinculacion == 'De Carrera'%}  
     <tr>
-    <th>
-    {%if entity.vinculacion == 'De Carrera'%}
-    1. Plan de Gestión           
-    {%else%}
-    1. Plan de Activiades
-    {%endif%}
-   
-    </th>
+    <th>1. Plan de Gestión</th>
     <td>Realice su plan de gestión</td>    
     <td>
     {%if entity.plangestion %}    
     <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%else%}
-    <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>   
+    <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>
     {%endif%}    
     </td>
-    <td>
-     {%if entity.plangestion %}
+    <td>{%if entity.plangestion %}
      {{entity.plangestion.estado}}   
-        {%endif%}
+     {%endif%}</td>
+    </tr>
+ {%else%}
+      <tr>
+    <th>1. Plan de Actividades</th>
+    <td>Plan de Actividades (SOCA)</td>    
+    <td>
+    {%if entity.plangestion %}    
+    <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%else%}
+    Sin Registros
+    {%endif%}    
     </td>
-    </tr>   
+    <td>{%if entity.plangestion %}
+     {{entity.plangestion.estado}}   
+     {%endif%}</td>
+    </tr>  
+ {%endif%}       
     <tr>
     <th>
     2. Autoevaluación
         </th>
-    <td>Realice su autoevaluación</td>    
-    <td><a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    <td>Realice su autoevaluación</td>
+    <td>
+   {%if instrumentos[1].estado%} 
+   <a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%endif%}
     </td>
     <td></td>
     </tr>
   <tr>
     <th>
-2. Evaluación de la red de tutores
+3. Coevaluación -  Red de tutores
         </th>
-        <td>Evalue a sus directores de curso diferentes a usted</td> 
-    <td><a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+        <td>Evalue a sus directores de curso</td> 
+    <td>
+     {%if instrumentos[2].estado%}    
+    <a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%endif%}
     </td>
   <td></td>
   </tr>
   <tr>
     <th>
-3.1 Coevaluación - Director de curso a tutores
+4. Coevaluación - Director de curso a tutores
         </th>
-        <td>Evalue a los tutores de sus cursos diferentes a usted</td> 
+        <td>Evalue a los tutores de sus cursos</td> 
     <td>
+    {%if instrumentos[3].estado%}     
     <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%endif%}
     </td>
   <td></td>  
   </tr>
-         {% if entity.lider|length > 0 %}
+        {% if entity.lider|length > 0 %}
        <tr>
            <th>
-           3.2  Evaluación de Lider o Cordinador Nacional a Directores de Curso 
+           5.  Coevaluación - Lider o Cordinador Nacional a Directores de Curso 
            </th>
            <td>Evaluae a los directores de curso</td>
            <td>
+               {%if instrumentos[4].estado%} 
            <a href="{{ path('docente_coevaldirector') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
+           {%endif%}
            </td>
       <td></td>     
        </tr>
@@ -97,11 +114,13 @@
         {% if entity.vinculacion == 'De Carrera'%}
        <tr>
            <th>
-           4.  Evaluación de Pares 
+           6.  Coevaluación - Terna de Pares 
            </th>
-           <td>Evaluae a los docentes de carrera de su escuela</td>
+           <td>Como ternado evaluae a los docentes de carrera de su escuela</td>
            <td>
-           <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
+           {%if instrumentos[6].estado%} 
+               <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
+           {%endif%}
            </td>
         <td></td>           
        </tr>
@@ -109,18 +128,20 @@
        
   </table>
    {%endif%}
-   
    <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
-          <th colspan="3">Resultados por Instrumento de Evaluación</th>
+          <th>Resultados</th>
+          <th></th>
+          <th></th>
       </tr>
     <tr>
     <th>
-    {%if entity.vinculacion == 'De Carrera'%}
+    {%if entity.vinculacion == 'DC'%}
     1. Plan de Gestión      
     {%else%}
-    1. Plan de Activiades
+    1. Plan de Actividades
     {%endif%}
+    (Autoevaluación)
         </th>
         <td>
         <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>    
@@ -129,16 +150,9 @@
 <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
     </td>
     </tr>
-  <tr>
-    <th>
-2. Evaluación de la red de tutores
-        </th>
-        <td><a href="javascript:popUp('{{ path('redtutores_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a></td> 
-    <td></td>
-  </tr>
     <tr>
     <th>
-3. Evaluación de estudiantes
+2. Evaluación de estudiantes (Heteroevaluación)
         </th>
         <td>
            {%if entity.heteroeval%} 
@@ -149,10 +163,12 @@
   </tr>
       <tr>
     <th>
-4. Coevaluación por roles
+3. Coevaluaciones
         </th>
         <td>
+            {%if entity.evaluacion%}
             <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>
@@ -162,7 +178,9 @@
 5. Informe de Evaluación Final DC
         </th>
         <td>
+            {%if entity.evaluacion%}
             <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>
@@ -172,13 +190,14 @@
 5. Informe de Evaluación Final
         </th>
         <td>
+        {%if entity.evaluacion%}        
             <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>
   {%endif%}
   </table>
-   
  <script>
   
 function popUp(URL) {

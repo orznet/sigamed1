@@ -5,11 +5,14 @@ namespace Admin\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Admin\MedBundle\Entity\Instrumento;
 
 
 class DefaultController extends Controller
 {
     public function indexAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
          $session = $request->getSession();
         if (true === $this->container->get('security.context')->isGranted('ROLE_DEC')) {
                   $escuelas = $this->getUser()->getDecano();
@@ -35,6 +38,7 @@ class DefaultController extends Controller
                  $session->set('docenteid', $docente->getId());
                  return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
                     'entity'  => $docente,
+                    'instrumentos' => $instrumentos,
                     ));
               } else {
                   $docente = null;

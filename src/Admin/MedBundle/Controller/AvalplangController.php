@@ -206,7 +206,8 @@ class AvalplangController extends Controller
         $entity->setFechaAval(new \DateTime());   
         }
         if ($editForm->get('avalado')->getData() == 2){
-        $plan->setEstado(0);    
+        $plan->setEstado(0);
+        $this->enviarMail($entity);
         }
         
         if ($editForm->isValid()) {  
@@ -263,4 +264,22 @@ class AvalplangController extends Controller
             ->getForm()
         ;
     }
+    
+    public function enviarMail(\Admin\MedBundle\Entity\Avalplang $aval){
+        
+            $docente = $aval->getPlan()->getId();
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Plan de Gestión '.$docente->getUser()->getId().'-'.$docente->getPeriodo())
+            ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
+            ->setTo(array($docente->getUser()->getEmail() => $docente->getUser()->getNombres().' '.$docente->getUser()->getApellidos()))
+            ->setBody(
+            $this->renderView('AdminMedBundle:Avalplang:noaprobado.txt.twig',
+            array('aval' => $aval)
+            )
+            )
+            ;
+            $this->get('mailer')->send($message);
+    }
+
+    
 }

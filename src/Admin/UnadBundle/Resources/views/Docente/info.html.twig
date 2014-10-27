@@ -16,7 +16,7 @@
    
   <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
-          <th>Instrumento de Evaluación</th>
+          <th>Resultados</th>
           <th></th>
           <th></th>
       </tr>
@@ -52,7 +52,9 @@
 3. Coevaluaciones
         </th>
         <td>
+            {%if entity.evaluacion%}
             <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>
@@ -62,7 +64,9 @@
 5. Informe de Evaluación Final DC
         </th>
         <td>
+            {%if entity.evaluacion%}
             <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>
@@ -72,7 +76,9 @@
 5. Informe de Evaluación Final
         </th>
         <td>
+        {%if entity.evaluacion%}        
             <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%endif%}
         </td> 
     <td></td>
   </tr>

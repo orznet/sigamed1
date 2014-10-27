@@ -176,7 +176,9 @@ class CursoController extends Controller
         }
         
         $editForm = $this->createEditarForm($entity);
+        if ($entity->getDirector()){
         $editForm->get('director')->setData($entity->getDirector()->getId());
+        }
         $deleteForm = $this->createDeleteForm($id);
 
         return array(

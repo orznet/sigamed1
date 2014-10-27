@@ -3,7 +3,7 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: medunad
+    database_name: med20142
     database_user: root
     database_password: base456
     mailer_transport: smtp
@@ -12,3 +12,12 @@ parameters:
     mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
+
+
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: 'siga@unad.edu.co'
+    mailer_password: 'Siga1527'
+    auth_mode: login
+    port: 587
+    encryption: tls

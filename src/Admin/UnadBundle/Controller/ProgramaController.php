@@ -131,6 +131,26 @@ class ProgramaController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+     /**
+     * Finds and displays a Programa entity.
+     * @Route("/{id}/modal", name="programa_modal")
+     * @Method("GET")
+     * @Template()
+     */
+    public function modalAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Programa entity.');
+        }
+
+        return array(
+            'entity'      => $entity,
+        );
+    }
 
     /**
      * Displays a form to edit an existing Programa entity.

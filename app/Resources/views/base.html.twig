@@ -144,7 +144,8 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
 						<ul style="display: block;">
 							<li>
-						        <a href="{{ path('docente_show', { 'id': app.session.get('docenteid') }) }}">Perido 2014-1</a>
+						        <a href="{{ path('admin_user_inicio') }}">Perido Actual</a>
+                                                        <a href="{{ path('archivo_docente') }}">Archivo</a>
 							</li>
 						</ul>
 					</li>
@@ -182,10 +183,19 @@
 							</li>
                                                         <li>
 								<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a>
+							</li>
+                                                        <li>
+								<a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Aval Planes de gestión</a>
 							</li>   
 						</ul>
 					</li>
 				{%endif%}
+                                        
+                                     {% if is_granted('ROLE_AVAL')  %} 
+                                    <ul style="display: block;"> <li>
+				     <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Aval Planes de gestión</a>
+			             </li></ul>   
+                                     {%endif%}   
 				</ul>
 			</nav>
 			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

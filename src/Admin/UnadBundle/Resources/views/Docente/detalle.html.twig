@@ -35,13 +35,19 @@
     <th>Programa</th>
     <td  colspan="3">{{ entity.programa.nombre }}</td>
   </tr>
-
+  <tr>
+   <th>Lider de Programa</th>
+      <td colspan="3">
+      {%for programa in entity.lider%}
+      <a data-toggle="modal" href="{{ path('programa_modal', { 'id': programa.id }) }}" data-target="#myModal">{{programa.id}}</a>    
+      {{programa.nombre}} <br> {%endfor%}
+   </td>
+  </tr> 
   <tr>
    <th>Direcciones de curso</th>
       <td colspan="3">
       {%for curso in entity.director%}
       <a data-toggle="modal" href="{{ path('curso_modal', { 'id': curso.id }) }}" data-target="#myModal">{{curso.id}}</a>
-      
       {{curso.nombre}} <br> {%endfor%}
    </td>
   </tr> 
