@@ -21,6 +21,8 @@ class InstrumentoType extends AbstractType
             ->add('fechainicio')
             ->add('fechafin')
             ->add('estado')
+            ->add('estado', 'choice', array('empty_value' => ' ',    
+            'choices'   => array( '1' => 'Activo', '0' => 'Inactivo'), 'required'  => true,))       
         ;
     }
     

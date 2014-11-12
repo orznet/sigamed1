@@ -76,13 +76,13 @@
     <td class="data">Calificación Final H1</td>
   </tr>
   <tr>
-   <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.competencia2/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.competencia3/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.competencia5/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.competencia6/20)|number_format(2, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(2, '.', ',')}}</td>
+   <td class="data" align="center">{{(docente.heteroeval.competencia1/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia2/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia3/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia5/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.competencia6/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(1, '.', ',')}}</td>
   </tr>
 </table>
 {%endif%}
@@ -153,17 +153,17 @@
   <tr>
     <td>Autoevaluación (A1)</td>
     <td>25%</td>
-    <td>{{(docente.evaluacion.auto*0.25)|number_format(2, '.', ',')}}</td>
+    <td>{{(docente.evaluacion.auto*0.25)|number_format(1, '.', ',')}}</td>
   </tr>
   <tr>
     <td>Heteroevaluación (H1)</td>
     <td>50%</td>
-    <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : ''}}</td>
+    <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(1, '.', ',') : ''}}</td>
   </tr>
   <tr>
     <td>Coevaluación (C1,C2,C3 y C4)</td>
     <td>25%</td>
-    <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): ''}}</td>
+    <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(1, '.', ','): ''}}</td>
   </tr>
   <tr>
     <td>&nbsp;</td>

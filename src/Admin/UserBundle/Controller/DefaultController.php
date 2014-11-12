@@ -52,6 +52,8 @@ class DefaultController extends Controller
     
     public function homeAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
         $request = $this->getRequest();
         $session = $request->getSession();
         $cedula_usuario = $request->request->get('cedula_usuario');
@@ -83,6 +85,7 @@ class DefaultController extends Controller
         'autenticacion' => $autenticacion,
         'urlPeticion'   => $urlPeticion,
         'email_usuario'  => $email_usuario,
+        'instrumentos' => $instrumentos,
         ));
         //echo("<script type='text/javascript'>location.href='siga.php';</script>");
 
@@ -96,6 +99,7 @@ class DefaultController extends Controller
         'autenticacion' => $autenticacion,
         'urlPeticion'   => $urlPeticion,
         'email_usuario'  => $email_usuario,
+        'instrumentos' => $instrumentos,    
         ));
         }
     }

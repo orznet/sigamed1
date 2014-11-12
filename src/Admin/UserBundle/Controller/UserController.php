@@ -8,6 +8,7 @@ use Admin\UserBundle\Entity\Parabuscar;
 use Admin\UserBundle\Entity\User;
 use Admin\UserBundle\Form\UserType;
 use Admin\UserBundle\Form\BuscarType;
+use Admin\MedBundle\Entity\Archivo;
 
 /**
  * User controller.
@@ -180,6 +181,9 @@ class UserController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+       
+
+        $archivo = $em->getRepository('AdminMedBundle:Archivo')->findBy(array('cedula' => $id));
 
         $entity = $em->getRepository('AdminUserBundle:User')->find($id);
 
@@ -191,7 +195,9 @@ class UserController extends Controller
 
         return $this->render('AdminUserBundle:User:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(), 
+            'archivo'      => $archivo,
+            ));
     }
 
     /**

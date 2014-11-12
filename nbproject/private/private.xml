@@ -14,7 +14,6 @@
         <group>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/crear.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/info.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/AvalplangType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/final.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/finaldc.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/heteroeval.html.twig</file>
@@ -31,18 +30,26 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/info.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Instrumento.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Heteroeval.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/InstrumentoController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/index.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/modal.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/modal.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CursoController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/ProgramaController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/detalle.html.twig</file>
             <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/PlangestionController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/basepop.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ArchivoController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/pordoc.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CursoController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/index.html.twig</file>
         </group>
     </open-files>
 </project-private>

@@ -27,20 +27,13 @@
                 <td>{% if entity.fechafin %}{{ entity.fechafin|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.estado }}</td>
                 <td>
-            <li>
-                <a href="{{ path('instrumento_edit', { 'id': entity.id }) }}">edit</a>
-            </li>
+    
+                <a href="{{ path('instrumento_edit', { 'id': entity.id }) }}">Modificar</a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('instrumento_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

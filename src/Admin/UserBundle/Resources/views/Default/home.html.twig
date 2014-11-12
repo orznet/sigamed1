@@ -54,13 +54,14 @@
 
             <!-- MAIN CONTENT -->
                     <div id="content" class="container">
-                   <h1 class="txt-color-orangeDark login-header-big">IMPORTANTE:</h1>     
+                   <h1 class="txt-color-orangeDark login-header-big">Información Importante:</h1>
               
                     <h4 class="paragraph-header">
-                        Instrumentos de evaluación:<br>
-                        <b>Autoevaluación, evaluación de Tutor a Director de Curso, terna de pares (Docentes de Carrera), evaluación Directores de Curso a Tutores, evualuación de Lideres a Directores, evaluación de Decanos a Directores de Curso.</b><br>
+              
+                        <b>Circular informativa 260-012 </b><a href="http://siga.unad.edu.co/docs/med20142-circular.pdf" target="new">Ver...<i class="fa fa-download"></i></a><br>
+                        <b>Directrices Evaluación del Desempeño 2014-2 </b><a href="http://siga.unad.edu.co/docs/med20142-guia.pdf" target="new">Ver...<i class="fa fa-download"></i></a><br>
                         <br>
-                        A partir del 8 de julio se amplio el plazo de autenticación para todos los docentes y las cuentas bloqueadas.
+                      
                     </h4>
                     <br>
                     <table class="table table-bordered hidden-mobile">
@@ -78,7 +79,8 @@
                        </td>      
                        </tr>                  
                        <tr>
-                       <td>Sistema Único de Autenticación</td>
+                       {%if instrumentos[9].estado%}    
+                       <td>1. Sistema Único de Autenticación</td>
                        <td>
                        {%if cedula_usuario %}
 
@@ -90,15 +92,19 @@
                        </td>
                        </tr>
                        <tr>
-                           <td>MED Periodo 2014 - 1</td>
+                           <td>2. Ingreso MED Periodo 2014 - 2</td>
 
                            <td>
-                       {%if  0 %}
+                       {%if  cedula_usuario %}
                        <a href={{path('admin_user_send')}} class="btn btn-primary btn-xs">Entrar <i class="fa fa-sign-in"></i></a>
-                       {%endif%}
-                       Sistema en mantenimiento
-                           </td>
-
+                       {%else%}
+                       Auntentiquese primero para poder ingresar, Gracias.
+                            {%endif%}
+                       </td>
+                      {%else%}
+                       <td>El ingreso al módulo se encuentra deshabilitado por el momento, disculpe los inconvenientes.</td>
+                        {%endif%}
+                       
                        </tr>
                        <tr>
                            <td colspan="2" align="center">
