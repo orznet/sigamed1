@@ -17,7 +17,7 @@
         </td>
     </tr>
                <tr>
-                <td>Periodo: 2014-1</td>
+                <td>Periodo: {{ entity.id.periodo}}</td>
                 <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
                 <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
             </tr> 

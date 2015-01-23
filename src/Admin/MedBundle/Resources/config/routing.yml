@@ -80,3 +80,7 @@ heteroeval_info:
 coeval_info:
     pattern:  /unad/doc/{id}/coeval
     defaults: { _controller: "AdminUnadBundle:Docente:coevalinfo" }
+
+user_info:
+    pattern:  /unad/user/{id}/info
+    defaults: { _controller: "AdminUserBundle:User:show" }

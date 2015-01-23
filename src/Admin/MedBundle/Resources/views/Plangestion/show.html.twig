@@ -19,7 +19,7 @@
         <thead>
             <tr>
                 <th>Actividad</th>
-                <th>Auto</th>
+                <th>Autoevaluación</th>
             </tr>
         </thead>
         <tbody>
@@ -116,12 +116,7 @@ Sin revisar
             </tr>
             <tr>
                 <td colspan="2">Observaciones:<br>
-                
-   {% set texto = aval.observaciones|split('|') %} 
-   {% for obs in texto%}
-   {{obs}}<br>    
-   {%endfor%}   
-                    
+          {{ entity.observaciones }}
                 </td>
             </tr>
         </tbody>

@@ -5,8 +5,8 @@
      <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
-                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
-                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
+                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H') :'' }}</td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i') : '' }}</td>
             </tr>
             <tr>
                 <td colspan="2">Estado: 
@@ -61,20 +61,20 @@
         {% endfor %}
                <tr>
                    <td style="text-align: right"><b>Total Horas:</b></td>
-                   <td><b>{{totalhoras}}</b></td>
+                   <td><b>{{totalhoras|number_format(1, '.', ',')}}</b></td>
                     <td></td>
                </tr>
                {%if entity.estado == 'Sin Cerrar'%}
                <tr>
                 <td colspan="3">
                 <a href="{{ path('actividadrol_select', { 'id': entity.id.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Actividad</a>  
-                {%if totalhoras > 40 %}
+                {%if totalhoras > 40.1 %}
                 <div class="alert alert-danger fade in">
                  <i class="fa-fw fa fa-warning"></i>
                  <strong>ATENCIÓN</strong> No debe exceder las 40 horas para poder cerrar su plan de gestión.
                 </div>
-    {%else%}
-     <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Plan de Gestión</a>
+                   {%else%}
+                <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Plan de Gestión</a>
     {%endif%}
                    </td>
                </tr>

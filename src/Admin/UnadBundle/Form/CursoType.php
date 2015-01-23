@@ -20,6 +20,9 @@ class CursoType extends AbstractType
             ->add('tipologia')
             ->add('creditos')
             ->add('escuela')
+            ->add('director', 'text', array(
+             "mapped" => false,
+            ))     
            ->add('Programa', 'entity', array(
 'class' =>  'AdminUnadBundle:Programa',
 'empty_value' => ' ',

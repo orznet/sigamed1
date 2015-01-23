@@ -154,18 +154,38 @@ class ArchivoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Archivo entity.');
         }
-
+        
+        $urlserver = 'http://siga.unad.edu.co';
+        
         $plan = null;
-        $urlplan = 'http://med/archivo/'.$entity->getPeriodo().'/plan/'.$entity->getCedula().'-'.$entity->getPeriodo().'-plan.pdf';
+        $hetero = null;
+        $auto = null;
+        $coeval = null;
+        
+        $urlplan = $urlserver.'/archivo/'.$entity->getPeriodo().'/plan/'.$entity->getCedula().'-'.$entity->getPeriodo().'-plan.pdf';
+        $urlhetero = $urlserver.'/archivo/'.$entity->getPeriodo().'/hetero/'.$entity->getCedula().'-'.$entity->getPeriodo().'-hetero.pdf';
+        $urlauto = $urlserver.'/archivo/'.$entity->getPeriodo().'/auto/'.$entity->getCedula().'-'.$entity->getPeriodo().'-auto.pdf';
+        $urlcoeval = $urlserver.'/archivo/'.$entity->getPeriodo().'/coeval/'.$entity->getCedula().'-'.$entity->getPeriodo().'-coeval.pdf';
         
         if ($this->is_url_exist($urlplan)){
         $plan = $urlplan;      
         }
-        
+        if ($this->is_url_exist($urlhetero)){
+        $hetero = $urlhetero;      
+        }
+        if ($this->is_url_exist($urlauto)){
+        $auto = $urlauto;      
+        }
+        if ($this->is_url_exist($urlcoeval)){
+        $coeval = $urlcoeval;      
+        }   
         
         return array(
             'entity'  => $entity,
-            'plan'    => $plan
+            'plan'    => $plan,
+            'hetero'  => $hetero,
+            'auto'    => $auto,
+            'coeval'  => $coeval  
         );
     }
 

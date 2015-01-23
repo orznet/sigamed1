@@ -14,7 +14,7 @@
     <td>Cédula</td>
     <td>{{docente.user.id}}</td>
     <td>Periodo Acádemico</td>
-    <td>2014-1</td>
+    <td>{{docente.periodo}}</td>
   </tr>
   <tr>
     <td>Nombres</td>
@@ -82,7 +82,7 @@
     <td class="data" align="center">{{(docente.heteroeval.competencia4/20)|number_format(1, '.', ',')}}</td>
     <td class="data" align="center">{{(docente.heteroeval.competencia5/20)|number_format(1, '.', ',')}}</td>
     <td class="data" align="center">{{(docente.heteroeval.competencia6/20)|number_format(1, '.', ',')}}</td>
-    <td class="data" align="center">{{(docente.heteroeval.calificacion/20)|number_format(1, '.', ',')}}</td>
+    <td class="data" align="center">{{(docente.heteroeval.calificacion)|number_format(1, '.', ',')}}</td>
   </tr>
 </table>
 {%endif%}

@@ -19,12 +19,17 @@
             <tr>
                 <td>{{curso.id}}</td>
                 <td>{{curso.nombre}}</td>
-                <td>{{curso.director.user.nombres}} {{curso.director.user.apellidos}}</td>
+                <td>
+                {%if curso.director%}
+                {{curso.director.user.nombres}} {{curso.director.user.apellidos}}
+                {%endif%}    
+                </td>
                 <td>{%if curso.coeval %}
                {{curso.coeval.observaciones}}
                 {%endif%}                    
                 </td>
                 <td>
+                {%if curso.director%}    
                 {%if curso.coeval %}
                 {%if curso.coeval.f0 is not null %}
                 {{curso.coeval.f0}}
@@ -32,6 +37,7 @@
                 <a href="{{ path('coevaldirector_edit', { 'id': curso.coeval.id }) }}">Evaluar...</a>
                  {%endif%}
                 {%endif%}
+                 {%endif%}
                  </td>
         {% endfor %}
         </tbody>

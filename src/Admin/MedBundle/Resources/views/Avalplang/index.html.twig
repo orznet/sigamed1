@@ -10,15 +10,17 @@
                 <th>Nombre</th>
                 <th>Centro</th>
                 <th>Plan Gestión</th>
-                <th>Estado Plan</th>
+                <th>Avalar</th>
                 <th>Estado de Aval</th>
-                <th>Fecha</th>
+                <th>Fecha Aval</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <th>{{ entity.plan.id.user.id }}</th> 
+                <th>
+                <a href="{{ path('user_info', {'id': entity.plan.id.user.id }) }}">{{ entity.plan.id.user.id }}</a>
+                </th> 
                 <td>{{ entity.plan.id.user.nombres }} {{ entity.plan.id.user.apellidos }}</td>
                 <td>{{entity.plan.id.centro.nombre}}</td>
                 <td>
@@ -28,13 +30,13 @@
 
                 <td>
                     {%if entity.plan.estado == 'Cerrado' and entity.avalado != 1 %}
-                    <a data-toggle="modal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" data-target="#myModal">Aprobar</a>
-                    {%else%}
-                    Sin Cerrar
+                    <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
+                    {%else %}
+                        -
                     {%endif%}
                 </td>
                 <td>{{ entity.estado }}</td>
-                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>

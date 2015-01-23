@@ -46,9 +46,12 @@
             </tr>
         </thead>
         <tbody>
-         {%set final = 0%}  
+         {%set final = 0%}  {%set aux = 0%} 
         {% for evaluacion in entity.coevaldepar %}
-           {%set final = final+evaluacion.f0%}
+           {%if evaluacion.f0%}
+            {%set final = final+evaluacion.f0%}
+            {%set aux = aux+1%}
+            {%endif%}
                 <tr>
                 <td>{{evaluacion.evaluador.user.id}}</td>
                 <td>{{evaluacion.evaluador.user.nombres}} {{evaluacion.evaluador.user.apellidos}}</td>
@@ -57,7 +60,7 @@
                 <td>{{evaluacion.f0? 'Si' : 'No'}}</td>
             </tr>
             {% endfor %}
-            {%set final = final/3%}
+            {%set final = final/aux%}
             <tr>
                 <td colspan="4">Calificación Final:</td>
                 <td>{{final}}</td>

@@ -40,6 +40,7 @@
                 <th>Tutor</th>
                 <th>Correo</th>
                 <th>Evaluo?</th>
+                <th>Observaciones</th>
             </tr>
         </thead>
             <tbody>    
@@ -49,6 +50,7 @@
                             <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
                             <td>{{tutor.tutor.user.email}}</td>
                             <td>{{tutor.f0? 'Si' : 'No'}}</td>
+                            <td>{{tutor.observaciones}}</td>
             </tr>
             {%endfor%}
             </tbody>

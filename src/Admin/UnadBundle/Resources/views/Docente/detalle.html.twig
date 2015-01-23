@@ -55,7 +55,11 @@
       <th>Tutorias de curso</th>
       <td colspan="3">{%for curso in entity.tutoria%} 
       {{curso.id}}:
-      {{curso.nombre}} Director: {{curso.director.user.nombres}} {{curso.director.user.apellidos}} <br>{%endfor%}
+      {{curso.nombre}} Director: 
+      {%if curso.director%}
+        {{curso.director.user.nombres}} {{curso.director.user.apellidos}} 
+      {%endif%}
+      <br>{%endfor%}
    </td>
   </tr>
 </table>

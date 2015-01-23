@@ -31,15 +31,14 @@
                 <td>{{ entity.centro }}</td>
                 <td>{{ entity.zona }}</td>
                 <td>{{ entity.periodo }}</td>
-                <td>{{ entity.final }}</td>
+                <td>{{ entity.final|number_format(1, '.', ',') }}</td>
                 <td>
-                <a href="javascript:popUp('{{ path('_welcome') }}archivo/informe/{{ entity.cedula }}-{{ entity.periodo }}.pdf')" class="btn btn-primary btn-xs"><i class="fa fa-file"></i></a>    
+                <a href="javascript:popUp('/archivo/{{entity.periodo}}/informe/{{entity.cedula}}-{{entity.periodo}}.pdf')" class="btn btn-primary btn-xs"><i class="fa fa-file"></i></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
     
  <script>
   

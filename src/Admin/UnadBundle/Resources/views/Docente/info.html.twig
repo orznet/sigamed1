@@ -52,7 +52,7 @@
 3. Coevaluaciones
         </th>
         <td>
-            {%if entity.evaluacion%}
+        {%if entity.evaluacion%}
             <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
         {%endif%}
         </td> 
