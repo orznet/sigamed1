@@ -1,0 +1,22 @@
+{% block body -%}
+
+
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title">Borrar Rol</h4>
+                </div>			<!-- /modal-header -->
+                <div class="modal-body">
+                Rol: 
+               {{ entity.rol.nombre }}
+           
+          <br>
+                Horas
+                {{ entity.horas }}
+                
+                </div>
+                <div class="modal-footer">
+                {{ form(delete_form) }}
+
+                </div>
+
+{% endblock %}

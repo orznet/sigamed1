@@ -57,6 +57,10 @@ protected $estado;
 protected $actividades;
 
 
+/**
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Rolplang", mappedBy="plang")
+ */
+protected $roles;
 
 /**
  * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
@@ -300,5 +304,38 @@ protected $avales;
     public function getAvales()
     {
         return $this->avales;
+    }
+
+    /**
+     * Add roles
+     *
+     * @param \Admin\MedBundle\Entity\Rolplang $roles
+     * @return Plangestion
+     */
+    public function addRole(\Admin\MedBundle\Entity\Rolplang $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Admin\MedBundle\Entity\Rolplang $roles
+     */
+    public function removeRole(\Admin\MedBundle\Entity\Rolplang $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }

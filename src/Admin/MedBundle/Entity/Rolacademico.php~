@@ -29,6 +29,19 @@ protected $nombre;
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
+protected $descripcion;
+
+
+/**
+ * @ORM\Column(type="decimal", scale=1, nullable=true)
+ */
+protected $horas;
+
+
+/**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
 protected $categoria;
 
 /**

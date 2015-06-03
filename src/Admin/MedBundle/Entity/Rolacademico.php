@@ -26,6 +26,13 @@ class Rolacademico{
 protected $nombre;
 
  /**
+     * @ORM\Column(type="string", length=512)
+     * @Assert\NotBlank()
+     */
+protected $descripcion;
+
+
+/**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
@@ -132,4 +139,27 @@ protected $actividades;
     {
         return $this->actividades;
     }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Rolacademico
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }   
 }

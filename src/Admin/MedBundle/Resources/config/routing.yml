@@ -23,7 +23,11 @@ _rolacedemico:
 
 _actividadplang:
     resource: "@AdminMedBundle/Controller/ActividadplangController.php"
-    type:     annotation    
+    type:     annotation
+    
+_rolplang:
+    resource: "@AdminMedBundle/Controller/RolplangController.php"
+    type:     annotation     
     
 _coevaltutor:
     resource: "@AdminMedBundle/Controller/coevalTutorController.php"

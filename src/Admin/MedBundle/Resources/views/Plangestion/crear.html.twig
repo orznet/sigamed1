@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-    <h3>Actividades del Plan de Gestión de  {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}</h3>
+    <h3>Roles del Plan de Gestión de  {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}</h3>
 
      <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
@@ -20,41 +20,27 @@
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
-                <th>Actividad</th>
+                <th>Rol</th>
                 <th>Horas</th>
                 <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
-        {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
-        {% set termino = 1 %}
-        {% for actividad in actividades %}
-           <tr>
-                    {%if temp != actividad.actividad.rol.nombre %} 
-                <td>
-                    <b>ROL:
-                    {{actividad.actividad.rol.nombre}}
-                    {% set temp = actividad.actividad.rol.nombre %}        
-                    </b>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    {%endif%}
-               </tr>     
+      {% set num = 0 %} {% set totalhoras = 0 %}
+      {% set termino = 1 %}
+      {% for rol in entity.roles %}
+   
             <tr>
                 {% set num = num+1 %}
                 <td>{{num}}.     
-                {{ actividad.actividad.descripcion }}
-                {%if actividad.actividad.textoampliacion %}
-                <font color="#a57225">{{actividad.descripcion}}</font>
-                {%endif%}
+                {{ rol.rol.nombre }}
                 </td>
-                <td>{{actividad.horas}}
-                    {% set totalhoras = totalhoras + actividad.horas%}
+                <td>{{rol.horas}}
+                    {% set totalhoras = totalhoras + rol.horas%}
                 </td>
                                 <td>
                 {%if entity.estado == 'Sin Cerrar'%}
-                <a href="{{ path('actividadplang_delete', { 'id': actividad.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
+                <a data-toggle="modal" data-target="#ModalCerrar" href="{{ path('rolplang_delete', { 'id': rol.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
                 {%endif%}
                 </td>
                </tr>
@@ -67,7 +53,7 @@
                {%if entity.estado == 'Sin Cerrar'%}
                <tr>
                 <td colspan="3">
-                <a href="{{ path('actividadrol_select', { 'id': entity.id.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Actividad</a>  
+                <a href="{{ path('actividadrol_select', { 'id': entity.id.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Rol</a>  
                 {%if totalhoras > 40.1 %}
                 <div class="alert alert-danger fade in">
                  <i class="fa-fw fa fa-warning"></i>
@@ -135,6 +121,11 @@ Sin revisar
                <td><button type="hidden" class="btn btn-primary">Cerrar Plan</button></td>    
                </form> 
                 </div>
-</div></div>    
+</div></div>
+     
+<div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header modal-sm">
+<div class="modal-content">
+</div></div></div>
     
 {% endblock %}

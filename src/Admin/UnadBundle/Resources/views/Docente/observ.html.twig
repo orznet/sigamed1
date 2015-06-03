@@ -1,6 +1,4 @@
-<head>
-<title>{% block title %}{{docente.user.id}}-{{docente.periodo}}{% endblock %}</title>
-</head>
+{% extends '::base.html.twig' %}
 {% block body -%}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
 
@@ -169,6 +167,27 @@ Aprobado
     </tr>
 </table>
 <table>
+  <tr>
+    <td colspan="3">Observaciones Decano de la Escuela: {{docente.evaluacion.observaciones}}
+    
+    
+   <form  action="{{ path('docente_observaciones', { 'id': docente.id }) }}" method="post" {{ form_enctype(form) }}>
+
+   <input type="hidden" name="_method" value="PUT" />
+     {{ form_errors(form) }}
+   <tr>
+       <td>{{ form_widget(form.observaciones) }}</td>
+       
+   </tr>
+   <tr>
+    <td><button type="hidden" class="btn btn-lg btn-primary">Guardar</button></td>
+  </tr>
+  {{ form_widget(form._token) }}
+</form>
+    
+    
+    </td>
+    </tr>
     <tr>
     <td colspan="3" align="center">Evaluación Número:{{docente.id}} -  Fecha y hora de consulta: {{ "now"|date("m/d/Y H:m") }}</td>
   </tr>

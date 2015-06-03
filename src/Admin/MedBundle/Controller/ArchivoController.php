@@ -165,7 +165,7 @@ class ArchivoController extends Controller
         $urlplan = $urlserver.'/archivo/'.$entity->getPeriodo().'/plan/'.$entity->getCedula().'-'.$entity->getPeriodo().'-plan.pdf';
         $urlhetero = $urlserver.'/archivo/'.$entity->getPeriodo().'/hetero/'.$entity->getCedula().'-'.$entity->getPeriodo().'-hetero.pdf';
         $urlauto = $urlserver.'/archivo/'.$entity->getPeriodo().'/auto/'.$entity->getCedula().'-'.$entity->getPeriodo().'-auto.pdf';
-        $urlcoeval = $urlserver.'/archivo/'.$entity->getPeriodo().'/coeval/'.$entity->getCedula().'-'.$entity->getPeriodo().'-coeval.pdf';
+        $urlcoeval = $urlserver.'/archivo/'.$entity->getPeriodo().'/coeval/'.$entity->getCedula().'-'.$entity->getPeriodo().'-co.pdf';
         
         if ($this->is_url_exist($urlplan)){
         $plan = $urlplan;      

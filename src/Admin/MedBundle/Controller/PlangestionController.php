@@ -290,6 +290,17 @@ class PlangestionController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Entidad No encontrada');
         }
+        
+        foreach ($entity->getRoles() as $rol){       
+            foreach ($rol->getRol()->getActividades() as $actividad){
+                $actividadplan = new Actividadplang();
+                $actividadplan->setPlang($entity);
+                $actividadplan->setActividad($actividad);
+                $em->persist($actividadplan);
+            }
+            
+        }     
+        
         $entity->setFechaCierre(new \DateTime());
         $entity->setEstado(1);
         $em->flush();

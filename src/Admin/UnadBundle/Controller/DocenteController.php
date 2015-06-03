@@ -10,7 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\UnadBundle\Entity\Docente;
 use Admin\UnadBundle\Entity\Escuela;
 use Admin\MedBundle\Entity\Instrumento;
+use Admin\MedBundle\Entity\Evaluacion;
 use Admin\UnadBundle\Form\DocenteType;
+use Admin\UnadBundle\Form\ObservType;
 
 /**
  * Docente controller
@@ -407,4 +409,44 @@ class DocenteController extends Controller
             'docente' => $entity,
          ); 
     }
+    
+    
+    /**
+     * @Route("/observ/{id}", name="docente_observ")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Docente:observ.html.twig")
+     */
+    public function observAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+       
+      $Form = $this->createForm(new ObservType());
+      
+      return array(
+          'docente' => $entity,
+          'form'   => $Form->createView(),    
+         ); 
+    }
+    
+     /**
+     * @Route("/observaciones/{id}", name="docente_observaciones")
+     * @Method("PUT")
+     * @Template("AdminUnadBundle:Docente:info.html.twig")
+     */
+    public function observacionesAction(Request $request, $id)
+    {
+               
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $evaluacion = $em->getRepository('AdminMedBundle:evaluacion')->find($id);
+        
+        $Form = $this->createForm(new ObservType());
+        $Form->bind($request);
+        $evaluacion->setObservaciones($Form->get('observaciones')->getData());      
+        $em->persist($evaluacion);
+        $em->flush();
+        return $this->redirect($this->generateUrl('docente_info', array('id' => $id)));  
+    }
+    
 }

@@ -62,8 +62,13 @@
             {%for evaluacion in entity.evaldedirector%}
    
             <tr>
-            <td>{{evaluacion.curso.nombre}}</td>    
-             <td>{{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}</td>
+            <td>{{evaluacion.curso.nombre}}</td>
+            <td>
+            {%if evaluacion.curso.director%}
+            {{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}
+            {%endif%}
+            </td>
+             
              <td>{{evaluacion.observaciones}}</td>
              <td>{{evaluacion.f0}}</td>
             </tr>

@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-        <h1>Agregar Actividad al Plan de Gestión</h1>
+<a href="{{ path('plangestion_crear', { 'id': id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-mail-reply-all"></i></span></i>Regresar</a>
+        <h1>Agregar Rol al Plan de Gestión</h1>
 
  <div class="widget-body" style="margin-right: 80px;">
 
@@ -8,16 +9,15 @@
             {% for rol in roles %}       
     <div class="panel panel-default">     
          <div class="panel-heading">
-             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{rol.id}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>ROL {{rol.nombre}}</a></h1>
-             </div>
+             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{rol.id}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>ROL {{rol.nombre}}</a></h1>   
+         </div>
              <div id="collapse{{rol.id}}" class="panel-collapse collapse" style="height: 0px;">
                         <div class="panel-body no-padding">
                        <table class="table table-bordered hidden-mobile">
                         <thead>
                         <tr>
                             <th></th>
-                         <th>Actividad</th>
-                         <th>Seleccionar</th>
+                         <th>{{rol.descripcion}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,11 +30,17 @@
                          <td>    
                          {{ actividad.descripcion }}
                          </td>
-                         <td>
-                         <a data-toggle="modal" href="{{ path('actividadplang_new', { 'id': id , 'ida' : actividad.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
-                         </td>
+
                         </tr>
                         {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td>
+                           
+                           <a data-toggle="modal" href="{{ path('rolplang_new', { 'id': id , 'idr' : rol.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar este rol</a>   
+                            </td>
+                        </tr>
+                        
                         </tbody>
                         </table>
                         </div>
@@ -43,9 +49,6 @@
     {%endfor%}
 </div>
 </div>
-
-
-
   
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">

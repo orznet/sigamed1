@@ -47,7 +47,7 @@
  {%else%}
       <tr>
     <th>1. Plan de Actividades</th>
-    <td>Plan de Actividades (SOCA)</td>    
+    <td>Plan de Actividades (Asignación académica)</td>    
     <td>
     {%if entity.plangestion %}    
     <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
@@ -67,7 +67,9 @@
     <td>Realice su autoevaluación</td>
     <td>
    {%if instrumentos[1].estado%}
-    {%if entity.vinculacion == 'De Carrera'%}  
+       {%if entity.plangestion%}       
+    {%if entity.vinculacion == 'De Carrera'%}
+  
     {% set temp = 1 %}
     {% for aval in entity.plangestion.avales %}
     {%if aval.avalado == 0 or aval.avalado == 2 %}
@@ -83,6 +85,7 @@
         
     {%else%}
        <a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%endif%}
     {%endif%}
     {%endif%}
     </td>

@@ -1,18 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario</h1>
+    <h1>Usuario {{ entity.id }}</h1>
 
       <table class="table table-bordered table-striped hidden-mobile">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ entity.username }}</td>
-            </tr>
             <tr>
                 <th>Nombres</th>
                 <td>{{ entity.nombres }}</td>
@@ -87,11 +79,23 @@
                 <td>{{ entity.periodo }}</td>
                 <td>{{ entity.final }}</td>
                 <td>
-                <a href="javascript:popUp('{{ path('_welcome') }}archivo/informe/{{ entity.cedula }}-{{ entity.periodo }}.pdf')" class="btn btn-primary btn-xs"><i class="fa fa-file"></i></a>    
+                <a href="javascript:popUp('{{ path('_welcome') }}archivo/{{entity.periodo}}/informe/{{ entity.cedula }}-{{ entity.periodo }}.pdf')" class="btn btn-primary btn-xs"><i class="fa fa-file"></i></a>    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    
+     <script>
+  
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+    popupWin.focus(); 
+ }
+</script>    
 {% endblock %}
