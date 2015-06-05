@@ -40,7 +40,7 @@
                 </td>
                                 <td>
                 {%if entity.estado == 'Sin Cerrar'%}
-                <a data-toggle="modal" data-target="#ModalCerrar" href="{{ path('rolplang_delete', { 'id': rol.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
+                <a href="{{ path('rolplang_delete', { 'id': rol.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
                 {%endif%}
                 </td>
                </tr>

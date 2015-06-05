@@ -39,7 +39,7 @@ protected $descripcion;
 protected $categoria;
 
 /**
- * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\actividadrol", mappedBy="rol")
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Actividadrol", mappedBy="rol")
  */
 protected $actividades;
 

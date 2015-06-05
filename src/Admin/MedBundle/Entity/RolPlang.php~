@@ -8,9 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="rol_plang")
- * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\actividadplanglRepository")
+ * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\rolplanglRepository")
  */
-class RolPlang{
+class Rolplang{
 
 /**
  * @ORM\Id
@@ -38,4 +38,83 @@ protected $plang;
 * @ORM\JoinColumn(name="rol_id", referencedColumnName="id", nullable=false)
 */
 protected $rol;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set horas
+     *
+     * @param string $horas
+     * @return Rolplang
+     */
+    public function setHoras($horas)
+    {
+        $this->horas = $horas;
+
+        return $this;
+    }
+
+    /**
+     * Get horas
+     *
+     * @return string 
+     */
+    public function getHoras()
+    {
+        return $this->horas;
+    }
+
+    /**
+     * Set plang
+     *
+     * @param \Admin\MedBundle\Entity\Plangestion $plang
+     * @return Rolplang
+     */
+    public function setPlang(\Admin\MedBundle\Entity\Plangestion $plang)
+    {
+        $this->plang = $plang;
+
+        return $this;
+    }
+
+    /**
+     * Get plang
+     *
+     * @return \Admin\MedBundle\Entity\Plangestion 
+     */
+    public function getPlang()
+    {
+        return $this->plang;
+    }
+
+    /**
+     * Set rol
+     *
+     * @param \Admin\MedBundle\Entity\Rolacademico $rol
+     * @return Rolplang
+     */
+    public function setRol(\Admin\MedBundle\Entity\Rolacademico $rol)
+    {
+        $this->rol = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Get rol
+     *
+     * @return \Admin\MedBundle\Entity\Rolacademico 
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
 }
