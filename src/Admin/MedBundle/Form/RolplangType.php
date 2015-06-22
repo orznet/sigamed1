@@ -16,6 +16,7 @@ class RolplangType extends AbstractType
     {
         $builder
             ->add('horas')
+            ->add('descripcion', 'textarea', array('attr' => array('cols' => '60')))    
             ->add('rol', 'entity', array(
           'class' =>  'AdminMedBundle:Rolacademico',
           'property' => 'id',

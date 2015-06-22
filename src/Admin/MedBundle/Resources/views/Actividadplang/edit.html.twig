@@ -12,10 +12,6 @@
                        <font color="#F87217">{{ form_errors(edit_form) }}</font>
                        </td>    
                    </tr> 
-                   <tr>    
-		    <td>Actividad ID</td>
-		    <td>{{ entity.id }}</td>
-		    </tr> 
 		   <tr>
 		    <td>Actividad</td>
 		    <td>{{ entity.actividad.descripcion }}</td>
@@ -30,9 +26,12 @@
 		    <td>Evidencia</td>
 		    <td>
 		     {{ form_widget(edit_form.file) }} {{ form_errors(edit_form.file) }}
-                        <font color="#F87217">Opcional: Únicamente Archivos PDF o ZIP de máximo 4MB de tamaño</font>
+                        <font color="#F87217">Si lo requiere adjunte un archivo, únicamente Archivos PDF o ZIP de máximo 4MB de tamaño</font>
 		    </td>
 		  </tr>
+                    <tr>    
+		    <td colspan="2">Importante: Si considera no autoevaluarse con esta actividad seleccione la opción “No Aplica”  y en el campo “Descripción del avance” escriba una breve justificación. </td>
+		    </tr> 
 		     <tr>
 		    <td>Autoevaluación</td>
 		    <td>

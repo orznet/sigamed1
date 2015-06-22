@@ -141,6 +141,26 @@ class PlangestionController extends Controller
         );
     }
     
+    
+        /**
+     * @Route("/conf/{id}", name="plangestion_conf")
+     * @Method("GET")
+     * @Template()
+     */
+    public function confAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Entidad no encontrada');
+        }
+        return array(
+            'entity'      => $entity,
+        );
+    }
+    
+    
         /**
      * @Route("/crear/{id}", name="plangestion_crear")
      * @Method("GET")
@@ -260,8 +280,13 @@ class PlangestionController extends Controller
         $actividades = $entity->getActividades();
         $suma = $aux = 0;
         foreach ($actividades as $actividad ){
+            
+         if($actividad->getAutoevaluacion()>0){
         $suma = $suma + $actividad->getAutoevaluacion();
         $aux++;
+        }   
+            
+
         }
         $entity->setAutoevaluacion($suma/$aux);
         $entity->setFechaAutoevaluacion(new \DateTime());
@@ -304,7 +329,7 @@ class PlangestionController extends Controller
         $entity->setFechaCierre(new \DateTime());
         $entity->setEstado(1);
         $em->flush();
-        return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $id)));
+        return $this->redirect($this->generateUrl('admin_user_inicio'));
     }
     
     

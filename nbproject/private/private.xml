@@ -12,8 +12,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/config/routing.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Curso.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Rolacademico.php</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Actividadrol/select.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadplang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/conf.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Rolplang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevalinfo.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/PlangestionController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadrol.php</file>
         </group>
     </open-files>
 </project-private>

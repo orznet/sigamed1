@@ -33,7 +33,10 @@
             <tr>
                 {% set num = num+1 %}
                 <td>{{num}}.     
-                {{ rol.rol.nombre }}
+                {{ rol.rol.nombre }}<br>
+                {%if rol.rol.textoampliacion%}
+                {{rol.descripcion}}
+                {%endif%}
                 </td>
                 <td>{{rol.horas}}
                     {% set totalhoras = totalhoras + rol.horas%}

@@ -26,17 +26,17 @@ class Rolacademico{
 protected $nombre;
 
  /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=512)
      * @Assert\NotBlank()
      */
 protected $descripcion;
 
 
-/**
- * @ORM\Column(type="decimal", scale=1, nullable=true)
- */
-protected $horas;
-
+    /**
+    * @ORM\Column(type="boolean")
+    * @Assert\NotBlank()
+    */
+    protected $texto_ampliacion;
 
 /**
      * @ORM\Column(type="string", length=255)
@@ -45,7 +45,7 @@ protected $horas;
 protected $categoria;
 
 /**
- * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\actividadrol", mappedBy="rol")
+ * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Actividadrol", mappedBy="rol")
  */
 protected $actividades;
 
@@ -145,4 +145,27 @@ protected $actividades;
     {
         return $this->actividades;
     }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Rolacademico
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }   
 }

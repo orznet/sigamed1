@@ -24,6 +24,10 @@ class Rolplang{
  */
 protected $horas;
 
+/**
+* @ORM\Column(type="string", length=2500, nullable=true)
+*/
+protected $descripcion;
 
 /** 
 * @var Plang
@@ -116,5 +120,28 @@ protected $rol;
     public function getRol()
     {
         return $this->rol;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Rolplang
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

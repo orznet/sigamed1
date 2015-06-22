@@ -32,6 +32,12 @@ protected $nombre;
 protected $descripcion;
 
 
+    /**
+    * @ORM\Column(type="boolean")
+    * @Assert\NotBlank()
+    */
+    protected $texto_ampliacion;
+
 /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
@@ -162,4 +168,27 @@ protected $actividades;
     {
         return $this->descripcion;
     }   
+
+    /**
+     * Set texto_ampliacion
+     *
+     * @param boolean $textoAmpliacion
+     * @return Rolacademico
+     */
+    public function setTextoAmpliacion($textoAmpliacion)
+    {
+        $this->texto_ampliacion = $textoAmpliacion;
+
+        return $this;
+    }
+
+    /**
+     * Get texto_ampliacion
+     *
+     * @return boolean 
+     */
+    public function getTextoAmpliacion()
+    {
+        return $this->texto_ampliacion;
+    }
 }

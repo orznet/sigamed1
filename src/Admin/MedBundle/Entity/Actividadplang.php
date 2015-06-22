@@ -340,4 +340,30 @@ protected $actividad;
     {
         return $this->path;
     }
+    
+     /**
+     * Get letras
+     *
+     * @return string 
+     */
+    public function getLetras()
+    {
+        if ($this->autoevaluacion == null )
+        return ' ';
+        elseif ($this->autoevaluacion == 0)
+        return 'NA';
+        elseif ($this->autoevaluacion == 1)
+        return 'N';
+        elseif ($this->autoevaluacion == 2)
+        return 'CN';
+        elseif ($this->autoevaluacion == 3)
+        return 'AV';  
+        elseif ($this->autoevaluacion == 4)
+        return 'CS';
+        elseif ($this->autoevaluacion == 5)
+        return 'S';   
+                
+        else
+         return $this->estado;   
+    }
 }

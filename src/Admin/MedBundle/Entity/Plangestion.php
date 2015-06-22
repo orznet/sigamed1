@@ -204,8 +204,10 @@ protected $avales;
     {
         if ($this->estado == 0 )
         return 'Sin Cerrar';
-        elseif ($this->estado == 1)
-        return 'Cerrado';    
+        elseif ($this->estado == 1 or $this->estado == 10)
+        return 'Cerrado';
+        elseif ($this->estado == 3)
+        return 'Sin Confirmar';  
         else
          return $this->estado;   
     }

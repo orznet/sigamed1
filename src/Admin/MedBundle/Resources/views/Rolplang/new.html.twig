@@ -20,6 +20,12 @@
     <td>Horas por semana</td>
     <td>{{ form_widget(form.horas) }} <i>Valor Aproximado, puede usar decimales.<i/></td>
    </tr>
+   {%if entity.rol.textoampliacion%}
+  <tr>
+    <td>Descripción</td>
+    <td>{{ form_widget(form.descripcion) }}</td>
+  </tr>
+  {%endif%}
   <tr>
     <td></td>
     <td><button type="hidden" class="btn btn-sm btn-primary">Agregar</button></td>

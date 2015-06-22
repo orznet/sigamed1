@@ -19,7 +19,9 @@
         <thead>
             <tr>
                 <th>Actividad</th>
-                <th>Autoevaluación</th>
+                <th></th>
+                <th>Adjunto</th>
+                <th>Auto</th>
             </tr>
         </thead>
         <tbody>
@@ -45,21 +47,31 @@
                 <font color="#a57225">{{actividad.descripcion}}</font>
                 {%endif%}
                 {%if actividad.observaciones %}
-                <br><font color="#058dc7">DESCRIPCIÓN DEL AVANCE: {{actividad.observaciones}}</font><br>
-                {%if actividad.path %}
-                <a href="../../{{actividad.webpath}}" target="_blank"><i class="fa fa-download"></i> Evidencia</a>
-                {%endif%}
+                <br><font color="#058dc7">Descripción del avance: {{actividad.observaciones}}</font><br>
+
                 {%endif%}
                 </td>
-                <td>
+                
+                                <td>
                   {%if actividad.plang.autoevaluacion %}
-                   {{actividad.autoevaluacion}}
+                   
                 {%elseif actividad.autoevaluacion is null%}
                     {% set termino = 0 %}
                 <a data-toggle="modal" href="{{ path('actividadplang_edit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                   {%else%}
                       <a data-toggle="modal" href="{{ path('actividadplang_borrar', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-default btn-xs txt-color-red"><i class="fa fa-trash-o"></i></a>  
                       {%endif%}   
+                </td>
+
+                    <td>
+                {%if actividad.path %}
+                <a href="../../{{actividad.webpath}}" target="_blank" class="btn btn-default btn-xs txt-color-green"><i class="fa fa-download"></i></a>
+                {%endif%}      
+                    </td>
+                <td>
+                    
+                 {{actividad.letras}}   
+                    
                 </td>
                </tr>
         {% endfor %}  
