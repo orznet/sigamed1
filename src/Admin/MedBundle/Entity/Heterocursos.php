@@ -1,22 +1,45 @@
 <?php
 namespace Admin\MedBundle\Entity;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
-  * @ORM\Table(name="hetero_estudiantes")
-  * @ORM\Entity(repositoryClass="Admin\PlanesBundle\Entity\HeteroevalRepository")
-  */
-class Heteroeval{
+ * @ORM\Entity
+ * @ORM\Table(name="hetero_curso")
+ * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\HeterocursosRepository")
+ */
+class Heterocursos{
     
 /**
  * @ORM\Id
  * @ORM\Column(name="id", type="integer", nullable=false)
+ * @ORM\GeneratedValue(strategy="AUTO")
  */
- private $id;
- 
- 
+private $id;
+
+
+ /**
+  * @ORM\Column(type="integer")
+  */
+protected $curso_id;
+
+ /**
+  * @ORM\Column(type="string", length=512, nullable=true)
+  */
+protected $nombre;
+
+ /**
+  * @ORM\Column(type="string", length=10, nullable=false)
+  */
+protected $periodo;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $estudiantes;
+
 /**
   * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
@@ -52,23 +75,16 @@ protected $competencia6;
   */
 protected $calificacion;
 
- /**
-  * @ORM\Column(type="datetime", nullable=true)
-  */
-protected $fecha;
 
-
-/**
- * @var Docente
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="heteroeval")
- * @ORM\JoinColumn(name="id",referencedColumnName="id") 
-*/
- protected $docente;
-
-  /**
-   * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Heterocursos", mappedBy="heteroeval") 
+ /** 
+   * @var Heteroeval 
+   * @ORM\ManyToOne(targetEntity="Admin\MedBundle\Entity\Heteroeval", inversedBy="cursos")
+   * @ORM\JoinColumn(name="hetero_id", referencedColumnName="id",
+   * nullable=false
+   * )
    */
-  protected $cursos;
+protected $heteroeval;
+    
 
     /**
      * Get id
@@ -81,10 +97,102 @@ protected $fecha;
     }
 
     /**
+     * Set curso_id
+     *
+     * @param integer $cursoId
+     * @return Heterocursos
+     */
+    public function setCursoId($cursoId)
+    {
+        $this->curso_id = $cursoId;
+
+        return $this;
+    }
+
+    /**
+     * Get curso_id
+     *
+     * @return integer 
+     */
+    public function getCursoId()
+    {
+        return $this->curso_id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Heterocursos
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set periodo
+     *
+     * @param string $periodo
+     * @return Heterocursos
+     */
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return string 
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+
+    /**
+     * Set estudiantes
+     *
+     * @param integer $estudiantes
+     * @return Heterocursos
+     */
+    public function setEstudiantes($estudiantes)
+    {
+        $this->estudiantes = $estudiantes;
+
+        return $this;
+    }
+
+    /**
+     * Get estudiantes
+     *
+     * @return integer 
+     */
+    public function getEstudiantes()
+    {
+        return $this->estudiantes;
+    }
+
+    /**
      * Set competencia1
      *
      * @param string $competencia1
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia1($competencia1)
     {
@@ -107,7 +215,7 @@ protected $fecha;
      * Set competencia2
      *
      * @param string $competencia2
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia2($competencia2)
     {
@@ -130,7 +238,7 @@ protected $fecha;
      * Set competencia3
      *
      * @param string $competencia3
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia3($competencia3)
     {
@@ -153,7 +261,7 @@ protected $fecha;
      * Set competencia4
      *
      * @param string $competencia4
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia4($competencia4)
     {
@@ -176,7 +284,7 @@ protected $fecha;
      * Set competencia5
      *
      * @param string $competencia5
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia5($competencia5)
     {
@@ -199,7 +307,7 @@ protected $fecha;
      * Set competencia6
      *
      * @param string $competencia6
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCompetencia6($competencia6)
     {
@@ -222,7 +330,7 @@ protected $fecha;
      * Set calificacion
      *
      * @param string $calificacion
-     * @return Heteroeval
+     * @return Heterocursos
      */
     public function setCalificacion($calificacion)
     {
@@ -242,101 +350,25 @@ protected $fecha;
     }
 
     /**
-     * Set fecha
+     * Set heteroeval
      *
-     * @param \DateTime $fecha
-     * @return Heteroeval
+     * @param \Admin\MedBundle\Entity\Heteroeval $heteroeval
+     * @return Heterocursos
      */
-    public function setFecha($fecha)
+    public function setHeteroeval(\Admin\MedBundle\Entity\Heteroeval $heteroeval)
     {
-        $this->fecha = $fecha;
+        $this->heteroeval = $heteroeval;
 
         return $this;
     }
 
     /**
-     * Get fecha
+     * Get heteroeval
      *
-     * @return \DateTime 
+     * @return \Admin\MedBundle\Entity\Heteroeval 
      */
-    public function getFecha()
+    public function getHeteroeval()
     {
-        return $this->fecha;
-    }
-
-    /**
-     * Set docente
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $docente
-     * @return Heteroeval
-     */
-    public function setDocente(\Admin\UnadBundle\Entity\Docente $docente = null)
-    {
-        $this->docente = $docente;
-
-        return $this;
-    }
-
-    /**
-     * Get docente
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getDocente()
-    {
-        return $this->docente;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->cursos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return Heteroeval
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Add cursos
-     *
-     * @param \Admin\MedBundle\Entity\Heterocursos $cursos
-     * @return Heteroeval
-     */
-    public function addCurso(\Admin\MedBundle\Entity\Heterocursos $cursos)
-    {
-        $this->cursos[] = $cursos;
-
-        return $this;
-    }
-
-    /**
-     * Remove cursos
-     *
-     * @param \Admin\MedBundle\Entity\Heterocursos $cursos
-     */
-    public function removeCurso(\Admin\MedBundle\Entity\Heterocursos $cursos)
-    {
-        $this->cursos->removeElement($cursos);
-    }
-
-    /**
-     * Get cursos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCursos()
-    {
-        return $this->cursos;
+        return $this->heteroeval;
     }
 }

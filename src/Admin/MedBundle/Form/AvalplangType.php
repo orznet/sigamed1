@@ -20,7 +20,9 @@ class AvalplangType extends AbstractType
 
                 
             ->add('avalado', 'choice', array('empty_value' => ' ', 'label' => ' ',    
-            'choices'   => array( '1' => 'Aprobado', '2' => 'No aprobado'), 'required'  => true,))      
+            'choices'   => array( '1' => 'Aprobado', '2' => 'No aprobado'), 'required'  => true,))
+            
+             ->add('file')    
         ;
     }
     

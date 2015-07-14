@@ -25,35 +25,24 @@
   <table>
         <thead>
             <tr>
-                <th>Actividad</th>
+                <th>Roles</th>
                 <th>Horas</th>
             </tr>
         </thead>
         <tbody>
-        {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
-        {% set termino = 1 %}
-        {% for actividad in entity.actividades %}
-           <tr>
-                    {%if temp != actividad.actividad.rol.nombre %} 
-                <td>
-                    <b>ROL:
-                    {{actividad.actividad.rol.nombre}}
-                    {% set temp = actividad.actividad.rol.nombre %}        
-                    </b>
-                    </td>
-                    <td></td>
-                    {%endif%}
-               </tr>     
+        {% set num = 0 %} {% set totalhoras = 0 %}
+       
+        {% for rol in entity.roles %}   
             <tr>
                 {% set num = num+1 %}
                 <td>{{num}}.     
-                {{ actividad.actividad.descripcion }}
-                {%if actividad.actividad.textoampliacion %}
-                <font color="#a57225">{{actividad.descripcion}}</font>
+                {{ rol.rol.nombre }}
+                {%if rol.rol.textoampliacion %}
+                <font color="#a57225">{{rol.descripcion}}</font>
                 {%endif%}
                 </td>
-                <td>{{actividad.horas}}
-                    {% set totalhoras = totalhoras + actividad.horas%}
+                <td>{{rol.horas}}
+                    {% set totalhoras = totalhoras + rol.horas%}
                 </td>
                </tr>
         {% endfor %}

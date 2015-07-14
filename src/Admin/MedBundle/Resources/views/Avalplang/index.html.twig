@@ -12,6 +12,7 @@
                 <th>Plan Gestión</th>
                 <th>Avalar</th>
                 <th>Estado de Aval</th>
+                <th>Escaner</th>
                 <th>Fecha Aval</th>
             </tr>
         </thead>
@@ -36,6 +37,11 @@
                     {%endif%}
                 </td>
                 <td>{{ entity.estado }}</td>
+                <td>
+                  {%if entity.path%}  
+                    <a href="../../../{{entity.webpath}}" target="_blank"><i class="fa fa-download"></i></a>
+                {%endif%}
+                </td>
                 <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
         {% endfor %}

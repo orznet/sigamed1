@@ -26,6 +26,19 @@
        <td>{{ form_widget(edit_form.avalado) }}</td>
    </tr>
    <tr>
+        {% if is_granted('ROLE_DEC') %}
+       <td>
+       Plan de Gestión Original escaneado<br>
+       <font color="#F87217">Adjunte el escaner del plan de gestión (Formato excel), únicamente en formato PDF y máximo 1MB de tamaño</font>
+       </td>
+       		    <td>
+		     {{ form_widget(edit_form.file) }} {{ form_errors(edit_form.file) }}
+                        
+		    </td>
+                    {%endif%}
+   </tr>
+   
+   <tr>
     <td></td>
     <td><button type="hidden" class="btn btn-lg btn-primary">Guardar</button></td>
   </tr>

@@ -1,0 +1,88 @@
+<?php
+namespace Admin\MedBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="hetero_curso")
+ * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\HeterocursosRepository")
+ */
+class Heterocursos{
+    
+/**
+ * @ORM\Id
+ * @ORM\Column(name="id", type="integer", nullable=false)
+ * @ORM\GeneratedValue(strategy="AUTO")
+ */
+private $id;
+
+
+ /**
+  * @ORM\Column(type="smallint")
+  */
+protected $curso_id;
+
+ /**
+  * @ORM\Column(type="string", length=512, nullable=true)
+  */
+protected $nombre;
+
+ /**
+  * @ORM\Column(type="string", length=10, nullable=false)
+  */
+protected $periodo;
+
+ /**
+  * @ORM\Column(type="smallint", nullable=true)
+  */
+protected $estudiantes;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia1;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia2;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia3;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia4;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia5;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $competencia6;
+
+/**
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  */
+protected $calificacion;
+
+
+ /** 
+   * @var Heteroeval 
+   * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Heteroeval", inversedBy="cursoshetero")
+   * @ORM\JoinColumn(name="hetero_id", referencedColumnName="id",
+   * nullable=false
+   * )
+   */
+protected $heteroeval;
+    
+}
