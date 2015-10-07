@@ -36,8 +36,6 @@ class redTutoresController extends Controller
         );
     }
     /**
-     * Creates a new redTutores entity.
-     *
      * @Route("/", name="redtutores_create")
      * @Method("POST")
      * @Template("AdminMedBundle:redTutores:new.html.twig")
@@ -138,7 +136,13 @@ class redTutoresController extends Controller
         $entity = $em->getRepository('AdminMedBundle:redTutores')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find redTutores entity.');
+        $entity = new redTutores();
+        $em = $this->getDoctrine()->getManager();
+        $tutor = $em->getRepository('AdminMedBundle:Tutor')->find($id);
+        $entity->setId($tutor);
+        $em->persist($entity);
+        $em->flush();
+        ##    throw $this->createNotFoundException('Entidad no encontrada');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -161,7 +165,7 @@ class redTutoresController extends Controller
     private function createEditForm(redTutores $entity)
     {
         $form = $this->createForm(new redTutoresType(), $entity, array(
-            'action' => $this->generateUrl('redtutores_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('redtutores_update', array('id' => $entity->getId()->getId())),
             'method' => 'PUT',
         ));
 

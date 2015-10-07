@@ -69,22 +69,11 @@ protected $programa;
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="tutoria")
-     */
-  protected $docentes;
-
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="curso") 
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Tutor", mappedBy="curso")
     */
-   protected $evaldetutor;
+    protected $tutores;
    
-   
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalTutor", mappedBy="curso") 
-    */
-   protected $evalatutor;
-   
-   
+      
     /**
     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="curso") 
     */
@@ -268,104 +257,6 @@ protected $programa;
         $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add docentes
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $docentes
-     * @return Curso
-     */
-    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
-    {
-        $this->docentes[] = $docentes;
-
-        return $this;
-    }
-
-    /**
-     * Remove docentes
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $docentes
-     */
-    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
-    {
-        $this->docentes->removeElement($docentes);
-    }
-
-    /**
-     * Get docentes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDocentes()
-    {
-        return $this->docentes;
-    }
-
-    /**
-     * Add evaldetutor
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
-     * @return Curso
-     */
-    public function addEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
-    {
-        $this->evaldetutor[] = $evaldetutor;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaldetutor
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
-     */
-    public function removeEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
-    {
-        $this->evaldetutor->removeElement($evaldetutor);
-    }
-
-    /**
-     * Get evaldetutor
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvaldetutor()
-    {
-        return $this->evaldetutor;
-    }
-
-    /**
-     * Add evalatutor
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evalatutor
-     * @return Curso
-     */
-    public function addEvalatutor(\Admin\MedBundle\Entity\coevalTutor $evalatutor)
-    {
-        $this->evalatutor[] = $evalatutor;
-
-        return $this;
-    }
-
-    /**
-     * Remove evalatutor
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evalatutor
-     */
-    public function removeEvalatutor(\Admin\MedBundle\Entity\coevalTutor $evalatutor)
-    {
-        $this->evalatutor->removeElement($evalatutor);
-    }
-
-    /**
-     * Get evalatutor
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvalatutor()
-    {
-        return $this->evalatutor;
-    }
 
     /**
      * Set coeval
@@ -388,5 +279,38 @@ protected $programa;
     public function getCoeval()
     {
         return $this->coeval;
+    }
+
+    /**
+     * Add tutores
+     *
+     * @param \Admin\MedBundle\Entity\Tutor $tutores
+     * @return Curso
+     */
+    public function addTutore(\Admin\MedBundle\Entity\Tutor $tutores)
+    {
+        $this->tutores[] = $tutores;
+
+        return $this;
+    }
+
+    /**
+     * Remove tutores
+     *
+     * @param \Admin\MedBundle\Entity\Tutor $tutores
+     */
+    public function removeTutore(\Admin\MedBundle\Entity\Tutor $tutores)
+    {
+        $this->tutores->removeElement($tutores);
+    }
+
+    /**
+     * Get tutores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTutores()
+    {
+        return $this->tutores;
     }
 }

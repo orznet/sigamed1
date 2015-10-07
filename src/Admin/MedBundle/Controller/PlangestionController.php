@@ -87,7 +87,7 @@ class PlangestionController extends Controller
         }
         
         $entity->setId($docente);
-        $entity->setEstado('0');
+        $entity->setEstado(0);
         $entity->setFechaCreacion(new \Datetime());
         $em->persist($entity);
         $em->flush();
@@ -286,7 +286,6 @@ class PlangestionController extends Controller
         $aux++;
         }   
             
-
         }
         $entity->setAutoevaluacion($suma/$aux);
         $entity->setFechaAutoevaluacion(new \DateTime());
@@ -315,21 +314,36 @@ class PlangestionController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Entidad No encontrada');
         }
+                
+        $entity->setFechaCierre(new \DateTime());
+        $entity->setEstado(1);
+        $em->flush();
+        return $this->redirect($this->generateUrl('admin_user_inicio'));
+    }
+    
+    /** Confirmar plan
+     * @Route("/{id}/confirm", name="plangestion_confirm")
+     * @Method("GET")
+     */
+    public function confirmAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Entidad No encontrada');
+        }
         
-        foreach ($entity->getRoles() as $rol){       
+      foreach ($entity->getRoles() as $rol){       
             foreach ($rol->getRol()->getActividades() as $actividad){
                 $actividadplan = new Actividadplang();
                 $actividadplan->setPlang($entity);
                 $actividadplan->setActividad($actividad);
                 $em->persist($actividadplan);
             }
-            
-        }     
-        
-        $entity->setFechaCierre(new \DateTime());
-        $entity->setEstado(1);
+        }  
+        $entity->setEstado(5);
         $em->flush();
-        return $this->redirect($this->generateUrl('admin_user_inicio'));
+        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
     }
     
     

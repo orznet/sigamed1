@@ -15,14 +15,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for tutor in curso.evalatutor %}
+        {% for tutor in curso.tutores %}
             <tr>
-                <td>{{tutor.tutor.user.id}}</td>
-                <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
-                <td>{{tutor.tutor.centro.nombre}}</td>
+                <td>{{tutor.docente.user.id}}</td>
+                <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
+                <td>{{tutor.docente.centro.nombre}}</td>
                 <td>
-                {%if tutor.fecha %}
-                Evaluado ({{tutor.f0}})
+                {%if tutor.coevaltutor %}
+                    
+                    {%if tutor.coevaltutor.f0 %}
+                    Evaluado ({{tutor.coevaltutor.f0}})
+                    {%else%}
+                     <a href="{{ path('coevaltutor_edit', { 'id': tutor.id }) }}">Evaluar...</a> 
+                    {%endif%}
                 {%else%}
                 <a href="{{ path('coevaltutor_edit', { 'id': tutor.id }) }}">Evaluar...</a>
                  {%endif%}

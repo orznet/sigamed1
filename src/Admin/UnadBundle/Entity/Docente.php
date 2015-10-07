@@ -113,22 +113,11 @@ protected $centro;
    protected $plangestion;
    
 
-     /**
-     * @ORM\ManyToMany(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="docentes")
-     * @ORM\JoinTable(name="docente_curso")
-     */
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Tutor", mappedBy="docente")
+    */
     protected $tutoria;
     
-  
-   /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="tutor") 
-    */
-   protected $evaladirector;
-   
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalTutor", mappedBy="tutor") 
-    */
-   protected $evaldedirector;
    
     /**
     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluado") 
@@ -522,25 +511,6 @@ protected $centro;
         return $this;
     }
 
-    /**
-     * Remove tutoria
-     *
-     * @param \Admin\UnadBundle\Entity\Curso $tutoria
-     */
-    public function removeTutorium(\Admin\UnadBundle\Entity\Curso $tutoria)
-    {
-        $this->tutoria->removeElement($tutoria);
-    }
-
-    /**
-     * Get tutoria
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTutoria()
-    {
-        return $this->tutoria;
-    }
 
     /**
      * Set plangestion
@@ -565,71 +535,6 @@ protected $centro;
         return $this->plangestion;
     }
 
-    /**
-     * Add evaladirector
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaladirector
-     * @return Docente
-     */
-    public function addEvaladirector(\Admin\MedBundle\Entity\redTutores $evaladirector)
-    {
-        $this->evaladirector[] = $evaladirector;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaladirector
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaladirector
-     */
-    public function removeEvaladirector(\Admin\MedBundle\Entity\redTutores $evaladirector)
-    {
-        $this->evaladirector->removeElement($evaladirector);
-    }
-
-    /**
-     * Get evaladirector
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvaladirector()
-    {
-        return $this->evaladirector;
-    }
-
-    /**
-     * Add evaldedirector
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evaldedirector
-     * @return Docente
-     */
-    public function addEvaldedirector(\Admin\MedBundle\Entity\coevalTutor $evaldedirector)
-    {
-        $this->evaldedirector[] = $evaldedirector;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaldedirector
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evaldedirector
-     */
-    public function removeEvaldedirector(\Admin\MedBundle\Entity\coevalTutor $evaldedirector)
-    {
-        $this->evaldedirector->removeElement($evaldedirector);
-    }
-
-    /**
-     * Get evaldedirector
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvaldedirector()
-    {
-        return $this->evaldedirector;
-    }
 
     /**
      * Add coevaldepar
@@ -764,5 +669,25 @@ protected $centro;
     public function getPeriodo()
     {
         return $this->periodo;
+    }
+
+    /**
+     * Remove tutoria
+     *
+     * @param \Admin\MedBundle\Entity\Tutor $tutoria
+     */
+    public function removeTutorium(\Admin\MedBundle\Entity\Tutor $tutoria)
+    {
+        $this->tutoria->removeElement($tutoria);
+    }
+
+    /**
+     * Get tutoria
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTutoria()
+    {
+        return $this->tutoria;
     }
 }

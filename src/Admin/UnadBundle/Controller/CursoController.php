@@ -7,7 +7,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\UnadBundle\Entity\Curso;
+use Admin\MedBundle\Entity\Cedula;
+use Admin\MedBundle\Entity\Tutor;
 use Admin\UnadBundle\Form\CursoType;
+use Admin\MedBundle\Form\CedulaType;
 use Admin\UnadBundle\Form\CursoprogType;
 
 /**
@@ -117,8 +120,7 @@ class CursoController extends Controller
     }
 
     /**
-     * Finds and displays a Curso entity.
-     *
+     * Finds and displays a Curso entity
      * @Route("/{id}", name="curso_show")
      * @Method("GET")
      * @Template()
@@ -133,13 +135,75 @@ class CursoController extends Controller
             throw $this->createNotFoundException('Unable to find Curso entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+       $deleteForm = $this->createDeleteForm($id);
+       $cedula = new Cedula();     
+       $Form = $this->createForm(new CedulaType(), $cedula, array(
+            'action' => $this->generateUrl('curso_tutor', array('id' => $entity->getId())),
+            'method' => 'GET',
+        ));
+       
+       
+       
+       $Form->add('submit', 'submit', array('label' => 'Enviar'));
 
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'cedula_form'   => $Form->createView(),     
         );
     }
+    
+   /**
+     * Finds and displays a Curso entity
+     * @Route("/{id}/tutor", name="curso_tutor")
+     * @Method("GET")
+     * @Template()
+     */
+    public function cursoTutorAction(Request $request, $id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $curso = $em->getRepository('AdminUnadBundle:Curso')->find($id);
+      $cedula = new Cedula();
+      $Form = $this->createForm(new CedulaType(), $cedula);
+      $Form->bind($request);
+      $numeroced = $Form->get('cedula')->getData();
+      
+      $usuario = $em->getRepository('AdminUserBundle:User')->find($numeroced);       
+       if (!$usuario) {
+       $this->get('session')->getFlashBag()->add('error', 'Cédula no encontrada');          
+       return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
+       }
+   
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario));
+      
+      
+      if (!$docente) {
+      $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
+      return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
+      }
+      
+       $session = $this->getRequest()->getSession();
+       if($docente->getId() == $session->get('docenteid')){
+       $this->get('session')->getFlashBag()->add('warning', 'No es necesario que el director se agregue como tutor');          
+       return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));      
+       }
+      
+      $tutor = new Tutor();
+      $tutor->setCurso($curso);
+      $tutor->setDocente($docente);
+      try{
+      $em->persist($tutor);
+      $em->flush();
+       } catch (\Doctrine\DBAL\DBALException $e) {
+             $this->get('session')->getFlashBag()->add('warning', 'El docente ya se encuentra en el curso');
+             return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));
+       }
+       $this->get('session')->getFlashBag()->add('success', 'El docente se agrego al curso'); 
+       return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));
+    }
+    
+    
+    
     
      /** en modal
      * @Route("/{id}/modal", name="curso_modal")
@@ -190,9 +254,7 @@ class CursoController extends Controller
 
     /**
     * Creates a form to edit a Curso entity.
-    *
     * @param Curso $entity The entity
-    *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Curso $entity)
@@ -201,9 +263,7 @@ class CursoController extends Controller
             'action' => $this->generateUrl('curso_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
         $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
     
@@ -222,8 +282,8 @@ class CursoController extends Controller
         $form = $this->createForm(new CursoprogType($escuelaid), $entity, array(
             'action' => $this->generateUrl('curso_update', array('id' => $entity->getId())),
             'method' => 'PUT',
-                )
-                );
+             )
+             );
         $form->add('submit', 'submit', array('label' => 'Actualizar'));
         return $form;
     

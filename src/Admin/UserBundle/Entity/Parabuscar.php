@@ -17,4 +17,3 @@ class Parabuscar{
      */
     public $parametro;
 }
-?>

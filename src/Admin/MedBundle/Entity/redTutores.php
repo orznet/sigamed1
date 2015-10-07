@@ -7,17 +7,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="hetero_redtutores")
+ * @ORM\Table(name="coeval_red")
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\redTutoresRepository")
  */
 class redTutores{
     
+
 /**
  * @ORM\Id
- * @ORM\Column(name="id", type="integer", nullable=false)
- * @ORM\GeneratedValue(strategy="AUTO")
- */
-private $id;
+ * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Tutor", inversedBy="coevaldirector")
+ * @ORM\JoinColumn(name="id",referencedColumnName="id") 
+     */
+ protected $id;  
+
  
 /**
   * @ORM\Column(type="decimal", scale=2, nullable=true)
@@ -154,25 +156,6 @@ protected $fecha;
   * @ORM\Column(type="string", length=512, nullable=true)
   */
 protected $observaciones;
-
- /** 
-    * @var Tutor 
-    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="evaladirector")
-    * @ORM\JoinColumn(name="docente_id", referencedColumnName="id",
-    * nullable=false
-    * )
-    */
-protected $tutor;
-
- /** 
-    * @var Curso 
-    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="evaldetutor")
-    * @ORM\JoinColumn(name="curso_id", referencedColumnName="id",
-    * nullable=false,
-    * onDelete="CASCADE"
-    * )
-    */
-protected $curso;
 
 
     /**
@@ -945,48 +928,15 @@ protected $curso;
     }
 
     /**
-     * Set tutor
+     * Set id
      *
-     * @param \Admin\UnadBundle\Entity\Docente $tutor
+     * @param \Admin\MedBundle\Entity\Tutor $id
      * @return redTutores
      */
-    public function setTutor(\Admin\UnadBundle\Entity\Docente $tutor)
+    public function setId(\Admin\MedBundle\Entity\Tutor $id)
     {
-        $this->tutor = $tutor;
+        $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * Get tutor
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getTutor()
-    {
-        return $this->tutor;
-    }
-
-    /**
-     * Set curso
-     *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
-     * @return redTutores
-     */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso)
-    {
-        $this->curso = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Admin\UnadBundle\Entity\Curso 
-     */
-    public function getCurso()
-    {
-        return $this->curso;
     }
 }

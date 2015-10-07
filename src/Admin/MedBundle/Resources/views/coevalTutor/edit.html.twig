@@ -3,12 +3,12 @@
 <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
     <tr>
         <td><a href="{{path('docente_coevaltutor')}}"><< Regresar...</a></td>  
-        <td>Curso: [{{coeval.curso.id}}] {{coeval.curso.nombre}}</td>
-        <td>Tutor: {{coeval.tutor.user.nombres}} {{coeval.tutor.user.apellidos}}</td>
-        <td><a href="javascript:popUp('{{path('plangestion_autoeval', { 'id': coeval.tutor.id })}}')">Ver Autoevaluación...</a></td>
+        <td>Curso: [{{coeval.tutor.curso.id}}] {{coeval.tutor.curso.nombre}}</td>
+        <td>Tutor: {{coeval.tutor.docente.user.nombres}} {{coeval.tutor.docente.user.apellidos}}</td>
+        <td><a href="javascript:popUp('{{path('plangestion_autoeval', { 'id': coeval.tutor.docente.id })}}')">Ver Autoevaluación...</a></td>
     </tr>
 </table>
-     <form action="{{ path('coevaltutor_update', { 'id': coeval.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+     <form action="{{ path('coevaltutor_update', { 'id': coeval.tutor.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
      <input type="hidden" name="_method" value="PUT" />
      {{ form_errors(edit_form) }}
@@ -144,7 +144,11 @@
   <tr>
      <td colspan="2">Observaciones: </td>
     <td>{{ form_widget(edit_form.observaciones)}}</td>
-  <td><button type="submit">Enviar</button></td>
+    <td>
+      {%if not coeval.f0%}
+        <button type="submit">Enviar</button>
+    </td>
+    {%endif%}
   </tr>
     </tbody>
     </table>

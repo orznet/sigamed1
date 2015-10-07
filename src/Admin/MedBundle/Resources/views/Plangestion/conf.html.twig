@@ -20,9 +20,9 @@
 <li>Para realizar su autoevaluación primero debe confirmar su asignación académica.</li>
 <li>La asignación académica es el registro de los roles únicamente y esta información es suministrada por la oficina de Talento Humano.</li>
 <li>La autoevaluación se realiza en base los roles de formación e investigación únicamente.</li>
-<li>El aplicativo asigna las actividades de cada rol automáticamente, estas no se pueden modificar.</li>
+<li>El aplicativo asigna las actividades de cada rol automáticamente y estas no se pueden modificar.</li>
 <li>La autoevaluación para los roles de formación no se realiza para cada curso o periodo especifico se realiza para el desempeño en general. </li>
-<li>Si considera que con la información registrada no se puede autoevaluar por favor envié un correo  a la dirección (siga@unad.edu.co) y en el asunto coloque su número de cedula y en el cuerpo del mensaje especifique que rol no corresponde o cual hace falta.</li>
+<li>Si considera que con la información registrada no se puede autoevaluar por favor envié un correo a la dirección (siga@unad.edu.co) y especifique que rol no corresponde o cual hace falta.</li>
 </ul>
                   
                 </td>   
@@ -55,7 +55,7 @@
 
                <tr>
                 <td colspan="3">
-                {%if entity.estado == 'Cerrado' %}
+                {%if entity.estado != 'Confirmado' or entity.estado != 'Autoevaluado' %}
                  <a href="{{ path('plangestion_show', { 'id': entity.id.id }) }}" class="btn btn-primary btn-xs">Autoevaluación<i class="fa fa-sign-in"></i></a>
                 {%else%}
                 <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Confirmar Asignación</a>
@@ -80,7 +80,7 @@
 Confirme su asignación para poder autoevaluarse, luego de confirmar no podrá solicitar ajustes a la asignación en caso que realmente se requieran.<br>
                 </div>
                 <div class="modal-footer">
-               <form  action="{{ path('plangestion_cerrar', { 'id': entity.id.id }) }}" method="get">     
+               <form  action="{{ path('plangestion_confirm', { 'id': entity.id.id }) }}" method="get">     
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                         Cancelar
                 </button>

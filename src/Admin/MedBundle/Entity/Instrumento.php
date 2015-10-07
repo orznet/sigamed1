@@ -45,7 +45,7 @@ class Instrumento{
     protected $fechafin;
 
     /**
-    * @ORM\Column(type="smallint", nullable=true)
+    * @ORM\Column(type="smallint")
     */
     protected $estado;
     
@@ -126,7 +126,7 @@ class Instrumento{
      */
     public function getFechainicio()
     {
-        return $this->fechainicio;
+       return $this->fechainicio;
     }
 
     /**

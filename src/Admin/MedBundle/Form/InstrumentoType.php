@@ -18,11 +18,19 @@ class InstrumentoType extends AbstractType
             ->add('nombre')
             ->add('tipo')
             ->add('descripcion')    
-            ->add('fechainicio')
-            ->add('fechafin')
-            ->add('estado')
-            ->add('estado', 'choice', array('empty_value' => ' ',    
-            'choices'   => array( '1' => 'Activo', '0' => 'Inactivo'), 'required'  => true,))       
+            ->add('fechainicio', 'date', array(
+            'widget' => 'single_text',
+            // this is actually the default format for single_text
+            'format' => 'yyyy-MM-dd',
+            ))   
+             ->add('fechafin', 'date', array(
+            'widget' => 'single_text',
+            // this is actually the default format for single_text
+            'format' => 'yyyy-MM-dd',
+            ))
+            ->add('estado', 'choice', array(  
+            'choices'   => array( '1' => 'Activo', '0' => 'Inactivo'),
+            'required'  => true,))       
         ;
     }
     

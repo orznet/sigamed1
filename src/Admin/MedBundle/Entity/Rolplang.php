@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="rol_plang")
+ * @ORM\Table(name="rol_plang", uniqueConstraints={@ORM\UniqueConstraint(columns={"plan_id", "rol_id"})})
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\rolplanglRepository")
  */
 class Rolplang{

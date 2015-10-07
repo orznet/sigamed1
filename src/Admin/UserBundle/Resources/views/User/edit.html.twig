@@ -1,28 +1,59 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User edit</h1>
+        <form action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            <table class="table table-bordered table-striped hidden-mobile" style="width: 80%">
+   <input type="hidden" name="_method" value="PUT" />
+     {{ form_errors(edit_form) }}
+   <tr>
+    <td>Identificación</td>
+    <td>{{ form_widget(edit_form.id) }}</td>
+   </tr>
+   <tr>
+    <td>Usuario</td>
+    <td>{{ form_widget(edit_form.username) }}</td>
+   </tr>
+   <tr>
+    <td>Nombres</td>
+    <td>{{ form_widget(edit_form.nombres) }}</td>
+   </tr>
+      <tr>
+    <td>Apellidos</td>
+    <td>{{ form_widget(edit_form.apellidos) }}</td>
+   </tr>
+      <tr>
+    <td>Email</td>
+    <td>{{ form_widget(edit_form.email) }}</td>
+   </tr>
+   <tr>
+    <td>Estado</td>
+    <td>Activo: {{ form_widget(edit_form.isActive) }}
+    </td>
+   </tr>
+      <tr>
+    <td>Contraseña</td>
+    <td>{{ form_widget(edit_form.password) }}
+    </td>
+   </tr>
+   <tr>
+    <td>Roles</td>
+    <td>{{ form_widget(edit_form.user_roles) }}
+    </td>
+   </tr>
+   <tr>
+    <td></td>
+    <td>    
+    <button type="submit" class="btn btn-lg btn-primary">Guardar</button></td>
+  </tr>
+  {{ form_widget(edit_form._token) }}
+  </table>
+</form>
 
-    <form action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Edit</button>
-        </p>
-    </form>
-
-        <ul class="record_actions">
+<ul class="record_actions">
     <li>
         <a href="{{ path('admin_user') }}">
-            Back to the list
+            Regresar
         </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_user_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
     </li>
 </ul>
 {% endblock %}

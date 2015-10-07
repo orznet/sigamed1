@@ -1,20 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Actividades de {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}} </h1>
+    <h1>Autoevaluación de {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}} </h1>
 
-     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-        <tbody>
-            <tr>
-                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
-                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td colspan="2">Observaciones: {{ entity.observaciones }}</td>
-            </tr>
-        </tbody>
-    </table>  
-    
+ 
   <table class="table table-bordered hidden-mobile" style="width: 95%">
         <thead>
             <tr>
@@ -77,36 +66,6 @@
         {% endfor %}  
         </tbody>
     </table>
-    
-    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-  <tr>
-    <th>Avalador</th>
-    <th>Perfil</th>
-    <th>Fecha de Aval</th>
-    <th>Estado</th>
-  </tr>
-  {% for aval in entity.avales %}
-  <tr>
-    <td>{{aval.user.nombres}} {{aval.user.apellidos}}</td>
-    <td>{{aval.perfil}}</td>
-    <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
-    <td>
-{%if aval.avalado == 1%}
-Aprobado
-{%elseif aval.avalado == 2%}
-<font color="#F87217">No aprobado</font>
-{%else%}
-Sin revisar
-{%endif%}
-
-    </td>
-  </tr>
-    <tr>
-    <td  colspan="5"><b>Observaciones: </b>{{aval.observaciones}}</td>
-  </tr>
-  {% endfor %}  
-</table>
-    <h1>Autoevaluación</h1>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
@@ -124,7 +83,11 @@ Sin revisar
             </tr>
             <tr>
                 <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
-                <td>Autoevaluación: {{ entity.autoevaluacion }}</td>
+                <td>Autoevaluación: {{ entity.autoevaluacion }} 
+                         {%if entity.estado != 'Autoevaluado'%}
+                         <h1> <font color="#c7254e">Autoevaluación sin Cerrar !</font></h1> 
+                         {%endif%}
+                </td>
             </tr>
             <tr>
                 <td colspan="2">Observaciones:<br>
@@ -132,8 +95,8 @@ Sin revisar
                 </td>
             </tr>
         </tbody>
-    </table>   
-    
+    </table>
+
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">

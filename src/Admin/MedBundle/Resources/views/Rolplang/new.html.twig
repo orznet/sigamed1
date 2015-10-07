@@ -18,7 +18,8 @@
   </tr>
    <tr>
     <td>Horas por semana</td>
-    <td>{{ form_widget(form.horas) }} <i>Valor Aproximado, puede usar decimales.<i/></td>
+    <td>{{ form_widget(form.horas) }}<i>Horas por semana aproximadas, puede usar decimales. </i>
+            <br>Horas diponibles en su plan: {{40-libre}} de máximo 40</td>
    </tr>
    {%if entity.rol.textoampliacion%}
   <tr>
@@ -33,5 +34,5 @@
   {{ form_widget(form._token) }}
   </table>
      
-</form>
+   </form></div>
 {% endblock %}

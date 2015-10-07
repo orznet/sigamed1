@@ -231,32 +231,22 @@ class UserController extends Controller
 public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('AdminUserBundle:User')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new UserType(), $entity);
-        $current_pass = $entity->getPassword();
+        $currentpass = $entity->getPassword();
         $editForm->bind($request);
+            
         if ($editForm->isValid()) {
-               if ($current_pass != $entity->getPassword()) {
-                $this->setSecurePassword($entity);
-            }           
-            $em->persist($entity);
-            $em->flush();
-
+               if ($editForm->get('password')->getData() != $currentpass) {
+               $this->setSecurePassword($entity);
+               }
+             $em->persist($entity);
+             $em->flush(); 
             return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
         }
-
-        return $this->render('AdminUserBundle:User:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**

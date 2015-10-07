@@ -12,12 +12,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class coevalTutor{
     
-/**
- * @ORM\Id
- * @ORM\Column(name="id", type="integer", nullable=false)
- * @ORM\GeneratedValue(strategy="AUTO")
- */
-private $id;
+ /**
+  * @ORM\Id
+  * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Tutor", inversedBy="coevaltutor")
+  * @ORM\JoinColumn(name="id",referencedColumnName="id") 
+  */
+ protected $tutor;
 
 /**
   * @ORM\Column(type="decimal", scale=2, nullable=true)
@@ -97,34 +97,6 @@ protected $fecha;
   */
 protected $observaciones;
 
- /** 
-    * @var Tutor 
-    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="evaldedirector")
-    * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id",
-    * nullable=false
-    * )
-    */
-protected $tutor;
-
- /** 
-    * @var Curso 
-    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="evalatutor")
-    * @ORM\JoinColumn(name="curso_id", referencedColumnName="id",
-    * nullable=false,
-    * onDelete="CASCADE"
-    * )
-    */
-protected $curso;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set f0
@@ -517,51 +489,7 @@ protected $curso;
         return $this->observaciones;
     }
 
-    /**
-     * Set tutor
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $tutor
-     * @return coevalTutor
-     */
-    public function setTutor(\Admin\UnadBundle\Entity\Docente $tutor)
-    {
-        $this->tutor = $tutor;
-
-        return $this;
-    }
-
-    /**
-     * Get tutor
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getTutor()
-    {
-        return $this->tutor;
-    }
-
-    /**
-     * Set curso
-     *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
-     * @return coevalTutor
-     */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso)
-    {
-        $this->curso = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Admin\UnadBundle\Entity\Curso 
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
+ 
 
     /**
      * Set fecha
@@ -584,5 +512,28 @@ protected $curso;
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set tutor
+     *
+     * @param \Admin\MedBundle\Entity\Tutor $tutor
+     * @return coevalTutor
+     */
+    public function setTutor(\Admin\MedBundle\Entity\Tutor $tutor)
+    {
+        $this->tutor = $tutor;
+
+        return $this;
+    }
+
+    /**
+     * Get tutor
+     *
+     * @return \Admin\MedBundle\Entity\Tutor 
+     */
+    public function getTutor()
+    {
+        return $this->tutor;
     }
 }

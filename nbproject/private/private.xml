@@ -18,18 +18,23 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/heteroeval.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadplang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Avalplang/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Entity/User.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/config/parameters.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/edit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/config/routing.yml</file>
+            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/AvalplangType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevaldirector.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Actividadrol/select.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Avalplang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Rolplang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/conf.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Form/UserType.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/autoeval.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/detalle.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevalinfo.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadrol.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/PlangestionController.php</file>
         </group>
     </open-files>
 </project-private>

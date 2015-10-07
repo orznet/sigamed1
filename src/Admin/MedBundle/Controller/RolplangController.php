@@ -54,9 +54,14 @@ class RolplangController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+           try{
             $em->persist($entity);
             $em->flush();
-
+            } catch (\Doctrine\DBAL\DBALException $e) {
+             $this->get('session')->getFlashBag()->add('error', 'No puede agregar un rol dos veces');
+            }
+            
             return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $id)));
         }
 
@@ -99,6 +104,11 @@ class RolplangController extends Controller
         $em = $this->getDoctrine()->getManager();
         $plang = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
         $rol = $em->getRepository('AdminMedBundle:Rolacademico')->find($idr);
+        $roles = $em->getRepository('AdminMedBundle:Rolplang')->findBy(array('plang' => $plang));
+        $libre = 0;
+        foreach ($roles as $rolok){ 
+        $libre = $libre + $rolok->getHoras();   
+        }
         $entity->setRol($rol);
         $entity->setPlang($plang);
         $form   = $this->createCreateForm($entity, $id);
@@ -107,6 +117,7 @@ class RolplangController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
             'id'     => $id,
+            'libre'   => $libre,
         );
     }
 

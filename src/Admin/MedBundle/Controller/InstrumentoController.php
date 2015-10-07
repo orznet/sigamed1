@@ -3,6 +3,7 @@
 namespace Admin\MedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -146,7 +147,7 @@ class InstrumentoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -162,45 +163,47 @@ class InstrumentoController extends Controller
     {
         $form = $this->createForm(new InstrumentoType(), $entity, array(
             'action' => $this->generateUrl('instrumento_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
-    /**
+ /**
      * Edits an existing Instrumento entity.
      *
      * @Route("/{id}", name="instrumento_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("AdminMedBundle:Instrumento:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
+        if (!$request->isXmlHttpRequest()) {
+        return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('AdminMedBundle:Instrumento')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Instrumento entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+       
         $editForm->handleRequest($request);
-
+        
         if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('instrumento_edit', array('id' => $id)));
+        $em->persist($entity);
+        $em->flush();
+        return new JsonResponse(array('message' => 'Success!'), 200);   
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+          $response = new JsonResponse(
+            array(
+            'message' => 'Error desde Json',
+            'form' => $this->renderView('AdminMedBundle:Instrumento:form.html.twig',
+             array(
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+             ))), 400);
+            return $response;
     }
     /**
      * Deletes a Instrumento entity.

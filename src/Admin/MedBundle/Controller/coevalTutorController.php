@@ -137,7 +137,13 @@ class coevalTutorController extends Controller
         $entity = $em->getRepository('AdminMedBundle:coevalTutor')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find coevalTutor entity.');
+        $entity = new coevalTutor();
+        $em = $this->getDoctrine()->getManager();
+        $tutor = $em->getRepository('AdminMedBundle:Tutor')->find($id);
+        $entity->setTutor($tutor);
+        $em->persist($entity);
+        $em->flush();
+        ##    throw $this->createNotFoundException('Entidad no encontrada');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -160,7 +166,7 @@ class coevalTutorController extends Controller
     private function createEditForm(coevalTutor $entity)
     {
         $form = $this->createForm(new coevalTutorType(), $entity, array(
-            'action' => $this->generateUrl('coevaltutor_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('coevaltutor_update', array('id' => $entity->getTutor()->getId())),
             'method' => 'PUT',
         ));
 

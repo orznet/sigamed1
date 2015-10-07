@@ -22,11 +22,11 @@
                 <th>Nombre</th>
                 <th>Centro</th>
             </tr>
-        {%for docente in entity.docentes %}
+        {%for tutor in entity.tutores %}
             <tr>
-                <td>{{docente.id}}</td>
-                <td>{{docente.user.id}} - {{docente.user.nombres}} {{docente.user.apellidos}}</td>
-                <td>{{docente.centro.nombre}}</td>
+                <td>{{tutor.docente.id}}</td>
+                <td>{{tutor.docente.user.id}} - {{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
+                <td>{{tutor.docente.centro.nombre}}</td>
             </tr>
         {%endfor%}   
         </tbody>

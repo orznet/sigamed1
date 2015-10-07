@@ -1,17 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-        <!-- widget grid -->
-                <section id="widget-grid" class="">
 
-                <!-- row -->
-                <div class="row">
-
-        <!-- NEW WIDGET START -->
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
         <!-- Widget ID (each widget will need unique ID)-->
-        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
                 <!-- widget options:
                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                 data-widget-colorbutton="false"
@@ -73,20 +66,10 @@
             </div>
             <!-- end widget div -->
         </div>
-        <!-- end widget -->
-                                                                        
- {% if is_granted('ROLE_ADMIN') %}  
-        <ul>
-        <li>
-            <a href="{{ path('escuela_new') }}">
-                Nuevo
-            </a>
-        </li>
-    </ul>
-    {%endif%}
+        <!-- end widget -->                                                           
+        </article>
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
 </div></div></div>
- 
     {% endblock %}

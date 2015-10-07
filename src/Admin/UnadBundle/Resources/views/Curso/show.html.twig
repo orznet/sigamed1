@@ -9,4 +9,6 @@
         <ul class="record_actions">
     {% if is_granted('ROLE_ADMIN') %} <li>{{ form(delete_form) }}</li> {%endif%}
 </ul>
+
+{{ form(cedula_form) }}
 {% endblock %}

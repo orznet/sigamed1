@@ -211,13 +211,42 @@
 
 			<!-- MAIN CONTENT -->
 			<div id="content">
-			
+                            
+                            
+                     {% for flashMessage in app.session.flashbag.get('error') %}
+                     <div class="alert alert-danger fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-times"></i>
+                                    <strong>Error!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}
+                            
+                     {% for flashMessage in app.session.flashbag.get('success') %}
+                     <div class="alert alert-success fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-check"></i>
+                                    <strong>Hecho!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('warning') %}
+                     <div class="alert alert-warning fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-warning"></i>
+                                    <strong>Advertencia!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}
+                            
 				<!-- widget grid -->
 				<section id="widget-grid" class="">
 				
 					<!-- row -->
 					<div class="row">
-
                                         {% block body %}
                                         {% endblock %}
                                         </div>			
@@ -232,6 +261,8 @@
                         </div>
 
 {% block javascripts %}
+                        
+                <script src="{{ asset('js/main.js')}}"></script>
 		<!-- END SHORTCUT AREA -->
 		<!--================================================== -->
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -307,7 +338,7 @@
 		<script src="{{ asset('js/plugin/datatables/DT_bootstrap.js') }}"></script>
 		
 		<script type="text/javascript">
-		
+		initAjaxForm();
 		// DO NOT REMOVE : GLOBAL FUNCTIONS!
 		
 		$(document).ready(function() {

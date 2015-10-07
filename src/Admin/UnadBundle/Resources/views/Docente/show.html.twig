@@ -27,12 +27,11 @@
           <th>Instrumento de Evaluación</th>
           <th>Descripción</th>
           <th>Ingreso</th>
-          <th>Estado</th>
       </tr>
 {%if entity.vinculacion == 'De Carrera'%}  
     <tr>
-    <th>1. Plan de Gestión</th>
-    <td>Realice su plan de gestión</td>    
+    <th>1. Autoevaluación (Plan de Gestión)</th>
+    <td>Instrumento para el registro del los roles del plan de gestión y para la autoevaluación por actividades</td>    
     <td>
     {%if entity.plangestion %}    
     <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
@@ -40,13 +39,11 @@
     <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>
     {%endif%}    
     </td>
-    <td>{%if entity.plangestion %}
-     {{entity.plangestion.estado}}   
-     {%endif%}</td>
+
     </tr>
  {%else%}
       <tr>
-    <th>1. Plan de Actividades</th>
+    <th>1. Autoevaluación (Plan de Actividades)</th>
     <td>Plan de Actividades (Asignación académica)</td>    
     <td>
     {%if entity.plangestion %}    
@@ -55,46 +52,9 @@
     Sin Registros
     {%endif%}    
     </td>
-    <td>{%if entity.plangestion %}
-     {{entity.plangestion.estado}}   
-     {%endif%}</td>
-    </tr>  
- {%endif%}       
-    <tr>
-    <th>
-    2. Autoevaluación
-        </th>
-    <td>Realice su autoevaluación</td>
-    <td>
-   {%if instrumentos[1].estado%}
-       {%if entity.plangestion%}       
-    {%if entity.vinculacion == 'De Carrera'%}
-  
-    {% set temp = 1 %}
-    {% for aval in entity.plangestion.avales %}
-    {%if aval.avalado == 0 or aval.avalado == 2 %}
-    {% set temp = 0 %}
-    {%endif%}
-    {%endfor%}
-    
-    {%if temp%}
-    <a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
-    {%else%}
-     Requiere Aval   
-    {%endif%}
-        
-    {%else%}
-     
-     {%if entity.plangestion.estado != 'Sin Confirmar' %}
-     <a href="{{ path('plangestion_show', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
-     {%endif%}
 
-    {%endif%}
-    {%endif%}
-    {%endif%}
-    </td>
-    <td></td>
-    </tr>
+    </tr>  
+ {%endif%}
   <tr>
     <th>
 3. Coevaluación -  Red de tutores
@@ -105,7 +65,6 @@
     <a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%endif%}
     </td>
-  <td></td>
   </tr>
   <tr>
     <th>
@@ -116,8 +75,7 @@
     {%if instrumentos[3].estado%}     
     <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%endif%}
-    </td>
-  <td></td>  
+    </td> 
   </tr>
         {% if entity.lider|length > 0 %}
        <tr>
@@ -129,8 +87,7 @@
                {%if instrumentos[4].estado%} 
            <a href="{{ path('docente_coevaldirector') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
            {%endif%}
-           </td>
-      <td></td>     
+           </td>    
        </tr>
        {%endif%}
   
@@ -144,8 +101,7 @@
            {%if instrumentos[6].estado%} 
                <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
            {%endif%}
-           </td>
-        <td></td>           
+           </td>       
        </tr>
        {%endif%}
        

@@ -5,9 +5,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 
+
+
+
+
 /**
  * @ORM\Entity
- * @ORM\Table(name="rol_plang")
+ * @ORM\Table(name="rol_plang", uniqueConstraints={@ORM\UniqueConstraint(columns={"plan_id", "rol_id"})})
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\rolplanglRepository")
  */
 class Rolplang{
@@ -28,13 +32,6 @@ protected $horas;
 * @ORM\Column(type="string", length=2500, nullable=true)
 */
 protected $descripcion;
-
-
-/**
-* @ORM\Column(type="boolean")
-* @Assert\NotBlank()
-*/
-protected $texto_ampliacion;
 
 /** 
 * @var Plang

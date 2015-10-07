@@ -71,7 +71,7 @@
         {% for entity in entities %}
             <tr table class="data">
                 <td class="data">
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')  %}
                 <a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
                 {%else%}{{ entity.id }}{%endif%}
                 </td>

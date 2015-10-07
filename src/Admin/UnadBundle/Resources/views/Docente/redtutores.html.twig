@@ -14,54 +14,25 @@
             </tr>
         </thead>
         <tbody>
-        {% for evaluacion in entity.getEvaladirector() %}
+        {% for tutoria in entity.tutoria %}
             <tr>
-                <td>{{evaluacion.curso.id}}</td>
-                <td>{{evaluacion.curso.nombre}}</td>
-                <td>{{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}</td>
+                <td>{{tutoria.curso.id}}</td>
+                <td>{{tutoria.curso.nombre}}</td>
+                <td>{{tutoria.curso.director.user.nombres}} {{tutoria.curso.director.user.apellidos}}</td>
                 <td>
-                {%if evaluacion.fecha %}
-                Evaluado ({{evaluacion.f0}})
+                {%if tutoria.coevaldirector %}
+                    
+                    {%if tutoria.coevaldirector.f0 %}
+                    Evaluado ({{tutoria.coevaldirector.f0}})
+                    {%else%}
+                     <a href="{{ path('redtutores_edit', { 'id': tutoria.id }) }}">Evaluar...</a> 
+                    {%endif%}
                 {%else%}
-                <a href="{{ path('redtutores_edit', { 'id': evaluacion.id }) }}">Evaluar...</a>
+                <a href="{{ path('redtutores_edit', { 'id': tutoria.id }) }}">Evaluar...</a>
                  {%endif%}
                  </td>
         {% endfor %}
         </tbody>
     </table>
-    <h1>2. Cursos a cargo como director:</h1>
-{%set final=0%} {%set aux=0%}
-{%for curso in cursos%}            
-<h4>{{curso.id}}-{{curso.nombre}} (Tutores: {%set cont = 0%}{%for tutor in curso.evaldetutor%} {% set cont = cont + 1%} {%endfor%}{{cont}})</h4>    
-{%if cont > 0%}
-<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-        <thead>
-            <tr>
-                <th>Tutor</th>
-                <th>Correo</th>
-                <th>Evaluo?</th>
-                <th>Observaciones</th>
-            </tr>
-        </thead>
-            <tbody>    
-            {%for tutor in curso.evaldetutor%}
-            {%if tutor.f0%}{%set final=final+tutor.f0%}{%set aux=aux+1%}{%endif%}        
-            <tr>
-                            <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
-                            <td>{{tutor.tutor.user.email}}</td>
-                            <td>{{tutor.f0? 'Si' : 'No'}}</td>
-                            <td>{{tutor.observaciones}}</td>
-            </tr>
-            {%endfor%}
-            </tbody>
-</table>
-{%endif%}
-{%endfor%}
-<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-    <tr>
-        <td>Calificación Final</td> 
-        <td>{%if final > 0%}{%set final = final/aux%} {{final}}{%endif%}</td>
-    </tr>    
-</table>
 <p>Apreciado docente: solicite a sus tutores evaluar su curso para poder obtener una calificación final de este instrumento</p>
 {% endblock %}
