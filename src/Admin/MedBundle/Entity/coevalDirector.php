@@ -12,15 +12,18 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class coevalDirector{
     
-/**
- * @ORM\Id
- * @ORM\Column(name="id", type="integer", nullable=false)
- * @ORM\GeneratedValue(strategy="AUTO")
+ /**
+  * @ORM\Id
+ * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="coeval")
+ * @ORM\JoinColumn(name="curso_id",referencedColumnName="id") 
  */
-private $id;
+ protected $curso;  
+
+
+
 
 /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $f0;
  /**
@@ -107,24 +110,8 @@ protected $fecha;
   */
 protected $observaciones;
 
-/**
- * @var Curso 
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="coeval")
- * @ORM\JoinColumn(name="curso_id",referencedColumnName="id") 
- */
- protected $curso;  
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
+     /**
      * Set f0
      *
      * @param string $f0
@@ -537,30 +524,6 @@ protected $observaciones;
     {
         return $this->observaciones;
     }
-
-    /**
-     * Set curso
-     *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
-     * @return coevalDirector
-     */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso = null)
-    {
-        $this->curso = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Admin\UnadBundle\Entity\Curso 
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
-
     /**
      * Set f16
      *
@@ -605,5 +568,28 @@ protected $observaciones;
     public function getF17()
     {
         return $this->f17;
+    }
+
+    /**
+     * Set curso
+     *
+     * @param \Admin\UnadBundle\Entity\Curso $curso
+     * @return coevalDirector
+     */
+    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso)
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \Admin\UnadBundle\Entity\Curso 
+     */
+    public function getCurso()
+    {
+        return $this->curso;
     }
 }

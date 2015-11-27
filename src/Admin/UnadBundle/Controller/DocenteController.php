@@ -323,20 +323,6 @@ class DocenteController extends Controller
          );  
     }
     
-     /**
-     * @Method("GET")
-     * @Template()
-     */
-    public function coevalparesAction()
-    {
-      $em = $this->getDoctrine()->getManager();
-      $session = $this->getRequest()->getSession();
-      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
-
-        return array(
-            'entity' => $entity,
-         ); 
-    }
     
      /**
      * @Method("GET")

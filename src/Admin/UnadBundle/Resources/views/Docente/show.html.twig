@@ -30,12 +30,16 @@
       </tr>
 {%if entity.vinculacion == 'De Carrera'%}  
     <tr>
-    <th>1. Autoevaluación (Plan de Gestión)</th>
-    <td>Instrumento para el registro del los roles del plan de gestión y para la autoevaluación por actividades</td>    
+    <th>Autoevaluación
+    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Plan de Gestión)</a>
+    </th>
+    <td>Registro del los roles del plan de gestión y para la autoevaluación por actividades</td>    
     <td>
-    {%if entity.plangestion %}    
+    {%if entity.plangestion %}
+          {%if instrumentos[1].estado%}   
     <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
-    {%else%}
+            {%else%}<i>Ver cronograma</i>{%endif%}
+         {%else%}
     <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>
     {%endif%}    
     </td>
@@ -43,11 +47,15 @@
     </tr>
  {%else%}
       <tr>
-    <th>1. Autoevaluación (Plan de Actividades)</th>
-    <td>Plan de Actividades (Asignación académica)</td>    
+    <th>Autoevaluación (Plan de Actividades)</th>
+    <td>Plan de Actividades
+    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a> 
+    </td>    
     <td>
-    {%if entity.plangestion %}    
+    {%if entity.plangestion %}
+     {%if instrumentos[1].estado%} 
     <a href="{{ path('plangestion_conf', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%else%}<i>Ver cronograma</i>{%endif%}
     {%else%}
     Sin Registros
     {%endif%}    
@@ -55,34 +63,38 @@
 
     </tr>  
  {%endif%}
-  <tr>
+  {%if entity.tutoria|length > 0%}
+    <tr>
     <th>
-3. Coevaluación -  Red de tutores
+Coevaluación -  Red de tutores
         </th>
-        <td>Evalue a sus directores de curso</td> 
+        <td>Evaluación del tutor al director de curso</td> 
     <td>
      {%if instrumentos[2].estado%}    
     <a href="{{ path('docente_redtutores') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%endif%}
     </td>
   </tr>
-  <tr>
+  {%endif%}
+    {%if entity.director|length > 0%}
+  <tr> 
     <th>
-4. Coevaluación - Director de curso a tutores
+Coevaluación - Director de curso a tutores
         </th>
-        <td>Evalue a los tutores de sus cursos</td> 
+        <td>Evaluación del director a los tutores de curso</td> 
     <td>
     {%if instrumentos[3].estado%}     
     <a href="{{ path('docente_coevaltutor') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%endif%}
     </td> 
   </tr>
+  {%endif%}
         {% if entity.lider|length > 0 %}
        <tr>
            <th>
-           5.  Coevaluación - Lider o Cordinador Nacional a Directores de Curso 
+          Coevaluación - Lider o Cordinador Nacional a Directores de Curso 
            </th>
-           <td>Evaluae a los directores de curso</td>
+           <td>Evaluación del lider a los directores de curso</td>
            <td>
                {%if instrumentos[4].estado%} 
            <a href="{{ path('docente_coevaldirector') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
@@ -91,12 +103,12 @@
        </tr>
        {%endif%}
   
-        {% if entity.vinculacion == 'De Carrera'%}
+        {% if entity.ternado|length != 0%}
        <tr>
            <th>
-           6.  Coevaluación - Terna de Pares 
+           Coevaluación - Terna de Pares 
            </th>
-           <td>Como ternado evaluae a los docentes de carrera de su escuela</td>
+           <td>Evaluación de la terna a los pares acádemicos</td>
            <td>
            {%if instrumentos[6].estado%} 
                <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  

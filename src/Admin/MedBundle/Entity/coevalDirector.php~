@@ -12,15 +12,18 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class coevalDirector{
     
-/**
- * @ORM\Id
- * @ORM\Column(name="id", type="integer", nullable=false)
- * @ORM\GeneratedValue(strategy="AUTO")
+ /**
+  * @ORM\Id
+ * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="coeval")
+ * @ORM\JoinColumn(name="curso_id",referencedColumnName="id") 
  */
-private $id;
+ protected $curso;  
+
+
+
 
 /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $f0;
  /**
@@ -107,24 +110,8 @@ protected $fecha;
   */
 protected $observaciones;
 
-/**
- * @var Curso 
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="coeval")
- * @ORM\JoinColumn(name="curso_id",referencedColumnName="id") 
- */
- protected $curso;  
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
+     /**
      * Set f0
      *
      * @param string $f0
@@ -537,27 +524,49 @@ protected $observaciones;
     {
         return $this->observaciones;
     }
-
     /**
-     * Set curso
+     * Set f16
      *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
+     * @param integer $f16
      * @return coevalDirector
      */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso = null)
+    public function setF16($f16)
     {
-        $this->curso = $curso;
+        $this->f16 = $f16;
 
         return $this;
     }
 
     /**
-     * Get curso
+     * Get f16
      *
-     * @return \Admin\UnadBundle\Entity\Curso 
+     * @return integer 
      */
-    public function getCurso()
+    public function getF16()
     {
-        return $this->curso;
+        return $this->f16;
+    }
+
+    /**
+     * Set f17
+     *
+     * @param integer $f17
+     * @return coevalDirector
+     */
+    public function setF17($f17)
+    {
+        $this->f17 = $f17;
+
+        return $this;
+    }
+
+    /**
+     * Get f17
+     *
+     * @return integer 
+     */
+    public function getF17()
+    {
+        return $this->f17;
     }
 }

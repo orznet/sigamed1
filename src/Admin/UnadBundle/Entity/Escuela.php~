@@ -39,8 +39,7 @@ protected $sigla;
      * @var Decano 
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="decano")
      * @ORM\JoinColumn(name="decano_id", referencedColumnName="id",
-     * nullable=false,
-     * onDelete="CASCADE"
+     * nullable=false
      * )
      */
 protected $decano;
@@ -50,12 +49,10 @@ protected $decano;
      * @var Secretaria 
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="secretaria")
      * @ORM\JoinColumn(name="secretaria_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $secretaria;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="escuela")
@@ -63,9 +60,14 @@ protected $secretaria;
     protected $programas;
 
      /**
-     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="docente")
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="escuela")
      */
-    protected $docentes;   
+    protected $docentes;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Terna", mappedBy="escuela")
+    */
+    protected $ternados;
 
     /**
      * Set id
@@ -177,5 +179,79 @@ protected $secretaria;
     public function getSecretaria()
     {
         return $this->secretaria;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->programas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add programas
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programas
+     * @return Escuela
+     */
+    public function addPrograma(\Admin\UnadBundle\Entity\Programa $programas)
+    {
+        $this->programas[] = $programas;
+
+        return $this;
+    }
+
+    /**
+     * Remove programas
+     *
+     * @param \Admin\UnadBundle\Entity\Programa $programas
+     */
+    public function removePrograma(\Admin\UnadBundle\Entity\Programa $programas)
+    {
+        $this->programas->removeElement($programas);
+    }
+
+    /**
+     * Get programas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProgramas()
+    {
+        return $this->programas;
+    }
+
+    /**
+     * Add docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     * @return Escuela
+     */
+    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes[] = $docentes;
+
+        return $this;
+    }
+
+    /**
+     * Remove docentes
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docentes
+     */
+    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
+    {
+        $this->docentes->removeElement($docentes);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

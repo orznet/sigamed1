@@ -12,7 +12,7 @@ class CedulaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
             $builder
-            ->add('cedula')
+            ->add('cedula', 'text', array('required'  => true))        
             ;           
     }
 

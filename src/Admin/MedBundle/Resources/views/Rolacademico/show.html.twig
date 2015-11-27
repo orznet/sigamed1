@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Rolacademico</h1>
+    <h1>Rol Académico</h1>
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
@@ -19,7 +19,7 @@
             </tr>
         </tbody>
     </table>
-
+{% if is_granted('ROLE_ADMIN') %}   
         <ul class="record_actions">
     <li>
         <a href="{{ path('rolacademico') }}">
@@ -33,13 +33,12 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
- 
+ {%endif%}
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Descripcion</th>
-                <th>Textoa</th>
+                <th>Descripción</th>
 
             </tr>
         </thead>
@@ -48,7 +47,6 @@
             <tr>
                 <td><a href="{{ path('actividadrol_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
-                <td>{{ entity.textoampliacion }}</td>
             </tr>
         {% endfor %}
         </tbody>

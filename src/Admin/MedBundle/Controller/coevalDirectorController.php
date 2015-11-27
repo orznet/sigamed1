@@ -135,9 +135,15 @@ class coevalDirectorController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:coevalDirector')->find($id);
-
+        
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find coevalDirector entity.');
+        $entity = new coevalDirector();
+        $em = $this->getDoctrine()->getManager();
+        $curso = $em->getRepository('AdminUnadBundle:Curso')->find($id);
+        $entity->setCurso($curso);
+        $em->persist($entity);
+        $em->flush();
+        ##    throw $this->createNotFoundException('Entidad no encontrada');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -160,7 +166,7 @@ class coevalDirectorController extends Controller
     private function createEditForm(coevalDirector $entity)
     {
         $form = $this->createForm(new coevalDirectorType(), $entity, array(
-            'action' => $this->generateUrl('coevaldirector_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('coevaldirector_update', array('id' => $entity->getCurso()->getId())),
             'method' => 'PUT',
         ));
 

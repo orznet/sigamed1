@@ -10,8 +10,7 @@
                 <th>Código</th>
                 <th>Curso</th>
                 <th>Director</th>
-                <th>Observaciones</th>
-                <th>Evaluación</th>
+                <th>Evaluar</th>
             </tr>
         </thead>
         <tbody>
@@ -24,19 +23,18 @@
                 {{curso.director.user.nombres}} {{curso.director.user.apellidos}}
                 {%endif%}    
                 </td>
-                <td>{%if curso.coeval %}
-               {{curso.coeval.observaciones}}
-                {%endif%}                    
-                </td>
                 <td>
                 {%if curso.director%}    
                 {%if curso.coeval %}
-                {%if curso.coeval.f0 is not null %}
-                {{curso.coeval.f0}}
+               {%if curso.coeval.f0 %}
+               {{curso.coeval.f0}}
                 {%else%}
-                <a href="{{ path('coevaldirector_edit', { 'id': curso.coeval.id }) }}">Evaluar...</a>
-                 {%endif%}
+                <a href="{{ path('coevaldirector_edit', { 'id': curso.id }) }}">Evaluar...</a>   
                 {%endif%}
+                {%else%}
+                <a href="{{ path('coevaldirector_edit', { 'id': curso.id }) }}">Evaluar...</a>
+                 {%endif%}
+                
                  {%endif%}
                  </td>
         {% endfor %}

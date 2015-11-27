@@ -11,7 +11,6 @@
                 <th>Escuela</th>
                 <th>Lider</th>
                 <th>Nivel</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,9 +27,6 @@
                {%endif%}
                 </td>
                 <td>{{ entity.nivel }}</td>
-                <td>
-                        <a href="{{ path('programa_edit', { 'id': entity.id }) }}">edit</a>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

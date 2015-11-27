@@ -3,10 +3,6 @@ admin_user:
     defaults: { _controller: "AdminUserBundle:User:index" }
     requirements: { _method: get }
     
-admin_user_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "AdminUserBundle:User:show" }
-
 admin_user_buscarpor:
     pattern:  /lista
     defaults: { _controller: "AdminUserBundle:User:buscarpor" }

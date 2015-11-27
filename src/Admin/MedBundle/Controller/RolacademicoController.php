@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\RolacademicoType;
 /**
  * Rolacademico controller.
  *
- * @Route("/doc/rolacademico")
+ * @Route("/unad/rolacademico")
  */
 class RolacademicoController extends Controller
 {

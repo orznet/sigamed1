@@ -1,11 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-<h3><a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a> | Evaluación de pares (Coevaluación)</h3>
-    {%set temp = 0%}
-    {% for evaluado in entity.ternado %}
-    {%set temp = temp+1%}
-    {%endfor%}
-    {%if temp > 0%}
+<h3><a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a> | Evaluación de pares (Co Evaluación)</h3>
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
@@ -17,23 +12,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for evaluacion in entity.ternado %}
+        {% for docente in pares %}
             <tr>
                 <td>
-                {{evaluacion.evaluado.user.id}}</td>
-                <td>{{evaluacion.evaluado.user.nombres}} {{evaluacion.evaluado.user.apellidos}}</td>
-                <td>{{evaluacion.evaluado.centro.nombre}}</td>
+                {{docente.user.id}}</td>
+                <td>{{docente.user.nombres}} {{docente.user.apellidos}}</td>
+                <td>{{docente.centro.nombre}}</td>
                 <td>
-                {%if evaluacion.fecha %}
-                Evaluado ({{evaluacion.f0}})
-                {%else%}
-                <a href="{{ path('coevalpares_edit', { 'id': evaluacion.id }) }}">Evaluar...</a>
-                 {%endif%}
                  </td>
         {% endfor %}
         </tbody>
     </table>
-    {%endif%}
+
+
     <h3>Terna que lo evaluara:</h3>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>

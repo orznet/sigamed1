@@ -36,17 +36,19 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('admin_user') }}">
+        <a href="{{ path('unad_user_lista') }}">
             Regresar
         </a>
     </li>
+     {% if is_granted('ROLE_ADMIN') %} 
     <li>
         <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">
             Editar
         </a>
     </li>
-</ul>
     
+</ul>
+   {%endif%} 
 <h1>Evaluaciones Anteriores</h1>
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">

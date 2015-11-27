@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\coevalParesType;
 /**
  * coevalPares controller.
  *
- * @Route("/coevalpares")
+ * @Route("/doc/coevalpares")
  */
 class coevalParesController extends Controller
 {
@@ -21,18 +21,19 @@ class coevalParesController extends Controller
     /**
      * Lists all coevalPares entities.
      *
-     * @Route("/", name="coevalpares")
+     * @Route("/", name="docente_coevalpares")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:coevalPares')->findAll();
-
+        $session = $this->getRequest()->getSession();
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        $terna =  $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
+        
         return array(
-            'entities' => $entities,
+        'terna' => $terna
         );
     }
     /**
@@ -127,27 +128,21 @@ class coevalParesController extends Controller
     /**
      * Displays a form to edit an existing coevalPares entity.
      *
-     * @Route("/{id}/edit", name="coevalpares_edit")
+     * @Route("/send/{id}", name="coevalpares_edit")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('AdminMedBundle:coevalPares')->find($id);
-
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find coevalPares entity.');
+            throw $this->createNotFoundException('Unable to find Coevaluacion entity.');
         }
-
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -253,5 +248,43 @@ class coevalParesController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+     /**
+     * Crear Evaluaciones
+     * @Route("/crear/eval", name="coevalpares_crear")
+     * @Method("GET")
+     * @Template()
+     */
+    public function crearAction()
+    {
+     $em = $this->getDoctrine()->getManager();
+     $session = $this->getRequest()->getSession();
+     $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+     $ternado =  $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
+     $ternados =  $em->getRepository('AdminUnadBundle:Terna')->findBy(array('escuela' => $ternado->getEscuela(), 'principal' => 1));
+     $pares = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('vinculacion' => 'DC', 'escuela' => $ternado->getEscuela()));
+      
+    if($ternado->getPrincipal()){
+            foreach ($pares as $par){
+            if($par != $docente){
+            $entity = new coevalPares();
+            $entity->setEvaluado($par);
+            $entity->setEvaluador($ternado);
+            $em->persist($entity);    
+            }
+            }
+    }
+     else{
+            foreach ($ternados as $par){
+            $entity = new coevalPares();
+            $entity->setEvaluado($par->getDocente());
+            $entity->setEvaluador($ternado);
+            $em->persist($entity);    
+            }  
+     }
+     
+     $em->flush();
+     return $this->redirect($this->generateUrl('docente_coevalpares'));
     }
 }

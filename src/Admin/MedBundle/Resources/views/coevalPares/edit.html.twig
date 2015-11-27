@@ -11,8 +11,11 @@
   <tr>
     <th>Perfil</th>
     <td>{{ entity.evaluado.perfil }}</td>
-    <th>Plan de Gestión</th>
-    <td><a href="javascript:popUp('{{path('plangestion_autoeval', { 'id': entity.evaluado.id })}}')">Ver Autoevaluación...</a></td>
+    <th></th>
+    <td><!--
+    <a href="javascript:popUp('{{path('plangestion_autoeval', { 'id': entity.evaluado.id })}}')">Ver Autoevaluación...</a>
+    -->
+        </td>
   </tr>
 </table>
      <form action="{{ path('coevalpares_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>

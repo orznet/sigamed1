@@ -19,72 +19,72 @@ class Evaluacion{
  private $id;
  
  /**
- * @ORM\Column(type="decimal", scale=2, nullable=true)
+ * @ORM\Column(type="decimal", scale=1, nullable=true)
  */
 protected $final;
  
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $auto;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $auto1;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $auto2;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $hetero;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $hetero1;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $hetero2;    
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $hetero3;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co1;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co2;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co3;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co4;
 
  /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $co5;
 

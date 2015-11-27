@@ -20,7 +20,7 @@ class coevalTutor{
  protected $tutor;
 
 /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $f0;
  /**

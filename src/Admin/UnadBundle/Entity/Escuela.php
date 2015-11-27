@@ -62,7 +62,12 @@ protected $secretaria;
      /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Docente", mappedBy="escuela")
      */
-    protected $docentes;   
+    protected $docentes;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Terna", mappedBy="escuela")
+    */
+    protected $ternados;
 
     /**
      * Set id
@@ -248,5 +253,38 @@ protected $secretaria;
     public function getDocentes()
     {
         return $this->docentes;
+    }
+
+    /**
+     * Add ternados
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternados
+     * @return Escuela
+     */
+    public function addTernado(\Admin\UnadBundle\Entity\Terna $ternados)
+    {
+        $this->ternados[] = $ternados;
+
+        return $this;
+    }
+
+    /**
+     * Remove ternados
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternados
+     */
+    public function removeTernado(\Admin\UnadBundle\Entity\Terna $ternados)
+    {
+        $this->ternados->removeElement($ternados);
+    }
+
+    /**
+     * Get ternados
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTernados()
+    {
+        return $this->ternados;
     }
 }

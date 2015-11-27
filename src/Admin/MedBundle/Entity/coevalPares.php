@@ -21,7 +21,7 @@ private $id;
 
 
 /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $f0;
 
@@ -173,7 +173,7 @@ protected $evaluado;
 
  /** 
     * @var Evaluador 
-    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="ternado")
+    * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Terna", inversedBy="evaluacion")
     * @ORM\JoinColumn(name="evaluador_id", referencedColumnName="id",
     * nullable=false
     * )
@@ -975,10 +975,10 @@ protected $evaluador;
     /**
      * Set evaluador
      *
-     * @param \Admin\UnadBundle\Entity\Docente $evaluador
+     * @param \Admin\UnadBundle\Entity\Terna $evaluador
      * @return coevalPares
      */
-    public function setEvaluador(\Admin\UnadBundle\Entity\Docente $evaluador)
+    public function setEvaluador(\Admin\UnadBundle\Entity\Terna $evaluador)
     {
         $this->evaluador = $evaluador;
 
@@ -988,7 +988,7 @@ protected $evaluador;
     /**
      * Get evaluador
      *
-     * @return \Admin\UnadBundle\Entity\Docente 
+     * @return \Admin\UnadBundle\Entity\Terna 
      */
     public function getEvaluador()
     {

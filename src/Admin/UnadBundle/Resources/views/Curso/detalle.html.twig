@@ -21,13 +21,15 @@
               <th>ID</th>
                 <th>Nombre</th>
                 <th>Centro</th>
+                <th>Borrar</th>
             </tr>
         {%for tutor in entity.tutores %}
             <tr>
                 <td>{{tutor.docente.id}}</td>
                 <td>{{tutor.docente.user.id}} - {{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                 <td>{{tutor.docente.centro.nombre}}</td>
+                <td><a href="{{ path('tutor_delete', {'id': tutor.id }) }}">Borrar</a></td>
             </tr>
-        {%endfor%}   
+        {%endfor%}
         </tbody>
         </table>

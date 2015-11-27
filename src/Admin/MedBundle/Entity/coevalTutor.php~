@@ -20,7 +20,7 @@ class coevalTutor{
  protected $tutor;
 
 /**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
+  * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $f0;
  /**
@@ -512,5 +512,28 @@ protected $observaciones;
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set tutor
+     *
+     * @param \Admin\MedBundle\Entity\Tutor $tutor
+     * @return coevalTutor
+     */
+    public function setTutor(\Admin\MedBundle\Entity\Tutor $tutor)
+    {
+        $this->tutor = $tutor;
+
+        return $this;
+    }
+
+    /**
+     * Get tutor
+     *
+     * @return \Admin\MedBundle\Entity\Tutor 
+     */
+    public function getTutor()
+    {
+        return $this->tutor;
     }
 }

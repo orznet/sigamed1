@@ -30,10 +30,6 @@ docente_coevaltutor:
     pattern:  /doc/coevaltutor
     defaults: { _controller: "AdminUnadBundle:Docente:coevaltutor" }
     
-docente_coevalpares:
-    pattern:  /doc/coevalpares
-    defaults: { _controller: "AdminUnadBundle:Docente:coevalpares" }
-    
 docente_coevaldirector:
     pattern:  /doc/coevaldirector
     defaults: { _controller: "AdminUnadBundle:Docente:coevaldirector" }

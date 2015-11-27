@@ -143,8 +143,7 @@ class CursoController extends Controller
         ));
        
        
-       
-       $Form->add('submit', 'submit', array('label' => 'Enviar'));
+       $Form->add('submit', 'submit', array('label' => 'Agregar'));
 
         return array(
             'entity'      => $entity,
@@ -167,6 +166,13 @@ class CursoController extends Controller
       $Form = $this->createForm(new CedulaType(), $cedula);
       $Form->bind($request);
       $numeroced = $Form->get('cedula')->getData();
+      $session = $this->getRequest()->getSession();
+      $securityContext = $this->container->get('security.context');
+      
+      if($curso->getDirector()->getId() != $session->get('docenteid') && !$securityContext->isGranted('ROLE_ADMIN')){
+      $this->get('session')->getFlashBag()->add('error', 'No permitido');          
+      return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));                     
+       }
       
       $usuario = $em->getRepository('AdminUserBundle:User')->find($numeroced);       
        if (!$usuario) {
@@ -182,8 +188,7 @@ class CursoController extends Controller
       return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
       }
       
-       $session = $this->getRequest()->getSession();
-       if($docente->getId() == $session->get('docenteid')){
+       if($docente->getId() == $curso->getDirector()->getId()){
        $this->get('session')->getFlashBag()->add('warning', 'No es necesario que el director se agregue como tutor');          
        return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));      
        }
@@ -368,4 +373,40 @@ class CursoController extends Controller
             ->getForm()
         ;
     }
+    
+     /**
+     * Borrar Tutor.
+     *
+     * @Route("/tutor/{id}/del", name="tutor_delete")
+     * @Method("GET")
+     */
+    public function borrartutorAction($id)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AdminMedBundle:Tutor')->find($id);
+            $cursoid = $entity->getCurso()->getId();
+            $director = $entity->getCurso()->getDirector();
+            $securityContext = $this->container->get('security.context');
+            $session = $this->getRequest()->getSession();
+            
+            if($director->getId() == $session->get('docenteid') || $securityContext->isGranted('ROLE_ADMIN')){
+
+                try{
+                $em->remove($entity);
+                $em->flush();
+                } catch (\Doctrine\DBAL\DBALException $e) {
+                $this->get('session')->getFlashBag()->add('warning', 'El tutor no se puede remover ya evaluo');
+                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));
+                }
+                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));
+                } 
+                else{
+                $this->get('session')->getFlashBag()->add('error', 'No permitido');          
+                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));   
+                }
+            
+        }
+            
+
+    
 }

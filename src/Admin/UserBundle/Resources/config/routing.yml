@@ -25,4 +25,8 @@ unad_user_lista:
 
 unad_user_buscarpor:
     pattern:  /unad/user/lista
-    defaults: { _controller: "AdminUserBundle:User:buscarpor" }         
+    defaults: { _controller: "AdminUserBundle:User:buscarpor" }
+    
+admin_user_show:
+    pattern:  /unad/{id}/doc
+    defaults: { _controller: "AdminUserBundle:User:show" }    

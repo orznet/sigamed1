@@ -136,7 +136,7 @@ protected $centro;
    protected $evaluacion;
    
     /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluador") 
+    * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Terna", mappedBy="docente") 
     */
    protected $ternado;
    
@@ -569,38 +569,6 @@ protected $centro;
         return $this->coevaldepar;
     }
 
-    /**
-     * Add ternado
-     *
-     * @param \Admin\MedBundle\Entity\coevalPares $ternado
-     * @return Docente
-     */
-    public function addTernado(\Admin\MedBundle\Entity\coevalPares $ternado)
-    {
-        $this->ternado[] = $ternado;
-
-        return $this;
-    }
-
-    /**
-     * Remove ternado
-     *
-     * @param \Admin\MedBundle\Entity\coevalPares $ternado
-     */
-    public function removeTernado(\Admin\MedBundle\Entity\coevalPares $ternado)
-    {
-        $this->ternado->removeElement($ternado);
-    }
-
-    /**
-     * Get ternado
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTernado()
-    {
-        return $this->ternado;
-    }
 
     /**
      * Set heteroeval
@@ -689,5 +657,38 @@ protected $centro;
     public function getTutoria()
     {
         return $this->tutoria;
+    }
+
+    /**
+     * Add ternado
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternado
+     * @return Docente
+     */
+    public function addTernado(\Admin\UnadBundle\Entity\Terna $ternado)
+    {
+        $this->ternado[] = $ternado;
+
+        return $this;
+    }
+
+    /**
+     * Remove ternado
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternado
+     */
+    public function removeTernado(\Admin\UnadBundle\Entity\Terna $ternado)
+    {
+        $this->ternado->removeElement($ternado);
+    }
+
+    /**
+     * Get ternado
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTernado()
+    {
+        return $this->ternado;
     }
 }

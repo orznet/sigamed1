@@ -25,7 +25,19 @@
             </tr>
             <tr>
                 <th>Secretaria Academica</th>
-                <td>{{ entity.secretaria ? entity.secretaria.username~' '~entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
+                <td>{{ entity.secretaria ? entity.secretaria.username~': '~entity.secretaria.nombres~' '~entity.secretaria.apellidos  : 'SIN' }}</td>
+            </tr>
+            <tr>
+                <th>Terna de Pares</th>
+                <td>
+                     {%for ternado in entity.ternados %}
+                    {{ternado.docente.user.id}}: {{ternado.docente.user.nombres}} {{ternado.docente.user.apellidos}}
+                    {%if not ternado.principal %}
+                    - Suplente
+                    {%endif%}
+                    <br>
+                    {%endfor%}
+                </td>
             </tr>
         </tbody>
     </table>
