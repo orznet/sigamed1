@@ -36,8 +36,7 @@ protected $tipo;
      * @var Director 
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="directorcentro")
      * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
-     * nullable=true,
-     * onDelete="CASCADE"
+     * nullable=true
      * )
      */
 protected $director;

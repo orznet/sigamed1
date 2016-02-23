@@ -71,7 +71,7 @@ protected $path;
 
     /**
      * @Assert\File(
-     *     maxSize = "1000000", 
+     *     maxSize = "4000000", 
      *     maxSizeMessage = "El tamaño máximo permitido es de 1MB",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Tipo de archivo no válido"

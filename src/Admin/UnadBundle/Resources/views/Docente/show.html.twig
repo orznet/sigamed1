@@ -13,67 +13,57 @@
 </ul>
            {%endif%}
 
-        <div class="alert alert-info fade in">
-        <button class="close" data-dismiss="alert">
-            ×
-        </button>
-        <i class="fa-fw fa fa-info"></i>
-       <strong>Importante!</strong> Verifique su información:
-            <ul>
-            <li>Si encuantra algún error en la información de vinculación por favor envie un correo a la direccion siga@unad.edu.co solicitando el cambio.
-            </li>
-            <li>
-            Si usted es tutor de un curso y no esta registrado o no es tutor un curso en el cual esta apareciendo, solicite al director de curso la modificación. 
-            </li>
-            </ul>
-        </div>
-
-<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-{% for plan in entity.planmejoramiento %}
-  <tr>
-    <th>Plan de Mejoramiento</th>
-    <td>
-   <a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a> 
-    </td></tr>
-   {% endfor %}
-   </table>
- {%if 1 %}  
+<h4>3. Instrumentos de Evaluación</h4>
   <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
-          <th>Instrumento de Evaluación</th>
+          <th>Instrumento</th>
           <th>Descripción</th>
-          <th>Ingreso</th>
+          <th>Acción</th>
       </tr>
 {%if entity.vinculacion == 'De Carrera'%}  
-    <tr>
+        <tr>
+        <th>
+        Plan de Gestión Docente
+        </th>
+        <td>Formato de Excel diligenciado y guardado en PDF</td>
+        <td>
+        {%if entity.plangestion.formato%}
+            <a href="../../../{{entity.plangestion.formato.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver Archivo...</a>
+            {%else%}
+            <a href="{{ path('formatoplang_new', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a>
+            {%endif%}
+        </td>
+        
+    </tr>
+      <tr>
     <th>Autoevaluación
-    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Plan de Gestión)</a>
+
     </th>
-    <td>Registro del los roles del plan de gestión y para la autoevaluación por actividades</td>    
+    <td>Registro de roles y  autoevaluación</td>    
     <td>
     {%if entity.plangestion %}
-          {%if instrumentos[1].estado%}   
+          {%if instrumentos[0].estado%}   
     <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
             {%else%}<i>Ver cronograma</i>{%endif%}
          {%else%}
     <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>
     {%endif%}    
     </td>
-
     </tr>
+    
  {%else%}
       <tr>
     <th>Autoevaluación (Plan de Actividades)</th>
     <td>Plan de Actividades
-    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a> 
+    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a>
     </td>    
     <td>
-    {%if entity.plangestion %}
+    {%if entity.plangestion.autoevaluacion == null %}
      {%if instrumentos[1].estado%} 
     <a href="{{ path('plangestion_conf', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%else%}<i>Ver cronograma</i>{%endif%}
     {%else%}
-    Sin Registros
+    <i>Ver Resultados</i>
     {%endif%}    
     </td>
 
@@ -134,13 +124,19 @@ Coevaluación - Director de curso a tutores
        {%endif%}
        
   </table>
-   {%endif%}
-   <table class="table table-bordered hidden-mobile" style="width: 95%">
-      <tr>
-          <th>Resultados</th>
-          <th></th>
-          <th></th>
-      </tr>
+
+<table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+{% for plan in entity.planmejoramiento %}
+  <tr>
+    <th>Plan de Mejoramiento</th>
+    <td>
+   <a href="{{ path('planmejoramiento_doc', { 'id': plan.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a> 
+    </td></tr>
+   {% endfor %}
+   </table>
+
+<h4>4. Resultados</h4>
+<table class="table table-bordered hidden-mobile" style="width: 95%">
     <tr>
     <th>
     {%if entity.vinculacion == 'DC'%}
@@ -151,10 +147,11 @@ Coevaluación - Director de curso a tutores
     (Autoevaluación)
         </th>
         <td>
-        <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Activiades <i class="fa fa-sign-in"></i></a>    
         </td>    
     <td>
-<a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+{%if entity.plangestion%}
+        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+   {%endif%}
     </td>
     </tr>
     <tr>
@@ -164,7 +161,7 @@ Coevaluación - Director de curso a tutores
         <td>
            {%if entity.heteroeval%} 
             <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
-        {%else%} Sin registros {%endif%}
+        {%else%} - {%endif%}
         </td> 
     <td></td>
   </tr>
@@ -182,7 +179,7 @@ Coevaluación - Director de curso a tutores
   {%if entity.vinculacion == 'De Carrera'%}
         <tr>
     <th>
-5. Informe de Evaluación Final DC
+4. Informe de Evaluación Final DC
         </th>
         <td>
             {%if entity.evaluacion%}
@@ -194,7 +191,7 @@ Coevaluación - Director de curso a tutores
   {%else%}
           <tr>
     <th>
-5. Informe de Evaluación Final
+4. Informe de Evaluación Final
         </th>
         <td>
         {%if entity.evaluacion%}        
@@ -205,12 +202,62 @@ Coevaluación - Director de curso a tutores
   </tr>
   {%endif%}
   </table>
+
+ <div class="modal fade" data-refresh="true" id="ModalTutor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog">
+<div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title">Red de Tutores</h4>
+                </div>			<!-- /modal-header -->
+                <div class="modal-body">
+                <ul>
+                    <li>
+                    Si usted fue tutor y este no se encuentra en la lista de cursos de tutoría, solicite al director del curso que lo incluya en el curso enviándole su numero de cedula, esto le permitirá evaluar al director y recibir evaluación del director.
+                    </li> 
+                    <li>     
+                    Si usted aparece como tutor de un curso del cual no lo fue ninguno de los periodos académicos del segundo semestre del presente año, solicite al director de curso que lo borre de la red.
+                    </li> 
+                </ul>
+                </div>
+                <div class="modal-footer">
+                </div>
+</div></div>
+ </div>   
+     
+<div class="modal fade" data-refresh="true" id="ModalDirector" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog">
+<div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title">Director de Curso</h4>
+                </div>			<!-- /modal-header -->
+                <div class="modal-body">
+                <ul>
+                    <li>
+                    Usted puede modificar la red de tutores haciendo clic sobre el código del curso, para agregar un tutor requiere únicamente el número de cedula.
+                    </li> 
+                    <li>     
+                    Si usted fue director de curso y este no aparece en su lista por favor solicite el ajuste enviando un correo a siga@unad.edu.co especificando:
+                    Nombre del Curso
+                    Código 
+                    Periodo (16-02, 8-04, 8.05).
+                    </li> 
+                </ul>
+                </div>
+                <div class="modal-footer">
+                </div>
+</div></div>
+</div>
+
+
+
  <script>
   
 function popUp(URL) {
 
     if(typeof(popupWin) != "object" || popupWin.closed)  { 
-        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=yes,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
     } 
     else{ 
         popupWin.location.href = URL; 

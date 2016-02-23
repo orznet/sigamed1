@@ -48,10 +48,8 @@
   </tr>
       <tr>
     <td>Tutorias de curso:</td>
-    <td colspan="3">{%for curso in docente.tutoria%} 
-      {{curso.id}}:
-      {{curso.nombre}} - {%endfor%}
-   </td>
+      {%for tutor in docente.tutoria%}
+      {{tutor.curso.id}} {{tutor.curso.nombre}} <br> {%endfor%}
   </tr>
     <tr>
    <td>Direcciones de curso:</td>
@@ -153,17 +151,17 @@
   <tr>
     <td>Autoevaluación (A1)</td>
     <td>25%</td>
-    <td>{{(docente.evaluacion.auto*0.25)|number_format(1, '.', ',')}}</td>
+    <td>{{(docente.evaluacion.auto*0.25)|number_format(2, '.', ',')}}</td>
   </tr>
   <tr>
     <td>Heteroevaluación (H1)</td>
     <td>50%</td>
-    <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(1, '.', ',') : ''}}</td>
+    <td>{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : ''}}</td>
   </tr>
   <tr>
     <td>Coevaluación (C1,C2,C3 y C4)</td>
     <td>25%</td>
-    <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(1, '.', ','): ''}}</td>
+    <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): ''}}</td>
   </tr>
   <tr>
     <td>&nbsp;</td>

@@ -1,0 +1,48 @@
+{% block body -%}
+<body>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+<table>
+    <tr>
+    <td align="center" colspan="3"><img src="/img/logo-med-unad.png" alt="MED"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">
+        <h3>Plan de Activiades de
+ {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}  </h3>   
+        </td>
+    </tr>
+               <tr>
+                <td>Periodo: {{ entity.id.periodo}}</td>
+                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr> 
+</table>
+  <table>
+        <thead>
+            <tr>
+                <th>Roles y Actividades.</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set num = 0 %}
+       
+        {% for rol in entity.roles %}   
+            <tr>
+                {% set num = num+1 %}
+                <td><b>{{num}}. {{ rol.rol.nombre }}</b>
+                {%if rol.rol.textoampliacion %}
+                <font color="#a57225">{{rol.descripcion}}</font>
+                {%endif%}
+                </td>
+                    {%for actividad in rol.rol.actividades%}
+                    <tr> <td>
+                    {{actividad.descripcion}}
+                     </td>  </tr>
+                    {%endfor%}
+               </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<b>IMPORTANTE: Las actividades de cada rol son predeterminadas y no se pueden modificar.</b><br>
+    </body>
+{% endblock %}

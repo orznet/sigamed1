@@ -28,7 +28,7 @@
                 <td>{{tutor.docente.id}}</td>
                 <td>{{tutor.docente.user.id}} - {{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                 <td>{{tutor.docente.centro.nombre}}</td>
-                <td><a href="{{ path('tutor_delete', {'id': tutor.id }) }}">Borrar</a></td>
+                <td><a href="{{ path('tutor_delete', {'id': tutor.id }) }}">Borrar Tutor</a></td>
             </tr>
         {%endfor%}
         </tbody>

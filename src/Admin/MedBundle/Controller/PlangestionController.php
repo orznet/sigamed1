@@ -190,8 +190,15 @@ class PlangestionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        $docente = $entity->getId();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+        
+        if ($docente->getVinculacion() != 'De Carrera'){
+        
+           return $this->render( 'AdminMedBundle:Plangestion:planactividades.html.twig', array('entity' => $entity));
+            
         }
         return array(
             'entity'      => $entity,

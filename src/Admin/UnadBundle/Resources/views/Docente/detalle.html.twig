@@ -1,10 +1,12 @@
-
+ <h4>1. Información de vinculación</h4>   
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-      <tr>
-          <td colspan="4">
-          <h4>Información vinculación de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h4>   
-          </td>    
-      </tr>
+     <tr>
+    <th>Nombre</th>
+    <td>{{ entity.user.nombres }} {{ entity.user.apellidos }}</td>
+    <th>Periodo de Evaluación</th>
+    <td>{{entity.periodo}}</td>
+  </tr>   
+      
   <tr>
     <th>Cédula</th>
     <td>{{ entity.user.id }}</td>
@@ -32,7 +34,7 @@
     </td>
   </tr>
   </table>
-<h4>Asignación en Roles de Formación</h4>
+<h4>2. Asignación en Roles de Formación</h4>
   
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
     <tr>
@@ -52,6 +54,9 @@
       {%endif%}
       <br>{%endfor%}
    </td>
+   <td>
+       <a data-toggle="modal" data-target="#ModalTutor" class="btn btn-success btn-xs">Ayuda</a>   
+   </td>
   </tr>
     <tr>
    <th>Director y Tutor</th>
@@ -67,7 +72,10 @@
       <a data-toggle="modal" href="{{ path('curso_modal', { 'id': curso.id }) }}" data-target="#myModal">{{curso.id}}:</a>
       {{curso.nombre}} <br> {%endfor%}
    </td>
-  </tr> 
+   <td>
+   <a data-toggle="modal" data-target="#ModalDirector" class="btn btn-success btn-xs">Ayuda</a>
+   </td>
+  </tr>
   <tr>
    <th>Líder de Cadena o Programa</th>
    <td>
@@ -82,5 +90,6 @@
       <a data-toggle="modal" href="{{ path('programa_modal', { 'id': programa.id }) }}" data-target="#myModal">{{programa.id}}</a>    
       {{programa.nombre}} <br> {%endfor%}
    </td>
+   <td></td>
   </tr>
 </table>

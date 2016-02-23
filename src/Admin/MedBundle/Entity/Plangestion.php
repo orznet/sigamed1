@@ -7,18 +7,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="plan_gestion")
+ * @ORM\Table(name="plangestion")
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\PlangestionRepository")
  */
 class Plangestion{
 
-
 /**
- * @ORM\Id
+* @var integer $id
+* @ORM\Id
+* @ORM\Column(type="integer")
+* @ORM\GeneratedValue(strategy="AUTO")
+*/
+protected $id;
+    
+/**
+ * @var Docente
  * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="plangestion")
- * @ORM\JoinColumn(name="id",referencedColumnName="id") 
+ * @ORM\JoinColumn(name="docente_id",referencedColumnName="id") 
      */
- protected $id;  
+ protected $docente;  
  
  /**
   * @ORM\Column(type="datetime", nullable=true)
@@ -66,6 +73,12 @@ protected $roles;
  * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
  */
 protected $avales;
+
+/**
+ * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\formatoPlang", mappedBy="plan")
+ */
+protected $formato;
+
 
     /**
      * Set fecha_creacion
@@ -227,15 +240,7 @@ protected $avales;
         return $this;
     }
 
-    /**
-     * Get id
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
     /**
      * Constructor
      */
@@ -341,5 +346,61 @@ protected $avales;
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Set formato
+     *
+     * @param \Admin\MedBundle\Entity\formatoPlang $formato
+     * @return Plangestion
+     */
+    public function setFormato(\Admin\MedBundle\Entity\formatoPlang $formato = null)
+    {
+        $this->formato = $formato;
+
+        return $this;
+    }
+
+    /**
+     * Get formato
+     *
+     * @return \Admin\MedBundle\Entity\formatoPlang 
+     */
+    public function getFormato()
+    {
+        return $this->formato;
+    }
+
+    /**
+     * Set docente
+     *
+     * @param \Admin\UnadBundle\Entity\Docente $docente
+     * @return Plangestion
+     */
+    public function setDocente(\Admin\UnadBundle\Entity\Docente $docente)
+    {
+        $this->docente = $docente;
+
+        return $this;
+    }
+
+    /**
+     * Get docente
+     *
+     * @return \Admin\UnadBundle\Entity\Docente 
+     */
+    public function getDocente()
+    {
+        return $this->docente;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

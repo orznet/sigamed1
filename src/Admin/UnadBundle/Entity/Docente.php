@@ -108,7 +108,7 @@ protected $centro;
 
     
    /**
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="id") 
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="docente") 
     */
    protected $plangestion;
    

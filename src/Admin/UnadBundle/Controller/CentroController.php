@@ -243,4 +243,44 @@ class CentroController extends Controller
             ->getForm()
         ;
     }
+    
+     /**
+     * @Route("/docs/{id}/pc", name="centro_docs")
+     * @Method("GET")
+     * @Template()
+     */
+    public function docsAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $centros = $user->getDirectorcentro();
+        $centro = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('id' => $id));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro));
+
+        return array(
+            'docentes'      => $docentes,
+            'centro'    => $centros[0],
+            'user'   => $user,
+        );
+    }
+    
+    
+    /**
+     * @Route("/docs/index", name="centro_index")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listaAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $centros = $user->getDirectorcentro();
+        $zonas = $user->getDirectorzona();
+
+        return array(
+            'centros'    => $centros,
+            'zonas'    => $zonas,
+        );
+    }
+    
+    
 }

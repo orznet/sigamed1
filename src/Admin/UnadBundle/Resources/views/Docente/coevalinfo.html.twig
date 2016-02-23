@@ -11,11 +11,10 @@
         </tr>    
     </table>   
     
-    
-
+   
 {%set final=0%} {%set aux=0%}
 <table>
-{%for curso in cursos%}    
+{%for curso in entity.director%}    
         <thead>
            <tr>
            <td align="left" colspan="3">Curso: {{curso.id}} - {{curso.nombre}}</td>
@@ -26,30 +25,28 @@
                 <th>Calificación</th>
             </tr>
         </thead>
-        {%if curso.evaldetutor|length > 0%}
             <tbody>    
-            {%for tutor in curso.evaldetutor%}
-            {%if tutor.f0%}{%set final=final+tutor.f0%}{%set aux=aux+1%}{%endif%}        
+            {%for tutor in curso.tutores%}
+                  
             <tr>
-                            <td>{{tutor.tutor.user.nombres}} {{tutor.tutor.user.apellidos}}</td>
-                            <td>{{tutor.observaciones}}</td>
-                            <td>{{tutor.f0? tutor.f0 : 'Sin'}}</td>
+                            <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
+                            <td>{{tutor.coevaldirector? tutor.coevaldirector.observaciones : 'No evaluo' }}</td>
+                            <td>{{tutor.coevaldirector? '*' : 'n/a'}}</td>
             </tr>
+            {%if tutor.coevaldirector%}{%set final=final+tutor.coevaldirector.f0%}{%set aux=aux+1%}{%endif%}  
             {%endfor%}
-
-{%endif%}
 {%endfor%}
             <tr>
-                <td colspan="2" align="right"><b>Calificación Final:</b></td>
-                <td>{%if final > 0%}{%set final = final/aux%} {{final|number_format(2, '.', ',')}}{%endif%}</td>
+                <td colspan="2" align="right"><b>Calificación Final del Instrumento:</b></td>
+                <td>{%if final > 0%}{%set final = final/aux%} {{final|number_format(1, '.', ',')}}{%endif%}</td>
             </tr>
             </tbody>
-</table>
- 
-    {%if entity.evaldedirector|length > 0 %}
+            
+            
+   {%if entity.tutoria|length > 0 %}
     <table>
       <tr><td colspan="4">
-       <b>2. Tutor: </b>Evaluación recibida del director de curso
+       <b>2. Rol de Tutor: </b>Evaluación recibida del director de curso
         </td></tr>
         
             <tr>
@@ -59,27 +56,26 @@
                 <th>Calificación</th>
             </tr>
             <tbody>      
-            {%for evaluacion in entity.evaldedirector%}
+            {%for tutor in entity.tutoria%}
    
             <tr>
-            <td>{{evaluacion.curso.nombre}}</td>
+            <td>{{tutor.curso.nombre}}</td>
             <td>
-            {%if evaluacion.curso.director%}
-            {{evaluacion.curso.director.user.nombres}} {{evaluacion.curso.director.user.apellidos}}
+            {%if tutor.coevaltutor%}
+            {{tutor.curso.director.user.nombres}} {{tutor.curso.director.user.apellidos}}
             {%endif%}
             </td>
              
-             <td>{{evaluacion.observaciones}}</td>
-             <td>{{evaluacion.f0}}</td>
+             <td>{{tutor.coevaltutor.observaciones}}</td>
+             <td>{{tutor.coevaltutor.f0}}</td>
             </tr>
         {%endfor%}
 
         </tbody>
         </table>
-{%endif%}
-    
-   
-    {%if entity.director|length > 0 %}
+{%endif%}            
+
+  {%if entity.director|length > 0 %}
         <table>
             <tr><td colspan="4">
                 <b>3. Director de curso: </b>Evaluación recibida del lider nacional de programa o cadena de formación. 
@@ -97,7 +93,7 @@
             <tr>
             <td>{{curso.nombre}}</td>    
              <td>
-            {%if curso.programa.lider%}  
+            {%if curso.programa.lider %}  
             {{curso.programa.lider.user.nombres}} {{curso.programa.lider.user.apellidos}}
              {%endif%}  
              </td>
@@ -109,7 +105,7 @@
         </tbody>
         </table>
 {%endif%}
-   
+            
     {%if entity.lider|length > 0 %}
         
        <table>
@@ -135,6 +131,6 @@
   
         </tbody>
         </table>
-   {%endif%}
+   {%endif%}            
 
 {% endblock %}

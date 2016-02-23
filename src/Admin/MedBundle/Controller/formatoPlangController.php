@@ -1,27 +1,27 @@
 <?php
 
-namespace Admin\UnadBundle\Controller;
+namespace Admin\MedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Admin\UnadBundle\Entity\Zona;
-use Admin\UnadBundle\Form\ZonaType;
+use Admin\MedBundle\Entity\formatoPlang;
+use Admin\MedBundle\Form\formatoPlangType;
 
 /**
- * Zona controller.
+ * formatoPlang controller.
  *
- * @Route("/unad/zona")
+ * @Route("/doc/formatoplang")
  */
-class ZonaController extends Controller
+class formatoPlangController extends Controller
 {
 
     /**
-     * Lists all Zona entities.
+     * Lists all formatoPlang entities.
      *
-     * @Route("/", name="zona")
+     * @Route("/", name="formatoplang")
      * @Method("GET")
      * @Template()
      */
@@ -29,80 +29,87 @@ class ZonaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AdminUnadBundle:Zona')->findAll();
+        $entities = $em->getRepository('AdminMedBundle:formatoPlang')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Zona entity.
+     * Creates a new formatoPlang entity.
      *
-     * @Route("/", name="zona_create")
+     * @Route("/crear/{id}", name="formatoplang_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Zona:new.html.twig")
+     * @Template("AdminMedBundle:formatoPlang:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id)
     {
-        $entity = new Zona();
-        $form = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $plan = $em->getRepository('AdminMedBundle:Plangestion')->findOneBy(array('docente' => $docente)); 
+        $entity = new formatoPlang();
+        $entity->setPlan($plan);
+        $form = $this->createCreateForm($entity, $id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('zona_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('docente_show', array('id' => $id)));
         }
 
         return array(
             'entity' => $entity,
+            'id'      => $id,
             'form'   => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Zona entity.
+    * Creates a form to create a formatoPlang entity.
     *
-    * @param Zona $entity The entity
+    * @param formatoPlang $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Zona $entity)
+    private function createCreateForm(formatoPlang $entity, $id)
     {
-        $form = $this->createForm(new ZonaType(), $entity, array(
-            'action' => $this->generateUrl('zona_create'),
+        $form = $this->createForm(new formatoPlangType(), $entity, array(
+            'action' => $this->generateUrl('formatoplang_create', array('id' => $id)),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Cargar'));
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new Zona entity.
+     * Displays a form to create a new formatoPlang entity.
      *
-     * @Route("/new", name="zona_new")
+     * @Route("/new/{id}", name="formatoplang_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new Zona();
-        $form   = $this->createCreateForm($entity);
+
+        $entity = new formatoPlang();
+        
+        $form   = $this->createCreateForm($entity,$id);
 
         return array(
             'entity' => $entity,
+            'id'    => $id,
             'form'   => $form->createView(),
         );
     }
 
     /**
-     * Finds and displays a Zona entity.
+     * Finds and displays a formatoPlang entity.
      *
-     * @Route("/{id}", name="zona_show")
+     * @Route("/{id}", name="formatoplang_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +117,10 @@ class ZonaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Zona')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:formatoPlang')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Zona entity.');
+            throw $this->createNotFoundException('Unable to find formatoPlang entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +132,9 @@ class ZonaController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Zona entity.
+     * Displays a form to edit an existing formatoPlang entity.
      *
-     * @Route("/{id}/edit", name="zona_edit")
+     * @Route("/{id}/edit", name="formatoplang_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +142,10 @@ class ZonaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Zona')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:formatoPlang')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Zona entity.');
+            throw $this->createNotFoundException('Unable to find formatoPlang entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +159,16 @@ class ZonaController extends Controller
     }
 
     /**
-    * Creates a form to edit a Zona entity.
+    * Creates a form to edit a formatoPlang entity.
     *
-    * @param Zona $entity The entity
+    * @param formatoPlang $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Zona $entity)
+    private function createEditForm(formatoPlang $entity)
     {
-        $form = $this->createForm(new ZonaType(), $entity, array(
-            'action' => $this->generateUrl('zona_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new formatoPlangType(), $entity, array(
+            'action' => $this->generateUrl('formatoplang_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +177,20 @@ class ZonaController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Zona entity.
+     * Edits an existing formatoPlang entity.
      *
-     * @Route("/{id}", name="zona_update")
+     * @Route("/{id}", name="formatoplang_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Zona:edit.html.twig")
+     * @Template("AdminMedBundle:formatoPlang:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Zona')->find($id);
+        $entity = $em->getRepository('AdminMedBundle:formatoPlang')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Zona entity.');
+            throw $this->createNotFoundException('Unable to find formatoPlang entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +200,7 @@ class ZonaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('zona_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('formatoplang_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +210,9 @@ class ZonaController extends Controller
         );
     }
     /**
-     * Deletes a Zona entity.
+     * Deletes a formatoPlang entity.
      *
-     * @Route("/{id}", name="zona_delete")
+     * @Route("/{id}", name="formatoplang_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +222,21 @@ class ZonaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AdminUnadBundle:Zona')->find($id);
+            $entity = $em->getRepository('AdminMedBundle:formatoPlang')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Zona entity.');
+                throw $this->createNotFoundException('Unable to find formatoPlang entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('zona'));
+        return $this->redirect($this->generateUrl('formatoplang'));
     }
 
     /**
-     * Creates a form to delete a Zona entity by id.
+     * Creates a form to delete a formatoPlang entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,30 +245,10 @@ class ZonaController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('zona_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('formatoplang_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
-    
-    
-     /**
-     * @Route("/docs/pc", name="zona_docs")
-     * @Method("GET")
-     * @Template()
-     */
-    public function docsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.context')->getToken()->getUser();
-        $zonas = $user->getDirectorzona();
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros[0]));
-
-        return array(
-            'docentes'      => $docentes,
-            'centro'    => $centros[0],
-            'user'   => $user,
-        );
     }
 }

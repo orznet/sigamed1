@@ -6,6 +6,7 @@
             {'entity': entity}
         ) }}
 
+<h4>Agregar Tutor al Curso</h4><br>
 
 <form action="{{ path('curso_tutor', { 'id': entity.id }) }}" method="get" {{ form_enctype(cedula_form) }}>
     {{ form_label(cedula_form.cedula,  'Cédula del Tutor') }}

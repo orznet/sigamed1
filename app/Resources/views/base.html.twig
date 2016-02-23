@@ -162,10 +162,7 @@
                         <a href="{{ path('programa') }}">Programas</a>
                         </li>
                         <li>
-                        <a href="{{ path('zona') }}">Zonas</a>
-                        </li>
-                        <li>
-                        <a href="{{ path('centro') }}">Centros</a>
+                        <a href="{{ path('zona') }}">Zonas y Centros</a>
                         </li>
                         <li>
                         <a href="{{ path('unad_user_lista') }}">Usuarios</a>
@@ -210,7 +207,14 @@
                                     <ul style="display: block;"> <li>
 				     <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Aval Planes de gestión</a>
 			             </li></ul>   
-                                     {%endif%}   
+                                     {%endif%}
+                                        
+                                    {% if is_granted('ROLE_DIRZ') or is_granted('ROLE_DIRC')  %} 
+                                    <ul style="display: block;"> <li>
+				     <a href="{{ path('centro_index') }}"><i class="fa fa-book"></i> Consultar Docentes</a>
+			             </li></ul>   
+                                     {%endif%}      
+                                          
 				</ul>
 			</nav>
 			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
