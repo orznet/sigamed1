@@ -126,19 +126,34 @@
 				<ul>
 					<li>
 						<a href="{{ path('admin_user_inicio') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
-					</li>
-                                        
-                                        {% if is_granted('ROLE_DEC') or is_granted('ROLE_SECA')  %}
-                                        <li>
-						<a href="{{ path('escuela_info') }}"><i class="fa fa-lg fa-fw fa-folder-open"></i> <span class="menu-item-parent">Mi Escuela</span></a>
+					        {% if is_granted('ROLE_DEC') or is_granted('ROLE_SECA')  %}
                                                 <ul style="display: block;">
                                                     <li>
-                                                  <a href="{{ path('escuela_resultados') }}">Resultados</a>      
+                                                  <a href="{{ path('escuela_info') }}"><i class="fa fa-book"></i> Mi Escuela</a>      
                                                     </li>    
                                                 </ul>
+                                                <li>
+						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Instrumentos</span></a>
+						<ul style="display: block;">
+						    <li>
+								<a href="{{ path('docente_decarrera') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
+							</li>  
+							<li>
+								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
+							</li>
+                                                        <li>
+								<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a>
+							</li>
+ 
+						</ul>
 					</li>
-                                        {% endif %}
+                                                
+                                                        {% endif %}
+                                        </li>
                                         
+                                       
+
+                                                               
                                       {% if is_granted('ROLE_DOC') %}
                                         <li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
@@ -186,21 +201,7 @@
                 {%endif%}
                         
 					{% if is_granted('ROLE_DEC')  %}
-                                        <li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Instrumentos</span></a>
-						<ul style="display: block;">
-						
-							<li>
-								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
-							</li>
-                                                        <li>
-								<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a>
-							</li>
-                                                        <li>
-								<a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Aval Planes de gestión</a>
-							</li>   
-						</ul>
-					</li>
+
 				{%endif%}
                                         
                                      {% if is_granted('ROLE_AVAL')  %} 

@@ -45,8 +45,8 @@ protected $path;
      * @Assert\File(
      *     maxSize = "2000000", 
      *     maxSizeMessage = "El tamaño máximo permitido es de 2MB",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Tipo de archivo no válido, guarde la hoja de excel en formato PDF"
+     *     mimeTypes = {"application/excel", "application/x-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
+     *     mimeTypesMessage = "Tipo de archivo no válido, Solo se permite en formato Excel"
      * )
      */
  private $file;

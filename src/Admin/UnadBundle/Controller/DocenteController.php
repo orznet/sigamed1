@@ -57,6 +57,29 @@ class DocenteController extends Controller
            'escuela' => $escuela,
         );
     }
+    
+      /**
+     * Listado de docentes carrera por escuela.
+     *
+     * @Route("/dc", name="docente_decarrera")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Docente:porescueladc.html.twig")
+     */
+    public function indexDcAction()
+    {
+        $em = $this->getDoctrine()->getManager();        
+        $session = $this->getRequest()->getSession();
+        $id = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->findOneBy(array('id' => $id));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'vinculacion' => 'DC'));
+        $total = count($entities);
+        return array(
+           'entities' => $entities,
+           'total'  => $total,
+           'escuela' => $escuela,
+        );
+    }
+    
     /**
      * Creates a new Docente entity.
      *
