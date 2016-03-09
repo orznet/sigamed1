@@ -59,8 +59,11 @@ _instrumento:
     
 _formato:
     resource: "@AdminMedBundle/Controller/formatoPlangController.php"
-    type:     annotation    
-    
+    type:     annotation
+
+_plangpdf:
+    resource: "@AdminMedBundle/Controller/pdfPlangController.php"
+    type:     annotation
     
 accionespm_editdoc:
     pattern:  /doc/planm/acc/{id}/edit

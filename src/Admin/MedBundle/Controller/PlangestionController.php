@@ -143,17 +143,18 @@ class PlangestionController extends Controller
     
     
         /**
-     * @Route("/conf/{id}", name="plangestion_conf")
+     * @Route("/conf/plan", name="plangestion_conf")
      * @Method("GET")
      * @Template()
      */
-    public function confAction($id)
+    public function confAction()
     {
+        $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));        
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->findOneBy(array('docente' => $docente));
         if (!$entity) {
-            throw $this->createNotFoundException('Entidad no encontrada');
+            throw $this->createNotFoundException('Plangestion no encontrado');
         }
         return array(
             'entity'      => $entity,
@@ -162,19 +163,21 @@ class PlangestionController extends Controller
     
     
         /**
-     * @Route("/crear/{id}", name="plangestion_crear")
+     * @Route("/agregar/roles", name="plangestion_crear")
      * @Method("GET")
      * @Template()
      */
-    public function crearAction($id)
+    public function crearAction()
     {
+        $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
-        $actividades = $em->getRepository('AdminMedBundle:Actividadplang')->findBy(array('plang' => $id),array('actividad' => 'ASC'));
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));        
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->findOneBy(array('docente' => $docente));
+        $actividades = $em->getRepository('AdminMedBundle:Actividadplang')->findBy(array('plang' => $entity),array('actividad' => 'ASC'));
 
         if (!$entity) {
-            throw $this->createNotFoundException('Entidad no encontrada');
+            throw $this->createNotFoundException('Plan gestion no encontrado');
         }
         return array(
             'entity'      => $entity,
@@ -190,7 +193,7 @@ class PlangestionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
-        $docente = $entity->getId();
+        $docente = $entity->getDocente();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Plangestion entity.');
         }
@@ -259,7 +262,7 @@ class PlangestionController extends Controller
     private function createEditForm(Plangestion $entity)
     {
         $form = $this->createForm(new PlangestionType(), $entity, array(
-            'action' => $this->generateUrl('plangestion_update', array('id' => $entity->getId()->getId())),
+            'action' => $this->generateUrl('plangestion_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 

@@ -36,18 +36,29 @@
         
     </tr>
       <tr>
-    <th>Autoevaluación
+          
+    <th>Registro Roles
 
     </th>
-    <td>Registro de roles y  autoevaluación</td>    
+    <td>Registro de roles para autoevaluación</td>    
     <td>
     {%if entity.plangestion %}
-          {%if instrumentos[0].estado%}   
-    <a href="{{ path('plangestion_crear', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%if instrumentos[0].estado%}   
+    <a href="{{ path('plangestion_crear') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
+    {%else%}<i>Ver cronograma a</i>{%endif%}
+    {%endif%}
+    </td>
+      </tr>
+      <tr>
+    <th>Autoevaluación
+    </th>
+    <td>Descrición del avance y cargue de evidencias</td>    
+    <td>
+    {%if entity.plangestion %}
+          {%if instrumentos[1].estado%}  
+    <a href="{{ path('plangestion_show', { 'id': entity.plangestion.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
             {%else%}<i>Ver cronograma</i>{%endif%}
-         {%else%}
-    <a href="{{ path('plangestion_add') }}" class="btn btn-primary btn-xs">Crear Plan Gestión <i class="fa fa-plus"></i></a>
-    {%endif%}    
+            {%endif%}
     </td>
     </tr>
     

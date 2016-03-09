@@ -279,7 +279,7 @@ class ActividadplangController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $entity->getPlang()->getId()->getId())));
+            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $entity->getPlang()->getId())));
         }
 
         return array(
@@ -332,7 +332,7 @@ class ActividadplangController extends Controller
             $entity->removeUpload();
             $em->flush();
         }
-        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $entity->getPlang()->getId()->getId())));
+        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $entity->getPlang()->getId())));
     }
     
     /**

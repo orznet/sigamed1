@@ -28,7 +28,16 @@ class DefaultController extends Controller
                  $session->set('escuelaid', $escuela->getId()); 
               } else {
                   $escuela = null;
-              } 
+              }
+              
+        if (true === $this->container->get('security.context')->isGranted('ROLE_DIRZ')) {
+           $zonas = $this->getUser()->getDirectorzona();
+           $zona = $zonas[0];
+          $session->set('zonaid', $zona->getId()); 
+              } else {
+           $escuela = null;
+           }       
+              
               
         $user = $this->getUser()->getUsername();
         

@@ -44,7 +44,8 @@
                 <th>Apellidos</th>
                 <th>Centro</th>
                 <th>Plan G. Excel</th>
-                <th>Plan G. MED</th>
+                <th>Plan G. PDF</th>
+                <th>Roles Auto</th>
                 <th>Avalar</th>
             </tr>
         </thead>
@@ -63,8 +64,25 @@
                 No cargado
                 {%endif%}
             </td>
+            <td>
+            {%if entity.plangestion.pdf%}    
+            <a href="../../../{{entity.plangestion.pdf.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
+           {%else%}
+           <a href="{{ path('pdfplang_new', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a> 
+           {%endif%}
+            </td>
             <td></td>
-            <td></td>
+            <td>
+                    {%if entity.plangestion.estado == 'Cerrado' %}
+                    {%if entity.plangestion.avales[0].avalado%}
+                avalado
+                {%endif%}
+                            <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.plangestion.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
+                    
+                    {%else %}
+                        -
+                    {%endif%}
+            </td>
             </tr>
         {% endfor %}
         </tbody>

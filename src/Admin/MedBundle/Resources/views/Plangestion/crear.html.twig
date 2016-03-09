@@ -1,20 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-    <h3>Plan de Gestión de  {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}</h3>
-
-     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
-        <tbody>
-            <tr>
-                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H') :'' }}</td>
-                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <td colspan="2">Estado: 
-                {{entity.estado}}    
-                </td>
-            </tr>
-        </tbody>
-    </table>  
+    <h3>Roles para autoevaluación de {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}</h3>
     
  </table>
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
@@ -56,21 +42,36 @@
                {%if entity.estado == 'Sin Cerrar'%}
                <tr>
                 <td colspan="3">
-                <a href="{{ path('actividadrol_select', { 'id': entity.id.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Rol</a>  
+                <a href="{{ path('actividadrol_select', { 'id': entity.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Rol</a>  
                 {%if totalhoras > 40.1 %}
                 <div class="alert alert-danger fade in">
                  <i class="fa-fw fa fa-warning"></i>
                  <strong>ATENCIÓN</strong> No debe exceder las 40 horas para poder cerrar su plan de gestión.
                 </div>
                    {%else%}
-                <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Plan de Gestión</a>
-    {%endif%}
+                <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Registro de Roles</a>
+                  {%endif%}
                    </td>
                </tr>
                {%endif%}
         </tbody>
     </table>
- <br>
+      <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <tbody>
+            <tr>
+                <td>Estado: 
+                {%if entity.estado == 'Sin Cerrar'%}
+                 <font style="color: red">Sin Cerrar</font>  
+                 <h1>Cierre su registro para que los avaladores puedan revisarlo.</h1>
+                {%else%}    
+                  <font style="color: green">{{entity.estado}}</font> 
+                   {%endif%} 
+                </td>
+                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>  
+ 
  <br>
  <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
   <tr>
@@ -88,9 +89,9 @@
 {%if aval.avalado == 1%}
 <font color="#356635">Aprobado</font>
 {%elseif aval.avalado == 2%}
-<font color="#F87217">No aprobado</font>
+<font color="red">No aprobado</font>
 {%else%}
-<font color="#F87217">Sin revisar</font>
+<font color="red">Sin revisar</font>
 {%endif%}
 
     </td>
@@ -106,41 +107,22 @@
   {% endfor %}  
 </table>
  
-     {% set temp = 1 %}
-    {% for aval in entity.avales %}
-    {%if aval.avalado == 0 or aval.avalado == 2 %}
-    {% set temp = 0 %}
-    {%endif%}
-    {%endfor%}
-    {%if temp%}
- 
-    {%if entity.estado == 'Confirmado' or entity.estado == 'Autoevaluado'%}
-     <a href="{{ path('plangestion_show', { 'id': entity.id.id }) }}" class="btn btn-primary btn-default">Autoevaluación <i class="fa fa-sign-in"></i></a>
-    {%else%}
- <a href="{{ path('plangestion_confirm', { 'id': entity.id.id }) }}" class="btn btn-primary btn-default">Iniciar la autoevaluación <i class="fa fa-sign-in"></i></a>
-    {%endif%}
-    {%else%}
-    <h1>Para continuar con su autoevaluación se requiere que su plan tenga los avales correspondientes.</h1>  
-    {%endif%}
-     
- 
- 
  <div class="modal fade" data-refresh="true" id="ModalCerrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
 <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-                <h4 class="modal-title">Cerrar Plan de Gestión</h4>
+                <h4 class="modal-title">Cerrar Registro de Roles</h4>
                 </div>			<!-- /modal-header -->
                 <div class="modal-body">
-                IMPORTANTE: Al cerrar su plan de gestión ya no podra modificarlo, si esta seguro cierre su plan de gestión y solicite la aprobación de los avaladores para poder relizar su autoevaluación.
+                IMPORTANTE: Al cerrar su registro de roles ya no podra modificarlo, si esta seguro cierrelo y solicite los avales correspondientes para poder relizar su autoevaluación.
                 </div>
                 <div class="modal-footer">
-               <form  action="{{ path('plangestion_cerrar', { 'id': entity.id.id }) }}" method="get">     
+               <form  action="{{ path('plangestion_cerrar', { 'id': entity.id }) }}" method="get">     
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                         Cancelar
                 </button>
-               <td><button type="hidden" class="btn btn-primary">Cerrar Plan</button></td>    
+               <td><button type="hidden" class="btn btn-primary">Cerrar</button></td>    
                </form> 
                 </div>
 </div></div>

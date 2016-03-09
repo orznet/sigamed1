@@ -22,7 +22,7 @@
                         -->
                     <header>
                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                    <h2>Docentes {{escuela.nombre}} : {{total}}</h2>
+                    <h2>Docentes de Carrera por Zona : {{total}}</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -42,23 +42,33 @@
                 <th>Cédula</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
-                <th>Vinculación</th>
-                <th>Modalidad</th>
+                <th>Escuela</th>
                 <th>Centro</th>
+                <th>Plan G. Excel</th>
+                <th>Plan G. PDF</th>
+                <th>Roles Auto</th>
+                <th>Avalar</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
             <td><a href="{{ path('docente_info', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>
-            <a href="{{ path('admin_user_show', { 'id': entity.user.id }) }}">{{ entity.user.id }}</a>
-            </td>
+            <td>{{ entity.user.username }}</td>
             <td>{{ entity.user.nombres }}</td>
             <td>{{ entity.user.apellidos }}</td>
-            <td>{{ entity.vinculacion }}</td>
-            <td>{{ entity.modalidad }}</td>
+            <td>{{ entity.escuela.sigla }}</td>
             <td>{{ entity.centro.nombre }}</td>
+            <td>
+            {%if entity.plangestion.formato%}
+                <a href="../../../{{entity.plangestion.formato.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
+                {%else%}
+                No cargado
+                {%endif%}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
             </tr>
         {% endfor %}
         </tbody>

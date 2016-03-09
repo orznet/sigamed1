@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-    <h3>Roles Asignación Académica de:  {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}</h3>
+    <h3>Roles Asignación Académica de:  {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}</h3>
 
      <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
@@ -80,7 +80,7 @@
 Confirme su asignación para poder autoevaluarse, luego de confirmar no podrá solicitar ajustes a la asignación en caso que realmente se requieran.<br>
                 </div>
                 <div class="modal-footer">
-               <form  action="{{ path('plangestion_confirm', { 'id': entity.id.id }) }}" method="get">     
+               <form  action="{{ path('plangestion_confirm', { 'id': entity.docente.id }) }}" method="get">     
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                         Cancelar
                 </button>

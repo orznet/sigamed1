@@ -126,7 +126,7 @@
 				<ul>
 					<li>
 						<a href="{{ path('admin_user_inicio') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
-					        {% if is_granted('ROLE_DEC') or is_granted('ROLE_SECA')  %}
+					        {% if is_granted('ROLE_DEC') %}
                                                 <ul style="display: block;">
                                                     <li>
                                                   <a href="{{ path('escuela_info') }}"><i class="fa fa-book"></i> Mi Escuela</a>      
@@ -136,8 +136,10 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Instrumentos</span></a>
 						<ul style="display: block;">
 						    <li>
-								<a href="{{ path('docente_decarrera') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
-							</li>  
+							</li>
+                                                        <li>
+								<a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
+							</li> 
 							<li>
 								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
 							</li>
@@ -149,8 +151,7 @@
 					</li>
                                                 
                                                         {% endif %}
-                                        </li>
-                                        
+                                                                             
                                        
 
                                                                
@@ -166,28 +167,28 @@
 					</li>
                                          {%endif%}
                                         
-                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')%}
-                        <li>
-                        <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Unad</span></a>
-                        <ul>
-                        <li>
-                        <a href="{{ path('escuela') }}">Escuelas</a>
-                        </li>
-                        <li>
-                        <a href="{{ path('programa') }}">Programas</a>
-                        </li>
-                        <li>
-                        <a href="{{ path('zona') }}">Zonas y Centros</a>
-                        </li>
-                        <li>
-                        <a href="{{ path('unad_user_lista') }}">Usuarios</a>
-                        </li>
-                        <li>
-                        <a href="{{ path('rolacademico') }}">Roles y Actividades</a>
-                        </li>
-                        </ul>
-                        </li>
-                        {%endif%}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')%}
+            <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Unad</span></a>
+            <ul>
+            <li>
+            <a href="{{ path('escuela') }}">Escuelas</a>
+            </li>
+            <li>
+            <a href="{{ path('programa') }}">Programas</a>
+            </li>
+            <li>
+            <a href="{{ path('zona') }}">Zonas y Centros</a>
+            </li>
+            <li>
+            <a href="{{ path('unad_user_lista') }}">Usuarios</a>
+            </li>
+            <li>
+            <a href="{{ path('rolacademico') }}">Roles y Actividades</a>
+            </li>
+            </ul>
+            </li>
+            {%endif%}
                         
                 {% if is_granted('ROLE_ADMIN')%}
                         <li>
@@ -200,22 +201,24 @@
                         </li>
                 {%endif%}
                         
-					{% if is_granted('ROLE_DEC')  %}
-
-				{%endif%}
                                         
-                                     {% if is_granted('ROLE_AVAL')  %} 
-                                    <ul style="display: block;"> <li>
-				     <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Aval Planes de gestión</a>
-			             </li></ul>   
-                                     {%endif%}
                                         
                                     {% if is_granted('ROLE_DIRZ') or is_granted('ROLE_DIRC')  %} 
                                     <ul style="display: block;"> <li>
 				     <a href="{{ path('centro_index') }}"><i class="fa fa-book"></i> Consultar Docentes</a>
-			             </li></ul>   
-                                     {%endif%}      
-                                          
+			             </li>  
+                                     {%endif%}     
+                        
+                                    {% if is_granted('ROLE_DIRZ') %} 
+                                     <li>
+				     <a href="{{ path('docente_dczona') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
+			             </li>
+                                    <li>
+                                    <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Avalar Roles</a>
+                                    </li>
+                                     
+                                     {%endif%}  
+                                    </ul>        
 				</ul>
 			</nav>
 			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

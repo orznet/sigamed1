@@ -8,16 +8,16 @@
     <tr>
         <td align="center" colspan="3">
         <h3>Plan de
-        {%if entity.id.vinculacion == 'De Carrera'%}
+        {%if entity.docente.vinculacion == 'De Carrera'%}
             Gestión de
             {%else%}
-            Activiades de
+            Actividades de
             {%endif%}
- {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}  </h3>   
+ {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}  </h3>   
         </td>
     </tr>
                <tr>
-                <td>Periodo: {{ entity.id.periodo}}</td>
+                <td>Periodo: {{ entity.docente.periodo}}</td>
                 <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
                 <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
             </tr> 
@@ -53,7 +53,7 @@
         </tbody>
     </table>
   
-{%if entity.id.vinculacion == 'De Carrera'%}
+{%if entity.docente.vinculacion == 'De Carrera'%}
 <table>
   <tr>
     <th>Avalador</th>

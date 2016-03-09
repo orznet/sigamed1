@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Aval Planes de Gestión de Docentes de Carrera</h1>
+    <h1>Aval de Roles para Autoevaluación de Docentes de Carrera</h1>
 
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
@@ -9,50 +9,67 @@
                 <th>Cédula</th>
                 <th>Nombre</th>
                 <th>Centro</th>
-                <th>Plan Gestión</th>
-                <th>Avalar</th>
-                <th>Estado de Aval</th>
-                <th>Escaner</th>
-                <th>Fecha Aval</th>
+                <th>Plan G. Excel</th>
+                <th>Plan G. PDF</th>
+                <th>Roles</th>
+                <th>Aval</th>
+                <th>Estado Aval</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <th>
-                <a href="{{ path('user_info', {'id': entity.plan.id.user.id }) }}">{{ entity.plan.id.user.id }}</a>
+                {{ entity.plan.docente.user.id }}
                 </th> 
-                <td>{{ entity.plan.id.user.nombres }} {{ entity.plan.id.user.apellidos }}</td>
-                <td>{{entity.plan.id.centro.nombre}}</td>
+                <td>{{ entity.plan.docente.user.nombres }} {{ entity.plan.docente.user.apellidos }}</td>
+                <td>{{entity.plan.docente.centro.nombre}}</td>
+                
                 <td>
-        <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.id.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
+            {%if entity.plan.formato%}
+                <a href="../../../{{entity.plan.formato.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
+                {%else%}
+                No cargado
+                {%endif%}
                 </td>
                 
-
+                                <td>
+                                {%if entity.plan.pdf%}    
+            <a href="../../../{{entity.plan.pdf.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
+           {%else%}
+           <a href="{{ path('pdfplang_new', { 'id': entity.plan.docente.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a> 
+           {%endif%}
+                </td>
+                
+                <td>
+              {%if entity.plan.estado == 'Cerrado' or entity.plan.estado == 'Autoevaluado' %}
+                    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
+                {%else%}
+                    Sin Registro
+                    {%endif%}
+                </td>
+          
                 <td>
                     {%if entity.plan.estado == 'Cerrado' and entity.avalado != 1 %}
-                    <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
+                    <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.plan.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
                     {%else %}
-                        -
+                    
                     {%endif%}
                 </td>
                 <td>{{ entity.estado }}</td>
-                <td>
-                  {%if entity.path%}  
-                    <a href="../../../{{entity.webpath}}" target="_blank"><i class="fa fa-download"></i></a>
-                {%endif%}
-                </td>
-                <td>{% if entity.fechaaval %}{{ entity.fechaaval|date('Y-m-d H:i') }}{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <ul>
         <li>
-        <p>Si el <b>Estado del Plan</b> es "Sin Cerrar" es porque el docente requiere cerrar Plan de Gestión para porderlo Avalar.</p> 
+        <p><b>Plan G. Excel. </b>Es el plan de gestión propuesto por el docente diligenciado en formato Excel.</p> 
         </li>
-        <li><p>Al <b>No Aprobar</b> un plan de gestión este queda habilitado nuevamente para que el docente realice los cambios correspondientes.</p></li>
+        <li><p><b>Plan G. PDF. </b>Es el plan de gestión aprobado y firmado, debe ser cargado por el Decano de la Escuela.</p></li>
+   <li><p><b>Roles. </b>Son el registro de roles que realiza el docente coherentes al plan de gestión aprobado y con los cuales realizara su auto evaluación al final del periodo acádemico.</p></li>
+   <li><p><b>Aval. </b>Los roles registrados para auto evaluación requieren el aval del Decano y del Director de Zona.</p></li>   
     </ul>
+    <br>
      <script>
   
 function popUp(URL) {

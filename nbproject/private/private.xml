@@ -13,22 +13,25 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/coevalDirector.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/formatoPlangType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Avalplang/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/pdfPlang.php</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/formatoPlangController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/porescueladc.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Avalplang/edit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/web/app_dev.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/formatoPlang/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
             <file>file:/Users/omarr/codigo/med/web/app.php</file>
             <file>file:/Users/omarr/codigo/med/app/config/parameters.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/formatoPlang/new.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Centro/show.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/form.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/formatoPlang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/DocenteController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Escuela/info.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Zona/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Form/CentroType.php</file>
         </group>

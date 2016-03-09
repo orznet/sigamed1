@@ -1,10 +1,22 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Autoevaluación de {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}} </h1>
+{% block body -%} 
 
- 
-  <table class="table table-bordered hidden-mobile" style="width: 95%">
+<h1>Autoevaluación de {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}} </h1>
+
+    {% set temp = 1 %}
+    {% for aval in entity.avales %}
+    {%if aval.avalado == 0 or aval.avalado == 2 %}
+    {% set temp = 0 %}
+    {%endif%}
+    {%endfor%}
+    {%if temp%}
+
+  {%if entity.actividades|length() == 0 %}    
+  <a href="{{ path('plangestion_confirm', { 'id': entity.id }) }}" class="btn btn-primary btn-default">Iniciar la autoevaluación <i class="fa fa-sign-in"></i></a>
+  {%else%}
+
+   <table class="table table-bordered hidden-mobile" style="width: 95%">
         <thead>
             <tr>
                 <th>Actividad</th>
@@ -14,6 +26,7 @@
             </tr>
         </thead>
         <tbody>
+   
         {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
         {% set termino = 1 %}
         {% for actividad in entity.actividades %}
@@ -65,13 +78,14 @@
                </tr>
         {% endfor %}  
         </tbody>
-    </table>
+        
+          </table>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
             <tr>
                 <td colspan="2">
                 {%if termino == 1 and entity.autoevaluacion is null %}
-                <a data-toggle="modal" href="{{ path('plangestion_edit', { 'id': entity.id.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Autoevaluación</a>
+                <a data-toggle="modal" href="{{ path('plangestion_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Autoevaluación</a>
                 {%elseif entity.autoevaluacion is  null %}
                 <div class="alert alert-danger fade in">
                 <button class="close" data-dismiss="alert">×</button>
@@ -96,6 +110,12 @@
             </tr>
         </tbody>
     </table>
+{%endif%}
+
+   {%else%}
+   <h1>Para continuar con su autoevaluación requiere los avales correspondientes. <a href="{{ path('plangestion_crear') }}"> Ver...</a></h1>
+   
+   {%endif%}
 
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">

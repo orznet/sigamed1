@@ -79,6 +79,11 @@ protected $avales;
  */
 protected $formato;
 
+/**
+ * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang", mappedBy="plan")
+ */
+protected $pdf;
+
 
     /**
      * Set fecha_creacion
@@ -402,5 +407,28 @@ protected $formato;
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set pdf
+     *
+     * @param \Admin\MedBundle\Entity\pdfPlang $pdf
+     * @return Plangestion
+     */
+    public function setPdf(\Admin\MedBundle\Entity\pdfPlang $pdf = null)
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    /**
+     * Get pdf
+     *
+     * @return \Admin\MedBundle\Entity\pdfPlang 
+     */
+    public function getPdf()
+    {
+        return $this->pdf;
     }
 }

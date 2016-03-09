@@ -247,7 +247,7 @@ class RolplangController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $entity->getPlang()->getId()->getId())));
+        return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $entity->getPlang()->getId())));
     }
 
     /**

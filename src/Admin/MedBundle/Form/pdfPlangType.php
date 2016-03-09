@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AvalplangType extends AbstractType
+class pdfPlangType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,13 +15,7 @@ class AvalplangType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('observaciones', 'textarea', array(
-                  "mapped" => false, 'required'  => true, 'attr' => array('cols' => '90')))
-
-                
-            ->add('avalado', 'choice', array('empty_value' => ' ', 'label' => ' ',    
-            'choices'   => array( '1' => 'Aprobado', '2' => 'No aprobado'), 'required'  => true,))
-            
+        ->add('file', 'file', array('label' => '','required'  => true))      
         ;
     }
     
@@ -31,7 +25,7 @@ class AvalplangType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Admin\MedBundle\Entity\Avalplang'
+            'data_class' => 'Admin\MedBundle\Entity\pdfPlang'
         ));
     }
 
@@ -40,6 +34,6 @@ class AvalplangType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_medbundle_avalplang';
+        return 'admin_medbundle_pdfplang';
     }
 }

@@ -80,6 +80,27 @@ class DocenteController extends Controller
         );
     }
     
+          /**
+     * Listado de docentes carrera por escuela.
+     *
+     * @Route("/zn", name="docente_dczona")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Docente:porzonadc.html.twig")
+     */
+    public function indexZonaAction()
+    {
+        $em = $this->getDoctrine()->getManager();        
+        $session = $this->getRequest()->getSession();
+        $zona = $em->getRepository('AdminUnadBundle:Zona')->find($session->get('zonaid'));
+        $centro = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('zona' => $zona));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro, 'vinculacion' => 'DC'));
+        $total = count($entities);
+        return array(
+           'entities' => $entities,
+           'total'  => $total
+        );
+    }
+    
     /**
      * Creates a new Docente entity.
      *

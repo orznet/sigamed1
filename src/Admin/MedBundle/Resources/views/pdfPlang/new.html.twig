@@ -3,18 +3,18 @@
 {% block body -%}
                <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-            <h4 class="modal-title">Cargar Plan de Gestión</h4>
+            <h4 class="modal-title">Cargar Plan de Gestión PDF</h4>
             </div>			<!-- /modal-header -->
             <div class="modal-body">          
-   <form method="POST" action="{{path('formatoplang_create', { 'id': id })}}" {{ form_enctype(form) }}>
+   <form method="POST" action="{{path('pdfplang_create', { 'id': id })}}" {{ form_enctype(form) }}>
    <table class="table table-bordered table-striped hidden-mobile">
    <input type="hidden" name="_method" value="POST" />
      {{ form_errors(form) }}
    <tr>
      
        <td>
-       Plan de Gestión formato Excel<br>
-       <font color="#F87217">Adjunte su plan de gestión diligenciado en Formato Excel (máximo 1MB de tamaño)</font>
+       Plan de Gestión<br>
+       <font color="#F87217">Adjunte el escaner del plan de gestión aprobado y firmado, únicamente en formato PDF y máximo 3MB de tamaño</font>
        </td>
        		    <td>
 		     {{ form_widget(form.file) }} <font color="red">{{ form_errors(form.file) }}</font> 

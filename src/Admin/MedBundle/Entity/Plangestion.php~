@@ -79,6 +79,11 @@ protected $avales;
  */
 protected $formato;
 
+/**
+ * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang", mappedBy="plan")
+ */
+protected $pdf;
+
 
     /**
      * Set fecha_creacion
@@ -392,5 +397,15 @@ protected $formato;
     public function getDocente()
     {
         return $this->docente;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

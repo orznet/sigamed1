@@ -136,8 +136,10 @@ class AvalplangController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $plan = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
 
-        $entity = $em->getRepository('AdminMedBundle:Avalplang')->find($id);
+        $user = $em->getRepository('AdminUserBundle:User')->find($this->getUser());
+        $entity = $em->getRepository('AdminMedBundle:Avalplang')->findOneBy(array('plan' => $plan, 'user' => $user));
         
         $texto =  explode('\n', $entity->getObservaciones());
 
