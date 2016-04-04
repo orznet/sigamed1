@@ -19,24 +19,49 @@
           <th>Instrumento</th>
           <th>Descripción</th>
           <th>Acción</th>
+          <th>Estado</th>
       </tr>
 {%if entity.vinculacion == 'De Carrera'%}  
         <tr>
         <th>
         Plan de Gestión Docente
         </th>
-        <td>Formato Plan De Gestión en formato Excel  <a href="http://siga.unad.edu.co/docs/formato_plan_gestion_docente.xlsx" target="new">(Descargar) <i class="fa fa-download"></i></a></td>
+        <td>Formato Plan de Gestión en formato Excel  <a href="http://siga.unad.edu.co/docs/formato_plan_gestion_docente.xlsx" target="new">(Descargar) <i class="fa fa-download"></i></a></td>
         <td>
         {%if entity.plangestion.formato%}
-            <a href="../../../{{entity.plangestion.formato.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver Archivo Cargado...</a>
+            <a href="../../../{{entity.plangestion.formato.webpath}}"><i class="fa fa-file-o"></i> Ver Archivo...</a>
             {%else%}
             <a href="{{ path('formatoplang_new', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a>
             {%endif%}
         </td>
-        
+        <td>
+        {%if entity.plangestion.formato%}
+       <i class="fa fa-check" style="color: #739e73"></i>
+       {%else%}
+       <i class="fa fa-times" style="color: #a90329"></i>
+       {%endif%}    
+        </td>
     </tr>
-      <tr>
-          
+    <tr>
+    <th></th>
+    <td>Plan de Gestión Aprobado en PDF. (Este es cargado por el Decano Nacional)</td>
+    <td>
+    {%if entity.plangestion.pdf%}
+    <a href="javascript:popUp('../../../{{entity.plangestion.pdf.webpath}}')"><i class="fa fa-file-o"></i> Ver Archivo...</a>
+    {%else%}
+    No cargado
+    {%endif%}     
+    </td>
+    <td>
+      {%if entity.plangestion.pdf%}
+       <i class="fa fa-check" style="color: #739e73"></i>
+       {%else%}
+       <i class="fa fa-times" style="color: #a90329"></i>
+       {%endif%}  
+    </td>
+    </tr>
+    
+      <tr>      
     <th>Registro Roles
 
     </th>
@@ -45,9 +70,17 @@
     {%if entity.plangestion %}
     {%if instrumentos[0].estado%}   
     <a href="{{ path('plangestion_crear') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
-    {%else%}<i>Ver cronograma a</i>{%endif%}
+    {%else%}<i>Ver cronograma</i>{%endif%}
     {%endif%}
     </td>
+  
+        <td>
+        {%if entity.plangestion.estado == 'Cerrado' or  entity.plangestion.estado == 'Autoevaluado' %}
+       <i class="fa fa-check" style="color: #739e73"></i>
+       {%else%}
+       <i class="fa fa-times" style="color: #a90329"></i>
+       {%endif%}    
+        </td>
       </tr>
       <tr>
     <th>Autoevaluación
@@ -60,8 +93,14 @@
             {%else%}<i>Ver cronograma</i>{%endif%}
             {%endif%}
     </td>
+    <td>
+    {%if entity.plangestion.autoevaluacion is not null%}
+    <i class="fa fa-check" style="color: #739e73"></i>
+    {%else%}
+   <i class="fa fa-times" style="color: #a90329"></i>
+   {%endif%}
+    </td>
     </tr>
-    
  {%else%}
       <tr>
     <th>Autoevaluación (Plan de Actividades)</th>
@@ -69,7 +108,7 @@
     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a>
     </td>    
     <td>
-    {%if entity.plangestion.autoevaluacion == null %}
+    {%if entity.plangestion.autoevaluacion is not null %}
      {%if instrumentos[1].estado%} 
     <a href="{{ path('plangestion_conf', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%else%}<i>Ver cronograma</i>{%endif%}
@@ -160,7 +199,7 @@ Coevaluación - Director de curso a tutores
         <td>
         </td>    
     <td>
-{%if entity.plangestion%}
+{%if entity.plangestion.autoevaluacion is not null %}
         <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
    {%endif%}
     </td>
@@ -172,7 +211,7 @@ Coevaluación - Director de curso a tutores
         <td>
            {%if entity.heteroeval%} 
             <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
-        {%else%} - {%endif%}
+        {%else%}  {%endif%}
         </td> 
     <td></td>
   </tr>

@@ -48,8 +48,10 @@
   </tr>
       <tr>
     <td>Tutorias de curso:</td>
+    <td colspan="3">
       {%for tutor in docente.tutoria%}
       {{tutor.curso.id}} {{tutor.curso.nombre}} <br> {%endfor%}
+    </td>
   </tr>
     <tr>
    <td>Direcciones de curso:</td>
