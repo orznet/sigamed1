@@ -77,11 +77,13 @@ class DefaultController extends Controller
         $urlPeticion = $request->server->get('HTTP_REFERER');
 
         //------------- Origenes validos ----------------------------------------------------------
-        //$urlOrigenValido1 =	"http://intranet.unad.edu.co/autenticacion.php?continue=".$urlInicioApp; //cuando accede por el home de intranet
-        $urlOrigenValido2 =	$url_autenticacion."Usuario/envioDatosUsuario.php"; //cuando accede por login.unad.edu.co 
+        $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php?continue=".$urlInicioApp; //cuando accede por el home de intranet
+        $urlOrigenValido2 =	$url_autenticacion."Usuario/envioDatosUsuario.php"; //cuando accede por login.unad.edu.co
+        $urlOrigenValido3 =	$url_autenticacion."Usuario/envioDatosUsuario.php?continue=".$urlInicioApp; //cuando accede por login.unad.edu.co 
+        //
         //-----------------------------------------------------------------------------------------
         
-       if($cedula_usuario!="" && $autenticacion=="Aceptada" && $urlPeticion == $urlOrigenValido2){
+       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($urlPeticion == $urlOrigenValido1 || $urlPeticion == $urlOrigenValido2 || $urlPeticion == $urlOrigenValido3)){
         //	enviarFormulario();
        $session = $this->get('session');
        $session->set('cedula_usuario', $cedula_usuario);
@@ -95,6 +97,8 @@ class DefaultController extends Controller
         'urlPeticion'   => $urlPeticion,
         'email_usuario'  => $email_usuario,
         'instrumentos' => $instrumentos,
+         'url1'    => $urlOrigenValido1,
+         'url2'  => $urlOrigenValido2,    
         ));
         //echo("<script type='text/javascript'>location.href='siga.php';</script>");
 
@@ -103,11 +107,13 @@ class DefaultController extends Controller
         return $this->render('AdminUserBundle:Default:home.html.twig', array(
             // el último nombre de usuario ingresado por el usuario
         'cedula_usuario' => $cedula_usuario,
-        'nombres_usuario' => $nombres_usuario,
-        'apellidos_usuario' => $apellidos_usuario,
-        'autenticacion' => $autenticacion,
+        'nombres_usuario' => 'nn',
+        'apellidos_usuario' => 'nn',
+        'autenticacion' => 'nn',
         'urlPeticion'   => $urlPeticion,
-        'email_usuario'  => $email_usuario,
+          'url1'    => $urlOrigenValido1,
+          'url2'  => $urlOrigenValido2,
+        'email_usuario'  => 'nn',
         'instrumentos' => $instrumentos,    
         ));
         }

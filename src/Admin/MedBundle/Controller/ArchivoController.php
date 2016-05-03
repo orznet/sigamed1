@@ -17,26 +17,6 @@ use Admin\MedBundle\Form\ArchivoType;
  */
 class ArchivoController extends Controller
 {
-
-    /**
-     * Lists all Archivo entities.
-     *
-     * @Route("/", name="archivo")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:Archivo')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-    
-    
     
      /**
      * Lists all Archivo entities.
@@ -53,6 +33,26 @@ class ArchivoController extends Controller
 
         return array(
             'entities' => $entities,
+        );
+    }
+    
+    
+         /**
+     * Lists all Archivo entities.
+     *
+     * @Route("/per/{id}", name="archivo_pordoc")
+     * @Method("GET")
+     * @Template()
+     */
+    public function porperiodoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AdminMedBundle:Archivo')->findBy(array('periodo' => $id));
+
+        return array(
+            'entities' => $entities,
+            'id'    => $id,
         );
     }
     
