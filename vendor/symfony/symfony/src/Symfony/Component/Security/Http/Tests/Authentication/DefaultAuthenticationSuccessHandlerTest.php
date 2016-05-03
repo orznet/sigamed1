@@ -43,7 +43,7 @@ class DefaultAuthenticationSuccessHandlerTest extends \PHPUnit_Framework_TestCas
     {
         $options = array(
             'always_use_default_target_path' => true,
-            'default_target_path' => '/dashboard'
+            'default_target_path' => '/dashboard',
         );
 
         $response = $this->expectRedirectResponse('/dashboard');
@@ -63,6 +63,20 @@ class DefaultAuthenticationSuccessHandlerTest extends \PHPUnit_Framework_TestCas
         $response = $this->expectRedirectResponse('/dashboard');
 
         $handler = new DefaultAuthenticationSuccessHandler($this->httpUtils, array());
+        $result = $handler->onAuthenticationSuccess($this->request, $this->token);
+
+        $this->assertSame($response, $result);
+    }
+
+    public function testTargetPathIsPassedAsNestedParameterWithRequest()
+    {
+        $this->request->expects($this->once())
+            ->method('get')->with('_target_path')
+            ->will($this->returnValue(array('value' => '/dashboard')));
+
+        $response = $this->expectRedirectResponse('/dashboard');
+
+        $handler = new DefaultAuthenticationSuccessHandler($this->httpUtils, array('target_path_parameter' => '_target_path[value]'));
         $result = $handler->onAuthenticationSuccess($this->request, $this->token);
 
         $this->assertSame($response, $result);

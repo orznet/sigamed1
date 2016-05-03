@@ -17,7 +17,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
  * FilesystemLoader extends the default Twig filesystem loader
- * to work with the Symfony2 paths and template references.
+ * to work with the Symfony paths and template references.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
@@ -47,18 +47,7 @@ class FilesystemLoader extends \Twig_Loader_Filesystem
      */
     public function exists($name)
     {
-        if (parent::exists((string) $name)) {
-            return true;
-        }
-
-        // same logic as findTemplate below for the fallback
-        try {
-            $this->cache[(string) $name] = $this->locator->locate($this->parser->parse($name));
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        return true;
+        return parent::exists((string) $name);
     }
 
     /**
@@ -74,7 +63,7 @@ class FilesystemLoader extends \Twig_Loader_Filesystem
      *
      * @throws \Twig_Error_Loader if the template could not be found
      */
-    protected function findTemplate($template)
+    protected function findTemplate($template, $throw = true)
     {
         $logicalName = (string) $template;
 
@@ -87,23 +76,18 @@ class FilesystemLoader extends \Twig_Loader_Filesystem
         try {
             $file = parent::findTemplate($logicalName);
         } catch (\Twig_Error_Loader $e) {
-            $previous = $e;
+            $twigLoaderException = $e;
 
             // for BC
             try {
                 $template = $this->parser->parse($template);
-                try {
-                    $file = $this->locator->locate($template);
-                } catch (\InvalidArgumentException $e) {
-                    $previous = $e;
-                }
+                $file = $this->locator->locate($template);
             } catch (\Exception $e) {
-                $previous = $e;
             }
         }
 
         if (false === $file || null === $file) {
-            throw new \Twig_Error_Loader(sprintf('Unable to find template "%s".', $logicalName), -1, null, $previous);
+            throw $twigLoaderException;
         }
 
         return $this->cache[$logicalName] = $file;

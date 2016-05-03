@@ -14,7 +14,6 @@ namespace Sensio\Bundle\GeneratorBundle\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Command\Command;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
 
@@ -66,9 +65,8 @@ EOT
         $entityClass = $this->getContainer()->get('doctrine')->getAliasNamespace($bundle).'\\'.$entity;
         $metadata = $this->getEntityMetadata($entityClass);
         $bundle   = $this->getApplication()->getKernel()->getBundle($bundle);
+        $generator = $this->getGenerator($bundle);
 
-        $generator = new DoctrineFormGenerator($this->getContainer()->get('filesystem'));
-        $generator->setSkeletonDirs($this->getSkeletonDirs($bundle));
         $generator->generate($bundle, $entity, $metadata[0]);
 
         $output->writeln(sprintf(

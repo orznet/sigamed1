@@ -12,24 +12,24 @@
 namespace Symfony\Bundle\SecurityBundle\Tests\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Reference;
-
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 abstract class CompleteConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+    private static $containerCache = array();
+
     abstract protected function loadFromFile(ContainerBuilder $container, $file);
 
     public function testRolesHierarchy()
     {
         $container = $this->getContainer('container1');
         $this->assertEquals(array(
-            'ROLE_ADMIN'       => array('ROLE_USER'),
+            'ROLE_ADMIN' => array('ROLE_USER'),
             'ROLE_SUPER_ADMIN' => array('ROLE_USER', 'ROLE_ADMIN', 'ROLE_ALLOWED_TO_SWITCH'),
-            'ROLE_REMOTE'      => array('ROLE_USER', 'ROLE_ADMIN'),
+            'ROLE_REMOTE' => array('ROLE_USER', 'ROLE_ADMIN'),
         ), $container->getParameter('security.role_hierarchy.roles'));
     }
 
@@ -79,18 +79,27 @@ abstract class CompleteConfigurationTest extends \PHPUnit_Framework_TestCase
                 'security.channel_listener',
                 'security.logout_listener.secure',
                 'security.authentication.listener.x509.secure',
+                'security.authentication.listener.remote_user.secure',
                 'security.authentication.listener.form.secure',
                 'security.authentication.listener.basic.secure',
                 'security.authentication.listener.digest.secure',
+                'security.authentication.listener.rememberme.secure',
                 'security.authentication.listener.anonymous.secure',
-                'security.access_listener',
                 'security.authentication.switchuser_listener.secure',
+                'security.access_listener',
             ),
             array(
                 'security.channel_listener',
                 'security.context_listener.0',
                 'security.authentication.listener.basic.host',
                 'security.authentication.listener.anonymous.host',
+                'security.access_listener',
+            ),
+            array(
+                'security.channel_listener',
+                'security.context_listener.1',
+                'security.authentication.listener.basic.with_user_checker',
+                'security.authentication.listener.anonymous.with_user_checker',
                 'security.access_listener',
             ),
         ), $listeners);
@@ -117,6 +126,7 @@ abstract class CompleteConfigurationTest extends \PHPUnit_Framework_TestCase
             array(
                 '/test',
                 'foo\\.example\\.org',
+                array('GET', 'POST'),
             ),
         ), $matchers);
     }
@@ -218,8 +228,40 @@ abstract class CompleteConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', (string) $container->getAlias('security.acl.provider'));
     }
 
+    public function testRememberMeThrowExceptionsDefault()
+    {
+        $container = $this->getContainer('container1');
+        $this->assertTrue($container->getDefinition('security.authentication.listener.rememberme.secure')->getArgument(5));
+    }
+
+    public function testRememberMeThrowExceptions()
+    {
+        $container = $this->getContainer('remember_me_options');
+        $service = $container->getDefinition('security.authentication.listener.rememberme.main');
+        $this->assertEquals('security.authentication.rememberme.services.persistent.main', $service->getArgument(1));
+        $this->assertFalse($service->getArgument(5));
+    }
+
+    public function testUserCheckerConfig()
+    {
+        $this->assertEquals('app.user_checker', $this->getContainer('container1')->getAlias('security.user_checker.with_user_checker'));
+    }
+
+    public function testUserCheckerConfigWithDefaultChecker()
+    {
+        $this->assertEquals('security.user_checker', $this->getContainer('container1')->getAlias('security.user_checker.host'));
+    }
+
+    public function testUserCheckerConfigWithNoCheckers()
+    {
+        $this->assertEquals('security.user_checker', $this->getContainer('container1')->getAlias('security.user_checker.secure'));
+    }
+
     protected function getContainer($file)
     {
+        if (isset(self::$containerCache[$file])) {
+            return self::$containerCache[$file];
+        }
         $container = new ContainerBuilder();
         $security = new SecurityExtension();
         $container->registerExtension($security);
@@ -232,6 +274,6 @@ abstract class CompleteConfigurationTest extends \PHPUnit_Framework_TestCase
         $container->getCompilerPassConfig()->setRemovingPasses(array());
         $container->compile();
 
-        return $container;
+        return self::$containerCache[$file] = $container;
     }
 }

@@ -8,16 +8,7 @@ parameters:
     database_password: base456
     mailer_transport: smtp
     mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_user: siga@unad.edu.co
+    mailer_password: Siga1527
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-
-
-    mailer_transport: gmail
-    mailer_host: smtp.gmail.com
-    mailer_user: 'siga@unad.edu.co'
-    mailer_password: 'Siga1527'
-    auth_mode: login
-    port: 587
-    encryption: tls
