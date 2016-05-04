@@ -56,6 +56,7 @@ class DefaultController extends Controller
         return $this->render('AdminUserBundle:Default:index.html.twig',array(
             'escuela'      => $escuela,
             'user'  => $user,
+            'periodo' => $this->container->getParameter('appmed.periodo'),
             ));
     }
     

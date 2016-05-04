@@ -72,7 +72,7 @@ protected $path;
     }
 
     protected function getUploadDir() {
-        return 'archivos/pdfplang/';
+        return 'uploads/'.$this->getPlan()->getDocente()->getPeriodo().'/pdfplang';
     }
       /**
      * Sets file.
