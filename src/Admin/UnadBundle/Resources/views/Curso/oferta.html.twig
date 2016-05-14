@@ -2,7 +2,7 @@
 
 {% block body -%}
         {{ include(
-            'AdminUnadBundle:Curso:info.html.twig',
+            'AdminUnadBundle:Curso:detalle.html.twig',
             {'entity': entity}
         ) }}
 
@@ -15,5 +15,4 @@
     {{ form_errors(cedula_form.cedula) }}
     <input type="submit" />
 </form>
- 
 {% endblock %}

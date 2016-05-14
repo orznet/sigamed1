@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tutor", uniqueConstraints={@ORM\UniqueConstraint(columns={"docente_id", "curso_id"})})
+ * @ORM\Table(name="tutor", uniqueConstraints={@ORM\UniqueConstraint(columns={"docente_id", "oferta_id"})})
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\tutorlRepository")
  */
 class Tutor{
@@ -37,11 +37,11 @@ protected $observaciones;
 protected $docente;
 
 /** 
-* @var Curso
-* @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="tutores")
-* @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=false)
+* @var Oferta
+* @ORM\ManyToOne(targetEntity="Admin\MedBundle\Entity\Oferta", inversedBy="tutores")
+* @ORM\JoinColumn(name="oferta_id", referencedColumnName="id", nullable=false)
 */
-protected $curso;
+protected $oferta;
 
 /**
  * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="id") 
@@ -134,28 +134,6 @@ protected $coevaltutor;
         return $this->docente;
     }
 
-    /**
-     * Set curso
-     *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
-     * @return Tutor
-     */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso)
-    {
-        $this->curso = $curso;
-
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \Admin\UnadBundle\Entity\Curso 
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
 
     /**
      * Set coevaldirector
@@ -201,5 +179,28 @@ protected $coevaltutor;
     public function getCoevaltutor()
     {
         return $this->coevaltutor;
+    }
+
+    /**
+     * Set oferta
+     *
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
+     * @return Tutor
+     */
+    public function setOferta(\Admin\MedBundle\Entity\Oferta $oferta)
+    {
+        $this->oferta = $oferta;
+
+        return $this;
+    }
+
+    /**
+     * Get oferta
+     *
+     * @return \Admin\MedBundle\Entity\Oferta 
+     */
+    public function getOferta()
+    {
+        return $this->oferta;
     }
 }

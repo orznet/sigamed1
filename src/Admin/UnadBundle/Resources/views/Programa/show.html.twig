@@ -38,8 +38,6 @@
     <tr>
     <th>id</th>
     <th>Curso</th>
-    <th>Director</th>
-    <th>Cedula</th>
     </tr>     
      {%for curso in entity.cursos %}
     
@@ -48,12 +46,6 @@
     <a href="{{ path('curso_show', { 'id': curso.id }) }}">{{curso.id}}</a>
     </td>
     <td>{{curso.nombre}}</td>
-    {%if curso.director%}
-    <td>
-    {{curso.director.id}}
-    </td>
-    <td>{{curso.director.user.id}}</td>
-    {%endif%}
     </tr>
     
     {%endfor%}

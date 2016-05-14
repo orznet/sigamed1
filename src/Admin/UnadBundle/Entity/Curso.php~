@@ -47,17 +47,6 @@ protected $creditos;
 protected $escuela;
 
 
-
-      /** 
-     * @var Director 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="director")
-     * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
-     * nullable=true
-     * )
-     */
-protected $director;
-
-
       /** 
      * @var Programa 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="cursos")
@@ -66,29 +55,18 @@ protected $director;
      * )
      */
 protected $programa;
-
-
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Tutor", mappedBy="curso")
-    */
-    protected $tutores;
-
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\redTutores", mappedBy="curso") 
-    */
-   protected $evaldetutor;
    
-   
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalTutor", mappedBy="curso") 
-    */
-   protected $evalatutor;
-   
-   
+      
     /**
     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="curso") 
     */
    protected $coeval;
+   
+   
+   /**
+* @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Oferta", mappedBy="curso")
+*/
+protected $oferta;
   
     /**
      * Get id
@@ -216,29 +194,6 @@ protected $programa;
     }
 
     /**
-     * Set Director
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $director
-     * @return Curso
-     */
-    public function setDirector(\Admin\UnadBundle\Entity\Docente $director = null)
-    {
-        $this->director = $director;
-
-        return $this;
-    }
-
-    /**
-     * Get Director
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getDirector()
-    {
-        return $this->director;
-    }
-
-    /**
      * Set Programa
      *
      * @param \Admin\UnadBundle\Entity\Programa $programa
@@ -268,104 +223,6 @@ protected $programa;
         $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add docentes
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $docentes
-     * @return Curso
-     */
-    public function addDocente(\Admin\UnadBundle\Entity\Docente $docentes)
-    {
-        $this->docentes[] = $docentes;
-
-        return $this;
-    }
-
-    /**
-     * Remove docentes
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $docentes
-     */
-    public function removeDocente(\Admin\UnadBundle\Entity\Docente $docentes)
-    {
-        $this->docentes->removeElement($docentes);
-    }
-
-    /**
-     * Get docentes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDocentes()
-    {
-        return $this->docentes;
-    }
-
-    /**
-     * Add evaldetutor
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
-     * @return Curso
-     */
-    public function addEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
-    {
-        $this->evaldetutor[] = $evaldetutor;
-
-        return $this;
-    }
-
-    /**
-     * Remove evaldetutor
-     *
-     * @param \Admin\MedBundle\Entity\redTutores $evaldetutor
-     */
-    public function removeEvaldetutor(\Admin\MedBundle\Entity\redTutores $evaldetutor)
-    {
-        $this->evaldetutor->removeElement($evaldetutor);
-    }
-
-    /**
-     * Get evaldetutor
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvaldetutor()
-    {
-        return $this->evaldetutor;
-    }
-
-    /**
-     * Add evalatutor
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evalatutor
-     * @return Curso
-     */
-    public function addEvalatutor(\Admin\MedBundle\Entity\coevalTutor $evalatutor)
-    {
-        $this->evalatutor[] = $evalatutor;
-
-        return $this;
-    }
-
-    /**
-     * Remove evalatutor
-     *
-     * @param \Admin\MedBundle\Entity\coevalTutor $evalatutor
-     */
-    public function removeEvalatutor(\Admin\MedBundle\Entity\coevalTutor $evalatutor)
-    {
-        $this->evalatutor->removeElement($evalatutor);
-    }
-
-    /**
-     * Get evalatutor
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEvalatutor()
-    {
-        return $this->evalatutor;
-    }
 
     /**
      * Set coeval
@@ -388,5 +245,40 @@ protected $programa;
     public function getCoeval()
     {
         return $this->coeval;
+    }
+
+    
+
+    /**
+     * Add oferta
+     *
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
+     * @return Curso
+     */
+    public function addOfertum(\Admin\MedBundle\Entity\Oferta $oferta)
+    {
+        $this->oferta[] = $oferta;
+
+        return $this;
+    }
+
+    /**
+     * Remove oferta
+     *
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
+     */
+    public function removeOfertum(\Admin\MedBundle\Entity\Oferta $oferta)
+    {
+        $this->oferta->removeElement($oferta);
+    }
+
+    /**
+     * Get oferta
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOferta()
+    {
+        return $this->oferta;
     }
 }

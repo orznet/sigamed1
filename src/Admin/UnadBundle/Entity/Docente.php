@@ -102,7 +102,7 @@ protected $centro;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="director")
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Oferta", mappedBy="director")
      */
     protected $director;    
 
@@ -468,10 +468,10 @@ protected $centro;
     /**
      * Add director
      *
-     * @param \Admin\UnadBundle\Entity\Curso $director
+     * @param \Admin\MedBundle\Entity\Oferta $director
      * @return Docente
      */
-    public function addDirector(\Admin\UnadBundle\Entity\Curso $director)
+    public function addDirector(\Admin\MedBundle\Entity\Oferta $director)
     {
         $this->director[] = $director;
 
@@ -481,9 +481,9 @@ protected $centro;
     /**
      * Remove director
      *
-     * @param \Admin\UnadBundle\Entity\Curso $director
+     * @param \Admin\MedBundle\Entity\Oferta $director
      */
-    public function removeDirector(\Admin\UnadBundle\Entity\Curso $director)
+    public function removeDirector(\Admin\MedBundle\Entity\Oferta $director)
     {
         $this->director->removeElement($director);
     }

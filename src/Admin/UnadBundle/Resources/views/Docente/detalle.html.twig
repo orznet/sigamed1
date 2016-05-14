@@ -47,10 +47,9 @@
        {%endif%}
    </td>
       <td colspan="3">{%for tutoria in entity.tutoria%} 
-      {{tutoria.curso.id}}:
-      {{tutoria.curso.nombre}} Director: 
-      {%if tutoria.curso.director%}
-        {{tutoria.curso.director.user.nombres}} {{tutoria.curso.director.user.apellidos}} 
+      {{tutoria.oferta.curso.id}}:{{tutoria.oferta.curso.nombre}} Periodo:{{tutoria.oferta.periodo}}  Director: 
+      {%if tutoria.oferta.director%}
+        {{tutoria.oferta.director.user.nombres}} {{tutoria.oferta.director.user.apellidos}} 
       {%endif%}
       <br>{%endfor%}
    </td>
@@ -59,7 +58,7 @@
    </td>
   </tr>
     <tr>
-   <th>Director y Tutor</th>
+   <th>Director</th>
    <td>
        {%if entity.director|length > 0%}
        <i class="fa fa-check" style="color: #739e73"></i>
@@ -68,9 +67,9 @@
        {%endif%}
    </td>
       <td colspan="3">
-      {%for curso in entity.director%}
-      <a data-toggle="modal" href="{{ path('curso_modal', { 'id': curso.id }) }}" data-target="#myModal">{{curso.id}}:</a>
-      {{curso.nombre}} <br> {%endfor%}
+      {%for oferta in entity.director%}
+      <a data-toggle="modal" href="{{ path('curso_modal', { 'id': oferta.id }) }}" data-target="#myModal">{{oferta.id}}:</a>
+      {{oferta.curso.nombre}} ({{oferta.periodo}}) <br> {%endfor%}
    </td>
    <td>
    <a data-toggle="modal" data-target="#ModalDirector" class="btn btn-success btn-xs">Ayuda</a>

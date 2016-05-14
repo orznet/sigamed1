@@ -1,12 +1,12 @@
 <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
-           <td colspan="4"><h4>Código: {{ entity.curso.id }} Nombre: {{ entity.curso.nombre }} Periodo:({{entity.periodo}}) </h4></td>
+           <td colspan="4"><h4>Código: {{ entity.id }} Nombre: {{ entity.nombre }} </h4></td>
             <tr>
                 <th>Programa</th>
-                <td>{{ entity.curso.programa? entity.curso.programa.nombre : 'Sin' }} - {{ entity.curso.escuela }}</td>
+                <td>{{ entity.programa? entity.programa.nombre : 'Sin' }} - {{ entity.escuela }}</td>
             </tr>
             <tr>
-                <td colspan="2"><b>Nivel:</b> {{ entity.curso.nivel }} <b>Tipologia:</b> {{ entity.curso.tipologia }} <b>Creditos:</b> {{ entity.curso.creditos }}</td>
+                <td colspan="2"><b>Nivel:</b> {{ entity.nivel }} <b>Tipologia:</b> {{ entity.tipologia }} <b>Creditos:</b> {{ entity.creditos }}</td>
             </tr>
         </tbody>
     </table>
@@ -19,7 +19,8 @@
                 <th>Centro</th>
                 <th>Borrar</th>
             </tr>
-        {%for tutor in entity.tutores %}
+        {%for oferta in entity.oferta %}
+        {%for tutor in oferta.tutores %}
             <tr>
                 <td>{{tutor.docente.id}}</td>
                 <td>{{tutor.docente.user.id}} - {{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
@@ -27,5 +28,6 @@
                 <td><a href="{{ path('tutor_delete', {'id': tutor.id }) }}">Borrar Tutor</a></td>
             </tr>
         {%endfor%}
+            {%endfor%}
         </tbody>
         </table>

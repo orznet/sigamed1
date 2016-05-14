@@ -12,26 +12,40 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/pdfPlang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/dc.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/crear.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ArchivoController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadplang.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/show.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/edit.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/web/app.php</file>
-            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/porperiodo.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/AvalplangType.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/oferta.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Oferta.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/AvalplangController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Avalplang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/formatoPlang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/RolplangController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ActividadplangController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/DocenteController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/index.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Zona/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Escuela/info.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/modal.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Curso.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/pdfPlang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/ProgramaRepository.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Actividadplang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CursoController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/detalle.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/detalle.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/config/parameters.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/AvalplangType.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/porperiodo.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Avalplang.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ActividadplangController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/detalle.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Zona/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/PlangestionController.php</file>
         </group>
     </open-files>

@@ -102,13 +102,13 @@ protected $centro;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Curso", mappedBy="director")
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Oferta", mappedBy="director")
      */
     protected $director;    
 
     
    /**
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="id") 
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", mappedBy="docente") 
     */
    protected $plangestion;
    
@@ -136,7 +136,7 @@ protected $centro;
    protected $evaluacion;
    
     /**
-    * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Terna", mappedBy="terna") 
+    * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Terna", mappedBy="docente") 
     */
    protected $ternado;
    
@@ -468,10 +468,10 @@ protected $centro;
     /**
      * Add director
      *
-     * @param \Admin\UnadBundle\Entity\Curso $director
+     * @param \Admin\MedBundle\Entity\Oferta $director
      * @return Docente
      */
-    public function addDirector(\Admin\UnadBundle\Entity\Curso $director)
+    public function addDirector(\Admin\MedBundle\Entity\Oferta $director)
     {
         $this->director[] = $director;
 
@@ -481,9 +481,9 @@ protected $centro;
     /**
      * Remove director
      *
-     * @param \Admin\UnadBundle\Entity\Curso $director
+     * @param \Admin\MedBundle\Entity\Oferta $director
      */
-    public function removeDirector(\Admin\UnadBundle\Entity\Curso $director)
+    public function removeDirector(\Admin\MedBundle\Entity\Oferta $director)
     {
         $this->director->removeElement($director);
     }
@@ -657,5 +657,38 @@ protected $centro;
     public function getTutoria()
     {
         return $this->tutoria;
+    }
+
+    /**
+     * Add ternado
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternado
+     * @return Docente
+     */
+    public function addTernado(\Admin\UnadBundle\Entity\Terna $ternado)
+    {
+        $this->ternado[] = $ternado;
+
+        return $this;
+    }
+
+    /**
+     * Remove ternado
+     *
+     * @param \Admin\UnadBundle\Entity\Terna $ternado
+     */
+    public function removeTernado(\Admin\UnadBundle\Entity\Terna $ternado)
+    {
+        $this->ternado->removeElement($ternado);
+    }
+
+    /**
+     * Get ternado
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTernado()
+    {
+        return $this->ternado;
     }
 }

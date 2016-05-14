@@ -142,11 +142,14 @@ class EscuelaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela),array('nivel' => 'DESC'));
+        
         if (!$escuela) {
             throw $this->createNotFoundException('Unable to find Escuela entity.');
         }
         return array(
         'entity'      => $escuela,
+        'programas'   => $programas 
         );
     }
     

@@ -20,7 +20,7 @@ class ProgramaType extends AbstractType
             ))
             ->add('nivel', 'choice', array(
             'empty_value' => ' ',    
-            'choices'   => array('Diplomado' => 'Diplomado', 'Especialización' => 'Especialización','Licenciatura' => 'Licenciatura', 'Maestria' => 'Maestria','Profesional' => 'Profesional','Tecnologia' => 'Tecnologia','Unidad'=>'Unidad'),
+            'choices'   => array('Diplomado' => 'Diplomado', 'Especialización' => 'Especialización','Licenciatura' => 'Licenciatura', 'Maestria' => 'Maestria','Profesional' => 'Profesional','Tecnología' => 'Tecnología','Unidad'=>'Unidad'),
             'required'  => true,
             ))    
                 

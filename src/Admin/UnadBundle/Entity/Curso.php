@@ -47,17 +47,6 @@ protected $creditos;
 protected $escuela;
 
 
-
-      /** 
-     * @var Director 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="director")
-     * @ORM\JoinColumn(name="director_id", referencedColumnName="id",
-     * nullable=true
-     * )
-     */
-protected $director;
-
-
       /** 
      * @var Programa 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="cursos")
@@ -66,18 +55,18 @@ protected $director;
      * )
      */
 protected $programa;
-
-
-    /**
-    * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Tutor", mappedBy="curso")
-    */
-    protected $tutores;
    
       
     /**
     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="curso") 
     */
    protected $coeval;
+   
+   
+   /**
+* @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Oferta", mappedBy="curso")
+*/
+protected $oferta;
   
     /**
      * Get id
@@ -205,29 +194,6 @@ protected $programa;
     }
 
     /**
-     * Set Director
-     *
-     * @param \Admin\UnadBundle\Entity\Docente $director
-     * @return Curso
-     */
-    public function setDirector(\Admin\UnadBundle\Entity\Docente $director = null)
-    {
-        $this->director = $director;
-
-        return $this;
-    }
-
-    /**
-     * Get Director
-     *
-     * @return \Admin\UnadBundle\Entity\Docente 
-     */
-    public function getDirector()
-    {
-        return $this->director;
-    }
-
-    /**
      * Set Programa
      *
      * @param \Admin\UnadBundle\Entity\Programa $programa
@@ -281,36 +247,38 @@ protected $programa;
         return $this->coeval;
     }
 
+    
+
     /**
-     * Add tutores
+     * Add oferta
      *
-     * @param \Admin\MedBundle\Entity\Tutor $tutores
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
      * @return Curso
      */
-    public function addTutore(\Admin\MedBundle\Entity\Tutor $tutores)
+    public function addOfertum(\Admin\MedBundle\Entity\Oferta $oferta)
     {
-        $this->tutores[] = $tutores;
+        $this->oferta[] = $oferta;
 
         return $this;
     }
 
     /**
-     * Remove tutores
+     * Remove oferta
      *
-     * @param \Admin\MedBundle\Entity\Tutor $tutores
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
      */
-    public function removeTutore(\Admin\MedBundle\Entity\Tutor $tutores)
+    public function removeOfertum(\Admin\MedBundle\Entity\Oferta $oferta)
     {
-        $this->tutores->removeElement($tutores);
+        $this->oferta->removeElement($oferta);
     }
 
     /**
-     * Get tutores
+     * Get oferta
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTutores()
+    public function getOferta()
     {
-        return $this->tutores;
+        return $this->oferta;
     }
 }

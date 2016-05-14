@@ -1,0 +1,1 @@
+[13-May-2016 01:39:25 America/Argentina/Buenos_Aires] PHP Fatal error:  Call to undefined method Proxies\__CG__\Admin\UnadBundle\Entity\Curso::getDirector() in /Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CursoController.php on line 208
