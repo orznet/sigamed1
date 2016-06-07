@@ -32,15 +32,6 @@
     <td>{{ form_widget(edit_form.programa) }}</td>
    </tr>
    <tr>
-    <td>Director</td>
-    <td>{{ form_widget(edit_form.director) }} {{entity.director? entity.director.user.nombres~' '~entity.director.user.apellidos : 'Sin' }}
-    <input type=button onClick='targetitem = document.forms[0].admin_unadbundle_curso_director; 
-dataitem = window.open("{{ path('programa_addlider') }}",
-"dataitem", "toolbar=no,menubar=no,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1100,height=510,left = 100,top = 100"); dataitem.targetitem = targetitem' 
-value="Selecionar Director">
-    </td>
-   </tr>
-   <tr>
     <td></td>
     <td>    
     <button type="submit" class="btn btn-lg btn-primary">Guardar</button></td>

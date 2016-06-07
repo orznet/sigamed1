@@ -14,7 +14,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
          $session = $request->getSession();
-        if (true === $this->container->get('security.context')->isGranted('ROLE_DEC')) {
+        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DEC')) {
                   $escuelas = $this->getUser()->getDecano();
                   $escuela = $escuelas[0];
                  $session->set('escuelaid', $escuela->getId()); 
@@ -22,7 +22,7 @@ class DefaultController extends Controller
                   $escuela = null;
               }
               
-        if (true === $this->container->get('security.context')->isGranted('ROLE_SECA')) {
+        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_SECA')) {
                   $escuelas = $this->getUser()->getSecretaria();
                   $escuela = $escuelas[0];
                  $session->set('escuelaid', $escuela->getId()); 
@@ -30,7 +30,7 @@ class DefaultController extends Controller
                   $escuela = null;
               }
               
-        if (true === $this->container->get('security.context')->isGranted('ROLE_DIRZ')) {
+        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DIRZ')) {
            $zonas = $this->getUser()->getDirectorzona();
            $zona = $zonas[0];
           $session->set('zonaid', $zona->getId()); 
@@ -41,7 +41,7 @@ class DefaultController extends Controller
               
         $user = $this->getUser()->getUsername();
         
-        if (true === $this->container->get('security.context')->isGranted('ROLE_DOC')) {
+        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DOC')) {
                  $docentes = $this->getUser()->getDocente();
                  $docente = $docentes[0];
                  $session->set('docenteid', $docente->getId());
@@ -60,11 +60,11 @@ class DefaultController extends Controller
             ));
     }
     
-    public function homeAction()
+    public function homeAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
-        $request = $this->getRequest();
+        //$request = $this->getRequest();
         $session = $request->getSession();
         $cedula_usuario = $request->request->get('cedula_usuario');
         $nombres_usuario = $request->request->get('nombres_usuario');

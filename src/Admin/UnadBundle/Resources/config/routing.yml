@@ -22,22 +22,18 @@ _curso_unad:
     resource: "@AdminUnadBundle/Controller/CursoController.php"
     type:     annotation
     
-docente_redtutores:
-    pattern:  /doc/redtutor
-    defaults: { _controller: "AdminUnadBundle:Docente:redtutores" }
-
 docente_coevaltutor:
-    pattern:  /doc/coevaltutor
+    path:  /doc/coevaltutor
     defaults: { _controller: "AdminUnadBundle:Docente:coevaltutor" }
     
 docente_coevaldirector:
-    pattern:  /doc/coevaldirector
+    path:  /doc/coevaldirector
     defaults: { _controller: "AdminUnadBundle:Docente:coevaldirector" }
     
 docente_infofinal_dc:
-    pattern:  /info/finaldc/{id}
+    path:  /info/finaldc/{id}
     defaults: { _controller: "AdminUnadBundle:Docente:finaldc" }    
  
 decano_coevallider:
-    pattern:  /dec/coevallider
+    path:  /dec/coevallider
     defaults: { _controller: "AdminUnadBundle:Escuela:coevallider" }        

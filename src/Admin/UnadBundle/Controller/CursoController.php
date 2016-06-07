@@ -11,6 +11,7 @@ use Admin\MedBundle\Entity\Oferta;
 use Admin\MedBundle\Entity\Cedula;
 use Admin\MedBundle\Entity\Tutor;
 use Admin\UnadBundle\Form\CursoType;
+use Admin\MedBundle\Form\ofertaType;
 use Admin\MedBundle\Form\CedulaType;
 use Admin\UnadBundle\Form\CursoprogType;
 
@@ -38,7 +39,7 @@ class CursoController extends Controller
         );
     }
     
-        /**
+     /**
      * Lists all Curso entities.
      *
      * @Route("/pe/{sigla}", name="curso_escuela")
@@ -135,57 +136,88 @@ class CursoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Curso entity.');
         }
-
-       $deleteForm = $this->createDeleteForm($id);
-       $cedula = new Cedula();     
-       $Form = $this->createForm(new CedulaType(), $cedula, array(
-            'action' => $this->generateUrl('curso_tutor', array('id' => $entity->getId())),
+       $datos = new \Admin\MedBundle\Entity\OfertaDatos();     
+       $Form = $this->createForm(new ofertaType(), $datos, array(
+            'action' => $this->generateUrl('oferta_curso', array('id' => $entity->getId())),
             'method' => 'GET',
         ));
-       
-       
-       $Form->add('submit', 'submit', array('label' => 'Agregar'));
-
+        
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-            'cedula_form'   => $Form->createView(),     
+            'form'      => $Form->createView(),
         );
     }
     
-    
      /**
-     * Finds and displays a Curso entity
-     * @Route("/oferta/{id}", name="oferta_show")
+     * Docentes de un curso por oferta
+     * @Route("/{id}/oferta", name="oferta")
      * @Method("GET")
      * @Template()
      */
+    
     public function ofertaAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('AdminMedBundle:Oferta')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Oferta entity.');
         }
-
-       $deleteForm = $this->createDeleteForm($id);
        $cedula = new Cedula();     
        $Form = $this->createForm(new CedulaType(), $cedula, array(
             'action' => $this->generateUrl('oferta_tutor', array('id' => $entity->getId())),
             'method' => 'GET',
-        ));
-       
-       
-       $Form->add('submit', 'submit', array('label' => 'Agregar'));
-
+        ));  
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
             'cedula_form'   => $Form->createView(),     
         );
     }
+    
+  
+     /**
+     * Finds and displays a Curso entity
+     * @Route("/{id}/addoferta", name="oferta_curso")
+     * @Method("GET")
+     * @Template()
+     */
+    public function ofertaCursoAction(Request $request, $id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $curso = $em->getRepository('AdminUnadBundle:Curso')->find($id);
+      $oferta = new Oferta();
+      $datos = new \Admin\MedBundle\Entity\OfertaDatos();
+      $Form = $this->createForm(new ofertaType(), $datos);
+      $Form->bind($request);
+      $numeroced = $Form->get('cedula')->getData();
+      
+      $usuario = $em->getRepository('AdminUserBundle:User')->find($numeroced);       
+       if (!$usuario) {
+       $this->get('session')->getFlashBag()->add('error', 'Cédula no encontrada');          
+       return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
+       }
+       
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario));
+          
+      if (!$docente) {
+      $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
+      return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
+      }
+      
+      $oferta->setCurso($curso);
+      $oferta->setDirector($docente);
+      $oferta->setPeriodo($Form->get('periodo')->getData());
+     
+      try{
+      $em->persist($oferta);
+      $em->flush();
+       } catch (\Doctrine\DBAL\DBALException $e) {
+             $this->get('session')->getFlashBag()->add('warning', 'Error de base de datos');
+             return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));
+       }
+       $this->get('session')->getFlashBag()->add('success', 'La oferta se agrego al curso'); 
+       return $this->redirect($this->generateUrl('curso_show', array('id' => $id))); 
+    }  
     
     
    /**
@@ -194,7 +226,7 @@ class CursoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function cursoTutorAction(Request $request, $id)
+    public function ofertaTutorAction(Request $request, $id)
     {
       $em = $this->getDoctrine()->getManager();
       $oferta = $em->getRepository('AdminMedBundle:Oferta')->find($id);
@@ -203,30 +235,28 @@ class CursoController extends Controller
       $Form->bind($request);
       $numeroced = $Form->get('cedula')->getData();
       $session = $this->getRequest()->getSession();
-      $securityContext = $this->container->get('security.context');
       
-      if($oferta->getDirector()->getId() != $session->get('docenteid') && !$securityContext->isGranted('ROLE_ADMIN')){
+      if($oferta->getDirector()->getId() != $session->get('docenteid') && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
       $this->get('session')->getFlashBag()->add('error', 'No permitido');          
-      return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));                     
+      return $this->redirect($this->generateUrl('oferta', array('id' => $id)));                     
        }
       
       $usuario = $em->getRepository('AdminUserBundle:User')->find($numeroced);       
        if (!$usuario) {
        $this->get('session')->getFlashBag()->add('error', 'Cédula no encontrada');          
-       return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));          
+       return $this->redirect($this->generateUrl('oferta', array('id' => $id)));          
        }
    
       $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario));
-      
-      
+          
       if (!$docente) {
       $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
-      return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));          
+      return $this->redirect($this->generateUrl('oferta', array('id' => $id)));          
       }
       
        if($docente->getId() == $oferta->getDirector()->getId()){
        $this->get('session')->getFlashBag()->add('warning', 'No es necesario que el director se agregue como tutor');          
-       return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));      
+       return $this->redirect($this->generateUrl('oferta', array('id' => $id)));      
        }
       
       $tutor = new Tutor();
@@ -237,10 +267,10 @@ class CursoController extends Controller
       $em->flush();
        } catch (\Doctrine\DBAL\DBALException $e) {
              $this->get('session')->getFlashBag()->add('warning', 'El docente ya se encuentra en el curso');
-             return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));
+             return $this->redirect($this->generateUrl('oferta', array('id' => $id)));
        }
        $this->get('session')->getFlashBag()->add('success', 'El docente se agrego al curso'); 
-       return $this->redirect($this->generateUrl('oferta_show', array('id' => $id)));
+       return $this->redirect($this->generateUrl('oferta', array('id' => $id)));
     }
     
     
@@ -258,8 +288,15 @@ class CursoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Curso entity.');
         }
+        
+        $cedula = new Cedula();     
+       $Form = $this->createForm(new CedulaType(), $cedula, array(
+            'action' => $this->generateUrl('oferta_tutor', array('id' => $id)),
+            'method' => 'GET',
+        ));
         return array(
             'entity'      => $entity,
+            'cedula_form'   => $Form->createView(),   
         );
     }
 
@@ -281,9 +318,7 @@ class CursoController extends Controller
         }
         
         $editForm = $this->createEditarForm($entity);
-        if ($entity->getDirector()){
-        $editForm->get('director')->setData($entity->getDirector()->getId());
-        }
+
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -405,7 +440,7 @@ class CursoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('curso_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+  //          ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
@@ -420,25 +455,24 @@ class CursoController extends Controller
     {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AdminMedBundle:Tutor')->find($id);
-            $cursoid = $entity->getCurso()->getId();
-            $director = $entity->getCurso()->getDirector();
-            $securityContext = $this->container->get('security.context');
+            $oferta = $entity->getOferta();
+            $director = $oferta->getDirector();
             $session = $this->getRequest()->getSession();
             
-            if($director->getId() == $session->get('docenteid') || $securityContext->isGranted('ROLE_ADMIN')){
-
+            if($director->getId() == $session->get('docenteid') || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
                 try{
                 $em->remove($entity);
                 $em->flush();
+                $this->get('session')->getFlashBag()->add('success', 'Se borro el docente del curso'); 
                 } catch (\Doctrine\DBAL\DBALException $e) {
                 $this->get('session')->getFlashBag()->add('warning', 'El tutor no se puede remover ya evaluo');
-                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));
+                return $this->redirect($this->generateUrl('oferta', array('id' => $oferta->getId())));
                 }
-                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));
+                return $this->redirect($this->generateUrl('oferta', array('id' => $oferta->getId())));
                 } 
                 else{
                 $this->get('session')->getFlashBag()->add('error', 'No permitido');          
-                return $this->redirect($this->generateUrl('curso_show', array('id' => $cursoid)));   
+                return $this->redirect($this->generateUrl('oferta', array('id' => $oferta->getId())));   
                 }
             
         }

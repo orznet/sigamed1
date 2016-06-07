@@ -27,13 +27,15 @@ class redTutoresController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:redTutores')->findAll();
+       $em = $this->getDoctrine()->getManager();
+       $session = $this->getRequest()->getSession();
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        $tutorias = $em->getRepository('AdminMedBundle:Tutor')->findBy(array('docente' => $entity));
 
         return array(
-            'entities' => $entities,
-        );
+            'entity' => $entity,
+            'tutorias'  => $tutorias,
+         );
     }
     /**
      * @Route("/", name="redtutores_create")
@@ -204,7 +206,7 @@ class redTutoresController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('docente_redtutores'));
+            return $this->redirect($this->generateUrl('redtutores'));
         }
 
         return array(

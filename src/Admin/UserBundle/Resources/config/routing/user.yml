@@ -1,31 +1,31 @@
 admin_user:
-    pattern:  /lista
+    path:  /lista
     defaults: { _controller: "AdminUserBundle:User:index" }
-    requirements: { _method: get }
+    requirements: { methods: get }
     
 admin_user_buscarpor:
-    pattern:  /lista
+    path:  /lista
     defaults: { _controller: "AdminUserBundle:User:buscarpor" }
 
 admin_user_new:
-    pattern:  /new
+    path:  /new
     defaults: { _controller: "AdminUserBundle:User:new" }
 
 admin_user_create:
-    pattern:  /create
+    path:  /create
     defaults: { _controller: "AdminUserBundle:User:create" }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 admin_user_edit:
-    pattern:  /{id}/edit
+    path:  /{id}/edit
     defaults: { _controller: "AdminUserBundle:User:edit" }
 
 admin_user_update:
-    pattern:  /{id}/update
+    path:  /{id}/update
     defaults: { _controller: "AdminUserBundle:User:update" }
-    requirements: { _method: post|put }
+    requirements: { methods: post|put }
 
 admin_user_delete:
-    pattern:  /{id}/delete
+    path:  /{id}/delete
     defaults: { _controller: "AdminUserBundle:User:delete" }
-    requirements: { _method: post|delete }
+    requirements: { methods: post|delete }

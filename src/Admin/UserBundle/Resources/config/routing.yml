@@ -3,30 +3,30 @@ AdminUserBundle_admin_user:
     prefix:   /admin/user
     
 admin_user_info:
-    pattern:  /info/user
+    path:  /info/user
     defaults: { _controller: "AdminUserBundle:User:info" }
     
 admin_user_home:
-    pattern:  /home
+    path:  /home
     defaults: { _controller: "AdminUserBundle:Default:home" }
     
 admin_user_send:
-    pattern:  /home/send
+    path:  /home/send
     defaults: { _controller: "AdminUserBundle:Default:send" }
     
 admin_user_inicio:
-    pattern:  /unad/inicio
+    path:  /unad/inicio
     defaults: { _controller: "AdminUserBundle:Default:index" }
     
 unad_user_lista:
-    pattern:  /unad/user/lista
+    path:  /unad/user/lista
     defaults: { _controller: "AdminUserBundle:User:index" }
-    requirements: { _method: get }
+    requirements: { methods: get }
 
 unad_user_buscarpor:
-    pattern:  /unad/user/lista
+    path:  /unad/user/lista
     defaults: { _controller: "AdminUserBundle:User:buscarpor" }
     
 admin_user_show:
-    pattern:  /unad/{id}/doc
+    path:  /unad/{id}/doc
     defaults: { _controller: "AdminUserBundle:User:show" }    

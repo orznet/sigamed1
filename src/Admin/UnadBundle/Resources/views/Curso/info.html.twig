@@ -10,24 +10,26 @@
             </tr>
         </tbody>
     </table>
-    <b>Tutores del curso:</b>
-        <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+            {%for oferta in entity.oferta %}
+        <b>Oferta:</b> {{oferta.periodo}}  <b>Director:</b> {{oferta.director.user.id}} {{oferta.director.user.nombres}} {{oferta.director.user.apellidos}}
+        <a href="{{ path('oferta', {'id': oferta.id }) }}">Editar...</a>
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
           <tr>
               <th>ID</th>
+              <th>Cédula</th>
                 <th>Nombre</th>
                 <th>Centro</th>
-                <th>Borrar</th>
             </tr>
-        {%for oferta in entity.oferta %}
         {%for tutor in oferta.tutores %}
             <tr>
                 <td>{{tutor.docente.id}}</td>
-                <td>{{tutor.docente.user.id}} - {{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
+                <td>{{tutor.docente.user.id}}</td>
+                <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                 <td>{{tutor.docente.centro.nombre}}</td>
-                <td><a href="{{ path('tutor_delete', {'id': tutor.id }) }}">Borrar Tutor</a></td>
             </tr>
         {%endfor%}
-            {%endfor%}
+           
         </tbody>
         </table>
+         {%endfor%}

@@ -64,35 +64,36 @@ _formato:
 _plangpdf:
     resource: "@AdminMedBundle/Controller/pdfPlangController.php"
     type:     annotation
+
     
 accionespm_editdoc:
-    pattern:  /doc/planm/acc/{id}/edit
+    path:  /doc/planm/acc/{id}/edit
     defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }
     
 planmejoramiento_doc:
-    pattern: /doc/planm/{id}
+    path: /doc/planm/{id}
     defaults: { _controller: "AdminMedBundle:Planmejoramiento:doc" }
  
 plangestion_info:
-    pattern:  /unad/doc/{id}/plan
+    path:  /unad/doc/{id}/plan
     defaults: { _controller: "AdminMedBundle:Plangestion:info" }
 
 plangestion_autoeval:
-    pattern:  /unad/doc/{id}/autoeval
+    path:  /unad/doc/{id}/autoeval
     defaults: { _controller: "AdminMedBundle:Plangestion:autoeval" }  
     
 redtutores_info:
-    pattern:  /unad/doc/{id}/redtutor
+    path:  /unad/doc/{id}/redtutor
     defaults: { _controller: "AdminUnadBundle:Docente:redtutoresinfo" }
     
 heteroeval_info:
-    pattern:  /unad/doc/{id}/heteroeval
+    path:  /unad/doc/{id}/heteroeval
     defaults: { _controller: "AdminUnadBundle:Docente:heteroeval" }
     
 coeval_info:
-    pattern:  /unad/doc/{id}/coeval
+    path:  /unad/doc/{id}/coeval
     defaults: { _controller: "AdminUnadBundle:Docente:coevalinfo" }
 
 user_info:
-    pattern:  /unad/user/{id}/info
+    path:  /unad/user/{id}/info
     defaults: { _controller: "AdminUserBundle:User:show" }
