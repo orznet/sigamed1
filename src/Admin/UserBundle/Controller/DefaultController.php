@@ -73,7 +73,7 @@ class DefaultController extends Controller
         $autenticacion = $request->request->get('autenticacion');
         
         $url_autenticacion = "http://login.unad.edu.co/";
-        $urlInicioApp  = "http://siga.unad.edu.co/";
+        $urlInicioApp  = "http://med.unad.edu.co/";
         //$urlServerApp  = "/login_check";
         $urlPeticion = $request->server->get('HTTP_REFERER');
 
