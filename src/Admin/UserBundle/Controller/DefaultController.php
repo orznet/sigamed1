@@ -124,7 +124,7 @@ class DefaultController extends Controller
     $request = $this->getRequest();
     $session = $request->getSession();
     $cedula_usuario = $session->get('cedula_usuario');
-    $pass = $request->server->get('SYMFONY_PASS');
+    $pass = $request->server->get('MED_PKW');
 	$formulario ="<form method='post' name='datos' action='/login_check'>";
 	$formulario.="<input id='username' type='hidden' name='_username' value=$cedula_usuario />";
 	$formulario.="<input id='password' type='hidden' name='_password' value=$pass />";

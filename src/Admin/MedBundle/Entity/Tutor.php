@@ -24,10 +24,6 @@ class Tutor{
  */
 protected $estudiantes;
 
-/**
-* @ORM\Column(type="string", length=127, nullable=true)
-*/
-protected $observaciones;
 
 /** 
 * @var Docente

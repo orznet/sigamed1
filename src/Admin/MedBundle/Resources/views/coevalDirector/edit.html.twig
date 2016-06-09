@@ -3,13 +3,13 @@
 <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
     <tr>
         <td><a href="{{path('docente_coevaldirector')}}"><< Regresar...</a></td>  
-        <td>Curso: {{entity.curso.nombre}}</td>
-        <td>Director: {{entity.curso.director.user.nombres}} {{entity.curso.director.user.apellidos}}</td>
+        <td>Curso: {{entity.oferta.curso.nombre}} {{entity.oferta.periodo}}</td>
+        <td>Director: {{entity.oferta.director.user.nombres}} {{entity.oferta.director.user.apellidos}}</td>
         <td></td>
     </tr>
 </table>
  
-<form action="{{ path('coevaldirector_update', { 'id': entity.curso.id }) }}" method="post" {{ form_enctype(edit_form) }}>     
+<form action="{{ path('coevaldirector_update', { 'id': entity.oferta.id }) }}" method="post" {{ form_enctype(edit_form) }}>     
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
      <input type="hidden" name="_method" value="PUT" />
      {{ form_errors(edit_form) }}

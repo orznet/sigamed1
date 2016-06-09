@@ -360,11 +360,11 @@ class DocenteController extends Controller
       $em = $this->getDoctrine()->getManager();
       $session = $this->getRequest()->getSession();
       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
-      $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
+      $ofertas = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('director' => $entity));
 
         return array(
             'entity' => $entity,
-            'cursos'  => $cursos,
+            'ofertas'  => $ofertas,
          );  
     }
     

@@ -1,4 +1,4 @@
-{% block body -%}
+    {% block body -%}
 <body>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
 <table>
@@ -8,11 +8,11 @@
     <tr>
         <td align="center" colspan="3">
         <h3>Plan de Activiades de
- {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}  </h3>   
+ {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}  </h3>   
         </td>
     </tr>
                <tr>
-                <td>Periodo: {{ entity.id.periodo}}</td>
+                <td>Periodo: {{ entity.docente.periodo}}</td>
                 <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
                 <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
             </tr> 

@@ -14,13 +14,10 @@ class coevalDirector{
     
  /**
   * @ORM\Id
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Curso", inversedBy="coeval")
- * @ORM\JoinColumn(name="curso_id",referencedColumnName="id") 
+ * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Oferta", inversedBy="coeval")
+ * @ORM\JoinColumn(name="oferta_id",referencedColumnName="id") 
  */
- protected $curso;  
-
-
-
+ protected $oferta;  
 
 /**
   * @ORM\Column(type="decimal", scale=1, nullable=true)
@@ -570,26 +567,29 @@ protected $observaciones;
         return $this->f17;
     }
 
+
+
+
     /**
-     * Set curso
+     * Set oferta
      *
-     * @param \Admin\UnadBundle\Entity\Curso $curso
+     * @param \Admin\MedBundle\Entity\Oferta $oferta
      * @return coevalDirector
      */
-    public function setCurso(\Admin\UnadBundle\Entity\Curso $curso)
+    public function setOferta(\Admin\MedBundle\Entity\Oferta $oferta)
     {
-        $this->curso = $curso;
+        $this->oferta = $oferta;
 
         return $this;
     }
 
     /**
-     * Get curso
+     * Get oferta
      *
-     * @return \Admin\UnadBundle\Entity\Curso 
+     * @return \Admin\MedBundle\Entity\Oferta 
      */
-    public function getCurso()
+    public function getOferta()
     {
-        return $this->curso;
+        return $this->oferta;
     }
 }

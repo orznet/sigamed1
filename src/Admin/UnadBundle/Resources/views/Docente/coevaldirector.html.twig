@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
 <a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a>
-    <h1>Evaluación de Lider a Directores de Curso</h1>
+<h1>Evaluación de Lider a Directores de Curso</h1>
     {%for programa in entity.lider%}
     <h1>Programa {{programa.nombre}}</h1>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
@@ -9,34 +9,38 @@
             <tr>
                 <th>Código</th>
                 <th>Curso</th>
+                <th>Periodo</th>
                 <th>Director</th>
                 <th>Evaluar</th>
             </tr>
         </thead>
         <tbody>
         {% for curso in programa.cursos %}
+            {%for oferta in curso.oferta%}
             <tr>
-                <td>{{curso.id}}</td>
-                <td>{{curso.nombre}}</td>
+                <td>{{oferta.curso.id}}</td>
+                <td>{{oferta.curso.nombre}}</td>
+                <td>{{oferta.periodo}}</td>
                 <td>
-                {%if curso.director%}
-                {{curso.director.user.nombres}} {{curso.director.user.apellidos}}
+                {%if oferta.director%}
+                {{oferta.director.user.nombres}} {{oferta.director.user.apellidos}}
                 {%endif%}    
                 </td>
                 <td>
-                {%if curso.director%}    
-                {%if curso.coeval %}
-               {%if curso.coeval.f0 %}
-               {{curso.coeval.f0}}
+                {%if oferta.director%}    
+                {%if oferta.coeval %}
+               {%if oferta.coeval.f0 %}
+               {{oferta.coeval.f0}}
                 {%else%}
-                <a href="{{ path('coevaldirector_edit', { 'id': curso.id }) }}">Evaluar...</a>   
+                <a href="{{ path('coevaldirector_edit', { 'id': oferta.id }) }}">Evaluar...</a>   
                 {%endif%}
                 {%else%}
-                <a href="{{ path('coevaldirector_edit', { 'id': curso.id }) }}">Evaluar...</a>
+                <a href="{{ path('coevaldirector_edit', { 'id': oferta.id }) }}">Evaluar...</a>
                  {%endif%}
                 
                  {%endif%}
                  </td>
+                 {%endfor%}
         {% endfor %}
         </tbody>
     </table>

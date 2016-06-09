@@ -15,7 +15,6 @@ class Oferta{
 /**
  * @ORM\Id
  * @ORM\Column(name="id", type="integer", nullable=false)
- * @ORM\GeneratedValue(strategy="AUTO")
  */
  protected $id;
  
@@ -44,6 +43,11 @@ protected $periodo;
 * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Tutor", mappedBy="oferta")
 */
 protected $tutores;
+
+    /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="oferta") 
+    */
+   protected $coeval;
 
     /**
      * Get id
@@ -162,5 +166,41 @@ protected $tutores;
     public function getTutores()
     {
         return $this->tutores;
+    }
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Oferta
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set coeval
+     *
+     * @param \Admin\MedBundle\Entity\coevalDirector $coeval
+     * @return Oferta
+     */
+    public function setCoeval(\Admin\MedBundle\Entity\coevalDirector $coeval = null)
+    {
+        $this->coeval = $coeval;
+
+        return $this;
+    }
+
+    /**
+     * Get coeval
+     *
+     * @return \Admin\MedBundle\Entity\coevalDirector 
+     */
+    public function getCoeval()
+    {
+        return $this->coeval;
     }
 }

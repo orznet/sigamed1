@@ -192,10 +192,10 @@ class PlangestionController extends Controller
     public function infoAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
-        $docente = $entity->getDocente();
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        $entity = $docente->getPlangestion();
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+            throw $this->createNotFoundException('No se encuentra el plan.');
         }
         
         if ($docente->getVinculacion() != 'De Carrera'){
@@ -218,7 +218,7 @@ class PlangestionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+            throw $this->createNotFoundException('No se encuentra to find Plangestion entity.');
         }
         return array(
             'entity'      => $entity,

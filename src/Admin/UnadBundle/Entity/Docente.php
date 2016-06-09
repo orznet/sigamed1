@@ -50,6 +50,16 @@ protected $perfil;
     */
 protected $periodo;
 
+ /**
+  * @ORM\Column(type="datetime", nullable=true)
+  */
+protected $fecha_inicio;
+
+ /**
+  * @ORM\Column(type="datetime", nullable=true)
+  */
+protected $fecha_fin;
+
 /** 
      * @var User
      * @ORM\ManyToOne(targetEntity="Admin\UserBundle\Entity\User", inversedBy="docente")

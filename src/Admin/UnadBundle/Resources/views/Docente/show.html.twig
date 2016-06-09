@@ -108,7 +108,7 @@
     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a>
     </td>    
     <td>
-    {%if entity.plangestion.autoevaluacion is not null %}
+    {%if entity.plangestion.autoevaluacion is null %}
      {%if instrumentos[1].estado%} 
     <a href="{{ path('plangestion_conf', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
     {%else%}<i>Ver cronograma</i>{%endif%}

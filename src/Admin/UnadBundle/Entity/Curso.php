@@ -56,12 +56,7 @@ protected $escuela;
      */
 protected $programa;
    
-      
-    /**
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalDirector", mappedBy="curso") 
-    */
-   protected $coeval;
-   
+       
    
    /**
 * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Oferta", mappedBy="curso")
@@ -222,32 +217,7 @@ protected $oferta;
     {
         $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
-    /**
-     * Set coeval
-     *
-     * @param \Admin\MedBundle\Entity\coevalDirector $coeval
-     * @return Curso
-     */
-    public function setCoeval(\Admin\MedBundle\Entity\coevalDirector $coeval = null)
-    {
-        $this->coeval = $coeval;
-
-        return $this;
-    }
-
-    /**
-     * Get coeval
-     *
-     * @return \Admin\MedBundle\Entity\coevalDirector 
-     */
-    public function getCoeval()
-    {
-        return $this->coeval;
-    }
-
-    
+  
 
     /**
      * Add oferta

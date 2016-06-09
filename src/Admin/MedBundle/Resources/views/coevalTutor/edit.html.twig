@@ -3,9 +3,9 @@
 <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
     <tr>
         <td><a href="{{path('docente_coevaltutor')}}"><< Regresar...</a></td>  
-        <td>Curso: [{{coeval.tutor.curso.id}}] {{coeval.tutor.curso.nombre}}</td>
+        <td>Curso: [{{coeval.tutor.oferta.curso.id}}] {{coeval.tutor.oferta.curso.nombre}} {{coeval.tutor.oferta.periodo}}</td>
         <td>Tutor: {{coeval.tutor.docente.user.nombres}} {{coeval.tutor.docente.user.apellidos}}</td>
-        <td><a href="javascript:popUp('{{path('plangestion_autoeval', { 'id': coeval.tutor.docente.id })}}')">Ver Autoevaluación...</a></td>
+        <td></td>
     </tr>
 </table>
      <form action="{{ path('coevaltutor_update', { 'id': coeval.tutor.id }) }}" method="post" {{ form_enctype(edit_form) }}>

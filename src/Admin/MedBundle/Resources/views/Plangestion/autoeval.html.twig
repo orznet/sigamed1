@@ -8,11 +8,11 @@
     <tr>
         <td align="center" colspan="2">
         <h3>Autoevaluación de
- {{ entity.id.user.nombres}} {{ entity.id.user.apellidos}} : {{ entity.id.user.id}}  </h3>   
+ {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}  </h3>   
         </td>
     </tr>
                <tr>
-                <td>Periodo: {{ entity.id.periodo}}</td>
+                <td>Periodo: {{ entity.docente.periodo}}</td>
                 <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>

@@ -2,9 +2,9 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
 <a href="{{ path('docente_show', {'id': app.session.get('docenteid') }) }}"> << Regresar</a>
-    <h1>Evaluación a tutores de curso</h1>
-    {%for curso in cursos%}
-    <h1>Curso: {{curso.nombre}}</h1>
+    <h1>Evaluación a Tutores de Curso</h1>
+    {%for oferta in ofertas%}
+    <h1>Curso: {{oferta.curso.nombre}} {{oferta.periodo}} </h1>
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <thead>
             <tr>
@@ -15,13 +15,16 @@
             </tr>
         </thead>
         <tbody>
-        {% for tutor in curso.tutores %}
+        {% for tutor in oferta.tutores %}
             <tr>
                 <td>{{tutor.docente.user.id}}</td>
                 <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                 <td>{{tutor.docente.centro.nombre}}</td>
                 <td>
-                {%if tutor.coevaltutor %}
+                {%if app.session.get('docenteid') == tutor.docente.id %}
+                    No Aplica
+                    {%else%}
+                   {%if tutor.coevaltutor %}
                     {%if tutor.coevaltutor.f0 %}
                     Evaluado ({{tutor.coevaltutor.f0}})
                     {%else%}
@@ -30,6 +33,7 @@
                 {%else%}
                 <a href="{{ path('coevaltutor_edit', { 'id': tutor.id }) }}">Evaluar...</a>
                  {%endif%}
+                {%endif%}
                  </td>
         {% endfor %}
         </tbody>
