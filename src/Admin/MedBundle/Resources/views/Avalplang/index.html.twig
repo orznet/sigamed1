@@ -43,7 +43,7 @@
                 
                 <td>
               {%if entity.plan.estado == 'Cerrado' or entity.plan.estado == 'Autoevaluado' %}
-                    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
+                    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.docente.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
                 {%else%}
                     Sin Registro
                     {%endif%}
