@@ -17,9 +17,7 @@ class BuscarType extends AbstractType
             'empty_value' => 'Buscar por:',    
             'choices'   => array('ced' => 'Cédula', 'nom' => 'Nombres','apell' => 'Apellidos'),
             'required'  => true,
-            ));
-            
-           
+            ));  
     }
 
     public function getName()

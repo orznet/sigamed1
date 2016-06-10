@@ -5,7 +5,7 @@
     <form action="{{ path('unad_user_buscarpor')}}" method="post" {{ form_enctype(buscar_form) }}>
         <input type="hidden" name="_method" value="PUT" /> 
         <tr>
-         <td>Usuarios({{totale}})</td>    
+         <td>Usuarios ({{totale}}) </td>    
          <td>{{ form_widget(buscar_form.texto) }}</td>
          <td>{{ form_widget(buscar_form.parametro) }}</td>
          <td>
@@ -83,7 +83,7 @@
      <a href="{{ path('docente_info', { 'id': entity.id }) }}">
     {{entity.id}}
      </a>
-    {%endfor%}  
+    {%endfor%}
                 </td>
                 <td class="data">
          
