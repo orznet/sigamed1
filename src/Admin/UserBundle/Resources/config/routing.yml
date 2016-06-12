@@ -1,11 +1,7 @@
-AdminUserBundle_admin_user:
-    resource: "@AdminUserBundle/Resources/config/routing/user.yml"
-    prefix:   /admin/user
-    
-admin_user_info:
-    path:  /info/user
-    defaults: { _controller: "AdminUserBundle:User:info" }
-    
+_admin_usuario:
+    resource: "@AdminUserBundle/Controller/UserController.php"
+    type:     annotation
+
 admin_user_home:
     path:  /home
     defaults: { _controller: "AdminUserBundle:Default:home" }
@@ -17,16 +13,3 @@ admin_user_send:
 admin_user_inicio:
     path:  /unad/inicio
     defaults: { _controller: "AdminUserBundle:Default:index" }
-    
-unad_user_lista:
-    path:  /unad/user/lista
-    defaults: { _controller: "AdminUserBundle:User:index" }
-    requirements: { methods: get }
-
-unad_user_buscarpor:
-    path:  /unad/user/lista
-    defaults: { _controller: "AdminUserBundle:User:buscarpor" }
-    
-admin_user_show:
-    path:  /unad/{id}/doc
-    defaults: { _controller: "AdminUserBundle:User:show" }    

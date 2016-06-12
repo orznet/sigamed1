@@ -207,6 +207,13 @@ class CursoController extends Controller
       $oferta->setCurso($curso);
       $oferta->setDirector($docente);
       $oferta->setPeriodo($Form->get('periodo')->getData());
+      if($Form->get('periodo')->getData()=='16-01'){
+      $oferta->setId($curso->getId()+10000000);    
+      }
+      else{
+      $oferta->setId($curso->getId()+20000000);      
+      }
+      
      
       try{
       $em->persist($oferta);
@@ -327,6 +334,31 @@ class CursoController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+     /**
+     * Displays a form to edit an existing Curso entity.
+     * @Route("/{id}/ofertaedit", name="oferta_edit")
+     * @Method("GET")
+     * @Template()
+     */
+    public function ofertaeditAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminMedBundle:Oferta')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('NO se encotro oferta');
+        }
+       $cedula = new Cedula();     
+       $Form = $this->createForm(new CedulaType(), $cedula, array(
+            'action' => $this->generateUrl('oferta_update', array('id' => $entity->getId())),
+            'method' => 'GET',
+        ));  
+        return array(
+            'entity'      => $entity,
+            'cedula_form' => $Form->createView(),     
+        );
+    }
+    
 
     /**
     * Creates a form to edit a Curso entity.
@@ -365,6 +397,35 @@ class CursoController extends Controller
     
    }
     
+     /**
+     * Edits an existing Curso entity.
+     * @Route("/{id}/ofertaupdate", name="oferta_update")
+     * @Method("GET")
+     * @Template("AdminUnadBundle:Curso:ofertaedit.html.twig")
+     */
+    public function ofertaupdateAction(Request $request, $id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $oferta = $em->getRepository('AdminMedBundle:Oferta')->find($id);
+      $cedula = new Cedula();     
+      $Form = $this->createForm(new CedulaType(), $cedula, array(
+      'action' => $this->generateUrl('oferta_update', array('id' => $id)),
+      'method' => 'GET',
+      )); 
+      $Form->bind($request);
+      
+      $ncedula = $Form->get('cedula')->getData();
+      $user = $em->getRepository('AdminUserBundle:User')->find($ncedula);
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array ('user' => $user));      
+      if (!$docente) {
+      $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
+      return $this->redirect($this->generateUrl('oferta_edit', array('id' => $id)));          
+      }
+      $oferta->setDirector($docente);
+      $em->flush();
+       $this->get('session')->getFlashBag()->add('success', 'Se actualizo el director'); 
+      return $this->redirect($this->generateUrl('oferta', array('id' => $id)));
+    }
     
     /**
      * Edits an existing Curso entity.
@@ -402,6 +463,8 @@ class CursoController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+    
     /**
      * Deletes a Curso entity.
      *

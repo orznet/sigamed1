@@ -12,7 +12,8 @@
     </table>
             {%for oferta in entity.oferta %}
         <b>Oferta:</b> {{oferta.periodo}}  <b>Director:</b> {{oferta.director.user.id}} {{oferta.director.user.nombres}} {{oferta.director.user.apellidos}}
-        <a href="{{ path('oferta', {'id': oferta.id }) }}">Editar...</a>
+
+        <a href="{{ path('oferta', {'id': oferta.id }) }}" class="btn btn-success btn-xs">Editar Red <i class="fa fa-edit"></i></a>  
     <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
         <tbody>
           <tr>

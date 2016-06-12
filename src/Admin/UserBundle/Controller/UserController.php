@@ -4,6 +4,9 @@ namespace Admin\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Admin\UserBundle\Entity\Parabuscar;
 use Admin\UserBundle\Entity\User;
 use Admin\UserBundle\Form\UserType;
@@ -13,23 +16,25 @@ use Admin\MedBundle\Entity\Archivo;
 /**
  * User controller.
  *
+ * @Route("/unad/user")
  */
 class UserController extends Controller
 {
-    /**
-     * Lists all User entities.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/", name="admin_user")
+     * @Method("GET")
+     * @Template()
      */
     public function indexAction()
     {
-       // $em = $this->getDoctrine()->getManager();
-        
-        $em = $this->getDoctrine()->getManager();
+       $em = $this->getDoctrine()->getManager();
+     //  $entities = $em->getRepository('AdminUserBundle:User')->findAll(array ($orderBy = null, $maxResults = 500, $firstResult = null));
+       
         $dql = "select a from AdminUserBundle:User a";
         $query = $em->createQuery($dql);
-        $query->setMaxResults(50);
+        $query->setMaxResults(500);
         $entities = $query->getResult();
-        $total = count($entities);
         
        $valores = new Parabuscar();     
        $Form = $this->createForm(new BuscarType(), $valores);
@@ -37,14 +42,15 @@ class UserController extends Controller
 
         return $this->render('AdminUserBundle:User:index.html.twig', array(
             'entities' => $entities,
-            'totale' => $total,
             'buscar_form'   => $Form->createView(),     
         ));
     }
     
-        /**
-     * Info del usuario logueado
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/info/user", name="admin_user_info")
+     * @Method("GET")
+     * @Template()
      */
     public function infoAction()
     {
@@ -53,14 +59,21 @@ class UserController extends Controller
     }
     
     
-
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/", name="admin_user_buscarpor")
+     * @Method("PUT")
+     * @Template()
+     */
     public function buscarporAction(Request $request)
     {
     $valores = new Parabuscar();
     $Form = $this->createForm(new BuscarType(), $valores);
     $Form->bind($request);
-    $cadena = $Form->get('texto')->getData();
-    $param = $Form->get('parametro')->getData();
+    $cadena = $valores->getTexto();
+    //$cadena = $Form->get('texto')->getData();
+    //$param = $Form->get('parametro')->getData();
+    $param = $valores->getParametro();
     
     if ($param == 'ced'){
     //return $this->redirect($this->generateUrl('admin_user_cedula', array('text' => $cadena)));
@@ -74,7 +87,7 @@ class UserController extends Controller
     return $this->buscarapellidoAction($cadena);
     //return $this->redirect($this->generateUrl('admin_user_apellidos', array('text' => $cadena)));
     }
-    return $this->redirect($this->generateUrl('admin_docente_buscar'));
+    return $this->redirect($this->generateUrl('_welcome'));
     }
  
     
@@ -84,15 +97,12 @@ class UserController extends Controller
         $query = $em->createQuery('SELECT a FROM AdminUserBundle:User a WHERE a.apellidos LIKE :text ');
         $query->setParameters(array(
         'text' => '%'.$text.'%',
-        ));
-        
+        ));       
         $docentes =  $query->getResult();
-        $total = count($docentes);
          $valores = new Parabuscar();     
        $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
             'entities' => $docentes,
-            'totale'  => $total,
             'buscar_form' => $Form->createView(),
         ));
     }
@@ -105,12 +115,10 @@ class UserController extends Controller
         'text' => '%'.$text.'%',
         ));
         $docentes =  $query->getResult();
-        $total = count($docentes);
         $valores = new Parabuscar();     
        $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
             'entities' => $docentes,
-            'totale'  => $total,
             'buscar_form' => $Form->createView(),
         ));
     }
@@ -123,20 +131,20 @@ class UserController extends Controller
         'text' => $text,
         ));
         $docentes =  $query->getResult();
-        $total = count($docentes);
         $valores = new Parabuscar();     
        $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
             'entities' => $docentes,
-            'totale'  => $total,
             'buscar_form' => $Form->createView(),
         ));
     }
     
     
-    /**
-     * Creates a new User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/create", name="admin_user_create")
+     * @Method("POST")
+     * @Template()
      */
     public function createAction(Request $request)
     {
@@ -159,9 +167,11 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to create a new User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/new", name="admin_user_new")
+     * @Method("GET")
+     * @Template()
      */
     public function newAction()
     {
@@ -174,9 +184,11 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/{id}/doc", name="admin_user_show")
+     * @Method("GET")
+     * @Template()
      */
     public function showAction($id)
     {
@@ -200,9 +212,11 @@ class UserController extends Controller
             ));
     }
 
-    /**
-     * Displays a form to edit an existing User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/{id}/edit", name="admin_user_edit")
+     * @Method("GET")
+     * @Template()
      */
     public function editAction($id)
     {
@@ -224,10 +238,13 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Edits an existing User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/{id}/update", name="admin_user_update")
+     * @Method("PUT")
+     * @Template()
      */
+    
 public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -249,9 +266,11 @@ public function updateAction(Request $request, $id)
         }
     }
 
-    /**
-     * Deletes a User entity.
-     *
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/{id}/delete", name="admin_user_delete")
+     * @Method("DELETE")
+     * @Template()
      */
     public function deleteAction(Request $request, $id)
     {

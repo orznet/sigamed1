@@ -5,7 +5,9 @@
             'AdminUnadBundle:Curso:detalle.html.twig',
             {'entity': entity}
         ) }}
-
+<div id="boton-e" style="visibility: visible">
+<a data-toggle="modal" data-target="#ModalEdit" class="btn btn-success btn-xs">Editar Red</a>
+</div>
 <div class="editar" id="editar" style="visibility: hidden">
  <h4>Agregar Tutor al Curso</h4><br>
 <form action="{{ path('oferta_tutor', { 'id': entity.id }) }}" method="get" {{ form_enctype(cedula_form) }}>
@@ -15,12 +17,8 @@
     <input type="submit" label="Agregar" />
 </form>
 </div>
-<div id="boton-e" style="visibility: visible">
-<a data-toggle="modal" data-target="#ModalEdit" class="btn btn-success btn-xs">Editar Red</a>
-</div>
 
 
-  
 <div class="modal fade" data-refresh="true" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog">
 <div class="modal-content">
