@@ -76,9 +76,9 @@ class DefaultController extends Controller
         $urlInicioApp  = "http://med.unad.edu.co/";
         //$urlServerApp  = "/login_check";
         $urlPeticion = $request->server->get('HTTP_REFERER');
-
+        
         //------------- Origenes validos ----------------------------------------------------------
-        $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php?continue=".$urlInicioApp; //cuando accede por el home de intranet
+        $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php"; //cuando accede por el home de intranet
         $urlOrigenValido2 =	$url_autenticacion."Usuario/envioDatosUsuario.php"; //cuando accede por login.unad.edu.co
         $urlOrigenValido3 =	$url_autenticacion."Usuario/envioDatosUsuario.php?continue=".$urlInicioApp; //cuando accede por login.unad.edu.co 
         //

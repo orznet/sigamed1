@@ -155,7 +155,7 @@ class ArchivoController extends Controller
             throw $this->createNotFoundException('Unable to find Archivo entity.');
         }
         
-        $urlserver = 'http://siga.unad.edu.co';
+        $urlserver = 'http://med.unad.edu.co';
         
         $plan = null;
         $hetero = null;
