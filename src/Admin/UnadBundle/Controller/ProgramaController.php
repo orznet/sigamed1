@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Admin\UnadBundle\Entity\Programa;
 use Admin\UnadBundle\Form\ProgramaType;
 
@@ -224,12 +225,8 @@ class ProgramaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
          
-        if ($this->container->get('security.context')->isGranted('ROLE_SECA')){
-         return $this->redirect($this->generateUrl('escuela_info'));  
-        }
-        else{
-            return $this->redirect($this->generateUrl('programa')); 
-        }
+            return $this->redirect($this->generateUrl('escuela_info')); 
+        
        
         }
 
@@ -293,7 +290,8 @@ class ProgramaController extends Controller
     public function addliderAction()
     {
        $em = $this->getDoctrine()->getManager();
-       $session = $this->getRequest()->getSession();
+       $session = new Session();
+       $session->migrate();
        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
         return array(

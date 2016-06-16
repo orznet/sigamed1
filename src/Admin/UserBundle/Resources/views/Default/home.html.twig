@@ -128,6 +128,38 @@
                        
                        </tr>
                        <tr>
+                           <td>
+                                               {% for flashMessage in app.session.flashbag.get('error') %}
+                     <div class="alert alert-danger fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-times"></i>
+                                    <strong>Error!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}
+                            
+                     {% for flashMessage in app.session.flashbag.get('success') %}
+                     <div class="alert alert-success fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-check"></i>
+                                    <strong>Hecho!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('warning') %}
+                     <div class="alert alert-warning fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-warning"></i>
+                                    <strong>Advertencia!</strong>  {{ flashMessage }}
+                                    </div>
+                        {% endfor %}     
+                           </td>
+                           </tr>
+                       <tr>
                            <td colspan="2" align="center">
                                <h5>Navegadores soportados en esta versión: Google Chrome y Firefox </h5>
                                <p>Ayuda y soporte técnico - Correo: omar.rodriguez@unad.edu.co - Skype: orznet</p>

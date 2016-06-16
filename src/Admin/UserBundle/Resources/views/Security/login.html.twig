@@ -61,19 +61,18 @@
 						<div class="hero">
 
 							<div class="pull-left login-desc-box-l">
-								<h4 class="paragraph-header">IMPORTANTE: Esta ventana es para el ingreso únicamente con contraseña MED, si no tiene esta contraseña debe autenticarse utilizando las credenciales de acceso de su cuenta de usuario SUA(Sistema único de autenticación).</h4>
+								<h4 class="paragraph-header">IMPORTANTE: Esta ventana es para el ingreso únicamente con contraseña MED, si no tiene esta contraseña debe autenticarse utilizando las credenciales del sistema único de autenticación (Intranet).</h4>
 							
                                                                 <div class="login-app-icons">
-                                                            <a href="http://siga.unad.edu.co" class="btn btn-primary">Autenticarse</a>
+                                                            <a href="http://med.unad.edu.co" class="btn btn-primary">Autenticarse</a>
                                                                 </div>
                                                         </div>
                                                   
-						</div>
-                                           
+						</div>     
 					</div>
                                                 {% if error %}
                                                 <center>        
-                                                <div class="mserror">{{ error.message=='Bad credentials' ? 'Usted no tiene acceso a este módulo' : error.message }}</div>
+                                                <div class="mserror">{{ error.message=='Bad credentials.' ? 'Usted no tiene acceso' : error.message }}</div>
                                                 </center>
                                                 {% endif %}
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">

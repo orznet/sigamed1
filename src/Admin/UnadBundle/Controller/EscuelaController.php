@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Admin\UnadBundle\Entity\Escuela;
 use Admin\UnadBundle\Form\EscuelaType;
 
@@ -140,7 +141,9 @@ class EscuelaController extends Controller
     public function infoAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = $this->getRequest()->getSession();
+        //$session = $this->getRequest()->getSession();
+            $session = new Session();
+       $session->migrate();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
         $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela),array('nivel' => 'DESC'));
         

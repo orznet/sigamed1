@@ -44,8 +44,15 @@ class DefaultController extends Controller
         if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DOC')) {
                  $docentes = $this->getUser()->getDocente();
                  $docente = $docentes[0];
-                 $session->set('docenteid', $docente->getId());
-                 return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
+                 
+                        if (!$docente) {
+                        $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para este periodo de evaluación, es posible que esto sea por su fecha de vinculación o fecha de desvinculación');          
+                        return $this->redirect($this->generateUrl('admin_user_home'));          
+                        }
+                 
+                 
+                     $session->set('docenteid', $docente->getId());
+                    return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
                     'entity'  => $docente,
                     'instrumentos' => $instrumentos,
                     ));

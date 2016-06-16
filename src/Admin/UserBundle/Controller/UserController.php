@@ -33,7 +33,7 @@ class UserController extends Controller
        
         $dql = "select a from AdminUserBundle:User a";
         $query = $em->createQuery($dql);
-        $query->setMaxResults(500);
+        $query->setMaxResults(50);
         $entities = $query->getResult();
         
        $valores = new Parabuscar();     
