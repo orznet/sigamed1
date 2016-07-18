@@ -16,11 +16,12 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/dc.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Form/BuscarType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/ProgramaController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/crear.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/ofertaedit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/oferta.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Oferta.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Docente.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Security/login.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/formatoPlang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/AvalplangController.php</file>
@@ -32,32 +33,34 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/redTutores/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CursoController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/config/routing.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/coevalTutorController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Cedula.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/coevalTutor/edit.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Avalplang.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Plangestion.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ActividadplangController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Programa/detalle.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Archivo.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ArchivoController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Tutor.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/pdfPlangController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/show.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevaldirector.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/info.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/redTutores/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/RolplangController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/DocenteController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Avalplang/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Curso.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/pdfPlang.php</file>
-            <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/ProgramaRepository.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/config/routing.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/show.html.twig</file>
@@ -65,6 +68,7 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/detalle.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/CedulaType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/planactividades.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/detalle.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/edit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/config/routing.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/info.html.twig</file>

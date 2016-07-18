@@ -189,7 +189,7 @@ Coevaluación - Director de curso a tutores
 <table class="table table-bordered hidden-mobile" style="width: 95%">
     <tr>
     <th>
-    {%if entity.vinculacion == 'DC'%}
+    {%if entity.vinculacion == 'De Carrera'%}
     1. Plan de Gestión      
     {%else%}
     1. Plan de Actividades
@@ -200,7 +200,7 @@ Coevaluación - Director de curso a tutores
         </td>    
     <td>
 {%if entity.plangestion.autoevaluacion is not null %}
-        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.plangestion.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
    {%endif%}
     </td>
     </tr>

@@ -74,21 +74,16 @@
            {%endif%}
             </td>
             <td>
-               {%if entity.plangestion.estado == 'Cerrado' or entity.plangestion.estado == 'Autoevaluado' %}
+               {%if entity.plangestion.estado != 'Sin Cerrar' %}
                 <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
                 {%else%}
                 Sin Roles
                 {%endif%}  
             </td>
             <td>
-                    {%if entity.plangestion.estado == 'Cerrado' %}
-                    {%if entity.plangestion.avales[0].avalado%}
-                avalado
-                {%endif%}
-                    Sin Aval
-                    {%else %}
-                        -
-                    {%endif%}
+            
+          <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.plangestion.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+
             </td>
             </tr>
         {% endfor %}

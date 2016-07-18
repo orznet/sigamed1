@@ -10,6 +10,7 @@ security:
             entity: { class: Admin\UserBundle\Entity\User, property: username }
 
     firewalls:
+                   
         dev:
 #           pattern:  ^/
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
@@ -26,6 +27,7 @@ security:
             security: false
 
         secured_area:
+            switch_user: { role: ROLE_ADMIN, parameter: _quieroser }
             pattern:    ^/
             anonymous: ~
 #            http_basic:
