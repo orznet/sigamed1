@@ -92,12 +92,10 @@
                        </tr>
                        <tr>
                       <td colspan="3">
-                          <ul>
-                      <li> Para ingresar al módulo debe primero autenticarse utilizando sus credenciales de intranet, si no puede superar esta autenticación intente recuperar sus credenciales utilizando el instructuvo que esta a continuación o puede comunicarse con la Mesa de Ayuda soporte.tecnico@unad.edu.co.  
-                      </li>
-                      <li>
+                        <h4> Para ingresar al módulo debe primero autenticarse utilizando sus credenciales de intranet, si no puede superar esta autenticación intente recuperar sus credenciales utilizando el instructuvo que esta a continuación o puede comunicarse con la Mesa de Ayuda al correo soporte.tecnico@unad.edu.co </h4>
+                   <br>
                        <a href="http://med.unad.edu.co/archivo/recuperacion-credenciales-acceso.pdf" target="new">Instructivo de Recuperación de Credenciales de Acceso <i class="fa fa-download"></i></a>
-                           </li></ul>
+                       
                        </td>      
                        </tr>                  
                        <tr>
@@ -105,7 +103,7 @@
                        <td>1. Sistema Único de Autenticación</td>
                        <td>
                        {%if autenticacion != "Aceptada" %}
-                       <a href="http://login.unad.edu.co/?continue=http://med.unad.edu.co/" class="btn btn-primary btn-xs">Autenticar <i class="fa fa-unlock"></i></a>
+                       <a href="http://login.unad.edu.co/?continue=http://med.unad.edu.co/" class="btn btn-primary btn-xs">Autenticación <i class="fa fa-unlock"></i></a>
                        {%else%}
                        {{cedula_usuario}}:
                        {{nombres_usuario}} {{apellidos_usuario}}
@@ -162,7 +160,6 @@
                        <tr>
                            <td colspan="2" align="center">
                                <h5>Navegadores soportados en esta versión: Google Chrome y Firefox </h5>
-                               <p>Ayuda y soporte técnico - Correo: omar.rodriguez@unad.edu.co - Skype: orznet</p>
                            </td>    
                        </tr>
                    </table>

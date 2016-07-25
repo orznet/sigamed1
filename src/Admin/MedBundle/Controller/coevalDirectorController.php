@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\MedBundle\Entity\coevalDirector;
+use Admin\UnadBundle\Entity\Programa;
 use Admin\MedBundle\Form\coevalDirectorType;
 
 /**
@@ -21,17 +22,22 @@ class coevalDirectorController extends Controller
     /**
      * Lists all coevalDirector entities.
      *
+     * @Route("/", name="docente_coevaldirector")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AdminMedBundle:coevalDirector')->findAll();
+        $session = $this->getRequest()->getSession();
+        $lider = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid')); 
+        $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('lider' => $lider));
+        $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('programa' => $programas));
+        $ofertas = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('curso' => $cursos),array('director' => 'ASC'));
 
         return array(
-            'entities' => $entities,
+            'programas' => $programas,
+            'ofertas' => $ofertas,
         );
     }
     /**

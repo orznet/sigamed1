@@ -25,11 +25,7 @@ _curso_unad:
 docente_coevaltutor:
     path:  /doc/coevaltutor
     defaults: { _controller: "AdminUnadBundle:Docente:coevaltutor" }
-    
-docente_coevaldirector:
-    path:  /doc/coevaldirector
-    defaults: { _controller: "AdminUnadBundle:Docente:coevaldirector" }
-    
+        
 docente_infofinal_dc:
     path:  /info/finaldc/{id}
     defaults: { _controller: "AdminUnadBundle:Docente:finaldc" }    

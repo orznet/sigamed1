@@ -47,7 +47,8 @@
                 <th>Plan G. Excel</th>
                 <th>Plan G. PDF</th>
                 <th>Roles</th>
-                <th>Autoevaluación</th>
+                <th>Avales</th>
+                <th>Auto</th>
             </tr>
         </thead>
         <tbody>
@@ -75,15 +76,22 @@
             </td>
             <td>
                {%if entity.plangestion.estado != 'Sin Cerrar' %}
-                <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
+                <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver <i class="fa fa-sign-in"></i></a>   
                 {%else%}
                 Sin Roles
                 {%endif%}  
             </td>
             <td>
-            
-          <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.plangestion.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
-
+            {%if entity.plangestion.avales|length == 1 %} 
+             {{entity.plangestion.avales[0].avalado? 1 : 0}} de {{entity.plangestion.avales|length}}
+            {%else%}
+             {{(entity.plangestion.avales[0].avalado? 1:0)+(entity.plangestion.avales[1].avalado? 1:0)}} de {{entity.plangestion.avales|length}}
+            {%endif%}    
+            </td>
+            <td>
+            {%if entity.plangestion.autoevaluacion %}
+          <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.plangestion.id }) }}')" class="btn btn-primary btn-xs">Ver <i class="fa fa-sign-in"></i></a>
+              {%endif%}
             </td>
             </tr>
         {% endfor %}
