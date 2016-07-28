@@ -392,10 +392,8 @@ class DocenteController extends Controller
     {
        $em = $this->getDoctrine()->getManager();
        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-       $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('director' => $entity));
         return array(
             'entity' => $entity,
-            'cursos'  => $cursos,
          );
         
     }

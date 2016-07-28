@@ -8,16 +8,16 @@
     <tr>
         <td align="center" colspan="2">
         <h3>Autoevaluación de
- {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}  </h3>   
+ {{ entity.user.nombres}} {{ entity.user.apellidos}} : {{ entity.user.id}}  </h3>   
         </td>
     </tr>
                <tr>
-                <td>Periodo: {{ entity.docente.periodo}}</td>
-                <td>Fecha Autoevaluación: {{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>Periodo: {{ entity.periodo}}</td>
+                <td>Fecha Autoevaluación: {{ entity.plangestion.fechaautoevaluacion? entity.plangestion.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <td colspan="2">
-                    Observaciones: {{ entity.observaciones }}
+                    Observaciones: {{ entity.plangestion.observaciones }}
                 </td> 
             </tr>
 </table>
@@ -33,7 +33,7 @@
         <tbody>
         {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
         {% set termino = 1 %}
-        {% for actividad in entity.actividades %}
+        {% for actividad in entity.plangestion.actividades %}
            <tr>
                     {%if temp != actividad.actividad.rol.nombre %} 
                 <td>
@@ -54,7 +54,7 @@
                 <font color="#a57225">{{actividad.descripcion}}</font>
                 {%endif%}
                 {%if actividad.observaciones %}
-                <br><font color="#058dc7">DESCRIPCIÓN DEL AVANCE: {{actividad.observaciones}}</font><br>
+                <br>DESCRIPCIÓN DEL AVANCE: <font color="#058dc7">{{actividad.observaciones}}</font><br>
                 {%endif%}
                 </td>
                 <td>
@@ -76,7 +76,7 @@
         {% endfor %}
                <tr>
                    <td  colspan="2" align="right">Autoevaluación:</td>
-                   <td>{{ entity.autoevaluacion }}</td>
+                   <td>{{ entity.plangestion.autoevaluacion }}</td>
                </tr>       
         </tbody>
     </table>    

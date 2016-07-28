@@ -1,54 +1,45 @@
 {% block body -%}
 <body>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-    <h3>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h3>  
+<h3>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h3>  
  
-    <table>
-        <tr>
-            <td>
-               <b>1. Red de Tutores: </b>Evaluación recibida de los tutores del curso     
-            </td>
-        </tr>    
-    </table>   
-    
-   
+ 
+
 {%set final=0%} {%set aux=0%}
-<table>
-{%for curso in entity.director%}    
-        <thead>
-           <tr>
-           <td align="left" colspan="3">Curso: {{curso.id}} - {{curso.nombre}}</td>
-            </tr>
-            <tr>
+{%if entity.director|length > 0 %}
+<h2>Red de Tutores</h2>Evaluación recibida de los tutores del curso
+ <table>
+          <tr>
+                <th>Curso</th>
                 <th>Tutor</th>
                 <th>Observaciones</th>
                 <th>Calificación</th>
             </tr>
-        </thead>
-            <tbody>    
-            {%for tutor in curso.tutores%}
-                  
+            <tbody> 
+{%for oferta in entity.director%}              
+            {%for tutor in oferta.tutores%}
+            
             <tr>
+                <td>{{oferta.curso.nombre}} - {{oferta.periodo}} </td> 
                             <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
-                            <td>{{tutor.coevaldirector? tutor.coevaldirector.observaciones : 'No evaluo' }}</td>
-                            <td>{{tutor.coevaldirector? '*' : 'n/a'}}</td>
+                            <td>{{tutor.coevaldirector? tutor.coevaldirector.observaciones : ' ' }}</td>
+                            <td>{{tutor.coevaldirector? '*.*' : 'No evaluo'}}</td>
             </tr>
             {%if tutor.coevaldirector%}{%set final=final+tutor.coevaldirector.f0%}{%set aux=aux+1%}{%endif%}  
             {%endfor%}
 {%endfor%}
             <tr>
-                <td colspan="2" align="right"><b>Calificación Final del Instrumento:</b></td>
+                <td colspan="3" align="right"><b>Calificación Final del Instrumento:</b></td>
                 <td>{%if final > 0%}{%set final = final/aux%} {{final|number_format(1, '.', ',')}}{%endif%}</td>
             </tr>
             </tbody>
-            
-            
+</table>
+  {%endif%}
+
    {%if entity.tutoria|length > 0 %}
-    <table>
-      <tr><td colspan="4">
-       <b>2. Rol de Tutor: </b>Evaluación recibida del director de curso
-        </td></tr>
-        
+
+<h2>Coevaluación del Director de Curso a Tutores</h2>
+<table>
             <tr>
                 <th>Curso</th>
                 <th>Director</th>
@@ -59,46 +50,50 @@
             {%for tutor in entity.tutoria%}
    
             <tr>
-            <td>{{tutor.curso.nombre}}</td>
+            <td>{{tutor.oferta.curso.nombre}} - {{tutor.oferta.periodo}}</td>
             <td>
-            {%if tutor.coevaltutor%}
-            {{tutor.curso.director.user.nombres}} {{tutor.curso.director.user.apellidos}}
-            {%endif%}
+            {%if tutor.oferta.director%}
+            {{tutor.oferta.director.user.nombres}} {{tutor.oferta.director.user.apellidos}}
+         {%endif%}
             </td>
-             
+             {%if tutor.coevaltutor%}
              <td>{{tutor.coevaltutor.observaciones}}</td>
              <td>{{tutor.coevaltutor.f0}}</td>
+             {%endif%}
             </tr>
+               
         {%endfor%}
-
         </tbody>
         </table>
 {%endif%}            
 
   {%if entity.director|length > 0 %}
+
+<h2>Coevaluación del Lider a Directores de Curso</h2>
         <table>
-            <tr><td colspan="4">
-                <b>3. Director de curso: </b>Evaluación recibida del lider nacional de programa o cadena de formación. 
-                </td></tr>
-            <tr>
                 <th>Curso</th>
+                <th>Programa</th>
                 <th>Lider</th>
                 <th>Observaciones</th>
                 <th>Calificación</th>
             </tr>
             <tbody>   
-            {%for curso in entity.director%}
-  
-             
+            {%for oferta in entity.director%}
+            
             <tr>
-            <td>{{curso.nombre}}</td>    
+            <td>{{oferta.curso.nombre}} - {{oferta.periodo}}</td>    
              <td>
-            {%if curso.programa.lider %}  
-            {{curso.programa.lider.user.nombres}} {{curso.programa.lider.user.apellidos}}
-             {%endif%}  
+                 {%if oferta.curso.programa%}
+               {{oferta.curso.programa.nombre}}
+                 {%endif%}
              </td>
-             <td>{{curso.coeval? curso.coeval.observaciones : 'N/A'}}</td>
-             <td>{{curso.coeval? curso.coeval.f0 : 'N/A'}}</td>
+             <td>
+                 {%if oferta.curso.programa%}
+               {{oferta.curso.programa.lider? oferta.curso.programa.lider.user.nombres ~ ' ' ~ oferta.curso.programa.lider.user.apellidos : 'Sin lider'}}
+                 {%endif%}
+             </td>
+             <td>{{oferta.coeval? oferta.coeval.observaciones : ' '}}</td>
+             <td>{{oferta.coeval? oferta.coeval.f0 : 'Sin Evaluación'}}</td>
             </tr>
         {%endfor%}
   
@@ -107,12 +102,8 @@
 {%endif%}
             
     {%if entity.lider|length > 0 %}
-        
+       <h2>Coevaluación del Decano a Lideres de Programa</h2> 
        <table>
-       <tr><td colspan="4">
-                <b>4. Lider de Programa: </b>Evaluación recibida del Decano Nacional 
-                </td></tr>
-            <tr>
             <tr>
                 <th>Programa</th>
               
@@ -124,8 +115,8 @@
             <tr>
             <td>{{programa.nombre}}</td>
             
-             <td>{{programa.coeval? programa.coeval.observaciones : 'N/A'}}</td>
-             <td>{{programa.coeval? programa.coeval.f0 : 'N/A'}}</td>
+             <td>{{programa.coeval? programa.coeval.observaciones : 'Sin Evaluación'}}</td>
+             <td>{{programa.coeval? programa.coeval.f0 : 'Sin Evaluación'}}</td>
             </tr>
         {%endfor%}
   

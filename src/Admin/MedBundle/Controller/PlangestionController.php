@@ -216,12 +216,12 @@ class PlangestionController extends Controller
     public function autoevalAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
-        if (!$entity) {
-            throw $this->createNotFoundException('No se encuentra to find Plangestion entity.');
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
+        if (!$docente) {
+            throw $this->createNotFoundException('No se encuentra docente entity.');
         }
         return array(
-            'entity'      => $entity,
+            'entity'      => $docente,
         );
     }
 

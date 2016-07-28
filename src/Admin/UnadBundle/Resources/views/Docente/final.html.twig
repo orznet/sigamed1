@@ -50,14 +50,14 @@
     <td>Tutorias de curso:</td>
     <td colspan="3">
       {%for tutor in docente.tutoria%}
-      {{tutor.curso.id}} {{tutor.curso.nombre}} <br> {%endfor%}
+      {{tutor.oferta.curso.id}} {{tutor.oferta.curso.nombre}},  {%endfor%}
     </td>
   </tr>
     <tr>
    <td>Direcciones de curso:</td>
       <td colspan="3">
-      {%for curso in docente.director%}
-      {{curso.id}} {{curso.nombre}} <br> {%endfor%}
+      {%for oferta in docente.director%}
+      {{oferta.curso.id}} {{oferta.curso.nombre}} - {{oferta.periodo}}, {%endfor%}
    </td>
   </tr>
 </table>

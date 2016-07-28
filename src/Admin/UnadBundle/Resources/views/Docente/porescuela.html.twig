@@ -45,6 +45,7 @@
                 <th>Vinculación</th>
                 <th>Modalidad</th>
                 <th>Centro</th>
+                <th>Auto</th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +60,13 @@
             <td>{{ entity.vinculacion }}</td>
             <td>{{ entity.modalidad }}</td>
             <td>{{ entity.centro.nombre }}</td>
+            <td>
+             {%if entity.plangestion.autoevaluacion %}
+              Si
+              {%else%}
+              No
+              {%endif%}
+            </td>
             </tr>
         {% endfor %}
         </tbody>
