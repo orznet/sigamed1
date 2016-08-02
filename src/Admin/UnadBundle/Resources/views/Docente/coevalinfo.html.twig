@@ -1,13 +1,41 @@
 {% block body -%}
 <body>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-<h3>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} del periodo {{entity.periodo}}</h3>  
+<h2>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} - {{entity.periodo}}</h2>  
  
+   {%if entity.Coevaldepar|length > 0 %}
+
+<h2>Terna de Pares</h2>
+<table>
+            <tr>
+                <th>Ternado</th>
+                <th>Observaciones</th>
+                <th>Calificación</th>
+            </tr>
+            <tbody>      
+            {%for evaluacion in entity.Coevaldepar%}
+   
+            <tr>
+                <td>
+                {{evaluacion.evaluador.docente.user.nombres}} {{evaluacion.evaluador.docente.user.nombres}}
+                   
+                </td>
+            <td>
+               {{evaluacion.observaciones}} 
+            </td>
+
+             <td>{{evaluacion.f0}}</td>
+            </tr>
+               
+        {%endfor%}
+        </tbody>
+        </table>
+{%endif%}  
  
 
 {%set final=0%} {%set aux=0%}
 {%if entity.director|length > 0 %}
-<h2>Red de Tutores</h2>Evaluación recibida de los tutores del curso
+<h2>Red de Tutores</h2>
  <table>
           <tr>
                 <th>Curso</th>
@@ -38,7 +66,7 @@
 
    {%if entity.tutoria|length > 0 %}
 
-<h2>Coevaluación del Director de Curso a Tutores</h2>
+<h2>Director de Curso a Tutores</h2>
 <table>
             <tr>
                 <th>Curso</th>
@@ -69,11 +97,11 @@
 
   {%if entity.director|length > 0 %}
 
-<h2>Coevaluación del Lider a Directores de Curso</h2>
+<h2>Líder a Directores de Curso</h2>
         <table>
                 <th>Curso</th>
                 <th>Programa</th>
-                <th>Lider</th>
+                <th>Líder</th>
                 <th>Observaciones</th>
                 <th>Calificación</th>
             </tr>
@@ -102,7 +130,7 @@
 {%endif%}
             
     {%if entity.lider|length > 0 %}
-       <h2>Coevaluación del Decano a Lideres de Programa</h2> 
+       <h2>Decano a Lideres de Programa</h2> 
        <table>
             <tr>
                 <th>Programa</th>
@@ -122,6 +150,7 @@
   
         </tbody>
         </table>
-   {%endif%}            
+   {%endif%}
+             
 
 {% endblock %}
