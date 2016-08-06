@@ -65,11 +65,7 @@ protected $fecha;
 */
  protected $docente;
 
-  /**
-   * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Heterocursos", mappedBy="heteroeval") 
-   */
-  protected $cursos;
-
+ 
     /**
      * Get id
      *
@@ -318,25 +314,5 @@ protected $fecha;
         $this->cursos[] = $cursos;
 
         return $this;
-    }
-
-    /**
-     * Remove cursos
-     *
-     * @param \Admin\MedBundle\Entity\Heterocursos $cursos
-     */
-    public function removeCurso(\Admin\MedBundle\Entity\Heterocursos $cursos)
-    {
-        $this->cursos->removeElement($cursos);
-    }
-
-    /**
-     * Get cursos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCursos()
-    {
-        return $this->cursos;
     }
 }

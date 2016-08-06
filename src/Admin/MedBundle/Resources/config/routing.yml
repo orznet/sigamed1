@@ -64,8 +64,11 @@ _formato:
 _plangpdf:
     resource: "@AdminMedBundle/Controller/pdfPlangController.php"
     type:     annotation
-
     
+_base:
+    resource: "@AdminMedBundle/Controller/BaseController.php"
+    type:     annotation    
+
 accionespm_editdoc:
     path:  /doc/planm/acc/{id}/edit
     defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }
@@ -85,10 +88,6 @@ plangestion_autoeval:
 redtutores_info:
     path:  /unad/doc/{id}/redtutor
     defaults: { _controller: "AdminUnadBundle:Docente:redtutoresinfo" }
-    
-heteroeval_info:
-    path:  /unad/doc/{id}/heteroeval
-    defaults: { _controller: "AdminUnadBundle:Docente:heteroeval" }
     
 coeval_info:
     path:  /unad/doc/{id}/coeval

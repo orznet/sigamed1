@@ -209,7 +209,7 @@ class DocenteController extends Controller
         );
     }
     
-        /**
+     /**
      * Finds and displays a Docente entity
      * @Route("/{id}/info", name="docente_info")
      * @Method("GET")
@@ -397,20 +397,7 @@ class DocenteController extends Controller
          );
         
     }
-    
-     /**
-     * @Method("GET")
-     * @Template()
-     */
-    public function heteroevalAction($id)
-    {
-      $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-        return array(
-            'entity' => $entity,
-         ); 
-    }
-    
+       
      /**
      * @Route("/finaldc/{id}", name="docente_finaldc")
      * @Method("GET")

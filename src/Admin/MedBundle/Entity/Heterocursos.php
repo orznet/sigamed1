@@ -19,8 +19,12 @@ class Heterocursos{
  */
 private $id;
 
-
  /**
+  * @ORM\Column(type="integer")
+  */
+protected $cedula;
+
+/**
   * @ORM\Column(type="integer")
   */
 protected $curso_id;
@@ -29,6 +33,11 @@ protected $curso_id;
   * @ORM\Column(type="string", length=512, nullable=true)
   */
 protected $nombre;
+ 
+ /**
+  * @ORM\Column(type="string", length=10, nullable=false)
+  */
+protected $semestre;
 
  /**
   * @ORM\Column(type="string", length=10, nullable=false)
@@ -74,18 +83,7 @@ protected $competencia6;
   * @ORM\Column(type="decimal", scale=1, nullable=true)
   */
 protected $calificacion;
-
-
- /** 
-   * @var Heteroeval 
-   * @ORM\ManyToOne(targetEntity="Admin\MedBundle\Entity\Heteroeval", inversedBy="cursos")
-   * @ORM\JoinColumn(name="hetero_id", referencedColumnName="id",
-   * nullable=false
-   * )
-   */
-protected $heteroeval;
-    
-
+   
     /**
      * Get id
      *
@@ -347,28 +345,5 @@ protected $heteroeval;
     public function getCalificacion()
     {
         return $this->calificacion;
-    }
-
-    /**
-     * Set heteroeval
-     *
-     * @param \Admin\MedBundle\Entity\Heteroeval $heteroeval
-     * @return Heterocursos
-     */
-    public function setHeteroeval(\Admin\MedBundle\Entity\Heteroeval $heteroeval)
-    {
-        $this->heteroeval = $heteroeval;
-
-        return $this;
-    }
-
-    /**
-     * Get heteroeval
-     *
-     * @return \Admin\MedBundle\Entity\Heteroeval 
-     */
-    public function getHeteroeval()
-    {
-        return $this->heteroeval;
     }
 }
