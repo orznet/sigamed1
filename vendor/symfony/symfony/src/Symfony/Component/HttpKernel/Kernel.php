@@ -59,11 +59,11 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $startTime;
     protected $loadClassCache;
 
-    const VERSION = '2.8.5';
-    const VERSION_ID = 20805;
+    const VERSION = '2.8.11';
+    const VERSION_ID = 20811;
     const MAJOR_VERSION = 2;
     const MINOR_VERSION = 8;
-    const RELEASE_VERSION = 5;
+    const RELEASE_VERSION = 11;
     const EXTRA_VERSION = '';
 
     const END_OF_MAINTENANCE = '11/2018';
@@ -466,8 +466,8 @@ abstract class Kernel implements KernelInterface, TerminableInterface
                 $hierarchy[] = $name;
             }
 
-            foreach ($hierarchy as $bundle) {
-                $this->bundleMap[$bundle] = $bundleMap;
+            foreach ($hierarchy as $hierarchyBundle) {
+                $this->bundleMap[$hierarchyBundle] = $bundleMap;
                 array_pop($bundleMap);
             }
         }

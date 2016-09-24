@@ -10,7 +10,6 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Sensio\\Bundle\\GeneratorBundle' => array($vendorDir . '/sensio/generator-bundle'),
     'Sensio\\Bundle\\DistributionBundle' => array($vendorDir . '/sensio/distribution-bundle'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),

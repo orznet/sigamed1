@@ -187,7 +187,7 @@ class XmlFileLoader extends FileLoader
         }
 
         if ($deprecated = $this->getChildren($service, 'deprecated')) {
-            $definition->setDeprecated(true, $deprecated[0]->nodeValue);
+            $definition->setDeprecated(true, $deprecated[0]->nodeValue ?: null);
         }
 
         $definition->setArguments($this->getArgumentsAsPhp($service, 'argument'));
@@ -315,6 +315,10 @@ class XmlFileLoader extends FileLoader
                 if ($services = $this->getChildren($node, 'service')) {
                     $definitions[$id] = array($services[0], $file, false);
                     $services[0]->setAttribute('id', $id);
+
+                    // anonymous services are always private
+                    // we could not use the constant false here, because of XML parsing
+                    $services[0]->setAttribute('public', 'false');
                 }
             }
         }
@@ -333,10 +337,6 @@ class XmlFileLoader extends FileLoader
         krsort($definitions);
         foreach ($definitions as $id => $def) {
             list($domElement, $file, $wild) = $def;
-
-            // anonymous services are always private
-            // we could not use the constant false here, because of XML parsing
-            $domElement->setAttribute('public', 'false');
 
             if (null !== $definition = $this->parseDefinition($domElement, $file)) {
                 $this->container->setDefinition($id, $definition);
@@ -507,7 +507,9 @@ $imports
 EOF
         ;
 
+        $disableEntities = libxml_disable_entity_loader(false);
         $valid = @$dom->schemaValidateSource($source);
+        libxml_disable_entity_loader($disableEntities);
 
         foreach ($tmpfiles as $tmpfile) {
             @unlink($tmpfile);
@@ -585,7 +587,7 @@ EOF
      *
      * @return array A PHP array
      */
-    public static function convertDomElementToArray(\DomElement $element)
+    public static function convertDomElementToArray(\DOMElement $element)
     {
         return XmlUtils::convertDomElementToArray($element);
     }
