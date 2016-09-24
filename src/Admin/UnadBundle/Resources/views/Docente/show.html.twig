@@ -226,19 +226,6 @@ Coevaluación - Director de curso a tutores
         </td> 
     <td></td>
   </tr>
-  {%if entity.vinculacion == 'De Carrera'%}
-        <tr>
-    <th>
-4. Informe de Evaluación Final DC
-        </th>
-        <td>
-            {%if entity.evaluacion%}
-            <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
-        {%endif%}
-        </td> 
-    <td></td>
-  </tr>
-  {%else%}
           <tr>
     <th>
 4. Informe de Evaluación Final
@@ -250,7 +237,7 @@ Coevaluación - Director de curso a tutores
         </td> 
     <td></td>
   </tr>
-  {%endif%}
+  
   </table>
 
  <div class="modal fade" data-refresh="true" id="ModalTutor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

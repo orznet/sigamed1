@@ -58,19 +58,7 @@
         </td> 
     <td></td>
   </tr>
-  {%if entity.vinculacion == 'De Carrera'%}
-        <tr>
-    <th>
-5. Informe de Evaluación Final DC
-        </th>
-        <td>
-            {%if entity.evaluacion%}
-            <a href="javascript:popUp('{{ path('docente_finaldc', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
-        {%endif%}
-        </td> 
-    <td></td>
-  </tr>
-  {%else%}
+
           <tr>
     <th>
 5. Informe de Evaluación Final
@@ -82,7 +70,7 @@
         </td> 
     <td></td>
   </tr>
-  {%endif%}
+
   </table>
    
    <script>

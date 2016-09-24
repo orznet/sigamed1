@@ -398,19 +398,6 @@ class DocenteController extends Controller
         
     }
        
-     /**
-     * @Route("/finaldc/{id}", name="docente_finaldc")
-     * @Method("GET")
-     * @Template("AdminUnadBundle:Docente:finaldc.html.twig")
-     */
-    public function finaldcAction($id)
-    {
-      $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-        return array(
-            'docente' => $entity,
-         ); 
-    }
     
      /**
      * @Route("/final/{id}", name="docente_final")
@@ -421,9 +408,17 @@ class DocenteController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-        return array(
+      
+     if ($entity->getVinculacion() == 'De Carrera'){
+        return $this->render('AdminUnadBundle:Docente:finaldc.html.twig', array(
+        'docente' => $entity,  
+        ));   
+     }
+     else{
+      return array(
             'docente' => $entity,
-         ); 
+      ); 
+     }
     }
     
     

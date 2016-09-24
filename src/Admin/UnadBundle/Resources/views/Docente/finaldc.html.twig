@@ -7,13 +7,13 @@
 <table class="table table-bordered table-striped hidden-mobile" style="width: 98%">
   <tr>
     <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
-        <br>INFORME FINAL DE EVALUACIÓN INDIVIDUAL -    DOCENTES DE CARRERA
+        <h3>INFORME FINAL DE EVALUACIÓN INDIVIDUAL -    DOCENTE DE CARRERA</h3>
     </td>
   </tr>
   <tr>
     <td>Cédula</td>
     <td>{{docente.user.id}}</td>
-    <td>Periodo Acádemico</td>
+    <td>Periodo de Evaluación</td>
     <td>{{docente.periodo}}</td>
   </tr>
   <tr>
@@ -30,7 +30,7 @@
   </tr>
   <tr>
     <td colspan="2">Vinculación: {{docente.vinculacion}} - Modalidad: {{docente.modalidad}}</td>
-    <td colspan="2">Resolución: {{docente.resolucion}} - Perfil: {{docente.perfil}}</td>
+    <td colspan="2">Perfil: {{docente.perfil}}</td>
   </tr>
   <tr>
     <td colspan="4">Escuela: {{docente.escuela.nombre}}<br>
@@ -49,7 +49,7 @@
 </table>
   <table class="data" width="100%" border="0">
     <tr>  
-    <td><b>1. Observaciones Plan de Gestión</b></td>
+    <td><b>OBSERVACIONES PLAN DE GESTIÓN</b></td>
     <td>Perfil</td>
     <td>Fecha</td>
     <td>Estado</td>
@@ -73,7 +73,7 @@ Aprobado
 {%if docente.heteroeval%}
 <table class="data" width="100%" border="0">
   <tr>
-    <td class="data" align="center" colspan="7">Heteroevaluación de Estudiantes - Compentencias Evaluadas</td>
+      <td class="data" colspan="7"><b>EVALUACIÓN DE ESTUDIANTES</b></td>
   </tr>
   <tr>
     <td class="data">Cognitiva</td>
@@ -96,11 +96,14 @@ Aprobado
 </table>
 {%endif%}
  <table  class="data" widtd="100%" border="0">
-  <tr>
+      <tr>
+      <td class="data" colspan="5"><b>RESULTADOS POR INSTRUMENTOS</b></td>
+  </tr>
+     <tr>
     <td>Item</td>
     <td>Instrumento</td>
     <td>Tipo</td>
-    <td>Evalua</td>
+    <td>Evaluó</td>
     <td>Calificación</td>
   </tr>
   <tr>
@@ -141,7 +144,10 @@ Aprobado
 </table>
        
 <table  class="data" widtd="100%" border="0">
-  <tr>
+    <tr>
+      <td class="data" colspan="3"><b>CONSOLIDACIÓN FINAL</b></td>
+  </tr>
+    <tr>
     <td>Tipo de Evaluación</td>
     <td>Ponderación:</td>
     <td>Porcentil</td>
@@ -162,15 +168,15 @@ Aprobado
     <td>{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): 'sin'}}</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td><h3>Evaluación Final del Desempeño</h3></td>
+    <td>Fecha de consolidación: {{docente.evaluacion.fecha|date('d/m/Y')}}</td>
+    <td align="left"><h3>Evaluación Final del Desempeño</h3></td>
     <td><h3>{{docente.evaluacion.final? docente.evaluacion.final|number_format(1, '.', ',') : '*'}}</h3>
     </td>
     </tr>
 </table>
 <table>
     <tr>
-    <td colspan="3" align="center">Evaluación Número:{{docente.id}} -  Fecha y hora de consulta: {{ "now"|date("m/d/Y H:m") }}</td>
+    <td colspan="3" align="center">Evaluación Número:{{docente.id}} - Fecha y hora de consulta: {{ "now"|date("d/m/Y H:m") }}</td>
   </tr>
 </table>
 {% endblock %}
