@@ -11,5 +11,10 @@ admin_user_send:
     defaults: { _controller: "AdminUserBundle:Default:send" }
     
 admin_user_inicio:
-    path:  /unad/inicio
+    path:  /user/inicio
     defaults: { _controller: "AdminUserBundle:Default:index" }
+    
+    
+admin_user_info:
+    path:  /user/info
+    defaults: { _controller: "AdminUserBundle:User:info" }   

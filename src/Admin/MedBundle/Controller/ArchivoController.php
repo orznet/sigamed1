@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\ArchivoType;
 /**
  * Archivo controller.
  *
- * @Route("/unad/archivo")
+ * @Route("/user/archivo")
  */
 class ArchivoController extends Controller
 {

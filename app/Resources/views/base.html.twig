@@ -126,7 +126,9 @@
 				<ul>
 					<li>
 						<a href="{{ path('admin_user_inicio') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
-					        {% if is_granted('ROLE_DEC') %}
+					      
+
+                                                 {% if is_granted('ROLE_DEC') %}
                                                 <ul style="display: block;">
                                                     <li>
                                                   <a href="{{ path('escuela_info') }}"><i class="fa fa-book"></i> Mi Escuela</a>      
@@ -155,19 +157,25 @@
                                        
 
                                                                
-                                      {% if is_granted('ROLE_DOC') %}
+                                      
                                         <li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
 						<ul style="display: block;">
 							<li>
+                                                       {% if is_granted('ROLE_DOC') %}     
 						        <a href="{{ path('admin_user_inicio') }}">Periodo Actual</a>
+                                                         {%endif%}
                                                         <a href="{{ path('archivo_docente') }}">Archivo</a>
 							</li>
 						</ul>
 					</li>
-                                         {%endif%}
                                         
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')%}
+                                        
+                                        
+                                        
+                                        
+                                        
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ADMON')%}
             <li>
             <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Unad</span></a>
             <ul>

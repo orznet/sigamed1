@@ -41,24 +41,24 @@ class DefaultController extends Controller
               
         $user = $this->getUser()->getUsername();
         
-        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DOC')) {
+        if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
                  $docentes = $this->getUser()->getDocente();
                  $docente = $docentes[0];
                  
                         if (!$docente) {
-                        $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para este periodo de evaluación, es posible que esto sea por su fecha de vinculación o fecha de desvinculación');          
-                        return $this->redirect($this->generateUrl('admin_user_home'));          
-                        }
-                 
-                 
+                        $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para el periodo de evaluación Vigente '.$this->container->getParameter('appmed.periodo').', es posible que aún no este activo por favor revise las fechas del cronograma de evaluación');          
+                        
+                        }else{
                      $session->set('docenteid', $docente->getId());
                     return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
                     'entity'  => $docente,
                     'instrumentos' => $instrumentos,
-                    ));
-              } else {
+                    ));   
+                            
+                  }
+             } else {
                   $docente = null;
-              } 
+             } 
         
         return $this->render('AdminUserBundle:Default:index.html.twig',array(
             'escuela'      => $escuela,

@@ -48,14 +48,12 @@ class UserController extends Controller
     
      /**
      * Lists all Usuarios entities.
-     * @Route("/info/user", name="admin_user_info")
      * @Method("GET")
      * @Template()
      */
     public function infoAction()
     {
-    return $this->render('AdminUserBundle:User:info.html.twig');   
-       
+    return $this->render('AdminUserBundle:User:info.html.twig');       
     }
     
     

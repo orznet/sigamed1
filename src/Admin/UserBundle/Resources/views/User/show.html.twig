@@ -18,8 +18,8 @@
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
-                <td>{{ entity.isActive }}</td>
+                <th>Roles en el Med</th>
+                <td>{% for rol in entity.roles %} {{rol.descripcion}}, {%endfor%}</td>
             </tr>
             <tr>
                 <th>Docente del periodo en curso:</th>
@@ -30,6 +30,9 @@
      </a>
     {%endfor%}    
                 </td>
+                
+                
+            
             </tr>
         </tbody>
     </table>
