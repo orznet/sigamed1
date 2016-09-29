@@ -1,8 +1,14 @@
+<!DOCTYPE html>
+<html>
 <head>
 <title>{% block title %}{{docente.user.id}}-{{docente.periodo}}{% endblock %}</title>
+<meta name="description" content="Informe Final de Evaluación">
+<meta charset="utf-8">
+<meta name="author" content="MED Módulo de Evaluación Docente UNAD">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
 </head>
 {% block body -%}
-<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+
 
 <table  class="data" widtd="100%" border="0">
   <tr>
@@ -180,3 +186,4 @@ Aprobado
   </tr>
 </table>
 {% endblock %}
+</html>
