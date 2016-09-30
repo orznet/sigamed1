@@ -82,11 +82,7 @@
                 {%endif%}  
             </td>
             <td>
-            {%if entity.plangestion.avales|length == 1 %} 
-             {{entity.plangestion.avales[0].avalado? 1 : 0}} de {{entity.plangestion.avales|length}}
-            {%else%}
-             {{(entity.plangestion.avales[0].avalado? 1:0)+(entity.plangestion.avales[1].avalado? 1:0)}} de {{entity.plangestion.avales|length}}
-            {%endif%}    
+
             </td>
             <td>
             {%if entity.plangestion.autoevaluacion %}

@@ -12,4 +12,4 @@ parameters:
     mailer_password: Siga1527
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    appmed.periodo: '20161'
+    appmed.periodo: '20162'

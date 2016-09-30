@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Admin\MedBundle\Entity\Instrumento;
+use Admin\UnadBundle\Entity\Docente;
 
 
 class DefaultController extends Controller
@@ -42,8 +43,10 @@ class DefaultController extends Controller
         $user = $this->getUser()->getUsername();
         
         if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-                 $docentes = $this->getUser()->getDocente();
-                 $docente = $docentes[0];
+                 
+                 $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $this->getUser(),'periodo' => $this->container->getParameter('appmed.periodo')));
+            //     $docentes = $this->getUser()->getDocente();
+              //   $docente = $docentes[0];
                  
                         if (!$docente) {
                         $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para el periodo de evaluación Vigente '.$this->container->getParameter('appmed.periodo').', es posible que aún no este activo por favor revise las fechas del cronograma de evaluación');          

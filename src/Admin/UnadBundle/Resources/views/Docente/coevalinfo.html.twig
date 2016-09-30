@@ -1,7 +1,7 @@
 {% block body -%}
 <body>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-<h2>Coevaluaciones de {{ entity.user.nombres }} {{ entity.user.apellidos }} - {{entity.periodo}}</h2>  
+<h2>Coevaluaciones de {{ entity.user.id }} {{ entity.user.nombres }} {{ entity.user.apellidos }} - {{entity.periodo}}</h2>  
  
    {%if entity.Coevaldepar|length > 0 %}
 

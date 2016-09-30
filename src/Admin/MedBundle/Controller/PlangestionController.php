@@ -92,33 +92,6 @@ class PlangestionController extends Controller
         $em->persist($entity);
         $em->flush();
         
-      //agregar avalador Decano N
-       $aval = new Avalplang();
-       $aval->setPlan($entity);
-       $aval->setUser($entity->getId()->getEscuela()->getDecano());
-       $aval->setPerfil('DECN');
-        $em->persist($aval);
-       
-        //agregar avalador Director de Zona
-       if ($entity->getId()->getCentro()->getId() != 89999){
-       $aval1 = new Avalplang();
-       $aval1->setPlan($entity);
-       $aval1->setUser($entity->getId()->getCentro()->getZona()->getDirector());
-       $aval1->setPerfil('DIRZ');
-       $em->persist($aval1);
-       
-       if ($entity->getId()->getCentro()->getZona()->getDirector() != $entity->getId()->getCentro()->getDirector() ){
-       $aval2 = new Avalplang();
-       $aval2->setPlan($entity);
-       $aval2->setUser($entity->getId()->getCentro()->getDirector());
-       $aval2->setPerfil('DIRC');
-       $em->persist($aval2);  
-       }
-       
-       }
-
-       $em->flush();
-        
        return $this->redirect($this->generateUrl('docente_show', array('id' => $session->get('docenteid'))));
     }
 
@@ -179,6 +152,11 @@ class PlangestionController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Plan gestion no encontrado');
         }
+        
+        if (count($entity->getAvales())==0){
+        $this->addAvales();            
+        }
+        
         return array(
             'entity'      => $entity,
             'actividades' => $actividades
@@ -398,5 +376,26 @@ class PlangestionController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    public function  addAvales(){
+      $em = $this->getDoctrine()->getManager();
+      $session = $this->getRequest()->getSession();
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid')); 
+        //agregar avalador Decano N
+       $aval = new Avalplang();
+       $aval->setPlan($docente->getPlangestion());
+       $aval->setUser($docente->getEscuela()->getDecano());
+       $aval->setPerfil('DECN');
+       $em->persist($aval);  
+        //agregar avalador Director de Zona
+       if ($docente->getCentro()->getId() != 89999){
+       $aval1 = new Avalplang();
+       $aval1->setPlan($docente->getPlangestion());
+       $aval1->setUser($docente->getCentro()->getZona()->getDirector());
+       $aval1->setPerfil('DIRZ');
+       $em->persist($aval1);           
+        }
+        $em->flush();
     }
 }
