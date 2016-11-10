@@ -72,7 +72,7 @@
         {% for centro in zona.centros %}   
             <tr>
             <td>{{ centro.zona.nombre }}</td>
-            <td>{{ centro.id }}</td>
+            <td><a href="{{ path('centro_edit', { 'id': centro.id }) }}">{{centro.id}}</a></td>
             <td>{{ centro.nombre}}</td>
             <td>{{ centro.tipo }}</td>
             <td>{{ centro.director? centro.director.id }}</td>

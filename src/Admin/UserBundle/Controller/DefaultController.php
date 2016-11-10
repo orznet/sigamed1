@@ -99,6 +99,9 @@ class DefaultController extends Controller
        $session = $this->get('session');
        $session->set('cedula_usuario', $cedula_usuario);
       
+       return $this->redirect($this->generateUrl('admin_user_send'));
+      
+      /*
         return $this->render('AdminUserBundle:Default:home.html.twig', array(
             // el último nombre de usuario ingresado por el usuario
         'cedula_usuario' => $cedula_usuario,
@@ -110,7 +113,7 @@ class DefaultController extends Controller
         'instrumentos' => $instrumentos,
          'url1'    => $urlOrigenValido1,
          'url2'  => $urlOrigenValido2,    
-        ));
+        ));*/
         //echo("<script type='text/javascript'>location.href='siga.php';</script>");
 
        }

@@ -16,7 +16,16 @@
 
 						</div>
 
-					</div>			
-			</div>
+					</div>	
 
+			</div>
+                {% if is_granted('ROLE_ADMIN') %}
+                <form method="get" action="?php echo $_GET['_quieroser'];?" >
+                <fieldset>
+                <legend>  </legend>
+                <p><label>ID <input type=text name=_quieroser></label>
+                <button>Enviar</button></p>  
+                </fieldset>  
+                </form>
+                {%endif%}
 {% endblock %}

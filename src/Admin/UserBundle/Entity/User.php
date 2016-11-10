@@ -2,6 +2,7 @@
 namespace Admin\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 /**
   * @ORM\Entity
@@ -50,6 +51,24 @@ class User implements UserInterface,  \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+     
+     /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+    
+    
     
     /**
      * se utilizó user_roles para no hacer conflicto al aplicar ->toArray en getRoles()

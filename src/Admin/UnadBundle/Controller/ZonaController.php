@@ -23,7 +23,7 @@ class ZonaController extends Controller
      *
      * @Route("/", name="zona")
      * @Method("GET")
-     * @Template()
+     * @Template("Zona/index.html.twig")
      */
     public function indexAction()
     {
@@ -40,7 +40,7 @@ class ZonaController extends Controller
      *
      * @Route("/", name="zona_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Zona:new.html.twig")
+     * @Template("Zona/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -86,7 +86,7 @@ class ZonaController extends Controller
      *
      * @Route("/new", name="zona_new")
      * @Method("GET")
-     * @Template()
+     * @Template("Zona/new.html.twig")
      */
     public function newAction()
     {
@@ -104,7 +104,7 @@ class ZonaController extends Controller
      *
      * @Route("/{id}", name="zona_show")
      * @Method("GET")
-     * @Template()
+     * @Template("Zona/show.html.twig")
      */
     public function showAction($id)
     {
@@ -129,7 +129,7 @@ class ZonaController extends Controller
      *
      * @Route("/{id}/edit", name="zona_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Zona/edit.html.twig")
      */
     public function editAction($id)
     {
@@ -174,7 +174,7 @@ class ZonaController extends Controller
      *
      * @Route("/{id}", name="zona_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Zona:edit.html.twig")
+     * @Template("Zona/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -249,7 +249,7 @@ class ZonaController extends Controller
      /**
      * @Route("/docs/pc", name="zona_docs")
      * @Method("GET")
-     * @Template()
+     * @Template("Zona/docs.html.twig")
      */
     public function docsAction()
     {

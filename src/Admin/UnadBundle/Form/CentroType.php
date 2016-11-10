@@ -16,7 +16,7 @@ class CentroType extends AbstractType
     {
         $builder
             ->add('nombre')
-             ->add('tipo', 'choice', array(
+            ->add('tipo', 'choice', array(
             'empty_value' => ' ',    
             'choices'   => array('Nodo' => 'Nodo', 'CEAD' => 'CEAD','CERES' => 'CERES', 'CCAV' => 'CCAV','UDR' => 'UDR'),
             'required'  => true,

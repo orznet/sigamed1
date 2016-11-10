@@ -23,7 +23,7 @@ class CentroController extends Controller
      *
      * @Route("/", name="centro")
      * @Method("GET")
-     * @Template()
+     * @Template("Centro/index.html.twig")
      */
     public function indexAction()
     {
@@ -39,7 +39,7 @@ class CentroController extends Controller
      *
      * @Route("/", name="centro_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Centro:new.html.twig")
+     * @Template("Centro/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -85,7 +85,7 @@ class CentroController extends Controller
      *
      * @Route("/new", name="centro_new")
      * @Method("GET")
-     * @Template()
+     * @Template("Centro/new.html.twig")
      */
     public function newAction()
     {
@@ -128,7 +128,7 @@ class CentroController extends Controller
      *
      * @Route("/{id}/edit", name="centro_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Centro/edit.html.twig")
      */
     public function editAction($id)
     {
@@ -173,7 +173,7 @@ class CentroController extends Controller
      *
      * @Route("/{id}", name="centro_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Centro:edit.html.twig")
+     * @Template("Centro/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -247,7 +247,7 @@ class CentroController extends Controller
      /**
      * @Route("/docs/{id}/pc", name="centro_docs")
      * @Method("GET")
-     * @Template()
+     * @Template("Centro/docs.html.twig")
      */
     public function docsAction($id)
     {
