@@ -21,10 +21,8 @@
                 <!-- widget content -->
                 <div class="content">
                 <div class="widget-body no-padding" id="bodyform">
-                <div class="form_error">
-                </div>
-        <form id="checkout-form" class="smart-form" novalidate="novalidate" method="POST" action="{{path('instrumento_update', { 'id': entity.id })}}" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="POST" />
+        <div class="form_error"></div>
+        <form method="POST" id="checkout-form" class="smart-form" novalidate="novalidate" method="POST" action="{{path('instrumento_update', { 'id': entity.id })}}" {{ form_enctype(form) }}>
         <div id="form_body">
         {% include 'AdminMedBundle:Instrumento:form.html.twig' with {'form': form} %}
         </div>
@@ -44,6 +42,7 @@
         </div>
         <!-- end widget -->                                                           
         </article>
+{{ form(delete_form) }}
 
 {% endblock %}
 

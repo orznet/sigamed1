@@ -68,7 +68,7 @@ class DocenteController extends Controller
     public function indexDcAction()
     {
         $em = $this->getDoctrine()->getManager();        
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('vinculacion' => 'DC'));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('vinculacion' => 'DC', 'periodo' => $this->container->getParameter('appmed.periodo') ));
         $total = count($entities);
         return array(
            'entities' => $entities,

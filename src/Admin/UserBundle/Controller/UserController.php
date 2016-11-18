@@ -3,6 +3,7 @@
 namespace Admin\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -11,12 +12,12 @@ use Admin\UserBundle\Entity\Parabuscar;
 use Admin\UserBundle\Entity\User;
 use Admin\UserBundle\Form\UserType;
 use Admin\UserBundle\Form\BuscarType;
-use Admin\MedBundle\Entity\Archivo;
+
 
 /**
  * User controller.
  *
- * @Route("/unad/user")
+ * @Route("/user/user")
  */
 class UserController extends Controller
 {
@@ -46,11 +47,11 @@ class UserController extends Controller
         ));
     }
     
-     /**
-     * Lists all Usuarios entities.
-     * @Method("GET")
-     * @Template()
-     */
+    /**
+    * Lists all Usuarios entities.
+    * @Method("GET")
+    * @Template()
+    */
     public function infoAction()
     {
     return $this->render('AdminUserBundle:User:info.html.twig');       
@@ -201,11 +202,11 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $passForm = $this->createPassForm($id);
 
         return $this->render('AdminUserBundle:User:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(), 
+            'newpass_form' => $passForm->createView(), 
             'archivo'      => $archivo,
             ));
     }
@@ -227,12 +228,10 @@ class UserController extends Controller
         }
 
         $editForm = $this->createForm(new UserType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AdminUserBundle:User:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -251,18 +250,59 @@ public function updateAction(Request $request, $id)
             throw $this->createNotFoundException('Unable to find User entity.');
         }
         $editForm = $this->createForm(new UserType(), $entity);
-        $currentpass = $entity->getPassword();
+      //  $currentpass = $entity->getPassword();
         $editForm->bind($request);
             
         if ($editForm->isValid()) {
-               if ($editForm->get('password')->getData() != $currentpass) {
-               $this->setSecurePassword($entity);
-               }
              $em->persist($entity);
-             $em->flush(); 
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+             $em->flush();
+          //  return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+          return $this->render('AdminUserBundle:User:edit.html.twig', array(
+          'entity'      => $entity,
+          'edit_form'   => $editForm->createView(),
+        ));  
         }
     }
+    
+     /**
+     * Lists all Usuarios entities.
+     * @Route("/{id}/newpass", name="admin_user_newpass")
+     * @Method("POST")
+     * @Template("AdminUserBundle:User:show.html.twig")
+     */
+    public function newpassAction(Request $request, $id)
+    {
+        if (!$request->isXmlHttpRequest()) {
+        return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }  
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AdminUserBundle:User')->find($id);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+        
+        $passForm = $this->createPassForm($id);
+        #$passForm->handleRequest($request);
+        $passForm->bind($request);
+        if ($passForm->isValid()) {
+        $currentpass = $this->generateRandomString();
+        $entity->setPassword($currentpass);
+        $this->setSecurePassword($entity);
+        $em->persist($entity);
+        $em->flush(); 
+        $this->enviarMail($entity, $currentpass);
+        return new JsonResponse(array(
+        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: '.$currentpass.'</div>'), 200);
+        }
+        $response = new JsonResponse(
+        array(
+        'message' => 'Error desde Json'), 400);
+        return $response;
+    
+    }
+    
 
      /**
      * Lists all Usuarios entities.
@@ -304,11 +344,57 @@ public function updateAction(Request $request, $id)
             ->getForm()
         ;
     }
+    
+    
+        /**
+     * Creates a form to delete a Instrumento entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createPassForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_user_newpass', array('id' => $id)))
+            ->setMethod('POST')
+            ->getForm()
+        ;
+    }
+    
+    
    private function setSecurePassword(&$entity) {
 	$entity->setSalt(md5(time()));
 	$encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
 	$password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
 	$entity->setPassword($password);
 }
+
+    private function generateRandomString($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+    public function enviarMail(\Admin\UserBundle\Entity\User $user, $newpass){
+        
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Contraseña del Módulo MED para '.$user->getId())
+            ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
+            ->setTo(array($user->getEmail() => $user->getNombres().' '.$user->getApellidos()))
+            ->setBody(
+            $this->renderView('AdminUserBundle:User:newpass.txt.twig',
+            array('user' => $user,
+                   'newpass' => $newpass
+                 )
+            )
+            )
+            ;
+            $this->get('mailer')->send($message);
+    }
     
 }

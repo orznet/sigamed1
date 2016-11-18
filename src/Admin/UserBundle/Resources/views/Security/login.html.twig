@@ -55,8 +55,19 @@
 			<!-- MAIN CONTENT -->
 			<div id="content" class="container">
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                <div class="row">
+                {% if error %}   
+                <div class="alert alert-danger alert-block">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Error de Ingreso!</h4>
+                <h5>1. El número de identificación {{last_username}} no se encuentra como usuario en el MED.</h5>
+                Recuerde que para estar habilitado en el módulo MED debe estar vinculado desde antes de la mitad del periodo acádemico en curso, si ingreso posterior a esta fecha y no puede ingresar por favor envie un correo a siga@unad.edu.co. 
+                <p>Si Director de Centro o de Zona es posible que aún no se encuentre como inscrito por favor envie un correo a siga@unad.edu.co.</p>
+                <h5>2. Si esta ingresando con contraseña MED esta digitanto la contraseña incorrecta.</h5>
+                </div>
+                {%endif%}
+                                    
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
 						<h1 class="txt-color-orangeDark login-header-big">MED Módulo de Evaluación Docente</h1>
 						<div class="hero">
 
@@ -72,7 +83,7 @@
 					</div>
                                                 {% if error %}
                                                 <center>        
-                                                <div class="mserror">{{ error.message=='Bad credentials.' ? 'Usted no tiene acceso' : error.message }}</div>
+                                                <div class="mserror">{{ error.message=='Bad credentials.' ? 'Este usuario no tiene acceso' : error.message }}</div>
                                                 </center>
                                                 {% endif %}
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">

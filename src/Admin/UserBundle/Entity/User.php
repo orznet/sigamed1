@@ -2,10 +2,10 @@
 namespace Admin\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 /**
   * @ORM\Entity
+  * @ORM\HasLifecycleCallbacks
   * @ORM\Table(name="admin_user")
   */
 class User implements UserInterface,  \Serializable
@@ -37,6 +37,12 @@ class User implements UserInterface,  \Serializable
      * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
+    
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $emailp;    
+    
     /**
      * @ORM\Column(name="password", type="string", length=255)
      */
@@ -47,7 +53,7 @@ class User implements UserInterface,  \Serializable
      */
     protected $salt;
       
-        /**
+       /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -55,7 +61,6 @@ class User implements UserInterface,  \Serializable
      /**
      * @var \DateTime $created
      *
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created;
@@ -63,12 +68,10 @@ class User implements UserInterface,  \Serializable
     /**
      * @var \DateTime $updated
      *
-     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updated;
-    
-    
+      
     
     /**
      * se utilizó user_roles para no hacer conflicto al aplicar ->toArray en getRoles()
@@ -545,5 +548,91 @@ class User implements UserInterface,  \Serializable
     public function getDocente()
     {
         return $this->docente;
+    }
+
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return User
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return User
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+    
+ /**
+ *
+ * @ORM\PrePersist
+ * @ORM\PreUpdate
+ */
+public function updatedTimestamps()
+{
+    $this->setUpdated(new \DateTime('now'));
+
+    if ($this->getCreated() == null) {
+        $this->setCreated(new \DateTime('now'));
+    }
+}
+
+
+    /**
+     * Set emailp
+     *
+     * @param string $emailp
+     * @return User
+     */
+    public function setEmailp($emailp)
+    {
+        $this->emailp = $emailp;
+
+        return $this;
+    }
+
+    /**
+     * Get emailp
+     *
+     * @return string 
+     */
+    public function getEmailp()
+    {
+        return $this->emailp;
     }
 }

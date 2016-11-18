@@ -244,7 +244,7 @@ class InstrumentoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('instrumento_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar'))
             ->getForm()
         ;
     }

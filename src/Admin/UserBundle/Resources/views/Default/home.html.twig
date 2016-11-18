@@ -89,10 +89,10 @@
                        </tr>                  
                        <tr>
                        {%if instrumentos[9].estado%}    
-                       <td>1. Sistema Único de Autenticación</td>
+                       <td>1. Ingreso al MED con credenciales del Sistema Único de Autenticación (Intranet)</td>
                        <td>
                        {%if autenticacion != "Aceptada" %}
-                       <a href="http://login.unad.edu.co/?continue=http://med.unad.edu.co/" class="btn btn-primary btn-xs">Autenticación <i class="fa fa-unlock"></i></a>
+                       <a href="http://login.unad.edu.co/?continue=http://med.unad.edu.co/" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-unlock"></i></a>
                        {%else%}
                        {{cedula_usuario}}:
                        {{nombres_usuario}} {{apellidos_usuario}}

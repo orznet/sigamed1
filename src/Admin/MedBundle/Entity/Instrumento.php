@@ -20,7 +20,8 @@ class Instrumento{
  protected $id;  
  
     /**
-    * @ORM\Column(type="string")
+    * @ORM\Column(type="string", nullable=false)
+    * @Assert\Length( min = "4", minMessage = "El número minimo de caracteres es  {{ limit }}" ) 
     */
     protected $nombre;   
     

@@ -27,9 +27,7 @@ class SecurityController extends Controller
             // el último nombre de usuario ingresado por el usuario
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
-            ));
-                      
-         
+            ));     
         //$this->get('session')->getFlashBag()->add('error', $error->getMessage().' '.$session->get(SecurityContext::LAST_USERNAME).' No corresponde a un usuario en el Módulo MED');          
        // return $this->redirect($this->generateUrl('admin_user_home'));   
     }

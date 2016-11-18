@@ -15,7 +15,7 @@ class InstrumentoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
+            ->add('nombre', 'text', array('required'  => true,))
             ->add('tipo')
             ->add('descripcion')    
             ->add('fechainicio', 'date', array(

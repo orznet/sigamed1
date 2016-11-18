@@ -1,9 +1,31 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-        <form action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+ <article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+            <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>Información del Usuario</h2>
+            </header>     
+                <!-- widget div-->
+                <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+
+                </div>
+                <!-- end widget edit box -->
+
+                <!-- widget content -->
+                <div class="content">
+                <div class="widget-body no-padding" id="bodyform">
+                <div class="form_error">
+                </div> 
+ <form action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
             <table class="table table-bordered table-striped hidden-mobile" style="width: 80%">
-   <input type="hidden" name="_method" value="PUT" />
+   <input type="hidden" name="_method" value="PUT"/>
      {{ form_errors(edit_form) }}
    <tr>
     <td>Identificación</td>
@@ -22,17 +44,16 @@
     <td>{{ form_widget(edit_form.apellidos) }}</td>
    </tr>
       <tr>
-    <td>Email</td>
+    <td>Email Unad</td>
     <td>{{ form_widget(edit_form.email) }}</td>
+   </tr>
+   <tr>
+    <td>Email Personal</td>
+    <td>{{ form_widget(edit_form.emailp) }}</td>
    </tr>
    <tr>
     <td>Estado</td>
     <td>Activo: {{ form_widget(edit_form.isActive) }}
-    </td>
-   </tr>
-      <tr>
-    <td>Contraseña</td>
-    <td>{{ form_widget(edit_form.password) }}
     </td>
    </tr>
    <tr>
@@ -49,11 +70,23 @@
   </table>
 </form>
 
+</div>
+<!-- end widget content -->
+</div>
+</div>
+<!-- end widget div -->
+</div>
+<!-- end widget -->                                                           
+</article>
+                   
+
+
 <ul class="record_actions">
     <li>
-        <a href="{{ path('admin_user') }}">
+        <a href="{{ path('admin_user_show', {'id':entity.id}) }}">
             Regresar
         </a>
     </li>
 </ul>
+
 {% endblock %}

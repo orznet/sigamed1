@@ -6,10 +6,13 @@ parameters:
     database_name: med20161
     database_user: root
     database_password: base456
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: siga@unad.edu.co
-    mailer_password: Siga1527
+    
+    mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com
+    mailer_user: siga@unad.edu.co 
+   
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
     appmed.periodo: '20162'
