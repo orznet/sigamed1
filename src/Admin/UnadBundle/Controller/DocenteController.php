@@ -49,7 +49,7 @@ class DocenteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->findOneBy(array('id' => $id));
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'periodo' => $this->container->getParameter('appmed.periodo')));
         $total = count($entities);
         return array(
            'entities' => $entities,
@@ -89,7 +89,7 @@ class DocenteController extends Controller
         $session = $this->getRequest()->getSession();
         $id = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->findOneBy(array('id' => $id));
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'vinculacion' => 'DC'));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'vinculacion' => 'DC', 'periodo' => $this->container->getParameter('appmed.periodo')));
         $total = count($entities);
         return array(
            'entities' => $entities,
@@ -111,7 +111,7 @@ class DocenteController extends Controller
         $session = $this->getRequest()->getSession();
         $zona = $em->getRepository('AdminUnadBundle:Zona')->find($session->get('zonaid'));
         $centro = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('zona' => $zona));
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro, 'vinculacion' => 'DC'));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro, 'vinculacion' => 'DC', 'periodo' => $this->container->getParameter('appmed.periodo')));
         $total = count($entities);
         return array(
            'entities' => $entities,

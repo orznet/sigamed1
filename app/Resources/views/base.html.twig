@@ -150,11 +150,17 @@
 							</li>
  
 						</ul>
-					</li>
                                                 
                                                         {% endif %}
                                                                              
-                                       
+                                               {% if is_granted('ROLE_SECA') %}
+                                                <ul style="display: block;">
+                                                    <li>
+                                                  <a href="{{ path('escuela_info') }}"><i class="fa fa-book"></i> Mi Escuela</a>      
+                                                    </li>    
+                                                </ul>
+                                                
+                                                        {% endif %}     
 
                                                                
                                       

@@ -255,7 +255,7 @@ class CentroController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $centros = $user->getDirectorcentro();
         $centro = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('id' => $id));
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro, 'periodo' => $this->container->getParameter('appmed.periodo')));
 
         return array(
             'docentes'      => $docentes,

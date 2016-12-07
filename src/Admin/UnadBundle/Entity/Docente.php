@@ -701,4 +701,50 @@ protected $centro;
     {
         return $this->ternado;
     }
+
+    /**
+     * Set fecha_inicio
+     *
+     * @param \DateTime $fechaInicio
+     * @return Docente
+     */
+    public function setFechaInicio($fechaInicio)
+    {
+        $this->fecha_inicio = $fechaInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_inicio
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInicio()
+    {
+        return $this->fecha_inicio;
+    }
+
+    /**
+     * Set fecha_fin
+     *
+     * @param \DateTime $fechaFin
+     * @return Docente
+     */
+    public function setFechaFin($fechaFin)
+    {
+        $this->fecha_fin = $fechaFin;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_fin
+     *
+     * @return \DateTime 
+     */
+    public function getFechaFin()
+    {
+        return $this->fecha_fin;
+    }
 }

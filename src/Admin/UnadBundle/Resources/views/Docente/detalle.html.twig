@@ -11,13 +11,13 @@
     <th>Cédula</th>
     <td>{{ entity.user.id }}</td>
     <th>Vinculación / Modalidad</th>
-    <td>{{ entity.vinculacion }} / {{ entity.modalidad }}</td>
+    <td>{{ entity.vinculacion }} / {{ entity.modalidad }} [{{ entity.fechainicio|date("d/m/Y") }} - {{ entity.fechafin|date("d/m/Y") }}]</td>
   </tr>
   <tr>
     <th>Cargo</th>
     <td>{{ entity.cargo }}</td>
     <th>Correo</th>
-    <td>{{ entity.user.email }}</td>
+    <td>{{ entity.user.email }} - {{ entity.user.emailp }} </td>
   </tr>
    <tr>
     <th>Perfil</th>
