@@ -37,6 +37,29 @@ class AvalplangController extends Controller
             'entities' => $entities,
         );
     }
+    
+    
+        /**
+     * Lists all Avalplang entities.
+     *
+     * @Route("/lista", name="aval_lista")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $entities = $em->getRepository('AdminMedBundle:Avalplang')->findAll();
+
+        return array(
+            'entities' => $entities,
+        );
+    }
+    
+    
+    
+    
     /**
      * Creates a new Avalplang entity.
      *

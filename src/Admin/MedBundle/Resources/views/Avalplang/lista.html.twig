@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Aval de Roles para Autoevaluación de Docentes de Carrera</h1>
+
+    <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
+        <thead>
+            <tr>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Escuela</th>
+                <th>Avalador</th>
+                <th>Estado Aval</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <th>
+                {{ entity.plan.docente.user.id }}
+                </th> 
+                <td>{{ entity.plan.docente.user.nombres }} {{ entity.plan.docente.user.apellidos }}</td>
+                <td>{{entity.plan.docente.escuela.sigla}}</td>
+                
+                
+                                <td>
+{{entity.perfil}}
+                </td>
+                <td>{{ entity.estado }}</td>
+                <td>
+              {%if entity.plan.estado != 'Sin Cerrar' %}
+                    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.docente.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
+                {%else%}
+                    Sin Registro
+                    {%endif%}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+     <script>
+  
+function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+ 
+</script>
+    {% endblock %}
