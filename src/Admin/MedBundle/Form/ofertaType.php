@@ -15,7 +15,7 @@ class ofertaType extends AbstractType
             ->add('cedula', 'text', array('required'  => true))
                     
            ->add('periodo', 'choice', array('empty_value' => ' ', 'label' => ' ',    
-            'choices'   => array( '16-01' => '16-01', '16-02' => '16-02'), 'required'  => true,))        
+            'choices'   => array( '16-04' => '16-04', '8-05' => '8-05'), 'required'  => true,))        
             ;           
     }
 
