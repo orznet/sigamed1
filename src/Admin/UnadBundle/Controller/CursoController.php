@@ -197,7 +197,7 @@ class CursoController extends Controller
        return $this->redirect($this->generateUrl('curso_show', array('id' => $id)));          
        }
        
-      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario));
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario, 'periodo' => $this->container->getParameter('appmed.periodo')));
           
       if (!$docente) {
       $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
@@ -207,7 +207,7 @@ class CursoController extends Controller
       $oferta->setCurso($curso);
       $oferta->setDirector($docente);
       $oferta->setPeriodo($Form->get('periodo')->getData());
-      if($Form->get('periodo')->getData()=='16-01'){
+      if($Form->get('periodo')->getData()=='16-04'){
       $oferta->setId($curso->getId()+10000000);    
       }
       else{
@@ -254,7 +254,7 @@ class CursoController extends Controller
        return $this->redirect($this->generateUrl('oferta', array('id' => $id)));          
        }
    
-      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario));
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $usuario, 'periodo' => $this->container->getParameter('appmed.periodo')));
           
       if (!$docente) {
       $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
