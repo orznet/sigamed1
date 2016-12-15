@@ -103,9 +103,9 @@
     </tr>
  {%else%}
       <tr>
-    <th>Autoevaluación (Plan de Actividades)</th>
-    <td>Plan de Actividades
-    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Asignación académica)</a>
+    <th>Autoevaluación (Plan de Gestión)</th>
+    <td>Plan de Gestión
+    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Ver Plan...)</a>
     </td>    
     <td>
     {%if entity.plangestion.autoevaluacion is null %}
@@ -189,12 +189,7 @@ Coevaluación - Director de curso a tutores
 <table class="table table-bordered hidden-mobile" style="width: 95%">
     <tr>
     <th>
-    {%if entity.vinculacion == 'De Carrera'%}
-    1. Plan de Gestión      
-    {%else%}
-    1. Plan de Actividades
-    {%endif%}
-    (Autoevaluación)
+    1. Plan de Gestión (Autoevaluación)
         </th>
         <td>
         </td>    
@@ -282,10 +277,10 @@ Coevaluación - Director de curso a tutores
                     Usted puede modificar la red de tutores haciendo clic sobre el código del curso, para agregar un tutor requiere únicamente el número de cedula.
                     </li> 
                     <li>     
-                    Si usted fue director de curso y este no aparece en su lista por favor solicite el ajuste enviando un correo a siga@unad.edu.co especificando:
+                    Si usted fue director de curso y este no aparece en la lista por favor solicite el ajuste enviando un correo a siga@unad.edu.co especificando:
                     Nombre del Curso
                     Código 
-                    Periodo (16-02, 8-04, 8.05).
+                    Periodo Acádemico.
                     </li> 
                 </ul>
                 </div>

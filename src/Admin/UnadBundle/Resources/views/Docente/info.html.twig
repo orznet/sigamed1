@@ -42,7 +42,7 @@
         </th>
         <td>
            {%if entity.heteroeval%} 
-            <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+            <a href="javascript:popUp('{{ path('heteroeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver... <i class="fa fa-sign-in"></i></a>
         {%else%} Sin registros {%endif%}
         </td> 
     <td></td>
@@ -53,7 +53,7 @@
         </th>
         <td>
         {%if entity.evaluacion%}
-            <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+            <a href="javascript:popUp('{{ path('coeval_info', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver... <i class="fa fa-sign-in"></i></a>
         {%endif%}
         </td> 
     <td></td>
@@ -64,9 +64,11 @@
 5. Informe de Evaluación Final
         </th>
         <td>
-        {%if entity.evaluacion%}        
-            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+        {%if entity.evaluacion%}
+            {%if entity.evaluacion.auto%} 
+            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver... <i class="fa fa-sign-in"></i></a>
         {%endif%}
+            {%endif%}
         </td> 
     <td></td>
   </tr>
