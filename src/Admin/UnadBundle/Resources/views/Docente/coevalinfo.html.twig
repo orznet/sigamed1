@@ -17,7 +17,7 @@
    
             <tr>
                 <td>
-                {{evaluacion.evaluador.docente.user.nombres}} {{evaluacion.evaluador.docente.user.nombres}}
+                {{evaluacion.evaluador.docente.user.nombres}} {{evaluacion.evaluador.docente.user.apellidos}}
                    
                 </td>
             <td>
@@ -51,7 +51,7 @@
                 <td>{{oferta.curso.nombre}} - {{oferta.periodo}} </td> 
                             <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                             <td>{{tutor.coevaldirector? tutor.coevaldirector.observaciones : ' ' }}</td>
-                            <td>{{tutor.coevaldirector? '*.*' : 'No evaluo'}}</td>
+                            <td>{{tutor.coevaldirector? '*.*' : 'Sin Evaluación'}}</td>
             </tr>
             {%if tutor.coevaldirector%}{%set final=final+tutor.coevaldirector.f0%}{%set aux=aux+1%}{%endif%}  
             {%endfor%}

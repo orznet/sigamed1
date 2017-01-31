@@ -27,7 +27,7 @@ class BaseController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-      $evaluaciones = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId()));
+      $evaluaciones = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId(), 'semestre' => $this->container->getParameter('appmed.periodo') ) );
         return array(
             'entity' => $entity,
             'evaluaciones' => $evaluaciones

@@ -195,7 +195,7 @@ Coevaluación - Director de curso a tutores
         </td>    
     <td>
 {%if entity.plangestion.autoevaluacion is not null %}
-        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.plangestion.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
    {%endif%}
     </td>
     </tr>

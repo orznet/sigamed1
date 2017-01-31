@@ -146,7 +146,7 @@
 								<a href="{{ path('planmejoramiento') }}"><i class="fa fa-book"></i> Planes de Mejoramiento</a>
 							</li>
                                                         <li>
-							<!--	<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a> -->
+								<a href="{{ path('decano_coevallider') }}"><i class="fa fa-book"></i> Evaluación a Lideres</a>
 							</li>
  
 						</ul>
@@ -163,20 +163,17 @@
                                                         {% endif %}     
 
                                                                
-                                      
-                                        <li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
-						<ul style="display: block;">
-							<li>
-                                                       {% if is_granted('ROLE_DOC') %}     
-						        <a href="{{ path('admin_user_inicio') }}">Periodo Actual</a>
-                                                         {%endif%}
-                                                        <a href="{{ path('archivo_docente') }}">Archivo</a>
-							</li>
-						</ul>
-					</li>
-                                        
-                                        
+                                    {% if is_granted('ROLE_DOC') %}  
+                                      <li>
+                                          <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
+                                              <ul style="display: block;">
+                                                      <li>
+                                                      <a href="{{ path('admin_user_inicio') }}">Periodo Actual</a>                              
+                                                      <a href="{{ path('archivo_docente') }}">Archivo</a>
+                                                      </li>
+                                              </ul>
+                                      </li>     
+                                           {%endif%}
                                         
                                         
                                         
@@ -230,19 +227,23 @@
                                         
                                         
                                     {% if is_granted('ROLE_DIRZ') or is_granted('ROLE_DIRC')  %} 
-                                    <ul style="display: block;"> <li>
-				     <a href="{{ path('centro_index') }}"><i class="fa fa-book"></i> Consultar Docentes</a>
+                                    <ul style="display: block;">
+                                        <li>
+				     <a href="{{ path('centro_index') }}"><i class="fa fa-book"></i> Docentes por Centro</a>
 			             </li>  
                                      {%endif%}     
                         
                                     {% if is_granted('ROLE_DIRZ') %} 
+                                    <ul style="display: block;">
+                                        <li>
+				     <a href="{{ path('zona_index') }}"><i class="fa fa-book"></i> Docentes por Zona</a>
+			             </li>  
                                      <li>
 				     <a href="{{ path('docente_dczona') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
 			             </li>
                                     <li>
                                     <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Avalar Roles</a>
                                     </li>
-                                     
                                      {%endif%}  
                                     </ul>        
 				</ul>

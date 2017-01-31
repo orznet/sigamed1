@@ -264,4 +264,24 @@ class ZonaController extends Controller
             'user'   => $user,
         );
     }
+    
+    
+        /**
+     * @Route("/docs/index", name="zona_index")
+     * @Method("GET")
+     * @Template("Zona/docs.html.twig")
+     */
+    public function listaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $zona = $user->getDirectorzona();
+        $centros = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('zona' => $zona[0]));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros));
+        
+        return array(
+            'docentes'      => $docentes,
+            'zona'        => $zona[0],
+        );
+    }
 }
