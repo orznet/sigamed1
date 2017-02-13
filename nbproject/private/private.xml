@@ -18,12 +18,13 @@
             <file>file:/Users/omarr/codigo/med/web/css/print.css</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Security/login.html.twig</file>
             <file>file:/Users/omarr/codigo/med/app/Resources/views/Zona/index.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/config/parameters.yml.dist</file>
             <file>file:/Users/omarr/codigo/med/app/Resources/views/Centro/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/config/parameters.yml.dist</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Docente.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Form/CentroType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevaltutor.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/Zona/docs.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/porescuela.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/User/newpass.txt.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/redTutores.php</file>
@@ -33,9 +34,8 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Form/InstrumentoType.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
             <file>file:/Users/omarr/codigo/med/app/config/config.yml</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/BaseController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Form/UserType.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/coevalinfo.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/BaseController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/ZonaController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/edit.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ArchivoController.php</file>
@@ -44,19 +44,22 @@
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Curso/info.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/form.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/CentroController.php</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/Centro/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/RolplangController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/DocenteController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Escuela/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Avalplang/index.html.twig</file>
             <file>file:/Users/omarr/codigo/med/app/Resources/views/base.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Heterocursos.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/config/routing.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/show.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/pordoc.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/info.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/coevalParesController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/index.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Plangestion/planactividades.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Instrumento.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/detalle.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/config/routing.yml</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/coevalLiderController.php</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Archivo/porperiodo.html.twig</file>
