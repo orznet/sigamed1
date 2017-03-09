@@ -6,14 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Admin\MedBundle\Entity\Instrumento;
+use Admin\MedBundle\Entity\Periodoe;
 use Admin\UnadBundle\Entity\Docente;
 
 
 class DefaultController extends Controller
 {
     public function indexAction(Request $request){
-        $em = $this->getDoctrine()->getManager();
-        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
+       $em = $this->getDoctrine()->getManager();
+       $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
+       $periodos = $em->getRepository('AdminMedBundle:Periodoe')->findAll();
+        
+       # $dql = "select a from AdminMedBundle:Periodoe a";
+       # $query = $em->createQuery($dql);
+       # $query->orderBy('Id', 'DESC');
+       # $query->setMaxResults(1);
+       # $periodos = $query->getResult();
+        
+        
          $session = $request->getSession();
         if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DEC')) {
                   $escuelas = $this->getUser()->getDecano();
@@ -67,6 +77,7 @@ class DefaultController extends Controller
             'escuela'      => $escuela,
             'user'  => $user,
             'periodo' => $this->container->getParameter('appmed.periodo'),
+            'periodos'  => $periodos,
             ));
     }
     
@@ -85,50 +96,51 @@ class DefaultController extends Controller
         $url_autenticacion = "http://login.unad.edu.co/";
         $urlInicioApp  = "http://med.unad.edu.co/";
         //$urlServerApp  = "/login_check";
-        $urlPeticion = $request->server->get('HTTP_REFERER');
+        
+        $direccion_respuesta = $this->getRequest()->server->get('HTTP_REFERER');
         
         //------------- Origenes validos ----------------------------------------------------------
-        $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php"; //cuando accede por el home de intranet
+        $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php?continue=http://med.unad.edu.co/"; //cuando accede por el home de intranet
         $urlOrigenValido2 =	$url_autenticacion."Usuario/envioDatosUsuario.php"; //cuando accede por login.unad.edu.co
         $urlOrigenValido3 =	$url_autenticacion."Usuario/envioDatosUsuario.php?continue=".$urlInicioApp; //cuando accede por login.unad.edu.co 
         //
         //-----------------------------------------------------------------------------------------
         
-       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($urlPeticion == $urlOrigenValido1 || $urlPeticion == $urlOrigenValido2 || $urlPeticion == $urlOrigenValido3)){
-        //	enviarFormulario();
-       $session = $this->get('session');
-       $session->set('cedula_usuario', $cedula_usuario);
+       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($direccion_respuesta == $urlOrigenValido1 || $direccion_respuesta == $urlOrigenValido2 || $urlPeticion == $urlOrigenValido3)){
+       
       
-       return $this->redirect($this->generateUrl('admin_user_send'));
       
-      /*
         return $this->render('AdminUserBundle:Default:home.html.twig', array(
             // el último nombre de usuario ingresado por el usuario
         'cedula_usuario' => $cedula_usuario,
         'nombres_usuario' => $nombres_usuario,
         'apellidos_usuario' => $apellidos_usuario,
         'autenticacion' => $autenticacion,
-        'urlPeticion'   => $urlPeticion,
+        'direccion_respuesta'   => $direccion_respuesta,
         'email_usuario'  => $email_usuario,
         'instrumentos' => $instrumentos,
          'url1'    => $urlOrigenValido1,
-         'url2'  => $urlOrigenValido2,    
-        ));*/
-        //echo("<script type='text/javascript'>location.href='siga.php';</script>");
+         'url2'  => $urlOrigenValido2,
+	     'url3'  => $urlOrigenValido3,
+            'if'   => 'Verdadero'
+        ));
 
        }
         else{
+       # $this->ingresoAction($cedula_usuario);    
         return $this->render('AdminUserBundle:Default:home.html.twig', array(
             // el último nombre de usuario ingresado por el usuario
         'cedula_usuario' => $cedula_usuario,
-        'nombres_usuario' => 'nn',
-        'apellidos_usuario' => 'nn',
-        'autenticacion' => 'nn',
-        'urlPeticion'   => $urlPeticion,
-          'url1'    => $urlOrigenValido1,
-          'url2'  => $urlOrigenValido2,
-        'email_usuario'  => 'nn',
-        'instrumentos' => $instrumentos,    
+        'nombres_usuario' => $nombres_usuario,
+        'apellidos_usuario' => $apellidos_usuario,
+        'autenticacion' => $autenticacion,
+        'direccion_respuesta'   => $direccion_respuesta,
+        'url1'    => $urlOrigenValido1,
+        'url2'  => $urlOrigenValido2,
+		'url3'  => $urlOrigenValido3,
+        'email_usuario'  => $autenticacion,
+        'instrumentos' => $instrumentos,
+        'if'   => 'falso'    
         ));
         }
     }
@@ -137,6 +149,17 @@ class DefaultController extends Controller
     $request = $this->getRequest();
     $session = $request->getSession();
     $cedula_usuario = $session->get('cedula_usuario');
+    $pass = $request->server->get('MED_PKW');
+	$formulario ="<form method='post' name='datos' action='/login_check'>";
+	$formulario.="<input id='username' type='hidden' name='_username' value=$cedula_usuario />";
+	$formulario.="<input id='password' type='hidden' name='_password' value=$pass />";
+	$formulario.="</form>";
+	$formulario.="<script>document.forms[0].submit(); </script>";	
+	echo $formulario;
+    }
+	
+    public function ingresoAction($cedula_usuario){    
+    $request = $this->getRequest();
     $pass = $request->server->get('MED_PKW');
 	$formulario ="<form method='post' name='datos' action='/login_check'>";
 	$formulario.="<input id='username' type='hidden' name='_username' value=$cedula_usuario />";

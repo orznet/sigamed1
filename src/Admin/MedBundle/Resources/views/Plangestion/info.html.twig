@@ -1,32 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{{docente.user.id}}-{{docente.periodo}}-plan{% endblock %}</title>
+<meta name="description" content="Plan de Gestión Docente">
+<meta charset="utf-8">
+<meta name="author" content="MED Módulo de Evaluación Docente UNAD">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
+</head>
 {% block body -%}
 <body>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}">
-<table>
-    <tr>
-    <td align="center" colspan="3"><img src="/img/logo-med-unad.png" alt="MED"></td>
-    </tr>
-    <tr>
-        <td align="center" colspan="3">
-        <h3>Plan de
-        {%if entity.docente.vinculacion == 'De Carrera'%}
-            Gestión de
-            {%else%}
-            Actividades de
-            {%endif%}
- {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}  </h3>   
-        </td>
-    </tr>
-               <tr>
-                <td>Periodo: {{ entity.docente.periodo}}</td>
-                <td>Fecha creación: {{ entity.fechacreacion? entity.fechacreacion|date('Y-m-d H:i:s') :'' }}</td>
-                <td>Fecha cierre: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i:s') : '' }}</td>
-            </tr> 
+<table widtd="100%" border="0">
+  <tr>
+    <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
+        <h3>PLAN DE GESTIÓN DE DOCENTE</h3>
+    </td>
+  </tr>
+  <tr>
+      <td><b>Escuela:</b></td>
+    <td>{{docente.escuela.nombre}}</td>
+    <td><b>Periodo de Ejecución:</b>
+    {{docente.periodo}} - Dias Habiles: {{periodo.dias}}</td>
+  </tr>
+  <tr>
+    <td><b>Nombre</b></td>
+    <td>{{docente.user.nombres}} {{docente.user.apellidos}}</td>
+    <td><b>Cédula:</b> {{docente.user.id}}</td>
+  </tr>
+  <tr>
+   <td colspan="2"><b>Programa:</b> {{docente.programa.nombre}}</td>
+    <td><b>Cargo:</b>
+    {{docente.cargo}} - <b>Perfil:</b> {{docente.perfil}}</td>
+  </tr>
+  <tr>
+      <td colspan="2">
+          <b>Zona:</b> {{docente.centro.zona.nombre}} - <b>Director:</b> 
+              {%if docente.centro.zona.director%}
+{{docente.centro.zona.director.nombres}} {{docente.centro.zona.director.apellidos}}
+    {%endif%}
+      </td>
+    <td colspan="2">
+        <b>CEAD:</b> {{docente.centro.nombre}}
+
+    </td>
+  </tr>
 </table>
   <table>
         <thead>
             <tr>
-                <th>Roles</th>
-                <th>Horas</th>
+                <th>Rol</th>
+                <th>Descripción de la Actividad</th>
+                <th>Horas Semana</th>
+                <th>Horas Periodo</th>
             </tr>
         </thead>
         <tbody>
@@ -37,23 +61,26 @@
                 {% set num = num+1 %}
                 <td>{{num}}.     
                 {{ rol.rol.nombre }}
-                {%if rol.rol.textoampliacion %}
+                    </td>
+                    <td>
                 <font color="#a57225">{{rol.descripcion}}</font>
-                {%endif%}
                 </td>
                 <td>{{rol.horas}}
                     {% set totalhoras = totalhoras + rol.horas%}
                 </td>
+                <td>
+                    {{rol.horas}}
+                </td>
                </tr>
         {% endfor %}
                <tr>
-                   <td>Total Horas:</td>
+                   <td></td>
+                   <td align="right">Total Horas:</td>
                     <td>{{totalhoras}}</td>
+                    <td>{{totalhoras*(periodo.dias/5) }}</td>
                </tr>
         </tbody>
     </table>
-  
-{%if entity.docente.vinculacion == 'De Carrera'%}
 <table>
   <tr>
     <th>Avalador</th>
@@ -78,15 +105,32 @@ Sin revisar
     </td>
   </tr>
     <tr>
-    <td  colspan="5"><b>Observaciones:</b><br>
+    <td  colspan="5"><b>Observaciones Generales:</b><br>
    {% set texto = aval.observaciones|split('|') %} 
    {% for obs in texto%}
    {{obs}}<br>
    {%endfor%}
    </td>
   </tr>
-  {% endfor %}  
+  {% endfor %}
+  
+    <tr>
+        <td  colspan="4"align="center"><br><br><br>____________________________<br>Firma Docente<br><b>{{docente.user.nombres}} {{docente.user.apellidos}}</b><br>
+              
+          </td>
+    </tr>
+        <tr>
+          <td  colspan="2" align="center"><br><br><br>____________________________<br>Firma Director CEAD<br><b>{%if docente.centro.director %}{{docente.centro.director.nombres}} {{docente.centro.director.apellidos}}{%endif%}</b><br>
+              
+          </td>
+          <td  colspan="2" align="center"><br><br><br>____________________________<br>Firma Decano<br><b>{{docente.escuela.decano.nombres}} {{docente.escuela.decano.apellidos}}</b><br>
+              
+          </td>
+    </tr>
+    
 </table>
-{%endif%}
+
+    
+
     </body>
 {% endblock %}

@@ -27,5 +27,31 @@
                 <button>Enviar</button></p>  
                 </fieldset>  
                 </form>
-                {%endif%}
+
+ {%for periodo in periodos%}
+ <h4> Periodo de Evaluación {{periodo.id}}</h4><br>
+     <table class="table table-bordered hidden-mobile" style="width: 95%">
+        <thead>
+                <tr>
+                <th>Id</th>
+                <th>Periodo Académico</th>
+                <th>Semanas</th>
+                <th>Inicio eventos académicos</th>
+                <th>Fin eventos académicos</th>
+                 </tr>
+               </thead> 
+               <tbody>
+
+            {%for periodoa in periodo.periodoa%}
+                <tr>
+                <td>{{periodoa.id}}</td>
+                <td>{{periodoa.nombre}}</td>
+                <td>{{ periodoa.semanas }}</td>
+                <td>{{ periodoa.fechainicio|date('d - F', "America/Bogota" ) }}</td>
+                <td>{{ periodoa.fechafin|date('d - F') }}</td>
+            {%endfor%}
+        </tbody>
+              </table>            
+  {%endfor%} 
+  {%endif%}
 {% endblock %}

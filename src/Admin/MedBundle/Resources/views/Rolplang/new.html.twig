@@ -21,12 +21,12 @@
     <td>{{ form_widget(form.horas) }}<i>Horas por semana aproximadas, puede usar decimales. </i>
             <br>Horas diponibles en su plan: {{40-libre}} de máximo 40</td>
    </tr>
-   {%if entity.rol.textoampliacion%}
+
   <tr>
-    <td>Descripción</td>
+    <td>Descripción del Rol</td>
     <td>{{ form_widget(form.descripcion) }}</td>
   </tr>
-  {%endif%}
+
   <tr>
     <td></td>
     <td><button type="hidden" class="btn btn-sm btn-primary">Agregar</button></td>

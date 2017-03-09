@@ -48,6 +48,99 @@
         </div>
     {%endfor%}
 </div>
+     
+xxxx
+
+<div class="panel-group smart-accordion-default" id="accordion">    
+    <div class="panel panel-default">     
+         <div class="panel-heading">
+             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse100" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>Roles de Formación</a></h1>   
+         </div>
+             <div id="collapse100" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body no-padding">
+                       <table class="table table-bordered hidden-mobile">
+                        <thead>
+                        <tr><th>Rol</th>
+                         <th></th></tr>
+                        </thead>
+                        <tbody>
+                        {% for rol in roles %}
+                        {% if rol.categoria =='FORMACIÓN'%}
+                        <tr>
+                         <td>{{rol.nombre}}     
+                         </td>
+                        <td>
+                         <a data-toggle="modal" href="{{ path('rolplang_new', { 'id': id , 'idr' : rol.id }) }}" data-target="#myModal" class="btn btn-labeled btn-group-sm btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar</a>   
+                         </td>
+                        </tr>
+                        {%endif%}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        </div>
+             </div>
+        </div>
+    
+        <div class="panel panel-default">     
+         <div class="panel-heading">
+             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse101" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>Roles de Investigación</a></h1>   
+         </div>
+             <div id="collapse101" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body no-padding">
+                       <table class="table table-bordered hidden-mobile">
+                        <thead>
+                        <tr><th>Rol</th>
+                         <th></th></tr>
+                        </thead>
+                        <tbody>
+                        {% for rol in roles %}
+                        {% if rol.categoria =='INVESTIGACIÓN'%}
+                        <tr>
+                         <td>{{rol.nombre}}     
+                         </td>
+                        <td>
+                         <a data-toggle="modal" href="{{ path('rolplang_new', { 'id': id , 'idr' : rol.id }) }}" data-target="#myModal" class="btn btn-labeled btn-group-sm btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar</a>   
+                         </td>
+                        </tr>
+                        {%endif%}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        </div>
+             </div>
+        </div>
+
+        <div class="panel panel-default">     
+         <div class="panel-heading">
+             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse103" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>Otras Roles y Actividades</a></h1>   
+         </div>
+             <div id="collapse103" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body no-padding">
+                       <table class="table table-bordered hidden-mobile">
+                        <thead>
+                        <tr><th>Rol</th>
+                         <th></th></tr>
+                        </thead>
+                        <tbody>
+                        {% for rol in roles %}
+                        {% if rol.categoria =='Otros'%}
+                        <tr>
+                         <td>{{rol.nombre}}     
+                         </td>
+                        <td>
+                         <a data-toggle="modal" href="{{ path('rolplang_new', { 'id': id , 'idr' : rol.id }) }}" data-target="#myModal" class="btn btn-labeled btn-group-sm btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar</a>   
+                         </td>
+                        </tr>
+                        {%endif%}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        </div>
+             </div>
+        </div>
+    
+</div>
+
 </div>
   
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -144,7 +144,7 @@ class PlangestionController extends Controller
     {
         $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getManager();
-
+        $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo') ));
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));        
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->findOneBy(array('docente' => $docente));
         $actividades = $em->getRepository('AdminMedBundle:Actividadplang')->findBy(array('plang' => $entity),array('actividad' => 'ASC'));
@@ -159,7 +159,8 @@ class PlangestionController extends Controller
         
         return array(
             'entity'      => $entity,
-            'actividades' => $actividades
+            'actividades' => $actividades,
+            'periodo'     => $periodo
         );
     }
     
@@ -172,6 +173,7 @@ class PlangestionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
         $entity = $docente->getPlangestion();
+        $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo') ));
         if (!$entity) {
             throw $this->createNotFoundException('No se encuentra el plan.');
         }
@@ -182,7 +184,9 @@ class PlangestionController extends Controller
             
         }
         return array(
-            'entity'      => $entity,
+            'docente'  => $docente,
+            'entity'  => $entity,
+            'periodo' => $periodo
         );
     }
     
