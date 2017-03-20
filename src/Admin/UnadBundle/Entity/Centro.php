@@ -43,6 +43,16 @@ protected $director;
 
 
       /** 
+     * @var Departamento 
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Departamento")
+     * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id",
+     * nullable=true
+     * )
+     */
+protected $departamento;
+
+
+      /** 
      * @var Zona 
      * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Zona", inversedBy="centros")
      * @ORM\JoinColumn(name="zona_id", referencedColumnName="id",
@@ -198,5 +208,28 @@ protected $zona;
     public function getDocentes()
     {
         return $this->docentes;
+    }
+
+    /**
+     * Set departamento
+     *
+     * @param \Admin\UnadBundle\Entity\Departamento $departamento
+     * @return Centro
+     */
+    public function setDepartamento(\Admin\UnadBundle\Entity\Departamento $departamento = null)
+    {
+        $this->departamento = $departamento;
+
+        return $this;
+    }
+
+    /**
+     * Get departamento
+     *
+     * @return \Admin\UnadBundle\Entity\Departamento 
+     */
+    public function getDepartamento()
+    {
+        return $this->departamento;
     }
 }

@@ -37,6 +37,14 @@ protected $nombre;
      */
 protected $director;
 
+
+/**
+ * @var Nodo
+ * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Centro")
+ * @ORM\JoinColumn(name="nodo_id",referencedColumnName="id") 
+     */
+ protected $nodo;
+
     /**
      * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Centro", mappedBy="zona")
      */
@@ -136,5 +144,28 @@ protected $director;
     public function getCentros()
     {
         return $this->centros;
+    }
+
+    /**
+     * Set nodo
+     *
+     * @param \Admin\UnadBundle\Entity\Centro $nodo
+     * @return Zona
+     */
+    public function setNodo(\Admin\UnadBundle\Entity\Centro $nodo = null)
+    {
+        $this->nodo = $nodo;
+
+        return $this;
+    }
+
+    /**
+     * Get nodo
+     *
+     * @return \Admin\UnadBundle\Entity\Centro 
+     */
+    public function getNodo()
+    {
+        return $this->nodo;
     }
 }

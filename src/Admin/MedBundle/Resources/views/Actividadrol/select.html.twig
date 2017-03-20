@@ -5,52 +5,6 @@
 
  <div class="widget-body" style="margin-right: 80px;">
 
-<div class="panel-group smart-accordion-default" id="accordion">
-            {% for rol in roles %}       
-    <div class="panel panel-default">     
-         <div class="panel-heading">
-             <h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{rol.id}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{rol.nombre}}</a></h1>   
-         </div>
-             <div id="collapse{{rol.id}}" class="panel-collapse collapse" style="height: 0px;">
-                        <div class="panel-body no-padding">
-                       <table class="table table-bordered hidden-mobile">
-                        <thead>
-                        <tr>
-                            <th></th>
-                         <th>{{rol.descripcion}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {% set num = 0 %}
-                         {% for actividad in rol.actividades %}
-                 
-                        <tr>
-                         {% set num = num+1 %}
-                         <td>{{num}}</td>
-                         <td>    
-                         {{ actividad.descripcion }}
-                         </td>
-
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td>
-                           
-                           <a data-toggle="modal" href="{{ path('rolplang_new', { 'id': id , 'idr' : rol.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar este rol</a>   
-                            </td>
-                        </tr>
-                        
-                        </tbody>
-                        </table>
-                        </div>
-             </div>    
-        </div>
-    {%endfor%}
-</div>
-     
-xxxx
-
 <div class="panel-group smart-accordion-default" id="accordion">    
     <div class="panel panel-default">     
          <div class="panel-heading">
@@ -138,9 +92,51 @@ xxxx
                         </div>
              </div>
         </div>
-    
+</div>
+<br>
+ACTIVIDADES POR ROL (Predeterminadas)
+<br>
+<div class="panel-group smart-accordion-default" id="accordion">
+            {% for rol in roles %}       
+    <div class="panel panel-default">     
+         <div class="panel-heading">
+             <h3 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{rol.id}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{rol.nombre}}</a></h3>   
+         </div>
+             <div id="collapse{{rol.id}}" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body no-padding">
+                       <table class="table table-bordered hidden-mobile">
+                        <thead>
+                        <tr>
+                            <th></th>
+                         <th>{{rol.descripcion}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% set num = 0 %}
+                         {% for actividad in rol.actividades %}
+                 
+                        <tr>
+                         {% set num = num+1 %}
+                         <td>{{num}}</td>
+                         <td>    
+                         {{ actividad.descripcion }}
+                         </td>
+
+                        </tr>
+                        {% endfor %}                    
+                        </tbody>
+                        </table>
+                        </div>
+             </div>    
+        </div>
+    {%endfor%}
 </div>
 
+ <br>
+ <br>
+ <br>
+ .
+     
 </div>
   
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

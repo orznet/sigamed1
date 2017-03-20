@@ -18,13 +18,18 @@ class CentroType extends AbstractType
             ->add('nombre')
             ->add('tipo', 'choice', array(
             'empty_value' => ' ',    
-            'choices'   => array('Nodo' => 'Nodo', 'CEAD' => 'CEAD','CERES' => 'CERES', 'CCAV' => 'CCAV','UDR' => 'UDR'),
+            'choices'   => array('CEAD' => 'CEAD', 'CCAV' => 'CCAV','UDR' => 'UDR'),
             'required'  => true,
             ))
             ->add('zona', 'entity', array(
                  'class' =>  'AdminUnadBundle:Zona',
                 'property' => 'nombre',
-                 ))    
+                 ))
+            ->add('departamento', 'entity', array(
+                 'class' =>  'AdminUnadBundle:Departamento',
+                 'empty_value' => ' ',
+                 'property' => 'nombre',
+                 ))        
         ;
     }
     
