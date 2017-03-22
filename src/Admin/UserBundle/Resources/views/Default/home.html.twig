@@ -43,7 +43,7 @@
 			<!--<span id="logo"></span>-->
 
 			<div id="logo-group">
-				<span id="logo"> <img src="img/unad_2013.png" alt="SmartAdmin"> </span>
+                            <span id="logo"> <img src="img/logoUNAD.png" style="width:315px;height:67px" alt="Unad"> </span>
 
 				<!-- END AJAX-DROPDOWN -->
 			</div>
@@ -54,17 +54,19 @@
 
             <!-- MAIN CONTENT -->
                     <div id="content" class="container">
-                   <h1 class="txt-color-orangeDark login-header-big">Módulo para la Evaluación del Desempeño Docente del periodo: 2016-2</h1>
-              Desarrollado en coherencia con las directrices emitidas por el Consejo Superior Universitario en el Acuerdo 003 del 28 de enero de 2011 y modificado por el Acuerdo 013 del 05 de mayo de 2011.
-                    <h4 class="paragraph-header">
-                
-                     <table class="table table-bordered hidden-mobile">
-
+                   <h1 class="txt-color-orangeDark login-header-big">Vicerrectoría Académica y de Investigación - Módulo para la Evaluación del Desempeño Docente</h1>
+                   <h4 class="paragraph-header"> Desarrollado en coherencia con las directrices emitidas por el Consejo Superior Universitario en el Acuerdo 003 del 28 de enero de 2011 y modificado por el Acuerdo 013 del 05 de mayo de 2011.</h4>
+                    
+                   <h1 class="txt-color-orangeDark login-header-big">Periodo de evaluación en curso: {{periodo.id}}</h1>
+                    <h4 class="paragraph-header">Ultimas circulares emitidas</h4> 
+                                         <table class="table table-bordered hidden-mobile">
+        <thead>
                        <tr>
                            <th>Circular informativa</th>
                            <th>Fecha</th>
                            <th>Ver...</th>
                        </tr>
+        </thead>
                         <tr>
                            <td>400.018</td>
                            <td>12 de septiembre de 2016</td>
@@ -76,15 +78,38 @@
                            <td><a href="http://med.unad.edu.co/archivo/circular20162-2.pdf" target="new">Ver... <i class="fa fa-download"></i></a></td>
                        </tr>
                    </table>
+                   
+                   <h4 class="paragraph-header"> La evaluación de este periodo de evaluación se realiza en base al desempeño de los periodos académicos:</h4>
+                    <table class="table table-bordered hidden-mobile">
+        <thead>
+                <tr>
+                <th>Periodo Académico</th>
+                <th>Semanas</th>
+                <th>Inicio eventos académicos</th>
+                <th>Fin eventos académicos</th>
+                 </tr>
+               </thead> 
+               <tbody>
 
+            {%for periodoa in periodo.periodoa%}
+                <tr>
+                <td>{{periodoa.nombre}}</td>
+                <td>{{ periodoa.semanas }}</td>
+                <td>{{ periodoa.fechainicio|localizeddate('full', 'none', app.request.locale ) }}</td>
+                <td>{{ periodoa.fechafin|localizeddate('full', 'none', app.request.locale )}}</td>
+            {%endfor%}
+        </tbody>
+              </table>
                     </h4>
                     <br>
                     <table class="table table-bordered hidden-mobile">
-                       <tr>
+                               <thead>
+                        <tr>
                        <td colspan="3" align="center">
                        <h1 class="txt-color-orangeDark login-header-big">AUTENTICACIÓN E INGRESO</h1>
                        </td>
                        </tr>
+                               </thead>
                        <tr>
                       <td colspan="3">
                         <h4>
@@ -145,14 +170,14 @@
                            </td>    
                        </tr>
                    </table>
- <!---   autenticacion:  {{autenticacion}}<br>
+   autenticacion:  {{autenticacion}}<br>
     cedula_usuario : {{cedula_usuario}}<br>
     nombres_usuario: {{nombres_usuario}}<br>
     direccion_respuesta: {{direccion_respuesta}}<br>
     url1: {{url1}}<br>
     url2: {{url2}}<br>
     url3: {{url3}}<br>
-    if: {{if}} -->
+    if: {{if}} 
     
 			</div>
 

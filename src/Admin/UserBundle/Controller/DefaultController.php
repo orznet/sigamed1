@@ -86,6 +86,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
         //$request = $this->getRequest();
+        $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo')));
         $session = $request->getSession();
         $cedula_usuario = $request->request->get('cedula_usuario');
         $nombres_usuario = $request->request->get('nombres_usuario');
@@ -106,7 +107,7 @@ class DefaultController extends Controller
         //
         //-----------------------------------------------------------------------------------------
         
-       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($direccion_respuesta == $urlOrigenValido1 || $direccion_respuesta == $urlOrigenValido2 || $urlPeticion == $urlOrigenValido3)){
+       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($direccion_respuesta == $urlOrigenValido1 || $direccion_respuesta == $urlOrigenValido2 || $direccion_respuesta == $urlOrigenValido3)){
        
       
       
@@ -119,6 +120,7 @@ class DefaultController extends Controller
         'direccion_respuesta'   => $direccion_respuesta,
         'email_usuario'  => $email_usuario,
         'instrumentos' => $instrumentos,
+        'periodo'   => $periodo,   
          'url1'    => $urlOrigenValido1,
          'url2'  => $urlOrigenValido2,
 	     'url3'  => $urlOrigenValido3,
@@ -137,9 +139,10 @@ class DefaultController extends Controller
         'direccion_respuesta'   => $direccion_respuesta,
         'url1'    => $urlOrigenValido1,
         'url2'  => $urlOrigenValido2,
-		'url3'  => $urlOrigenValido3,
+	'url3'  => $urlOrigenValido3,
         'email_usuario'  => $autenticacion,
         'instrumentos' => $instrumentos,
+        'periodo'   => $periodo,    
         'if'   => 'falso'    
         ));
         }
