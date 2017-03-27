@@ -16,7 +16,13 @@ class DefaultController extends Controller
        $em = $this->getDoctrine()->getManager();
        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
        $periodos = $em->getRepository('AdminMedBundle:Periodoe')->findAll();
-        
+       $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo') ));
+
+       $diff = date_diff($periodo->getFechainicio(),$periodo->getFechafin());
+       $diff2 = date_diff($periodo->getFechainicio(),new \DateTime('now'));
+       $dias = $diff->format("%a");
+       $hoy = $diff2->format("%a");
+       
        # $dql = "select a from AdminMedBundle:Periodoe a";
        # $query = $em->createQuery($dql);
        # $query->orderBy('Id', 'DESC');
@@ -76,8 +82,10 @@ class DefaultController extends Controller
         return $this->render('AdminUserBundle:Default:index.html.twig',array(
             'escuela'      => $escuela,
             'user'  => $user,
-            'periodo' => $this->container->getParameter('appmed.periodo'),
+            'periodo' => $periodo,
             'periodos'  => $periodos,
+            'dias' => $dias,
+            'hoy' => $hoy
             ));
     }
     
@@ -89,6 +97,7 @@ class DefaultController extends Controller
         $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo')));
         $session = $request->getSession();
         $cedula_usuario = $request->request->get('cedula_usuario');
+        $user = $em->getRepository('AdminUserBundle:User')->findOneBy(array('id' => $cedula_usuario));
         $nombres_usuario = $request->request->get('nombres_usuario');
         $apellidos_usuario = $request->request->get('apellidos_usuario');
         $email_usuario = $request->request->get('email_usuario');
@@ -107,45 +116,27 @@ class DefaultController extends Controller
         //
         //-----------------------------------------------------------------------------------------
         
-       if($cedula_usuario!="" && $autenticacion=="Aceptada" && ($direccion_respuesta == $urlOrigenValido1 || $direccion_respuesta == $urlOrigenValido2 || $direccion_respuesta == $urlOrigenValido3)){
-       
-      
-      
-        return $this->render('AdminUserBundle:Default:home.html.twig', array(
-            // el último nombre de usuario ingresado por el usuario
-        'cedula_usuario' => $cedula_usuario,
-        'nombres_usuario' => $nombres_usuario,
-        'apellidos_usuario' => $apellidos_usuario,
-        'autenticacion' => $autenticacion,
-        'direccion_respuesta'   => $direccion_respuesta,
-        'email_usuario'  => $email_usuario,
-        'instrumentos' => $instrumentos,
-        'periodo'   => $periodo,   
-         'url1'    => $urlOrigenValido1,
-         'url2'  => $urlOrigenValido2,
-	     'url3'  => $urlOrigenValido3,
-            'if'   => 'Verdadero'
-        ));
-
+       if($autenticacion=="Aceptada" && count($user) == 1 && $instrumentos[9]->getEstado()){
+       $this->ingresoAction($cedula_usuario);
        }
-        else{
+       
+       else{
        # $this->ingresoAction($cedula_usuario);    
         return $this->render('AdminUserBundle:Default:home.html.twig', array(
-            // el último nombre de usuario ingresado por el usuario
+         // el último nombre de usuario ingresado por el usuario
         'cedula_usuario' => $cedula_usuario,
         'nombres_usuario' => $nombres_usuario,
         'apellidos_usuario' => $apellidos_usuario,
         'autenticacion' => $autenticacion,
         'direccion_respuesta'   => $direccion_respuesta,
-        'url1'    => $urlOrigenValido1,
-        'url2'  => $urlOrigenValido2,
-	'url3'  => $urlOrigenValido3,
         'email_usuario'  => $autenticacion,
         'instrumentos' => $instrumentos,
-        'periodo'   => $periodo,    
-        'if'   => 'falso'    
+        'periodo'   => $periodo,
+        'user'    => $user,
+        'if'   => 'falso'
         ));
         }
+        
     }
     
     public function sendAction(){    

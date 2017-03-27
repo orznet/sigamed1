@@ -25,6 +25,11 @@ class Avalplang{
   */
 protected $perfil;
 
+  /**
+  * @ORM\Column(type="smallint")
+  */
+protected $periodo;
+
  /**
   * @ORM\Column(type="text", length=1024, nullable=true)
   * 
@@ -176,7 +181,7 @@ protected $user;
         return 'No Aprobado';  
         }
         else{ 
-        return 'Sin Revisar';    
+        return '';    
         }
     }
 
@@ -226,4 +231,27 @@ protected $user;
         return $this->user;
     }
         
+
+    /**
+     * Set periodo
+     *
+     * @param integer $periodo
+     * @return Avalplang
+     */
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return integer 
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
 }

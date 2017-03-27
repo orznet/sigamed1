@@ -47,10 +47,12 @@ class ActividadrolController extends Controller
 
         $entities = $em->getRepository('AdminMedBundle:Actividadrol')->decarrera();
         $roles = $em->getRepository('AdminMedBundle:Rolacademico')->findAll();
+        $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo') ));
         return array(
             'entities' => $entities,
             'id'  => $id,
-            'roles' => $roles 
+            'roles' => $roles,
+            'periodo' => $periodo
         );
     }
     

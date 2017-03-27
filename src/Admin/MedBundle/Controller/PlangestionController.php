@@ -153,9 +153,7 @@ class PlangestionController extends Controller
             throw $this->createNotFoundException('Plan gestion no encontrado');
         }
         
-        if (count($entity->getAvales())==0){
-        $this->addAvales();            
-        }
+
         
         return array(
             'entity'      => $entity,
@@ -391,6 +389,7 @@ class PlangestionController extends Controller
        $aval->setPlan($docente->getPlangestion());
        $aval->setUser($docente->getEscuela()->getDecano());
        $aval->setPerfil('DECN');
+       $aval->setPeriodo($this->container->getParameter('appmed.periodo'));
        $em->persist($aval);  
         //agregar avalador Director de Zona
        if ($docente->getCentro()->getId() != 89999){
@@ -398,6 +397,7 @@ class PlangestionController extends Controller
        $aval1->setPlan($docente->getPlangestion());
        $aval1->setUser($docente->getCentro()->getZona()->getDirector());
        $aval1->setPerfil('DIRZ');
+       $aval1->setPeriodo($this->container->getParameter('appmed.periodo'));
        $em->persist($aval1);           
         }
         $em->flush();

@@ -246,25 +246,6 @@ class ZonaController extends Controller
     }
     
     
-     /**
-     * @Route("/docs/pc", name="zona_docs")
-     * @Method("GET")
-     * @Template("Zona/docs.html.twig")
-     */
-    public function docsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.context')->getToken()->getUser();
-        $zonas = $user->getDirectorzona();
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros[0]));
-
-        return array(
-            'docentes'      => $docentes,
-            'centro'    => $centros[0],
-            'user'   => $user,
-        );
-    }
-    
     
         /**
      * @Route("/docs/index", name="zona_index")
@@ -277,11 +258,12 @@ class ZonaController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $zona = $user->getDirectorzona();
         $centros = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('zona' => $zona[0]));
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros, 'periodo' => $this->container->getParameter('appmed.periodo')));
         
         return array(
             'docentes'      => $docentes,
             'zona'        => $zona[0],
+            'periodo'     => $this->container->getParameter('appmed.periodo'),
         );
     }
 }

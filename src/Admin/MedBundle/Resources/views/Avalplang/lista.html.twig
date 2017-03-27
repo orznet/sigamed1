@@ -10,8 +10,9 @@
                 <th>Nombre</th>
                 <th>Escuela</th>
                 <th>Avalador</th>
-                <th>Estado Aval</th>
                 <th>Roles</th>
+                <th>Estado Aval</th>
+
             </tr>
         </thead>
         <tbody>
@@ -27,7 +28,6 @@
                                 <td>
 {{entity.perfil}}
                 </td>
-                <td>{{ entity.estado }}</td>
                 <td>
               {%if entity.plan.estado != 'Sin Cerrar' %}
                     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.docente.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
@@ -35,7 +35,7 @@
                     Sin Registro
                     {%endif%}
                 </td>
-
+                <td>{{ entity.estado }}</td>
             </tr>
         {% endfor %}
         </tbody>

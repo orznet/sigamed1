@@ -31,7 +31,7 @@ class DocenteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findAll();
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('periodo' => $this->container->getParameter('appmed.periodo')));
 
         return array(
             'entities' => $entities,

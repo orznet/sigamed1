@@ -15,8 +15,8 @@ class RolplangType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('horas')
-            ->add('descripcion', 'textarea', array('attr' => array('cols' => '60')))    
+            ->add('horas', 'text', array('attr' => array('onkeyup' => 'calculo()')))
+            ->add('descripcion', 'textarea', array('attr' => array('cols' => '100')))    
             ->add('rol', 'entity', array(
           'class' =>  'AdminMedBundle:Rolacademico',
           'property' => 'id',

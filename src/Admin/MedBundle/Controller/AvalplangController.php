@@ -13,7 +13,7 @@ use Admin\MedBundle\Form\AvalplangType;
 /**
  * Avalplang controller.
  *
- * @Route("/avales")
+ * @Route("/aval")
  */
 class AvalplangController extends Controller
 {
@@ -30,9 +30,7 @@ class AvalplangController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $user = $this->get('security.context')->getToken()->getUser();
-
-        $entities = $em->getRepository('AdminMedBundle:Avalplang')->findby(array('user' => $user));
-
+        $entities = $em->getRepository('AdminMedBundle:Avalplang')->findby(array('user' => $user, 'periodo' => $this->container->getParameter('appmed.periodo')));
         return array(
             'entities' => $entities,
         );
@@ -50,7 +48,13 @@ class AvalplangController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $entities = $em->getRepository('AdminMedBundle:Avalplang')->findAll();
+        $entities = $em->getRepository('AdminMedBundle:Avalplang')
+                          ->findBy(
+                            array('periodo'=> $this->container->getParameter('appmed.periodo'))
+                            );
+       if (count($entities)==0){
+       $this->addAvales();            
+       }
 
         return array(
             'entities' => $entities,
@@ -304,6 +308,32 @@ class AvalplangController extends Controller
             )
             ;
             $this->get('mailer')->send($message);
+    }
+    
+      public function  addAvales(){
+      $em = $this->getDoctrine()->getManager();
+      $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('periodo' => $this->container->getParameter('appmed.periodo'), 'vinculacion' => 'DC')); 
+       
+      foreach ($docentes as $docente){
+        //agregar avalador Decano N
+       $aval = new Avalplang();
+       $aval->setPlan($docente->getPlangestion());
+       $aval->setUser($docente->getEscuela()->getDecano());
+       $aval->setPerfil('DECN');
+       $aval->setPeriodo($this->container->getParameter('appmed.periodo'));
+       $em->persist($aval);  
+        //agregar avalador Director de Zona
+       if ($docente->getCentro()->getId() != 89999){
+       $aval1 = new Avalplang();
+       $aval1->setPlan($docente->getPlangestion());
+       $aval1->setUser($docente->getCentro()->getZona()->getDirector());
+       $aval1->setPerfil('DIRZ');
+       $aval1->setPeriodo($this->container->getParameter('appmed.periodo'));
+       $em->persist($aval1);           
+       }
+       $em->flush();
+       }
+        
     }
 
     

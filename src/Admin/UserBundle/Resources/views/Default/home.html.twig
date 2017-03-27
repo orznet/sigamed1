@@ -126,7 +126,7 @@
 
                            <td>
      
-                       <a href="https://intranet.unad.edu.co/" class="btn btn-primary btn-xs">Ir a Intranet <i class="fa fa-sign-in"></i></a>
+                       <a href="https://intranet.unad.edu.co" class="btn btn-primary btn-xs">Ir a Intranet <i class="fa fa-sign-in"></i></a>
 
                        </td>
 
@@ -164,21 +164,36 @@
                         {% endfor %}     
                            </td>
                            </tr>
+                               {%if autenticacion == 'Aceptada' and user|length == 0%}
+                                                <div class="alert alert-warning fade in">
+                     <button class="close" data-dismiss="alert">
+                      ×
+                                    </button>
+                                    <i class="fa-fw fa fa-warning"></i>
+                                    <strong>Advertencia!</strong>   Usted no se encuenta como usuario de este Aplicativo, si considera que extiste alguna inconsistencia por favor escriba a omar.rodriguez@unad.edu.co
+                                                </div>
+                     {%endif%}
+                           
+                      
+                           
+                    {%if instrumentos[9].estado == 0 %}
+                    <div class="alert alert-warning fade in">
+                    <button class="close" data-dismiss="alert">
+                     ×
+                    </button>
+                    <i class="fa-fw fa fa-warning"></i>
+                    <strong>Advertencia!</strong> Disculpe los inconvenientes el aplicativo se encuentra en mantenimiento.
+                    </div>
+                    {%endif%}    
+                           
+                           
+                           
                        <tr>
                            <td colspan="2" align="center">
                                <h5>Navegadores soportados en esta versión: Google Chrome y Firefox </h5>
                            </td>    
                        </tr>
                    </table>
-   autenticacion:  {{autenticacion}}<br>
-    cedula_usuario : {{cedula_usuario}}<br>
-    nombres_usuario: {{nombres_usuario}}<br>
-    direccion_respuesta: {{direccion_respuesta}}<br>
-    url1: {{url1}}<br>
-    url2: {{url2}}<br>
-    url3: {{url3}}<br>
-    if: {{if}} 
-    
 			</div>
 
 		</div>

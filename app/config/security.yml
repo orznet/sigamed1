@@ -48,4 +48,5 @@ security:
       - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/user, roles: [ROLE_ADMIN, ROLE_USER, ROLE_DEC] }
       - { path: ^/doc, roles: [ROLE_DOC, ROLE_ADMIN] }
+      - { path: ^/aval, roles: [ROLE_DEC, ROLE_DIRZ] }
        

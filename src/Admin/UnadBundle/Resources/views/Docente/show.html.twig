@@ -21,46 +21,7 @@
           <th>Acción</th>
           <th>Estado</th>
       </tr>
-{%if entity.vinculacion == 'De Carrera'%}  
-        <tr>
-        <th>
-        Plan de Gestión Docente
-        </th>
-        <td>Formato Plan de Gestión en formato Excel  <a href="http://siga.unad.edu.co/docs/formato_plan_gestion_docente.xlsx" target="new">(Descargar) <i class="fa fa-download"></i></a></td>
-        <td>
-        {%if entity.plangestion.formato%}
-            <a href="../../../{{entity.plangestion.formato.webpath}}"><i class="fa fa-file-o"></i> Ver Archivo...</a>
-            {%else%}
-            <a href="{{ path('formatoplang_new', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a>
-            {%endif%}
-        </td>
-        <td>
-        {%if entity.plangestion.formato%}
-       <i class="fa fa-check" style="color: #739e73"></i>
-       {%else%}
-       <i class="fa fa-times" style="color: #a90329"></i>
-       {%endif%}    
-        </td>
-    </tr>
-    <tr>
-    <th></th>
-    <td>Plan de Gestión Aprobado en PDF. (Este es cargado por el Decano Nacional)</td>
-    <td>
-    {%if entity.plangestion.pdf%}
-    <a href="javascript:popUp('../../../{{entity.plangestion.pdf.webpath}}')"><i class="fa fa-file-o"></i> Ver Archivo...</a>
-    {%else%}
-    No cargado
-    {%endif%}     
-    </td>
-    <td>
-      {%if entity.plangestion.pdf%}
-       <i class="fa fa-check" style="color: #739e73"></i>
-       {%else%}
-       <i class="fa fa-times" style="color: #a90329"></i>
-       {%endif%}  
-    </td>
-    </tr>
-    
+{%if entity.vinculacion == 'De Carrera'%}      
       <tr>      
     <th>Registro Roles
 
@@ -82,6 +43,24 @@
        {%endif%}    
         </td>
       </tr>
+          <tr>
+    <th>Plan de Gestión Docente</th>
+    <td>Plan de Gestión Aprobado en PDF. (Este es cargado por el Decano Nacional)</td>
+    <td>
+    {%if entity.plangestion.pdf%}
+    <a href="javascript:popUp('../../../{{entity.plangestion.pdf.webpath}}')"><i class="fa fa-file-o"></i> Ver Archivo...</a>
+    {%else%}
+    No cargado
+    {%endif%}     
+    </td>
+    <td>
+      {%if entity.plangestion.pdf%}
+       <i class="fa fa-check" style="color: #739e73"></i>
+       {%else%}
+       <i class="fa fa-times" style="color: #a90329"></i>
+       {%endif%}  
+    </td>
+    </tr>
       <tr>
     <th>Autoevaluación
     </th>

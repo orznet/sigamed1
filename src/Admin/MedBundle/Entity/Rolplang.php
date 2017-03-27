@@ -21,6 +21,10 @@ class Rolplang{
 
 /**
  * @ORM\Column(type="decimal", scale=1, nullable=true)
+ * @Assert\Range(
+ *      min = "0",
+ *      max = "40"
+ * )
  */
 protected $horas;
 

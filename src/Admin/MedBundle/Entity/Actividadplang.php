@@ -21,7 +21,7 @@ class Actividadplang{
  */
  protected $id;
 
-/**
+ /**
  * @ORM\Column(type="decimal", scale=1, nullable=true)
  */
 protected $horas;

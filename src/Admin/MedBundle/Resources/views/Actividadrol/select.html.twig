@@ -94,7 +94,7 @@
         </div>
 </div>
 <br>
-ACTIVIDADES POR ROL (Predeterminadas)
+Consulta listado de Actividades por Rol (Predeterminadas)
 <br>
 <div class="panel-group smart-accordion-default" id="accordion">
             {% for rol in roles %}       
@@ -143,5 +143,12 @@ ACTIVIDADES POR ROL (Predeterminadas)
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 </div></div></div>
- 
-    {% endblock %}
+   
+        
+        <script>
+function calculo() {
+  var input = document.getElementById('admin_medbundle_rolplang_horas');  
+  $('#porperiodo').text(input.value+' horas corresponden a '+input.value*({{periodo.dias/5}})+' horas para este periodo de {{periodo.dias*8}} horas.');
+    }
+    </script>
+{% endblock %}

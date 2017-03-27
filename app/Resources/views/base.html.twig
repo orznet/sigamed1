@@ -226,7 +226,7 @@
                         
                                         
                                         
-                                    {% if is_granted('ROLE_DIRZ') or is_granted('ROLE_DIRC')  %} 
+                                    {% if is_granted('ROLE_DIRC')  %} 
                                     <ul style="display: block;">
                                         <li>
 				     <a href="{{ path('centro_index') }}"><i class="fa fa-book"></i> Docentes por Centro</a>
@@ -237,12 +237,9 @@
                                     <ul style="display: block;">
                                         <li>
 				     <a href="{{ path('zona_index') }}"><i class="fa fa-book"></i> Docentes por Zona</a>
-			             </li>  
-                                     <li>
-				     <a href="{{ path('docente_dczona') }}"><i class="fa fa-book"></i> Planes de Gestión</a>
 			             </li>
                                     <li>
-                                    <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Avalar Roles</a>
+                                    <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Avalar Plan Gestión</a>
                                     </li>
                                      {%endif%}  
                                     </ul>        
