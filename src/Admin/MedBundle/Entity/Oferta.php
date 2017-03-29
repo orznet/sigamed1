@@ -34,7 +34,7 @@ protected $director;
 
 
 /**
- * @ORM\Column(type="string", nullable=false)
+ * @ORM\Column(type="integer", nullable=false)
  */
 protected $periodo;
 
@@ -62,7 +62,7 @@ protected $tutores;
     /**
      * Set periodo
      *
-     * @param string $periodo
+     * @param integer $periodo
      * @return Oferta
      */
     public function setPeriodo($periodo)

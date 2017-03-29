@@ -24,7 +24,7 @@ class ProgramaController extends Controller
      *
      * @Route("/", name="programa")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/index.html.twig")
      */
     public function indexAction()
     {
@@ -95,7 +95,7 @@ class ProgramaController extends Controller
      *
      * @Route("/new", name="programa_new")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/new.html.twig")
      */
     public function newAction()
     {
@@ -113,7 +113,7 @@ class ProgramaController extends Controller
      *
      * @Route("/{id}", name="programa_show")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/show.html.twig")
      */
     public function showAction($id)
     {
@@ -137,7 +137,7 @@ class ProgramaController extends Controller
      * Finds and displays a Programa entity.
      * @Route("/{id}/modal", name="programa_modal")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/modal.html.twig")
      */
     public function modalAction($id)
     {
@@ -158,7 +158,7 @@ class ProgramaController extends Controller
      *
      * @Route("/{id}/edit", name="programa_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/edit.html.twig")
      */
     public function editAction($id)
     {
@@ -203,7 +203,7 @@ class ProgramaController extends Controller
      *
      * @Route("/{id}", name="programa_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Programa:edit.html.twig")
+     * @Template("Programa/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -285,7 +285,7 @@ class ProgramaController extends Controller
      * Seleccionar docente
      * @Route("/add/lider", name="programa_addlider")
      * @Method("GET")
-     * @Template()
+     * @Template("Programa/addlider.html.twig")
      */
     public function addliderAction()
     {
@@ -293,7 +293,7 @@ class ProgramaController extends Controller
        $session = new Session();
        $session->migrate();
        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
-       $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela));
+       $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'periodo' => $this->container->getParameter('appmed.periodo')));
         return array(
         'entities' => $entities,
         );

@@ -78,10 +78,10 @@
 				</div>
 				<!-- END AJAX-DROPDOWN -->
 			</div>
-
+ 
 			<!-- pulled right: nav area -->
 			<div class="pull-right">
-
+                            
 				<!-- collapse menu button -->
 				<div id="hide-menu" class="btn-header pull-right">
 					<span> <a href="javascript:void(0);" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
@@ -160,7 +160,7 @@
                                                     </li>    
                                                 </ul>
                                                 
-                                                        {% endif %}     
+                                                {% endif %}     
 
                                                                
                                     {% if is_granted('ROLE_DOC') %}  
@@ -174,9 +174,7 @@
                                               </ul>
                                       </li>     
                                            {%endif%}
-                                        
-                                        
-                                        
+
                                         
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ADMON')%}
             <li>

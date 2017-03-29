@@ -28,7 +28,7 @@ class CursoController extends Controller
      *
      * @Route("/", name="curso")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/index.html.twig")
      */
     public function indexAction()
     {
@@ -44,7 +44,7 @@ class CursoController extends Controller
      *
      * @Route("/pe/{sigla}", name="curso_escuela")
      * @Method("GET")
-     * @Template("AdminUnadBundle:Curso:index.html.twig")
+     * @Template("Curso/index.html.twig")
      * 
      */
     public function porescuelaAction($sigla)
@@ -63,7 +63,7 @@ class CursoController extends Controller
      *
      * @Route("/", name="curso_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Curso:new.html.twig")
+     * @Template("Curso/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -108,7 +108,7 @@ class CursoController extends Controller
      *
      * @Route("/new", name="curso_new")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/new.html.twig")
      */
     public function newAction()
     {
@@ -125,7 +125,7 @@ class CursoController extends Controller
      * Finds and displays a Curso entity
      * @Route("/{id}", name="curso_show")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/show.html.twig")
      */
     public function showAction($id)
     {
@@ -152,7 +152,7 @@ class CursoController extends Controller
      * Docentes de un curso por oferta
      * @Route("/{id}/oferta", name="oferta")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/oferta.html.twig")
      */
     
     public function ofertaAction($id)
@@ -286,7 +286,7 @@ class CursoController extends Controller
      /** en modal
      * @Route("/{id}/modal", name="curso_modal")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/modal.html.twig")
      */
     public function modalAction($id)
     {
@@ -312,7 +312,7 @@ class CursoController extends Controller
      *
      * @Route("/{id}/edit", name="curso_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/edit.html.twig")
      */
     public function editAction($id)
     {
@@ -339,7 +339,7 @@ class CursoController extends Controller
      * Displays a form to edit an existing Curso entity.
      * @Route("/{id}/ofertaedit", name="oferta_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Curso/ofertaedit.html.twig")
      */
     public function ofertaeditAction($id)
     {
@@ -401,7 +401,7 @@ class CursoController extends Controller
      * Edits an existing Curso entity.
      * @Route("/{id}/ofertaupdate", name="oferta_update")
      * @Method("GET")
-     * @Template("AdminUnadBundle:Curso:ofertaedit.html.twig")
+     * @Template("Curso/ofertaedit.html.twig")
      */
     public function ofertaupdateAction(Request $request, $id)
     {
@@ -432,7 +432,7 @@ class CursoController extends Controller
      *
      * @Route("/{id}", name="curso_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Curso:edit.html.twig")
+     * @Template("Curso/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

@@ -24,7 +24,7 @@ class EscuelaController extends Controller
      *
      * @Route("/", name="escuela")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/index.html.twig")
      */
     public function indexAction()
     {
@@ -41,7 +41,7 @@ class EscuelaController extends Controller
      *
      * @Route("/", name="escuela_create")
      * @Method("POST")
-     * @Template("AdminUnadBundle:Escuela:new.html.twig")
+     * @Template("Escuela/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -93,7 +93,7 @@ class EscuelaController extends Controller
      *
      * @Route("/new", name="escuela_new")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/new.html.twig")
      */
     public function newAction()
     {
@@ -111,7 +111,7 @@ class EscuelaController extends Controller
      *
      * @Route("/{id}", name="escuela_show")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/show.html.twig")
      */
     public function showAction($id)
     {
@@ -136,7 +136,7 @@ class EscuelaController extends Controller
      *
      * @Route("/mi/info", name="escuela_info")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/info.html.twig")
      */
     public function infoAction()
     {
@@ -161,7 +161,7 @@ class EscuelaController extends Controller
      *
      * @Route("/{id}/edit", name="escuela_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/edit.html.twig")
      */
     public function editAction($id)
     {
@@ -208,7 +208,7 @@ class EscuelaController extends Controller
      *
      * @Route("/{id}", name="escuela_update")
      * @Method("PUT")
-     * @Template("AdminUnadBundle:Escuela:edit.html.twig")
+     * @Template("Escuela/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -288,7 +288,7 @@ class EscuelaController extends Controller
      * Finds and displays a Escuela entity.
      *
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/coevallider.html.twig")
      */
     public function coevalliderAction()
     {
@@ -310,7 +310,7 @@ class EscuelaController extends Controller
      * Lista la evaluacion de estudiantes
      * @Route("/mi/heteroeval", name="escuela_heteroeval")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/heteroeval.html.twig")
      */
     public function heteroevalAction()
     {
@@ -331,7 +331,7 @@ class EscuelaController extends Controller
       /**
      * @Route("/mi/resultados", name="escuela_resultados")
      * @Method("GET")
-     * @Template()
+     * @Template("Escuela/resultados.html.twig")
      */
     public function resultadosAction()
     {
