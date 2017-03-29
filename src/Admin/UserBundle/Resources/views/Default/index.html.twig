@@ -2,42 +2,56 @@
 {% block body -%}	
 <!-- MAIN CONTENT -->
 
-			<div id="content" class="container">
-		
-					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-						<h1 class="txt-color-orangeDark login-header-big">MED Módulo de Evaluación Docente</h1>
-                                                <h1 class="txt-color-orangeDark login-header-big">Perido de Evaluación: {{periodo.id}}</h1>
-						<div class="hero">
-							<div class="pull-left login-desc-box-l">
-								<h5 class="paragraph-header">Desarrollado en coherencia con las directrices emitidas por el Consejo Superior Universitario en el Acuerdo 003 del 28 de enero de 2011, modificado por el Acuerdo 013 del 05 de mayo de 2011.</h5>
-								<div class="login-app-icons">
-								</div>
-							</div>
+<div class="col-sm-12 col-md-12 col-lg-6">
+<div class="well">
+<h1 class="txt-color-orangeDark login-header-big">Periodo de Evaluación: {{periodo.id}}</h1>
+	<p>
+ Periodo de Evaluación del {{periodo.fechainicio|localizeddate('none','none',app.request.locale,null,"d' de 'MMMM") }} al {{periodo.fechafin|localizeddate('none', 'none', app.request.locale,null, "d 'de' MMMM") }}
+</p>
+    <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="{{hoy/dias*100}}" data-pie-size="180" style="width: 180px; height: 180px; line-height: 180px;">
+        <span class="percent percent-sign txt-color-blue font-xl semi-bold">{{hoy/dias*100}}</span>
+        <canvas width="360" height="360" style="width: 180px; height: 180px;"></canvas></div>
 
-						</div>
+<br>
+</div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-6">
+<div class="well">
+<h1 class="txt-color-orangeDark login-header-big">MED Módulo de Evaluación Docente</h1>
+<p>
+ Desarrollado en coherencia con las directrices emitidas por el Consejo Superior Universitario en el Acuerdo 003 del 28 de enero de 2011, modificado por el Acuerdo 013 del 05 de mayo de 2011.
+</p>
+<br>
+</div>
+</div>
 
-					</div>	
+<div class="col-sm-12 col-md-12 col-lg-6">
+<div class="well">
+<h1 class="txt-color-orangeDark login-header-big">Admin</h1>
 
-			</div>
-                {% if is_granted('ROLE_ADMIN') %}
-                <form method="get" action="?php echo $_GET['_quieroser'];?" >
-                <fieldset>
-                <legend>  </legend>
-                <p><label>ID <input type=text name=_quieroser></label>
-                <button>Enviar</button></p>  
-                </fieldset>  
-                </form>
+{% if is_granted('ROLE_ADMIN') %}
+<form method="get" action="?php echo $_GET['_quieroser'];?" >
+<fieldset>
+<p><label>ID <input type=text name=_quieroser></label>
+<button>Enviar</button></p>  
+</fieldset>  
+</form>
+{%endif%}
+</div>
+</div>
 
- {%for periodo in periodos%}
- <h4> Periodo de Evaluación {{periodo.id}} del {{periodo.fechainicio|date('d/M') }} al {{periodo.fechafin|date('d/M') }} van {{hoy}} de {{dias}} </h4><br>
-     <table class="table table-bordered hidden-mobile" style="width: 95%">
+
+<div class="col-sm-12">
+<div class="well">
+    <h1 class="txt-color-orangeDark login-header-big">Periodos Académicos</h1>
+     <table class="table table-bordered hidden-mobile" style="width: 100%">
         <thead>
                 <tr>
                 <th>Id</th>
                 <th>Periodo Académico</th>
                 <th>Semanas</th>
-                <th>Inicio eventos académicos</th>
-                <th>Fin eventos académicos</th>
+                <th>Eventos académicos</th>
+                <th>Avance</th>
                  </tr>
                </thead> 
                <tbody>
@@ -47,11 +61,21 @@
                 <td>{{periodoa.id}}</td>
                 <td>{{periodoa.nombre}}</td>
                 <td>{{ periodoa.semanas }}</td>
-                <td>{{ periodoa.fechainicio|date('d - F', "America/Bogota" ) }}</td>
-                <td>{{ periodoa.fechafin|date('d - F') }}</td>
+                <td>{{ periodoa.fechainicio|localizeddate('none','none',app.request.locale,null,"d' de 'MMMM") }} al
+                {{ periodoa.fechafin|localizeddate('none','none',app.request.locale,null,"d' de 'MMMM") }}</td>
+                <td>
+                 {% set difference = date(periodoa.fechainicio|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                 {% set difference2 = date(periodoa.fechainicio|date('Y/m/d')).diff(date(periodoa.fechafin|date('Y/m/d'))) %}
+         
+
+<div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"> <span class="text"> Dias calendario <span class="pull-right">{{difference.days }}/{{difference2.days }}</span> </span>
+<div class="progress">
+	<div class="progress-bar bg-color-blueDark" style="width: {{(difference.days/difference2.days)*100}}%;"></div>
+</div> </div>
+                </td>
             {%endfor%}
         </tbody>
-              </table>            
-  {%endfor%} 
-  {%endif%}
+              </table>     
+</div>
+</div> 
 {% endblock %}

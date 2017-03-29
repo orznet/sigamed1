@@ -28,7 +28,7 @@
               {%if entity.plan.estado != 'Sin Cerrar' %}
                     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.plan.docente.id }) }}')" class="btn btn-primary btn-xs">Ver Roles <i class="fa fa-sign-in"></i></a>   
                 {%else%}
-                    Sin Cerrar
+                    No cerrado por el docente
                     {%endif%}
                 </td>
                 <td>

@@ -64,10 +64,10 @@ class DefaultController extends Controller
             //     $docentes = $this->getUser()->getDocente();
               //   $docente = $docentes[0];
                  
-                        if (!$docente) {
+                    if (!$docente) {
                         $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para el periodo de evaluación Vigente '.$this->container->getParameter('appmed.periodo').', es posible que aún no este activo por favor revise las fechas del cronograma de evaluación');          
                         
-                        }else{
+                     }else{
                      $session->set('docenteid', $docente->getId());
                     return $this->render('AdminUnadBundle:Docente:show.html.twig',array(
                     'entity'  => $docente,
