@@ -69,7 +69,7 @@
                     {% set totalhoras = totalhoras + rol.horas%}
                 </td>
                 <td>
-                    {{rol.horas}}
+                    {{rol.horas*(periodo.dias/5)}}
                 </td>
                </tr>
         {% endfor %}
@@ -79,8 +79,12 @@
                     <td>{{totalhoras}}</td>
                     <td>{{totalhoras*(periodo.dias/5) }}</td>
                </tr>
+               <tr>
+                   <td colspan="4" align="center">Fecha de Registro: {{docente.plangestion.fechacierre|date('d-m-Y')}}</td>
+                   </tr>
         </tbody>
     </table>
+    
 <table>
   <tr>
     <th>Avalador</th>
@@ -129,8 +133,5 @@ Sin revisar
     </tr>
     
 </table>
-
-    
-
     </body>
 {% endblock %}

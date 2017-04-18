@@ -64,11 +64,15 @@ class RolplangController extends Controller
             
             return $this->redirect($this->generateUrl('plangestion_crear', array('id' => $id)));
         }
-
+        $libre = 0;
+       // foreach ($roles as $rolok){ 
+        //$libre = $libre + $rolok->getHoras();   
+       // }
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'id'    => $id,
+            'libre' => $libre,
         );
     }
 

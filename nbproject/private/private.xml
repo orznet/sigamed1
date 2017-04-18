@@ -12,20 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Zona.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Centro.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/dc.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/Resources/views/Zona/index.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/Resources/views/Centro/edit.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/app/config/parameters.yml</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Docente.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Departamento.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Actividadrol/select.html.twig</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Entity/Plangestion.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/ActividadrolController.php</file>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Form/CentroType.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/SecurityController.php</file>
         </group>
     </open-files>
 </project-private>

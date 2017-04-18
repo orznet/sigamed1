@@ -18,8 +18,8 @@
   </tr>
    <tr>
     <td>Horas por semana</td>
-    <td>{{ form_widget(form.horas) }}<i> Puede usar decimales.</i><div id="porperiodo"></div>
-            <br>Horas registras: {{libre}} de 40</td>
+    <td>{{ form_widget(form.horas) }}{{ form_errors(form.horas) }}<i> Como separador de decimales utilice un punto "." </i><div id="porperiodo"></div>
+        <br>Horas registras: {{libre}} de 40</td>
    </tr>
 
   <tr>
