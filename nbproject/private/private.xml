@@ -12,8 +12,21 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
+            <file>file:/Users/omarr/codigo/med/app/Resources/views/Centro/docs.html.twig</file>
             <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/SecurityController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/detalle.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Controller/EscuelaController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/RolacademicoController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Resources/views/Default/home.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/form.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Resources/views/Docente/porescuela.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/DefaultController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Entity/User.php</file>
+            <file>file:/Users/omarr/codigo/med/app/config/security.yml</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UnadBundle/Entity/Curso.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/UserBundle/Controller/UserController.php</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Resources/views/Instrumento/edit.html.twig</file>
+            <file>file:/Users/omarr/codigo/med/src/Admin/MedBundle/Controller/InstrumentoController.php</file>
         </group>
     </open-files>
 </project-private>

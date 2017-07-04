@@ -386,6 +386,7 @@ public function updateAction(Request $request, $id)
             ->setSubject('Contraseña del Módulo MED para '.$user->getId())
             ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
             ->setTo(array($user->getEmail() => $user->getNombres().' '.$user->getApellidos()))
+            ->setCc(array($user->getEmailp() => $user->getNombres().' '.$user->getApellidos()))                    
             ->setBody(
             $this->renderView('AdminUserBundle:User:newpass.txt.twig',
             array('user' => $user,
@@ -395,6 +396,14 @@ public function updateAction(Request $request, $id)
             )
             ;
             $this->get('mailer')->send($message);
+    }
+    
+    
+    
+    
+    public function homepass(){
+        
+        
     }
     
 }

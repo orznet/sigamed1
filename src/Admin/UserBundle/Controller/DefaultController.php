@@ -80,7 +80,7 @@ class DefaultController extends Controller
              } 
         
         return $this->render('AdminUserBundle:Default:index.html.twig',array(
-            'escuela'      => $escuela,
+            'escuela' => $escuela,
             'user'  => $user,
             'periodo' => $periodo,
             'periodos'  => $periodos,
@@ -91,23 +91,32 @@ class DefaultController extends Controller
     
     public function homeAction(Request $request)
     {
+          
         $em = $this->getDoctrine()->getManager();
         $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
         //$request = $this->getRequest();
         $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo')));
+        
         $session = $request->getSession();
+                
         $cedula_usuario = $request->request->get('cedula_usuario');
+        
         $user = $em->getRepository('AdminUserBundle:User')->findOneBy(array('id' => $cedula_usuario));
+        
         $nombres_usuario = $request->request->get('nombres_usuario');
         $apellidos_usuario = $request->request->get('apellidos_usuario');
         $email_usuario = $request->request->get('email_usuario');
         $autenticacion = $request->request->get('autenticacion');
+        $login_usuario = $request->request->get('login_usuario');
         
         $url_autenticacion = "http://login.unad.edu.co/";
+        $url_autenticacion2 ="https://intranet.unad.edu.co/autenticacion.php";
         $urlInicioApp  = "http://med.unad.edu.co/";
         //$urlServerApp  = "/login_check";
         
-        $direccion_respuesta = $this->getRequest()->server->get('HTTP_REFERER');
+        //$direccion_respuesta = $this->getRequest()->server->get('HTTP_REFERER');
+        $direccion_respuesta = $request->server->get('HTTP_REFERER');
+        //$direccion_respuesta = $request->getPathInfo();
         
         //------------- Origenes validos ----------------------------------------------------------
         $urlOrigenValido1 =	"https://intranet.unad.edu.co/autenticacion.php?continue=http://med.unad.edu.co/"; //cuando accede por el home de intranet
@@ -129,11 +138,11 @@ class DefaultController extends Controller
         'apellidos_usuario' => $apellidos_usuario,
         'autenticacion' => $autenticacion,
         'direccion_respuesta'   => $direccion_respuesta,
-        'email_usuario'  => $autenticacion,
+        'email_usuario'  => $email_usuario,
         'instrumentos' => $instrumentos,
         'periodo'   => $periodo,
         'user'    => $user,
-        'if'   => 'falso'
+        'login_usuario' => $login_usuario
         ));
         }
         

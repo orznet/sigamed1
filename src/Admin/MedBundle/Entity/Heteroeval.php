@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 /**
   * @ORM\Table(name="hetero_estudiantes")
-  * @ORM\Entity(repositoryClass="Admin\PlanesBundle\Entity\HeteroevalRepository")
+  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\HeteroevalRepository")
   */
 class Heteroeval{
     

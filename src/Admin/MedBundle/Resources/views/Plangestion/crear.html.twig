@@ -114,6 +114,12 @@
   </tr>
   {% endfor %}  
 </table>
+
+              {%if entity.estado != 'Sin Cerrar' %}
+                    <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.docente.id }) }}')" class="btn btn-primary btn-xs">Ver Plan de Gestión para impresión... <i class="fa fa-sign-in"></i></a>   
+                {%else%}
+                    Sin Registro
+                    {%endif%}
  
  <div class="modal fade" data-refresh="true" id="ModalCerrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
@@ -138,5 +144,19 @@
 <div class="modal fade" data-refresh="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
-</div></div></div>     
+</div></div></div>
+           <script>         
+               function popUp(URL) {
+
+    if(typeof(popupWin) != "object" || popupWin.closed)  { 
+        popupWin = window.open(URL, 'popupWin', 'scrollbars=auto,toolbar=no,menubar=no,status=no,width=1000,height=600, left=100,top=100');
+    } 
+    else{ 
+        popupWin.location.href = URL; 
+    }
+
+    popupWin.focus(); 
+ }
+ 
+</script>
 {% endblock %}

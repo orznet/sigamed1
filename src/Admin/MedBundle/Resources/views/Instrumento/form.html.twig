@@ -1,42 +1,53 @@
-     {{ form_errors(form) }}  
+{{ form_errors(form) }}  
 <fieldset>
-<section>
-
-    <label class="input"> <i class="icon-append fa fa-tag"></i>
-{{ form_widget(form.nombre,  {'attr': {'placeholder':'Nombre'}}) }}
-</label>
- <em for="name" class="invalid">{{ form_errors(form.nombre) }}</em>
-</section>
-        <section>
-<label class="input"> <i class="icon-append fa fa-user"></i>
-{{ form_widget(form.tipo,  {'attr': {'placeholder':'Tipo'}}) }}
-</label>
-<em for="name" class="invalid">{{ form_errors(form.tipo) }}</em>
-        </section>    
-        <section>
-<label class="input"> <i class="icon-append fa fa-user"></i>
-{{ form_widget(form.descripcion,  {'attr': {'placeholder':'Descripción'}}) }}
-</label>
-<em for="name" class="invalid">{{ form_errors(form.descripcion) }}</em>
-        </section>
-        <section>
+    <section>
+        {%if form_errors(form.nombre)%}
+            <label class="input state-error"> <i class="icon-append fa fa-user"></i>
+                {{ form_widget(form.nombre,  {'attr': {'placeholder':'Nombre', 'class':'invalid'}}) }}
+            </label>
+                <em for="name" class="invalid">{{ form_errors(form.nombre) }}</em>
+        {%else%}
+            <label class="input"><i class="icon-append fa fa-user"></i>
+                {{ form_widget(form.nombre,  {'attr': {'placeholder':'Nombre'}}) }}
+            </label>
+        {%endif%}
+    </section>
+    <section>
+        {%if form_errors(form.tipo)%}
+            <label class="input state-error"> <i class="icon-append fa fa-user"></i>
+                {{ form_widget(form.tipo,  {'attr': {'placeholder':'Nombre', 'class':'invalid'}}) }}
+            </label>
+            <em for="name" class="invalid">{{ form_errors(form.tipo) }}</em>
+        {%else%}
+            <label class="input"> <i class="icon-append fa fa-user"></i>
+                {{ form_widget(form.tipo,  {'attr': {'placeholder':'Nombre'}}) }}
+            </label>
+        {%endif%}
+    </section>
+    <section>
+        <label class="input"> <i class="icon-append fa fa-user"></i>
+            {{ form_widget(form.descripcion,  {'attr': {'placeholder':'Descripción'}}) }}
+        </label>
+        <em for="name" class="invalid">{{ form_errors(form.descripcion) }}</em>
+    </section>
+    <section>
         <label class="label">Fecha Inicio</label>
         <label class="input"> <i class="icon-append fa fa-calendar"></i>
-        {{ form_widget(form.fechainicio,  {'attr': {'placeholder':'Fecha Inicio','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
+            {{ form_widget(form.fechainicio,  {'attr': {'placeholder':'Fecha Inicio','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
         </label>
         <em for="name" class="invalid">{{ form_errors(form.fechainicio) }}</em>
-        </section>
-        <section> 
-       <label class="label">Fecha Fin</label>
-            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-        {{ form_widget(form.fechafin,  {'attr': {'placeholder':'Fecha Fin','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
+    </section>
+    <section> 
+        <label class="label">Fecha Fin</label>
+        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+            {{ form_widget(form.fechafin,  {'attr': {'placeholder':'Fecha Fin','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
         </label>
         <em for="name" class="invalid">{{ form_errors(form.fechafin) }}</em>
-            </section>
-        <section>
+    </section>
+    <section>
         <label class="select"> <i class="icon-append fa fa-user"></i>
-        {{ form_widget(form.estado)}}
+            {{ form_widget(form.estado)}}
         </label>
         <em for="name" class="invalid">{{ form_errors(form.estado) }}</em>
-        </section>
-        </fieldset>
+    </section>
+</fieldset>

@@ -27,6 +27,7 @@ class Instrumento{
     
     /**
     * @ORM\Column(type="string")
+     @Assert\NotBlank(message = "Este campo no puede estar en blanco")
     */
     private $tipo;
     

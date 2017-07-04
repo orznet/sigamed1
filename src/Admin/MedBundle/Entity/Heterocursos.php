@@ -346,4 +346,50 @@ protected $calificacion;
     {
         return $this->calificacion;
     }
+
+    /**
+     * Set cedula
+     *
+     * @param integer $cedula
+     * @return Heterocursos
+     */
+    public function setCedula($cedula)
+    {
+        $this->cedula = $cedula;
+
+        return $this;
+    }
+
+    /**
+     * Get cedula
+     *
+     * @return integer 
+     */
+    public function getCedula()
+    {
+        return $this->cedula;
+    }
+
+    /**
+     * Set semestre
+     *
+     * @param string $semestre
+     * @return Heterocursos
+     */
+    public function setSemestre($semestre)
+    {
+        $this->semestre = $semestre;
+
+        return $this;
+    }
+
+    /**
+     * Get semestre
+     *
+     * @return string 
+     */
+    public function getSemestre()
+    {
+        return $this->semestre;
+    }
 }

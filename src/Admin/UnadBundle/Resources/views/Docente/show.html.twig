@@ -40,7 +40,13 @@
        <i class="fa fa-check" style="color: #739e73"></i>
        {%else%}
        <i class="fa fa-times" style="color: #a90329"></i>
-       {%endif%}    
+       {%endif%}  
+       
+                     {%if entity.plangestion.estado != 'Sin Cerrar' %}
+                {%else%}
+                    
+                    {%endif%}
+       
         </td>
       </tr>
           <tr>

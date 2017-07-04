@@ -13,10 +13,12 @@ class ofertaType extends AbstractType
     {
             $builder
             ->add('cedula', 'text', array('required'  => true))
-                    
-           ->add('periodo', 'choice', array('empty_value' => ' ', 'label' => ' ',    
-            'choices'   => array( '16-04' => '16-04', '8-05' => '8-05'), 'required'  => true,))        
-            ;           
+                        
+          ->add('periodo', 'entity', array(
+          'class' =>  'AdminMedBundle:Periodoa',
+          'property' => 'id',
+          ))  
+        ;  
     }
 
     public function getName()

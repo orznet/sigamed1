@@ -192,8 +192,16 @@ class InstrumentoController extends Controller
         if ($editForm->isValid()) {
         $em->persist($entity);
         $em->flush();
-        return new JsonResponse(array(
-        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Registro actualizado.</div>'), 200);   
+        $editForm = $this->createEditForm($entity);
+        $response = new JsonResponse(
+        array(
+            'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Registro actualizado.</div>',
+            'form' => $this->renderView('AdminMedBundle:Instrumento:form.html.twig',
+             array(
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+             ))), 404);
+            return $response;        
         }
 
         $response = new JsonResponse(
