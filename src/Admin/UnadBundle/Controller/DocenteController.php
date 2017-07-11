@@ -16,25 +16,26 @@ use Admin\UnadBundle\Form\ObservType;
 
 /**
  * Docente controller
- * @Route("/unad/docente")
+ * @Route("/unad/doc")
  */
 class DocenteController extends Controller
 {
     /**
      * Lists all Docente entities.
      *
-     * @Route("/", name="docente")
+     * @Route("/pe/{periodo}", name="docente")
      * @Method("GET")
-     * @Template()
+     * @Template("Docente/porperiodo.html.twig")
      */
-    public function indexAction()
+    public function indexAction($periodo)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('periodo' => $this->container->getParameter('appmed.periodo')));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->docentesPeriodo($periodo);
 
         return array(
             'entities' => $entities,
+            'periodo' => $periodo
         );
     }
     

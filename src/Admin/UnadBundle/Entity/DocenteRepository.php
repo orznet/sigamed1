@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class DocenteRepository extends EntityRepository
 {
+     public function docentesPeriodo($periodo) {
+    $connection = $this->getEntityManager()->getConnection();
+    $q = "select doc.* from (select @periodoe_id:=".$periodo." p) param, docentes_periodo doc";
+    $stmt = $connection->executeQuery($q);
+    return $stmt->fetchAll();
+}   
 }

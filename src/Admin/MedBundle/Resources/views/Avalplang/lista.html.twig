@@ -44,6 +44,7 @@
                                         <th>Cédula</th>
                                         <th>Nombre</th>
                                         <th>Escuela</th>
+                                        <th>Centro</th>
                                         <th>Rol</th>
                                         <th>Avalador</th>
                                         <th>Roles</th>
@@ -59,13 +60,14 @@
                                             </th> 
                                             <td>{{ entity.plan.docente.user.nombres }} {{ entity.plan.docente.user.apellidos }}</td>
                                             <td>{{entity.plan.docente.escuela.sigla}}</td>
+                                            <td>{{entity.plan.docente.centro.nombre}}</td>
 
 
                                             <td>
                                                 {{entity.perfil}}
                                             </td>
                                              <td>
-                                                {{entity.user.id}}
+                                             {{entity.user.nombres}} {{entity.user.apellidos}}
                                             </td>
                                             <td>
                                                 {%if entity.plan.estado != 'Sin Cerrar' %}
