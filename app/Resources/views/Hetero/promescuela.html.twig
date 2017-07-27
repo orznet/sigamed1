@@ -48,6 +48,7 @@
                 <th>Competencia5</th>
                 <th>Competencia6</th>
                 <th>Promedio</th>
+                <th>Docentes</th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +63,7 @@
             <td>{{ entity.competencia5|number_format(2, '.', ',') }}</td>
             <td>{{ entity.competencia6|number_format(2, '.', ',') }}</td>
             <td>{{ ((entity.competencia1+entity.competencia2+entity.competencia3+entity.competencia4+entity.competencia5+entity.competencia6)/120)|number_format(2, '.', ',') }}</td>
-
+            <td>{{ entity.docentes }}</td>
             </tr>
         {% endfor %}
             

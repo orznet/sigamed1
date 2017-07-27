@@ -18,3 +18,7 @@ app/logs/prod.log
 app/logs/dev.log
 
 web/uploads/20161/formatoplang/formatoplang-160001.xlsx
+
+nbproject/private/private.xml
+
+web/uploads
