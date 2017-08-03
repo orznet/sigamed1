@@ -37,10 +37,11 @@
            <tr>
                     {%if temp != actividad.actividad.rol.nombre %} 
                 <td>
-                    <b>ROL:
+                    <b>Rol:
                     {{actividad.actividad.rol.nombre}}
                     {% set temp = actividad.actividad.rol.nombre %}        
                     </b>
+                    <br>{{actividad.actividad.rol.descripcion}}
                     </td>
                     <td></td>
                     <td></td>

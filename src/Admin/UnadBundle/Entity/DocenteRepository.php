@@ -17,5 +17,30 @@ class DocenteRepository extends EntityRepository
     $q = "select doc.* from (select @periodoe_id:=".$periodo." p) param, docentes_periodo doc";
     $stmt = $connection->executeQuery($q);
     return $stmt->fetchAll();
-}   
+}
+
+     public function totalEscuelas($periodo) {
+ 
+    $connection = $this->getEntityManager()->getConnection();
+       $q = "select docente.escuela_id, escuela.nombre, escuela.sigla,
+            count(case when vinculacion = 'DC' THEN 1 end) vdc,
+            count(case when vinculacion = 'DOFE' THEN 1 end) vdofe,
+            count(case when vinculacion = 'DO' THEN 1  end) vdo,
+            count(case when vinculacion = 'HC' then 1 end) vhc,
+            count(*) total
+            from docente
+            join escuela on docente.escuela_id = escuela.id
+            where periodo = ".$periodo."
+            group by docente.escuela_id";
+    $stmt = $connection->executeQuery($q);
+    return $stmt->fetchAll();
+}
+
+      public function porVinculacion($sigla, $periodo){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM AdminUnadBundle:Docente a WHERE a.vinculacion = :sigla and a.periodo = :periodo')->setParameter('sigla', $sigla)->setParameter('periodo', $periodo);    
+        $programas = $query->getResult(); 
+        return $programas;   
+      }
+
 }
