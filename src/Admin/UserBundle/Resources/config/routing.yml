@@ -2,19 +2,23 @@ _admin_usuario:
     resource: "@AdminUserBundle/Controller/UserController.php"
     type:     annotation
 
-admin_user_home:
+home_user:
     path:  /home
     defaults: { _controller: "AdminUserBundle:Default:home" }
     
-admin_user_send:
+home_user_send:
     path:  /home/send
     defaults: { _controller: "AdminUserBundle:Default:send" }
     
-admin_user_inicio:
-    path:  /user/inicio
+home_user_inicio:
+    path:  /home/inicio
     defaults: { _controller: "AdminUserBundle:Default:index" }
+
+admin_user_show:
+    path:  /unad/user/{id}/doc
+    defaults: { _controller: "AdminUserBundle:User:show" }    
     
     
-admin_user_info:
-    path:  /user/info
+home_user_info:
+    path:  /home/info
     defaults: { _controller: "AdminUserBundle:User:info" }   

@@ -188,6 +188,14 @@
 </table>
 
 <table>
+    {%if docente.evaluacion.aclaraciones%}
+    <tr>
+     <td>
+    ACLARACIONES:<br>
+    {{docente.evaluacion.aclaraciones}}
+     </td>
+    </tr>
+     {%endif%}
     <tr>
     <td colspan="3" align="center">Evaluación Número:{{docente.id}} -  Fecha y hora de consulta: {{ "now"|date("d/m/Y H:m") }}</td>
   </tr>

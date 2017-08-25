@@ -45,13 +45,13 @@
 					<!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
 					<div class="btn-group btn-group-justified" data-toggle="buttons">
 						<label class="btn btn-default">
-							<input type="radio" name="activity" id="{{ path('admin_user_info') }}">
+							<input type="radio" name="activity" id="{{ path('home_user_info') }}">
 							Usuario</label>
 						<label class="btn btn-default">
-							<input type="radio" name="activity" id="{{ path('admin_user_info') }}">
+							<input type="radio" name="activity" id="{{ path('home_user_info') }}">
 							Pendientes</label>
 						<label class="btn btn-default">
-							<input type="radio" name="activity" id="{{ path('admin_user_info') }}">
+							<input type="radio" name="activity" id="{{ path('home_user_info') }}">
 							Mensajes</label>
 					</div>
 
@@ -125,7 +125,7 @@
 
 				<ul>
 					<li>
-						<a href="{{ path('admin_user_inicio') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
+						<a href="{{ path('home_user_inicio') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
 					      
 
                                                  {% if is_granted('ROLE_DEC') %}
@@ -168,7 +168,7 @@
                                           <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">MED</span></a>
                                               <ul style="display: block;">
                                                       <li>
-                                                      <a href="{{ path('admin_user_inicio') }}">Periodo Actual</a>                              
+                                                      <a href="{{ path('home_user_inicio') }}">Periodo Actual</a>                              
                                                       <a href="{{ path('archivo_docente') }}">Archivo</a>
                                                       </li>
                                               </ul>
@@ -216,7 +216,7 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Admin</span></a>
                         <ul>
                    <li>
-                   <a href="{{ path('instrumento') }}">Instrumentos</a>
+                   <a href="{{ path('admin_instrumento') }}">Instrumentos</a>
                   </li>
                       </ul>
                         </li>

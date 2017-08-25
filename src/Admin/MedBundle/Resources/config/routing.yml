@@ -67,7 +67,11 @@ _plangpdf:
     
 _base:
     resource: "@AdminMedBundle/Controller/BaseController.php"
-    type:     annotation    
+    type:     annotation
+    
+_consolidar:
+    resource: "@AdminMedBundle/Controller/ConsolidarController.php"
+    type:     annotation        
 
 accionespm_editdoc:
     path:  /doc/planm/acc/{id}/edit

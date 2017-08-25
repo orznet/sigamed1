@@ -142,7 +142,7 @@ Aprobado
       <tr>
     <td>C2</td>
     <td>Evaluación de Red Tutores</td>
-    <td>Heteroevaluación</td>
+    <td>Coevaluación</td>
     <td>Tutor</td>
     <td class="centro">{{docente.evaluacion.co5? docente.evaluacion.co5: 'n/a' }}</td>
   </tr>
@@ -190,7 +190,7 @@ Aprobado
     </tr>
      {%endif%}
     <tr>
-    <td colspan="3" align="center">Evaluación Número:{{docente.id}} - Fecha última actualización: {{ docente.evaluacion.fecha|date('d/m/Y') }}</td>
+    <td colspan="3" align="center">Evaluación Número:{{docente.id}} - Fecha de consulta: {{  "now"|date('d/m/Y') }}</td>
   </tr>
 </table>
 {% endblock %}

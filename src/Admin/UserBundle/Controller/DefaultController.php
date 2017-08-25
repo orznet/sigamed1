@@ -116,6 +116,7 @@ class DefaultController extends Controller
         
         //$direccion_respuesta = $this->getRequest()->server->get('HTTP_REFERER');
         $direccion_respuesta = $request->server->get('HTTP_REFERER');
+        $direccion_ip = $request->server->get('REMOTE_ADDR');
         //$direccion_respuesta = $request->getPathInfo();
         
         //------------- Origenes validos ----------------------------------------------------------
@@ -142,7 +143,8 @@ class DefaultController extends Controller
         'instrumentos' => $instrumentos,
         'periodo'   => $periodo,
         'user'    => $user,
-        'login_usuario' => $login_usuario
+        'login_usuario' => $login_usuario,
+         'direccion_ip'  => $direccion_ip 
         ));
         }
         

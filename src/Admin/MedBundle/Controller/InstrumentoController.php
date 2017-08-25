@@ -22,7 +22,7 @@ class InstrumentoController extends Controller
     /**
      * Lists all Instrumento entities.
      *
-     * @Route("/", name="instrumento")
+     * @Route("/", name="admin_instrumento")
      * @Method("GET")
      * @Template()
      */
@@ -39,7 +39,7 @@ class InstrumentoController extends Controller
     /**
      * Creates a new Instrumento entity.
      *
-     * @Route("/", name="instrumento_create")
+     * @Route("/", name="admin_instrumento_create")
      * @Method("POST")
      * @Template("AdminMedBundle:Instrumento:new.html.twig")
      */
@@ -85,7 +85,7 @@ class InstrumentoController extends Controller
     /**
      * Displays a form to create a new Instrumento entity.
      *
-     * @Route("/new", name="instrumento_new")
+     * @Route("/new", name="admin_instrumento_new")
      * @Method("GET")
      * @Template()
      */
@@ -103,7 +103,7 @@ class InstrumentoController extends Controller
     /**
      * Finds and displays a Instrumento entity.
      *
-     * @Route("/{id}", name="instrumento_show")
+     * @Route("/{id}", name="admin_instrumento_show")
      * @Method("GET")
      * @Template()
      */
@@ -128,7 +128,7 @@ class InstrumentoController extends Controller
     /**
      * Displays a form to edit an existing Instrumento entity.
      *
-     * @Route("/{id}/edit", name="instrumento_edit")
+     * @Route("/{id}/edit", name="admin_instrumento_edit")
      * @Method("GET")
      * @Template()
      */
@@ -170,7 +170,7 @@ class InstrumentoController extends Controller
  /**
      * Edits an existing Instrumento entity.
      *
-     * @Route("/{id}", name="instrumento_update")
+     * @Route("/{id}", name="admin_instrumento_update")
      * @Method("POST")
      * @Template("AdminMedBundle:Instrumento:edit.html.twig")
      */
@@ -217,7 +217,7 @@ class InstrumentoController extends Controller
     /**
      * Deletes a Instrumento entity.
      *
-     * @Route("/{id}", name="instrumento_delete")
+     * @Route("/{id}", name="admin_instrumento_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
