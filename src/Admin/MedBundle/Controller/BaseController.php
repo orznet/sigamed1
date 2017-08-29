@@ -33,18 +33,6 @@ class BaseController extends Controller {
         );
     }
 
-    /**
-     * Mostrar promedio escuelas
-     * @Route("/heteroesc", name="heteroeval_prom_esc")
-     * @Method("GET")
-     * @Template("Hetero/promescuela.html.twig")
-     */
-    public function heteroescuelasAction() {
-        $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AdminMedBundle:Heteroeval')->getPromedioescuela();
-        return array(
-            'data' => $data
-        );
-    }
+
 
 }

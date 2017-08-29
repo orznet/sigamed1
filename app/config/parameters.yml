@@ -15,4 +15,4 @@ parameters:
    
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    appmed.periodo: '20172'
+    appmed.periodo: '20171'

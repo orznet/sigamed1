@@ -45,6 +45,9 @@
                                         <th>Vinculación</th>
                                         <th>Programa</th>
                                         <th>Centro</th>
+                                        <th>Auto</th>
+                                        <th>Hetero</th>
+                                        <th>Co</th>
                                         <th>Final</th>
                                     </tr>
                                 </thead>
@@ -60,13 +63,20 @@
                                             <td>{{ entity.vinculacion }}</td>
                                             <td>{{ entity.programa.id }}</td>
                                             <td>{{ entity.centro.nombre }}</td>
-                                            <td>
-                                                {%if entity.evaluacion %}
-
-                                                    {{ entity.evaluacion.final }}
-
-                                                {%endif%}
+                                            {%if entity.evaluacion %}
+                                            <td>   
+                                            {{ entity.evaluacion.auto }}
                                             </td>
+                                                <td>   
+                                            {{ entity.evaluacion.hetero }}
+                                            </td>
+                                                <td>   
+                                            {{ entity.evaluacion.co }}
+                                            </td>
+                                                <td>   
+                                            {{ entity.evaluacion.final }}
+                                            </td>
+                                            {%endif%}
                                         </tr>
                                     {% endfor %}
                                 </tbody>

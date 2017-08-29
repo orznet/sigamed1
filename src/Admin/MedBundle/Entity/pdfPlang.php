@@ -25,7 +25,7 @@ class pdfPlang{
   
   /** 
     * @var Plan 
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", inversedBy="pdf")
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion")
     * @ORM\JoinColumn(name="plangestion_id", referencedColumnName="id",
     * nullable=false
     * )

@@ -71,7 +71,11 @@ _base:
     
 _consolidar:
     resource: "@AdminMedBundle/Controller/ConsolidarController.php"
-    type:     annotation        
+    type:     annotation
+
+_hetero:
+    resource: "@AdminMedBundle/Controller/HeteroController.php"
+    type:     annotation   
 
 accionespm_editdoc:
     path:  /doc/planm/acc/{id}/edit
