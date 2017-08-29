@@ -36,15 +36,6 @@ class Instrumento{
     */
     private $descripcion;
 
-    /**
-    * @ORM\Column(type="date", nullable=true)
-    */
-    protected $fechainicio;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    protected $fechafin;
 
     /**
     * @ORM\Column(type="smallint")
@@ -108,51 +99,7 @@ class Instrumento{
         return $this->tipo;
     }
 
-    /**
-     * Set fechainicio
-     *
-     * @param \DateTime $fechainicio
-     * @return Instrumento
-     */
-    public function setFechainicio($fechainicio)
-    {
-        $this->fechainicio = $fechainicio;
-
-        return $this;
-    }
-
-    /**
-     * Get fechainicio
-     *
-     * @return \DateTime 
-     */
-    public function getFechainicio()
-    {
-       return $this->fechainicio;
-    }
-
-    /**
-     * Set fechafin
-     *
-     * @param \DateTime $fechafin
-     * @return Instrumento
-     */
-    public function setFechafin($fechafin)
-    {
-        $this->fechafin = $fechafin;
-
-        return $this;
-    }
-
-    /**
-     * Get fechafin
-     *
-     * @return \DateTime 
-     */
-    public function getFechafin()
-    {
-        return $this->fechafin;
-    }
+    
 
     /**
      * Set estado

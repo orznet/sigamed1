@@ -136,7 +136,7 @@ class DocenteController extends Controller {
     }
 
     /**
-     * Listado de docentes carrera por escuela.
+     * Listado de docentes carrera por zona.
      *
      * @Route("/zn", name="docente_dczona")
      * @Method("GET")

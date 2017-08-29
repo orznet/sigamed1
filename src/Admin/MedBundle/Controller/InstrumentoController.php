@@ -162,7 +162,7 @@ class InstrumentoController extends Controller
     private function createEditForm(Instrumento $entity)
     {
         $form = $this->createForm(new InstrumentoType(), $entity, array(
-            'action' => $this->generateUrl('instrumento_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_instrumento_update', array('id' => $entity->getId())),
             'method' => 'POST',
         ));
         return $form;
@@ -237,7 +237,7 @@ class InstrumentoController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('instrumento'));
+        return $this->redirect($this->generateUrl('admin_instrumento'));
     }
 
     /**
@@ -250,7 +250,7 @@ class InstrumentoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('instrumento_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_instrumento_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Borrar'))
             ->getForm()

@@ -2,7 +2,7 @@
 
 {% block body -%}
     <table class="table table-bordered table-striped" style="width: 550px">
-    <form action="{{ path('admin_user_buscarpor')}}" method="post" {{ form_enctype(buscar_form) }}>
+    <form action="{{ path('admon_user_buscarpor')}}" method="post" {{ form_enctype(buscar_form) }}>
         <input type="hidden" name="_method" value="PUT" /> 
         <tr>
             <td>Usuarios ({{entities|length}}) </td>    
@@ -62,9 +62,8 @@
                 <th class="data">Id</th>
                 <th class="data">Nombres</th>
                 <th class="data">Apellidos</th>
-                <th class="data">Email</th>
-               <th class="data">Docente</th>
-                <th class="data">Actions</th>
+                <th class="data">Email UNAD</th>
+                <th class="data">Email Personal</th>
             </tr>
         </thead>
         <tbody>
@@ -78,17 +77,8 @@
                 <td class="data">{{ entity.nombres }}</td>
                 <td class="data">{{ entity.apellidos }}</td>
                 <td class="data">{{ entity.email }}</td>
-                <td class="data">
-                    {% for entity in entity.getDocente %}
-     <a href="{{ path('docente_info', { 'id': entity.id }) }}">
-    {{entity.id}}
-     </a>
-    {%endfor%}
-                </td>
-                <td class="data">
-         
-       
-                </td>
+                <td class="data">{{ entity.emailp }}</td>
+
             </tr>
         {% endfor %}
         </tbody>

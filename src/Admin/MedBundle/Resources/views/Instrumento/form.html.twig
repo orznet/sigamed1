@@ -31,20 +31,6 @@
         <em for="name" class="invalid">{{ form_errors(form.descripcion) }}</em>
     </section>
     <section>
-        <label class="label">Fecha Inicio</label>
-        <label class="input"> <i class="icon-append fa fa-calendar"></i>
-            {{ form_widget(form.fechainicio,  {'attr': {'placeholder':'Fecha Inicio','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
-        </label>
-        <em for="name" class="invalid">{{ form_errors(form.fechainicio) }}</em>
-    </section>
-    <section> 
-        <label class="label">Fecha Fin</label>
-        <label class="input"> <i class="icon-append fa fa-calendar"></i>
-            {{ form_widget(form.fechafin,  {'attr': {'placeholder':'Fecha Fin','class':'hasDatepicker', 'data-dateformat':'dd/mm/yy'}}) }}
-        </label>
-        <em for="name" class="invalid">{{ form_errors(form.fechafin) }}</em>
-    </section>
-    <section>
         <label class="select"> <i class="icon-append fa fa-user"></i>
             {{ form_widget(form.estado)}}
         </label>

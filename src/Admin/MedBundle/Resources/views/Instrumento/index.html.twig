@@ -10,8 +10,6 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Tipo</th>
-                <th>Fecha inicio</th>
-                <th>Fecha fin</th>
                 <th>Estado</th>
                 <th>Actions</th>
             </tr>
@@ -19,16 +17,14 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('instrumento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('admin_instrumento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombre }}</td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.tipo }}</td>
-                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechafin %}{{ entity.fechafin|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.estado }}</td>
                 <td>
     
-                <a href="{{ path('instrumento_edit', { 'id': entity.id }) }}">Modificar</a>
+                <a href="{{ path('admin_instrumento_edit', { 'id': entity.id }) }}">Modificar</a>
 
                 </td>
             </tr>

@@ -17,17 +17,7 @@ class InstrumentoType extends AbstractType
         $builder
             ->add('nombre', 'text', array('required'  => true,))
             ->add('tipo')
-            ->add('descripcion')    
-            ->add('fechainicio', 'date', array(
-            'widget' => 'single_text',
-            // this is actually the default format for single_text
-            'format' => 'yyyy-MM-dd',
-            ))   
-             ->add('fechafin', 'date', array(
-            'widget' => 'single_text',
-            // this is actually the default format for single_text
-            'format' => 'yyyy-MM-dd',
-            ))
+            ->add('descripcion')
             ->add('estado', 'choice', array(  
             'choices'   => array( '1' => 'Activo', '0' => 'Inactivo'),
             'required'  => true,))       
