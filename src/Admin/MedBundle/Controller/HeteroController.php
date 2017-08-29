@@ -10,34 +10,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Admin\MedBundle\Entity\Heteroeval;
 use Admin\MedBundle\Entity\Heterocursos;
 
-
 /**
  * Plangestion controller.
  *
  * @Route("/unad/hetero")
  */
-class HeteroController extends Controller
-{
-    
-        /**
+class HeteroController extends Controller {
+
+    /**
      * Lists all hetero semestre actual
      *
      * @Route("/pcurso/{pe}", name="hetero_index")
      * @Method("GET")
      * @Template("Hetero/index.html.twig")
      */
-    public function indexAction($pe)
-    {
-       $em = $this->getDoctrine()->getManager();
-        
-       $entities = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('semestre' => $pe));
-       return array(
-       'entities' => $entities,
-       );
+    public function indexAction($pe) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('semestre' => $pe));
+        return array(
+            'entities' => $entities,
+        );
     }
-    
-    
-        /**
+
+    /**
      * Mostrar promedio escuelas
      * @Route("/prom_esc", name="hetero_prom_esc")
      * @Method("GET")
@@ -45,20 +41,30 @@ class HeteroController extends Controller
      */
     public function heteroescuelasAction() {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AdminMedBundle:Heteroeval')->getPromedioescuela();
+        $datas = $em->getRepository('AdminMedBundle:Heteroeval')->getPromedioescuela();
+
+       //$session = new Session();
+       //$session->migrate();
+       $session = $this->getRequest()->getSession();
+       
+       $miescuela = $session->get('escuelaid');
+       
+        
         return array(
-            'data' => $data
+            'data' => $datas,
+            'miescuela' => $miescuela
         );
     }
-    
-    
-     /**
+
+    /**
      * Listado de hetero escuela en periodo x
-     * @Route("/es_pe/{esc}/{pe}", name="hetero_prom_esc")
+     * @Route("/es_pe/{esc}/{pe}", name="hetero_esc_per")
      * @Method("GET")
      * @Template("Hetero/heteroescuelas.html.twig")
      */
-    public function escuelaperiodoAction($esc,$pe) {
+    public function escuelaperiodoAction($esc, $pe) {
+        
+        
         $em = $this->getDoctrine()->getManager();
         $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('periodo' => $pe, 'escuela' => $esc));
         $hetero = $em->getRepository('AdminMedBundle:Heteroeval')->findBy(array('docente' => $docentes));
@@ -66,7 +72,8 @@ class HeteroController extends Controller
         return array(
             'hetero' => $hetero,
             'escuela' => $escuela,
-            'pe'   => $pe
+            'pe' => $pe
         );
     }
+
 }
