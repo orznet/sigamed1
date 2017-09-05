@@ -59,7 +59,7 @@
                                         <td>{{ entity.vdofe }}{%set tdofe = tdofe + entity.vdofe%}</td>
                                         <td>{{ entity.vdo }}{%set tdo = tdo + entity.vdo%}</td>
                                         <td>{{ entity.vhc }}{%set thc = thc + entity.vhc%}</td>
-                                        <td><a  href="{{ path('docente_escuela', { 'id': entity.escuela_id }) }}">{{ entity.total }}</a></td>
+                                        <td><a  href="{{ path('docente_escuela', { 'id': entity.escuela_id, 'periodo': periodo }) }}">{{ entity.total }}</a></td>
 
                                     </tr>
                                 {% endfor %}
@@ -83,7 +83,11 @@
                 <!-- end widget div -->
             </div>
             <!-- end widget -->                                                           
-
+                Periodos de evaluación: 
+                
+                {%for periodo in periodos %}
+                      <a href="{{ path('docente_home', { 'periodo': periodo.id }) }}">{{periodo.id}} </a>
+                      {%endfor%}  
 
         </div>
     </div>

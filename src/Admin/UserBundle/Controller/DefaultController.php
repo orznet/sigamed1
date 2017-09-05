@@ -115,7 +115,7 @@ class DefaultController extends Controller {
         //
         //-----------------------------------------------------------------------------------------
 
-        if ($autenticacion == "Aceptada" && count($user) == 1 && $instrumentos[9]->getEstado()) {
+        if ($autenticacion == "Aceptada" && count($user) == 1) {
             $this->ingresoAction($cedula_usuario);
         } else {
             # $this->ingresoAction($cedula_usuario);    

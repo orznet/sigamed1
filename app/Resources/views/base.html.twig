@@ -193,10 +193,7 @@
             <a href="{{ path('admon_user') }}">Buscar Usuario</a>
             </li>
             <li>
-            <a href="#">Informes y Reportes</a>
-            </li>
-            <li>
-            <a href="{{ path('docente_home') }}">Docentes</a>
+            <a href="{{ path('docente_home', { 'periodo':  app.session.get('periodoe') }) }}">Docentes</a>
             </li>
             <li>
             <a href="{{ path('aval_lista') }}">Avales</a>
@@ -224,7 +221,7 @@
                 
                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ADMON') or is_granted('ROLE_DEC') %}
                         <li>
-                        <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Resultados</span></a>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"><em>New</em></i> <span class="menu-item-parent">Resultados</span></a>
                         <ul>
                    <li>
                    <a href="{{ path('hetero_prom_esc') }}">Evaluación de Estudiantes</a>

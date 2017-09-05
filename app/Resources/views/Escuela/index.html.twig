@@ -54,7 +54,7 @@
                {{ entity.decano.nombres }} {{ entity.decano.apellidos }}
                 </td>
                  <td>
-                <a  href="{{ path('docente_escuela', { 'id': entity.id }) }}">Ver</a>      
+                <a  href="{{ path('docente_escuela', { 'id': entity.id, 'periodo': app.session.get('periodoe') }) }}">Ver</a>      
                 </td>
             </tr>
         {% endfor %}

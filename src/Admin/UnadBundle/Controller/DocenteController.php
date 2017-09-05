@@ -39,38 +39,41 @@ class DocenteController extends Controller {
 
     /**
      * Home de Docentes
-     * @Route("/home", name="docente_home")
+     * @Route("/home/{periodo}", name="docente_home")
      * @Method("GET")
      * @Template("Docente/home.html.twig")
      */
-    public function homeAction() {
+    public function homeAction($periodo) {
         $em = $this->getDoctrine()->getManager();
-        $periodo = $this->container->getParameter('appmed.periodo');
+        //$periodo = $this->container->getParameter('appmed.periodo');
         $escuelas = $em->getRepository('AdminUnadBundle:Escuela')->findAll();
+        $periodose = $em->getRepository('AdminMedBundle:Periodoe')->findby(array(),array('id' => 'DESC'));
         $docsdc = $em->getRepository('AdminUnadBundle:Docente')->totalEscuelas($periodo);
         return array(
             'escuelas' => $escuelas,
             'periodo' => $periodo,
-            'docsdc' => $docsdc
+            'docsdc' => $docsdc,
+            'periodos' => $periodose
         );
     }
 
     /**
      * Lists all Docente entities.
      *
-     * @Route("/esc/{id}", name="docente_escuela")
+     * @Route("/esc/{id}/{periodo}", name="docente_escuela")
      * @Method("GET")
      * @Template("Docente/porescuela.html.twig")
      */
-    public function indexEscuelaAction($id) {
+    public function indexEscuelaAction($id,$periodo) {
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->findOneBy(array('id' => $id));
-        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'periodo' => $this->container->getParameter('appmed.periodo')));
+        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'periodo' => $periodo));
         $total = count($entities);
         return array(
             'entities' => $entities,
             'total' => $total,
             'escuela' => $escuela,
+            'periodo' => $periodo
         );
     }
     

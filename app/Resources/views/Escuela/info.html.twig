@@ -27,7 +27,13 @@
             </tr>
             <tr>
                 <th>Docentes</th>
-                <td><a  href="{{ path('docente_escuela', { 'id': entity.id }) }}">Ver</a> </td>
+                <td>
+               Periodos de evaluación: 
+                
+                {%for periodo in periodos %}
+                     <a  href="{{ path('docente_escuela', { 'id': entity.id , 'periodo': periodo.id }) }}">{{ periodo.id }}</a>
+                      {%endfor%}  
+                </td>
             </tr>
              <th>Cursos</th>
                 <td><a  href="{{ path('curso_escuela', { 'sigla': entity.sigla }) }}">Ver</a> </td>

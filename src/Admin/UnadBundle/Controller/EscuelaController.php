@@ -145,6 +145,7 @@ class EscuelaController extends Controller
             $session = new Session();
        $session->migrate();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+        $periodose = $em->getRepository('AdminMedBundle:Periodoe')->findby(array(),array('id' => 'DESC'));
         $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela),array('nivel' => 'DESC'));
         
         if (!$escuela) {
@@ -152,7 +153,8 @@ class EscuelaController extends Controller
         }
         return array(
         'entity'      => $escuela,
-        'programas'   => $programas 
+        'programas'   => $programas,
+        'periodos'    => $periodose
         );
     }
     
