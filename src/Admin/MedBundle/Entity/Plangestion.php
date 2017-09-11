@@ -45,6 +45,11 @@ class Plangestion {
     protected $fecha_autoevaluacion;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $dias;
+    
+    /**
      * @ORM\Column(type="string", length=512, nullable=true)
      */
     protected $observaciones;
@@ -400,4 +405,27 @@ class Plangestion {
         return $this->pdf;
     }
 
+
+    /**
+     * Set dias
+     *
+     * @param integer $dias
+     * @return Plangestion
+     */
+    public function setDias($dias)
+    {
+        $this->dias = $dias;
+
+        return $this;
+    }
+
+    /**
+     * Get dias
+     *
+     * @return integer 
+     */
+    public function getDias()
+    {
+        return $this->dias;
+    }
 }

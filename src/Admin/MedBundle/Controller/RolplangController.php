@@ -49,7 +49,7 @@ class RolplangController extends Controller
         $em = $this->getDoctrine()->getManager();
         $plang = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
         $entity->setPlang($plang);
-        $form = $this->createCreateForm($entity, $id);
+        $form = $this->createCreateForm($entity, $id, $plang->getDias());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -83,9 +83,9 @@ class RolplangController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Rolplang $entity, $id)
+    private function createCreateForm(Rolplang $entity, $id, $dias)
     {
-        $form = $this->createForm(new RolplangType(), $entity, array(
+        $form = $this->createForm(new RolplangType($dias), $entity, array(
             'action' => $this->generateUrl('rolplang_create', array('id' => $id)),
             'method' => 'POST',
         ));
@@ -111,17 +111,18 @@ class RolplangController extends Controller
         $roles = $em->getRepository('AdminMedBundle:Rolplang')->findBy(array('plang' => $plang));
         $libre = 0;
         foreach ($roles as $rolok){ 
-        $libre = $libre + $rolok->getHoras();   
+        $libre = $libre + $rolok->getHoras()*$rolok->getSemanas();   
         }
         $entity->setRol($rol);
         $entity->setPlang($plang);
-        $form   = $this->createCreateForm($entity, $id);
+        $form   = $this->createCreateForm($entity, $id,$plang->getDias());
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'id'     => $id,
             'libre'   => $libre,
+            'total'  => $plang->getDias()*8,
         );
     }
 

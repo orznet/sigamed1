@@ -28,6 +28,13 @@ class Rolplang{
  */
 protected $horas;
 
+
+/**
+ * @ORM\Column(type="integer", nullable=true)
+ */
+protected $semanas;
+
+
 /**
 * @ORM\Column(type="string", length=2500, nullable=true)
 */
@@ -147,5 +154,28 @@ protected $rol;
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set semanas
+     *
+     * @param integer $semanas
+     * @return Rolplang
+     */
+    public function setSemanas($semanas)
+    {
+        $this->semanas = $semanas;
+
+        return $this;
+    }
+
+    /**
+     * Get semanas
+     *
+     * @return integer 
+     */
+    public function getSemanas()
+    {
+        return $this->semanas;
     }
 }

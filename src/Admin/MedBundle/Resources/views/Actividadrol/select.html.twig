@@ -147,8 +147,9 @@ Consulta listado de Actividades por Rol (Predeterminadas)
         
         <script>
 function calculo() {
-  var input = document.getElementById('admin_medbundle_rolplang_horas');  
-  $('#porperiodo').text(input.value+' horas corresponden a '+input.value*({{periodo.dias/5}})+' horas para este periodo de {{periodo.dias*8}} horas.');
+  var horas = document.getElementById('admin_medbundle_rolplang_horas');
+  var semanas = document.getElementById('admin_medbundle_rolplang_semanas');
+  $('#porperiodo').text(horas.value+' horas en '+semanas.value+' semanas corresponden a '+horas.value*semanas.value+' horas para este periodo.');
     }
     </script>
 {% endblock %}

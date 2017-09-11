@@ -3,9 +3,9 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: evaluacion_docente
+    database_name: evaluacion_docente17
     database_user: root
-    database_password: base456
+    database_password: root
     
     mailer_transport: gmail
     mailer_encryption: ssl
@@ -15,4 +15,4 @@ parameters:
    
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    appmed.periodo: '20171'
+    appmed.periodo: '20172'

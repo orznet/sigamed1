@@ -5,10 +5,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
-
-
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="rol_plang", uniqueConstraints={@ORM\UniqueConstraint(columns={"plan_id", "rol_id"})})
@@ -25,8 +21,19 @@ class Rolplang{
 
 /**
  * @ORM\Column(type="decimal", scale=1, nullable=true)
+ * @Assert\Range(
+ *      min = "0",
+ *      max = "40"
+ * )
  */
 protected $horas;
+
+
+/**
+ * @ORM\Column(type="integer", nullable=true)
+ */
+protected $semanas;
+
 
 /**
 * @ORM\Column(type="string", length=2500, nullable=true)

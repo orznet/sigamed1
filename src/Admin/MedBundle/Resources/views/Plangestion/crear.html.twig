@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
     <h3>Plan Gestión de {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}} : {{ entity.docente.user.id}}</h3>
-    <h3>Periodo: {{periodo.id}} Semanas: {{periodo.dias/5}} Dias Habiles: {{periodo.dias}}  Horas: {{periodo.dias*8}}</h3>
+    <h3>Periodo: {{periodo.id}} Semanas: {{entity.dias/5}} Dias Habiles: {{entity.dias}}  Horas: {{entity.dias*8}}</h3>
     
  </table>
   <table class="table table-bordered table-striped hidden-mobile" style="width: 95%">
@@ -9,7 +9,8 @@
             <tr>
                 <th>Rol</th>
                 <th>Descripción</th>
-                <th>Horas Semana</th>
+                <th>Horas/Semana</th>
+                <th>Semanas</th>
                 <th>Horas Periodo</th>
                 <th>Borrar</th>
             </tr>
@@ -30,7 +31,9 @@
                 
                 </td>
                 <td>{{rol.horas}}
-                    {% set totalhoras = totalhoras + rol.horas%}
+                    {% set totalhoras = totalhoras + rol.horas*rol.semanas%}
+                </td>
+                <td>{{rol.semanas}}
                 </td>
                 <td>{{ (periodo.dias/5)*rol.horas|number_format(1, '.', ',')}}</td>
                 <td>
@@ -41,20 +44,21 @@
                </tr>
         {% endfor %}
                <tr>
+                  <td></td>                   
                    <td></td>
-                   <td style="text-align: right"><b>Total Horas:</b></td>
-                   <td><b>{{totalhoras|number_format(1, '.', ',')}}</b></td>
-                    <td>{{ (periodo.dias/5)*totalhoras|number_format(1, '.', ',')}}</td>
+                   <td></td>
+<td style="text-align: right"><b>Total:</b></td>
+                   <td>{{ totalhoras|number_format(1, '.', ',')}}</td>
                     <td></td>
                </tr>
                {%if entity.estado == 'Sin Cerrar'%}
                <tr>
-                <td colspan="5">
+                <td colspan="6">
                 <a href="{{ path('actividadrol_select', { 'id': entity.id }) }}" class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span></i>Agregar Rol</a>  
-                {%if totalhoras > 40.1 %}
+                {%if totalhoras > entity.dias*8 %}
                 <div class="alert alert-danger fade in">
                  <i class="fa-fw fa fa-warning"></i>
-                 <strong>ATENCIÓN</strong> No debe exceder las 40 horas para poder cerrar su plan de gestión.
+                 <strong>ATENCIÓN</strong> No debe exceder las {{entity.dias*8}} horas para poder cerrar su plan de gestión.
                 </div>
                    {%else%}
                 <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Registro de Roles</a>

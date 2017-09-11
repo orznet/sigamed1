@@ -1,5 +1,7 @@
 <?php
+
 namespace Admin\MedBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -10,80 +12,82 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="plangestion")
  * @ORM\Entity(repositoryClass="Admin\MedBundle\Entity\PlangestionRepository")
  */
-class Plangestion{
+class Plangestion {
 
-/**
-* @var integer $id
-* @ORM\Id
-* @ORM\Column(type="integer")
-* @ORM\GeneratedValue(strategy="AUTO")
-*/
-protected $id;
-    
-/**
- * @var Docente
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="plangestion")
- * @ORM\JoinColumn(name="docente_id",referencedColumnName="id") 
+    /**
+     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
- protected $docente;  
- 
- /**
-  * @ORM\Column(type="datetime", nullable=true)
-  */
-protected $fecha_creacion;
+    protected $id;
 
- /**
-  * @ORM\Column(type="datetime", nullable=true)
-  */
-protected $fecha_cierre;
+    /**
+     * @var Docente
+     * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="plangestion")
+     * @ORM\JoinColumn(name="docente_id",referencedColumnName="id") 
+     */
+    protected $docente;
 
- /**
-  * @ORM\Column(type="datetime", nullable=true)
-  */
-protected $fecha_autoevaluacion;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $fecha_creacion;
 
- /**
-  * @ORM\Column(type="string", length=512, nullable=true)
-  */
-protected $observaciones;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $fecha_cierre;
 
-/**
-  * @ORM\Column(type="decimal", scale=2, nullable=true)
-  */
-protected $autoevaluacion;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $fecha_autoevaluacion;
 
-/**
-  * @ORM\Column(type="smallint", nullable=false)
-  */
-protected $estado;
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $dias;
+    
+    /**
+     * @ORM\Column(type="string", length=512, nullable=true)
+     */
+    protected $observaciones;
 
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $autoevaluacion;
 
-/**
- * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Actividadplang", mappedBy="plang")
- */
-protected $actividades;
+    /**
+     * @ORM\Column(type="smallint", nullable=false)
+     */
+    protected $estado;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Actividadplang", mappedBy="plang")
+     */
+    protected $actividades;
 
-/**
- * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Rolplang", mappedBy="plang")
- */
-protected $roles;
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Rolplang", mappedBy="plang")
+     */
+    protected $roles;
 
-/**
- * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
- */
-protected $avales;
+    /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
+     */
+    protected $avales;
 
-/**
- * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\formatoPlang", mappedBy="plan")
- */
-protected $formato;
+    /**
+     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\formatoPlang")
+     */
+    protected $formato;
 
-/**
- * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang", mappedBy="plan")
- */
-protected $pdf;
-
+    /**
+     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang")
+     */
+    protected $pdf;
 
     /**
      * Set fecha_creacion
@@ -91,8 +95,7 @@ protected $pdf;
      * @param \DateTime $fechaCreacion
      * @return Plangestion
      */
-    public function setFechaCreacion($fechaCreacion)
-    {
+    public function setFechaCreacion($fechaCreacion) {
         $this->fecha_creacion = $fechaCreacion;
 
         return $this;
@@ -103,8 +106,7 @@ protected $pdf;
      *
      * @return \DateTime 
      */
-    public function getFechaCreacion()
-    {
+    public function getFechaCreacion() {
         return $this->fecha_creacion;
     }
 
@@ -114,8 +116,7 @@ protected $pdf;
      * @param \DateTime $fechaCierre
      * @return Plangestion
      */
-    public function setFechaCierre($fechaCierre)
-    {
+    public function setFechaCierre($fechaCierre) {
         $this->fecha_cierre = $fechaCierre;
 
         return $this;
@@ -126,8 +127,7 @@ protected $pdf;
      *
      * @return \DateTime 
      */
-    public function getFechaCierre()
-    {
+    public function getFechaCierre() {
         return $this->fecha_cierre;
     }
 
@@ -137,8 +137,7 @@ protected $pdf;
      * @param \DateTime $fechaAutoevaluacion
      * @return Plangestion
      */
-    public function setFechaAutoevaluacion($fechaAutoevaluacion)
-    {
+    public function setFechaAutoevaluacion($fechaAutoevaluacion) {
         $this->fecha_autoevaluacion = $fechaAutoevaluacion;
 
         return $this;
@@ -149,8 +148,7 @@ protected $pdf;
      *
      * @return \DateTime 
      */
-    public function getFechaAutoevaluacion()
-    {
+    public function getFechaAutoevaluacion() {
         return $this->fecha_autoevaluacion;
     }
 
@@ -160,8 +158,7 @@ protected $pdf;
      * @param string $observaciones
      * @return Plangestion
      */
-    public function setObservaciones($observaciones)
-    {
+    public function setObservaciones($observaciones) {
         $this->observaciones = $observaciones;
 
         return $this;
@@ -172,8 +169,7 @@ protected $pdf;
      *
      * @return string 
      */
-    public function getObservaciones()
-    {
+    public function getObservaciones() {
         return $this->observaciones;
     }
 
@@ -183,8 +179,7 @@ protected $pdf;
      * @param float $autoevaluacion
      * @return Plangestion
      */
-    public function setAutoevaluacion($autoevaluacion)
-    {
+    public function setAutoevaluacion($autoevaluacion) {
         $this->autoevaluacion = $autoevaluacion;
 
         return $this;
@@ -195,8 +190,7 @@ protected $pdf;
      *
      * @return float 
      */
-    public function getAutoevaluacion()
-    {
+    public function getAutoevaluacion() {
         return $this->autoevaluacion;
     }
 
@@ -206,8 +200,7 @@ protected $pdf;
      * @param integer $estado
      * @return Plangestion
      */
-    public function setEstado($estado)
-    {
+    public function setEstado($estado) {
         $this->estado = $estado;
 
         return $this;
@@ -218,18 +211,17 @@ protected $pdf;
      *
      * @return integer 
      */
-    public function getEstado()
-    {
-        if ($this->estado == 0 )
-        return 'Sin Cerrar';
+    public function getEstado() {
+        if ($this->estado == 0)
+            return 'Sin Cerrar';
         elseif ($this->estado == 1)
-        return 'Cerrado';
+            return 'Cerrado';
         elseif ($this->estado == 5)
-        return 'Confirmado';
+            return 'Confirmado';
         elseif ($this->estado == 10)
-        return 'Autoevaluado';  
+            return 'Autoevaluado';
         else
-        return $this->estado;   
+            return $this->estado;
     }
 
     /**
@@ -238,19 +230,16 @@ protected $pdf;
      * @param \Admin\UnadBundle\Entity\Docente $id
      * @return Plangestion
      */
-    public function setId(\Admin\UnadBundle\Entity\Docente $id)
-    {
+    public function setId(\Admin\UnadBundle\Entity\Docente $id) {
         $this->id = $id;
 
         return $this;
     }
 
-
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -260,8 +249,7 @@ protected $pdf;
      * @param \Admin\MedBundle\Entity\Actividadplang $actividades
      * @return Plangestion
      */
-    public function addActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
-    {
+    public function addActividade(\Admin\MedBundle\Entity\Actividadplang $actividades) {
         $this->actividades[] = $actividades;
 
         return $this;
@@ -272,8 +260,7 @@ protected $pdf;
      *
      * @param \Admin\MedBundle\Entity\Actividadplang $actividades
      */
-    public function removeActividade(\Admin\MedBundle\Entity\Actividadplang $actividades)
-    {
+    public function removeActividade(\Admin\MedBundle\Entity\Actividadplang $actividades) {
         $this->actividades->removeElement($actividades);
     }
 
@@ -282,8 +269,7 @@ protected $pdf;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getActividades()
-    {
+    public function getActividades() {
         return $this->actividades;
     }
 
@@ -293,8 +279,7 @@ protected $pdf;
      * @param \Admin\MedBundle\Entity\Avalplang $avales
      * @return Plangestion
      */
-    public function addAvale(\Admin\MedBundle\Entity\Avalplang $avales)
-    {
+    public function addAvale(\Admin\MedBundle\Entity\Avalplang $avales) {
         $this->avales[] = $avales;
 
         return $this;
@@ -305,8 +290,7 @@ protected $pdf;
      *
      * @param \Admin\MedBundle\Entity\Avalplang $avales
      */
-    public function removeAvale(\Admin\MedBundle\Entity\Avalplang $avales)
-    {
+    public function removeAvale(\Admin\MedBundle\Entity\Avalplang $avales) {
         $this->avales->removeElement($avales);
     }
 
@@ -315,8 +299,7 @@ protected $pdf;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAvales()
-    {
+    public function getAvales() {
         return $this->avales;
     }
 
@@ -326,8 +309,7 @@ protected $pdf;
      * @param \Admin\MedBundle\Entity\Rolplang $roles
      * @return Plangestion
      */
-    public function addRole(\Admin\MedBundle\Entity\Rolplang $roles)
-    {
+    public function addRole(\Admin\MedBundle\Entity\Rolplang $roles) {
         $this->roles[] = $roles;
 
         return $this;
@@ -338,8 +320,7 @@ protected $pdf;
      *
      * @param \Admin\MedBundle\Entity\Rolplang $roles
      */
-    public function removeRole(\Admin\MedBundle\Entity\Rolplang $roles)
-    {
+    public function removeRole(\Admin\MedBundle\Entity\Rolplang $roles) {
         $this->roles->removeElement($roles);
     }
 
@@ -348,8 +329,7 @@ protected $pdf;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRoles()
-    {
+    public function getRoles() {
         return $this->roles;
     }
 
@@ -359,8 +339,7 @@ protected $pdf;
      * @param \Admin\MedBundle\Entity\formatoPlang $formato
      * @return Plangestion
      */
-    public function setFormato(\Admin\MedBundle\Entity\formatoPlang $formato = null)
-    {
+    public function setFormato(\Admin\MedBundle\Entity\formatoPlang $formato = null) {
         $this->formato = $formato;
 
         return $this;
@@ -371,8 +350,7 @@ protected $pdf;
      *
      * @return \Admin\MedBundle\Entity\formatoPlang 
      */
-    public function getFormato()
-    {
+    public function getFormato() {
         return $this->formato;
     }
 
@@ -382,8 +360,7 @@ protected $pdf;
      * @param \Admin\UnadBundle\Entity\Docente $docente
      * @return Plangestion
      */
-    public function setDocente(\Admin\UnadBundle\Entity\Docente $docente)
-    {
+    public function setDocente(\Admin\UnadBundle\Entity\Docente $docente) {
         $this->docente = $docente;
 
         return $this;
@@ -394,8 +371,7 @@ protected $pdf;
      *
      * @return \Admin\UnadBundle\Entity\Docente 
      */
-    public function getDocente()
-    {
+    public function getDocente() {
         return $this->docente;
     }
 
@@ -404,8 +380,29 @@ protected $pdf;
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set pdf
+     *
+     * @param \Admin\MedBundle\Entity\pdfPlang $pdf
+     * @return Plangestion
+     */
+    public function setPdf(\Admin\MedBundle\Entity\pdfPlang $pdf = null) {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    /**
+     * Get pdf
+     *
+     * @return \Admin\MedBundle\Entity\pdfPlang 
+     */
+    public function getPdf() {
+        return $this->pdf;
+    }
+
 }
