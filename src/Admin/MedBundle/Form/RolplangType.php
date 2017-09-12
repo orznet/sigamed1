@@ -13,7 +13,7 @@ class RolplangType extends AbstractType {
      */
     public $semanas;
 
-    public function __construct(int $dias = null) {
+    public function __construct($dias = null) {
         $this->semanas = $dias/5;
     }
 
@@ -24,7 +24,12 @@ class RolplangType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $opciones = array();
-        for ($i = $this->semanas; $i > 0; $i--) {  
+        
+        $opciones[''.$this->semanas] = ''.$this->semanas;
+        $entero = intdiv($this->semanas , 1);
+        $decimal = $this->semanas - $entero;
+        $temp = $this->semanas-$decimal;
+        for ($i = $temp; $i > 0; $i--) {  
          $opciones[$i] = $i;
         }
 

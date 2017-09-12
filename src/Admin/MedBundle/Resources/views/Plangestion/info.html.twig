@@ -49,7 +49,8 @@
             <tr>
                 <th>Rol</th>
                 <th>Descripción de la Actividad</th>
-                <th>Horas Semana</th>
+                <th>Horas/Semana</th>
+                <th>Semanas</th>
                 <th>Horas Periodo</th>
             </tr>
         </thead>
@@ -66,21 +67,25 @@
                 <font color="#a57225">{{rol.descripcion}}</font>
                 </td>
                 <td>{{rol.horas}}
-                    {% set totalhoras = totalhoras + rol.horas%}
+                    {% set totalhoras = totalhoras + rol.horas*rol.semanas%}
+                </td>
+                <td>{{rol.semanas}}
                 </td>
                 <td>
-                    {{rol.horas*(periodo.dias/5)}}
+                    {{rol.horas*rol.semanas}}
                 </td>
                </tr>
         {% endfor %}
                <tr>
                    <td></td>
-                   <td align="right">Total Horas:</td>
-                    <td>{{totalhoras}}</td>
-                    <td>{{totalhoras*(periodo.dias/5) }}</td>
+                   <td></td>
+                    <td></td>
+                   <td align="right">Total:</td>
+                   
+                    <td>{{totalhoras }}</td>
                </tr>
                <tr>
-                   <td colspan="4" align="center">Fecha de Registro: {{docente.plangestion.fechacierre|date('d-m-Y')}}</td>
+                   <td colspan="5" align="center">Fecha de Registro: {{docente.plangestion.fechacierre|date('d-m-Y')}}</td>
                    </tr>
         </tbody>
     </table>

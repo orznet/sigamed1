@@ -30,7 +30,7 @@ protected $horas;
 
 
 /**
- * @ORM\Column(type="integer", nullable=true)
+ * @ORM\Column(type="decimal", scale=1, nullable=true)
  */
 protected $semanas;
 
@@ -156,10 +156,11 @@ protected $rol;
         return $this->descripcion;
     }
 
+
     /**
      * Set semanas
      *
-     * @param integer $semanas
+     * @param string $semanas
      * @return Rolplang
      */
     public function setSemanas($semanas)
@@ -172,7 +173,7 @@ protected $rol;
     /**
      * Get semanas
      *
-     * @return integer 
+     * @return string 
      */
     public function getSemanas()
     {

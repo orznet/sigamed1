@@ -33,9 +33,9 @@
                 <td>{{rol.horas}}
                     {% set totalhoras = totalhoras + rol.horas*rol.semanas%}
                 </td>
-                <td>{{rol.semanas}}
+                <td>{{rol.semanas|number_format(1, '.', ',')}}
                 </td>
-                <td>{{ (periodo.dias/5)*rol.horas|number_format(1, '.', ',')}}</td>
+                <td>{{ rol.horas*rol.semanas|number_format(1, '.', ',')}}</td>
                 <td>
                 {%if entity.estado == 'Sin Cerrar'%}
                 <a href="{{ path('rolplang_delete', { 'id': rol.id }) }}"  class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></a>
@@ -47,7 +47,7 @@
                   <td></td>                   
                    <td></td>
                    <td></td>
-<td style="text-align: right"><b>Total:</b></td>
+<td style="text-align: right"><b>Total: </b></td>
                    <td>{{ totalhoras|number_format(1, '.', ',')}}</td>
                     <td></td>
                </tr>
