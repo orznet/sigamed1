@@ -308,7 +308,7 @@ class PlangestionController extends Controller
         $entity->setFechaCierre(new \DateTime());
         $entity->setEstado(1);
         $em->flush();
-        return $this->redirect($this->generateUrl('admin_user_inicio'));
+        return $this->redirect($this->generateUrl('plangestion_crear'));
     }
     
     /** Confirmar plan

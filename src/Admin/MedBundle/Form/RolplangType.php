@@ -14,7 +14,7 @@ class RolplangType extends AbstractType {
     public $semanas;
 
     public function __construct($dias = null) {
-        $this->semanas = $dias/5;
+        $this->semanas = $dias / 5;
     }
 
     /**
@@ -24,24 +24,26 @@ class RolplangType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $opciones = array();
-        
-        $opciones[''.$this->semanas] = ''.$this->semanas;
-        $entero = intdiv($this->semanas , 1);
+
+        $opciones['' . $this->semanas] = '' . $this->semanas;
+        $entero = intdiv($this->semanas, 1);
         $decimal = $this->semanas - $entero;
-        $temp = $this->semanas-$decimal;
-        for ($i = $temp; $i > 0; $i--) {  
-         $opciones[$i] = $i;
+        $temp = $this->semanas - $decimal;
+        for ($i = $temp; $i > 0; $i--) {
+            $opciones[$i] = $i;
         }
 
         $builder
-                ->add('horas', 'text', array('attr' => array('onkeyup' => 'calculo()')))
+                ->add('horas', 'text', array(
+                    'attr' => array('onkeyup' => 'calculo()')
+                ))
                 ->add('descripcion', 'textarea', array('attr' => array('cols' => '100')))
                 ->add('rol', 'entity', array(
                     'class' => 'AdminMedBundle:Rolacademico',
                     'property' => 'id',
                 ))
                 ->add('semanas', 'choice', array(
-               //     'empty_value' => 'Semanas',
+                    //     'empty_value' => 'Semanas',
                     'choices' => $opciones,
                     'required' => true,
                     'attr' => array('onchange' => 'calculo()')))

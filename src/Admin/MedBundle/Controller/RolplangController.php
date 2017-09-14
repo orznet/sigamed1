@@ -111,7 +111,7 @@ class RolplangController extends Controller
         $roles = $em->getRepository('AdminMedBundle:Rolplang')->findBy(array('plang' => $plang));
         $libre = 0;
         foreach ($roles as $rolok){ 
-        $libre = $libre + $rolok->getHoras()*$rolok->getSemanas();   
+        $libre = $libre + $rolok->getHoras();   
         }
         $entity->setRol($rol);
         $entity->setPlang($plang);

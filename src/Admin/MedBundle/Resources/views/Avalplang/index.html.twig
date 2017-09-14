@@ -33,7 +33,7 @@
                 </td>
                 <td>
                 {%if entity.plan.estado == 'Cerrado' and entity.avalado != 1 %}
-                 <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.plan.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
+                 <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
                 {%else%}
                 {{entity.estado}}   
                 {%endif%}

@@ -19,7 +19,7 @@
       <td><b>Escuela:</b></td>
     <td>{{docente.escuela.nombre}}</td>
     <td><b>Periodo de Ejecución:</b>
-    {{docente.periodo}} - Dias Habiles: {{docente.plangestion.dias}}</td>
+    {{docente.periodo}} - Dias Habiles: {{docente.plangestion.dias}} (Horas: {{docente.plangestion.dias*8}})</td>
   </tr>
   <tr>
     <td><b>Nombre</b></td>
@@ -66,13 +66,13 @@
                     <td>
                 <font color="#a57225">{{rol.descripcion}}</font>
                 </td>
-                <td>{{rol.horas}}
-                    {% set totalhoras = totalhoras + rol.horas*rol.semanas%}
+                <td>{{(rol.horas/rol.semanas)|number_format(1, '.', ',')}}
+                    {% set totalhoras = totalhoras + rol.horas%}
                 </td>
-                <td>{{rol.semanas}}
+                <td>{{rol.semanas|number_format(1, '.', ',')}}
                 </td>
                 <td>
-                    {{rol.horas*rol.semanas}}
+                    {{rol.horas}}
                 </td>
                </tr>
         {% endfor %}
@@ -85,7 +85,7 @@
                     <td>{{totalhoras }}</td>
                </tr>
                <tr>
-                   <td colspan="5" align="center">Fecha de Registro: {{docente.plangestion.fechacierre|date('d-m-Y')}}</td>
+                   <td colspan="5" align="center">Fecha de Registro: {{docente.plangestion.fechacierre? docente.plangestion.fechacierre|date('d-m-Y'):'Sin Cerrar'}}</td>
                    </tr>
         </tbody>
     </table>

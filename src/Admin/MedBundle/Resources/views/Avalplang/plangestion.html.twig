@@ -69,7 +69,7 @@
                     <td>{{totalhoras }}</td>
                 </tr>
                 <tr>
-                    <td colspan="5" align="center">Fecha de Registro: {{docente.plangestion.fechacierre|date('d-m-Y')}}</td>
+                    <td colspan="5" align="center">Fecha Registro: {{ entity.fechacierre? entity.fechacierre|date('Y-m-d H:i') : 'Sin Cerrar' }}</td>
                 </tr>
             </tbody>
         </table>
@@ -87,7 +87,7 @@
                     <td>{{aval.perfil}}</td>
                     <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
                     <td>
-                    {%if aval.perfil == 'DECN' and is_granted('ROLE_DEC')%}    
+                    {%if aval.perfil == 'DECN' and entity.fechacierre and is_granted('ROLE_DEC')%}    
                         {%if aval.avalado == 1%}
                             Aprobado
                         {%elseif aval.avalado == 2%}
@@ -95,7 +95,9 @@
                         {%else%}
                             <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': aval.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
                             {%endif%}
-                       {%endif%}
+                       {%else%}
+                       Registro sin Cerrar
+                    {%endif%}
                     
                         {%if aval.perfil == 'DIRZ' and is_granted('ROLE_DIRZ')%}    
                         {%if aval.avalado == 1%}

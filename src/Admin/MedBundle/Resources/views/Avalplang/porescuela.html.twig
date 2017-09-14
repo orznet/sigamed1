@@ -11,7 +11,7 @@
                 <th>Centro</th>
                 <th>Dias</th>
                 <th>Horas</th>
-                <th>Plan</th>
+                <th colspan="2">Registro del Plan</th>
                 <th>Avales</th>
                 <th>Print</th>
                 <th>Original Firmado</th>
@@ -29,11 +29,16 @@
                     <td>{{entity.plangestion.dias*8}}</td>
                     <td>
                         {%if entity.plangestion.estado != 'Sin Cerrar' %}
-                            <a href="{{ path('aval_plangestion', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ver Plan <i class="fa fa-sign-in"></i></a>   
+                           Cerrado
                             {%else%}
-                            No registrado
+                            No Cerrado
                         {%endif%}
                     </td>
+                    <td>
+                      <a href="{{ path('aval_plangestion', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ver <i class="fa fa-sign-in"></i></a>   
+                         
+                    </td>    
+                   
                     <td>
                       {% for aval in entity.plangestion.avales%}
                       {{aval.perfil}}
