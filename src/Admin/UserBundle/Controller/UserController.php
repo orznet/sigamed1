@@ -252,8 +252,8 @@ class UserController extends Controller {
      * @Template("AdminUserBundle:User:show.html.twig")
      */
     public function newpassAction(Request $request, $id) {
-        if (!$request->isXmlHttpRequest()) {
-            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+         if (!$request->isXmlHttpRequest()) {
+        //     return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -265,7 +265,7 @@ class UserController extends Controller {
 
         $passForm = $this->createPassForm($id);
         #$passForm->handleRequest($request);
-        $passForm->bind($request);
+        $passForm->bind($request); 
         if ($passForm->isValid()) {
             $currentpass = $this->generateRandomString();
             $entity->setPassword($currentpass);
@@ -344,7 +344,7 @@ class UserController extends Controller {
     }
 
     private function generateRandomString($length = 6) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -359,14 +359,15 @@ class UserController extends Controller {
                 ->setSubject('Contraseña del Módulo MED para ' . $user->getId())
                 ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
                 ->setTo(array($user->getEmail() => $user->getNombres() . ' ' . $user->getApellidos()))
-                ->setCc(array($user->getEmailp() => $user->getNombres() . ' ' . $user->getApellidos()))
                 ->setBody(
                 $this->renderView('AdminUserBundle:User:newpass.txt.twig', array('user' => $user,
                     'newpass' => $newpass
                         )
                 )
-                )
-        ;
+        );
+        if ($user->getEmailp() != '') {
+            $message->setCc(array($user->getEmailp() => $user->getNombres() . ' ' . $user->getApellidos()));
+        }
         $this->get('mailer')->send($message);
     }
 

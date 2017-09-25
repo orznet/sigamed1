@@ -79,15 +79,15 @@ class Plangestion {
      */
     protected $avales;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\formatoPlang")
-     */
-    protected $formato;
 
+            
     /**
-     * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang")
-     */
-    protected $pdf;
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang", cascade={"persist", "merge", "remove"})
+    * @ORM\JoinColumn(name="pdf_id", referencedColumnName="id")
+    */
+    private $pdf;
+    
+    
 
     /**
      * Set fecha_creacion
@@ -333,26 +333,7 @@ class Plangestion {
         return $this->roles;
     }
 
-    /**
-     * Set formato
-     *
-     * @param \Admin\MedBundle\Entity\formatoPlang $formato
-     * @return Plangestion
-     */
-    public function setFormato(\Admin\MedBundle\Entity\formatoPlang $formato = null) {
-        $this->formato = $formato;
 
-        return $this;
-    }
-
-    /**
-     * Get formato
-     *
-     * @return \Admin\MedBundle\Entity\formatoPlang 
-     */
-    public function getFormato() {
-        return $this->formato;
-    }
 
     /**
      * Set docente

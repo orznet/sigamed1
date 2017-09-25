@@ -50,13 +50,13 @@
                         <td>
                             <font color="#a57225">{{rol.descripcion}}</font>
                         </td>
-                        <td>{{rol.horas}}
-                            {% set totalhoras = totalhoras + rol.horas*rol.semanas%}
+                        <td>{{(rol.horas/rol.semanas)|number_format(1, '.', ',')}}
+                            {% set totalhoras = totalhoras + rol.horas%}
                         </td>
-                        <td>{{rol.semanas}}
+                        <td>{{rol.semanas|number_format(1, '.', ',')}}
                         </td>
                         <td>
-                            {{rol.horas*rol.semanas}}
+                            {{rol.horas}}
                         </td>
                     </tr>
                 {% endfor %}

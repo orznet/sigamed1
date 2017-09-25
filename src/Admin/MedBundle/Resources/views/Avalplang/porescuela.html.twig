@@ -29,35 +29,29 @@
                     <td>{{entity.plangestion.dias*8}}</td>
                     <td>
                         {%if entity.plangestion.estado != 'Sin Cerrar' %}
-                           Cerrado
-                            {%else%}
+                            Cerrado
+                        {%else%}
                             No Cerrado
                         {%endif%}
                     </td>
                     <td>
-                      <a href="{{ path('aval_plangestion', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ver <i class="fa fa-sign-in"></i></a>   
-                         
-                    </td>    
-                   
-                    <td>
-                      {% for aval in entity.plangestion.avales%}
-                      {{aval.perfil}}
-                        {%if aval.estado=='Aprobado'%}
-                        <i class="fa fa-check" style="color: #739e73"></i>
-                        {%else%}
-                        <i class="fa fa-times" style="color: #a90329"></i>
-                        {%endif%}                      
-                     {%endfor%}
+                        <a href="{{ path('aval_plangestion', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Ver <i class="fa fa-sign-in"></i></a>
                     </td>
                     <td>
-                      <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs"> <i class="fa fa-print"></i></a>   
+                        {% for aval in entity.plangestion.avales%}
+                            {{aval.perfil}}
+                            {%if aval.estado=='Aprobado'%}
+                                <i class="fa fa-check" style="color: #739e73"></i>
+                            {%else%}
+                                <i class="fa fa-times" style="color: #a90329"></i>
+                            {%endif%}                      
+                        {%endfor%}
                     </td>
                     <td>
-                        {%if entity.plangestion.pdf%}    
-                            <a href="../../../{{entity.plangestion.pdf.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
-                        {%elseif is_granted('ROLE_DEC') %}
-                            <a href="{{ path('pdfplang_new', { 'id': entity.plangestion.docente.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a> 
-                            {%endif%}
+                        <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs"> <i class="fa fa-print"></i></a>   
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             {% endfor %}

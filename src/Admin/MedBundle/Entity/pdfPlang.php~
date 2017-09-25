@@ -23,11 +23,10 @@ class pdfPlang{
   protected $id;   
  
   
-  /** 
-    * @var Plan 
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion", inversedBy="pdf")
-    * @ORM\JoinColumn(name="plangestion_id", referencedColumnName="id",
-    * nullable=false
+      /** 
+    * @var Pdf 
+    * @ORM\oneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion")
+    * @ORM\JoinColumn(name="plangestion_id", referencedColumnName="id"
     * )
     */
 protected $plan;
@@ -43,8 +42,8 @@ protected $path;
 
     /**
      * @Assert\File(
-     *     maxSize = "2000000", 
-     *     maxSizeMessage = "El tamaño máximo permitido es de 2MB",
+     *     maxSize = "3000000", 
+     *     maxSizeMessage = "El tamaño máximo permitido es de 3MB",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Tipo de archivo no válido, Solo se permite en formato PDF"
      * )
@@ -72,7 +71,7 @@ protected $path;
     }
 
     protected function getUploadDir() {
-        return 'archivos/pdfplang/';
+        return 'uploads/'.$this->getPlan()->getDocente()->getPeriodo().'/pdfplang';
     }
       /**
      * Sets file.
@@ -177,7 +176,7 @@ protected $path;
      * Set plan
      *
      * @param \Admin\MedBundle\Entity\Plangestion $plan
-     * @return formatoPlang
+     * @return pdfPlang
      */
     public function setPlan(\Admin\MedBundle\Entity\Plangestion $plan)
     {

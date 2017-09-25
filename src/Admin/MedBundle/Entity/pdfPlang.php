@@ -12,26 +12,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\HasLifecycleCallbacks
  */
 class pdfPlang{
- 
+
+  protected $plan_id = 0;
+  protected $periodo = 0;
     
     /**
    * @var integer $id
    * @ORM\Id
    * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\GeneratedValue(strategy="IDENTITY")
    */
   protected $id;   
  
   
-  /** 
-    * @var Plan 
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\Plangestion")
-    * @ORM\JoinColumn(name="plangestion_id", referencedColumnName="id",
-    * nullable=false
-    * )
-    */
-protected $plan;
-
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -53,6 +46,13 @@ protected $path;
  
  
  
+     public function __construct($id,$periodo)
+    {
+        $this->plan_id = $id;
+        $this->periodo = $periodo;
+    }
+ 
+ 
          /******* Logica Archivos**/
     
      public function getAbsolutePath() {
@@ -72,7 +72,7 @@ protected $path;
     }
 
     protected function getUploadDir() {
-        return 'uploads/'.$this->getPlan()->getDocente()->getPeriodo().'/pdfplang';
+        return 'uploads/'.$this->periodo.'/pdfplang';
     }
       /**
      * Sets file.
@@ -110,7 +110,7 @@ protected $path;
         if (null !== $this->getFile()) {
             // haz lo que quieras para generar un nombre único
             //$filename = sha1(uniqid(mt_rand(), true));
-            $filename = 'pdfplang-'.$this->getPlan()->getDocente()->getId();
+            $filename = 'pdfplang-'.$this->plan_id;
             $this->path = $filename . '.' . $this->getFile()->guessExtension();
         }
     }
@@ -173,28 +173,6 @@ protected $path;
         return $this->path;
     }
 
-    /**
-     * Set plan
-     *
-     * @param \Admin\MedBundle\Entity\Plangestion $plan
-     * @return pdfPlang
-     */
-    public function setPlan(\Admin\MedBundle\Entity\Plangestion $plan)
-    {
-        $this->plan = $plan;
-
-        return $this;
-    }
-
-    /**
-     * Get plan
-     *
-     * @return \Admin\MedBundle\Entity\Plangestion 
-     */
-    public function getPlan()
-    {
-        return $this->plan;
-    }
 
     /**
      * Get id
