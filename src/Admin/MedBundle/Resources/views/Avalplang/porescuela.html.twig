@@ -51,7 +51,12 @@
                         <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs"> <i class="fa fa-print"></i></a>   
                     </td>
                     <td>
-
+                   {%if entity.plangestion.pdf%}    
+                    <a href="../../uploads/{{entity.periodo}}{{entity.plangestion.pdf.webpath}}" target="_blank"><i class="fa fa-file-o"></i> Ver...</a>
+                    {%else %}
+                    <a href="{{ path('pdfplang_new', { 'id': entity.plangestion.docente.id }) }}" class="btn btn-primary btn-xs">Cargar <i class="fa fa-upload"></i></a> 
+                    {%endif%}
+                    
                     </td>
                 </tr>
             {% endfor %}

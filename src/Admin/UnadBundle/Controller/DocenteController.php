@@ -258,9 +258,16 @@ class DocenteController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Docente entity.');
         }
-        return array(
-            'entity' => $entity,
-        );
+        
+        if ($entity->getVinculacion() == 'DOFE') {
+            return $this->render('AdminUnadBundle:Docente:dofe.html.twig', array(
+                        'entity' => $entity,
+            ));
+        } else {
+            return array(
+                'entity' => $entity,
+            );
+        }
     }
 
     /**

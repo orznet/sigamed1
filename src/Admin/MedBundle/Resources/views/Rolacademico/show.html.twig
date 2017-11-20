@@ -38,6 +38,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Responsabilidad</th>
                 <th>Descripción</th>
 
             </tr>
@@ -46,6 +47,7 @@
         {% for entity in entity.actividades %}
             <tr>
                 <td><a href="{{ path('actividadrol_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.responsabilidad? entity.responsabilidad.nombre : ' ' }}</td>
                 <td>{{ entity.descripcion }}</td>
             </tr>
         {% endfor %}

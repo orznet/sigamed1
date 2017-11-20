@@ -88,22 +88,18 @@
                     <td>{{aval.fechaAval? aval.fechaAval|date('Y-m-d H:i') : ''}}</td>
                     <td>
                     {%if aval.perfil == 'DECN' and entity.fechacierre and is_granted('ROLE_DEC')%}    
-                        {%if aval.avalado == 1%}
+                        {%if aval.avalado == 1 %}
                             Aprobado
-                        {%elseif aval.avalado == 2%}
-                            <font color="#F87217">No aprobado</font>
                         {%else%}
                             <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': aval.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
                             {%endif%}
                        {%else%}
-                       Registro sin Cerrar
+                       
                     {%endif%}
-                    
-                        {%if aval.perfil == 'DIRZ' and is_granted('ROLE_DIRZ')%}    
+
+                        {%if aval.perfil == 'DIRZ' and entity.fechacierre and is_granted('ROLE_DIRZ')%}    
                         {%if aval.avalado == 1%}
                             Aprobado
-                        {%elseif aval.avalado == 2%}
-                            <font color="#F87217">No aprobado</font>
                         {%else%}
                             <a data-toggle="modal" data-target="#myModal" href="{{ path('avalplang_edit', { 'id': aval.id }) }}" class="btn btn-primary btn-xs">Avalar <i class="fa fa-sign-in"></i></a>
                             {%endif%}

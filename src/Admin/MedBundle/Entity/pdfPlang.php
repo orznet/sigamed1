@@ -49,6 +49,7 @@ protected $path;
      public function __construct($id,$periodo)
     {
         $this->plan_id = $id;
+        $this->id = $id;
         $this->periodo = $periodo;
     }
  
@@ -64,7 +65,7 @@ protected $path;
     public function getWebPath() {
         return null === $this->path 
                 ? null 
-                : $this->getUploadDir() . '/' . $this->path;
+                : '/pdfplang/' . $this->path;
     }
 
     protected function getUploadRootDir() {
@@ -173,7 +174,18 @@ protected $path;
         return $this->path;
     }
 
-
+    /**
+     * Set id
+     * @param integer $id
+     * @return formatoPlang
+     */
+    public function SetId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    
+    
     /**
      * Get id
      *
