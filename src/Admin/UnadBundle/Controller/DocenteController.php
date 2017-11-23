@@ -243,6 +243,36 @@ class DocenteController extends Controller {
             'instrumentos' => $instrumentos,
         );
     }
+    
+    
+        /**
+     * Finds and displays a Docente entity
+     * @Route("/inicio/", name="docente_inicio")
+     * @Method("GET")
+     * @Template()
+     */
+    public function inicioAction() {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $entity = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        $instrumentos = $em->getRepository('AdminMedBundle:Instrumento')->findAll();
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Error al buscarla entidad del docente.');
+        }
+        
+        if ($entity->getVinculacion() == 'DOFE') {
+            return $this->render('AdminUnadBundle:Docente:iniciodofe.html.twig', array(
+                        'entity' => $entity,
+                        'instrumentos' => $instrumentos
+            ));
+        } else {
+            return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
+                        'entity' => $entity,
+                        'instrumentos' => $instrumentos
+            ));
+        }
+    }
 
     /**
      * Finds and displays a Docente entity

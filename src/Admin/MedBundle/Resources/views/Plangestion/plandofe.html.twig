@@ -74,7 +74,7 @@
              {%if actividad.actividad.responsabilidad.codigo != resp%}
                {% set resp = actividad.actividad.responsabilidad.codigo %}  
               <tr> 
-                  <td colspan="4"><b> Responsabilidad: {{actividad.actividad.responsabilidad.codigo}} - {{actividad.actividad.responsabilidad.nombre}}</b></td>
+                  <td colspan="4"><b> Responsabilidad: {{actividad.actividad.responsabilidad.codigo}} - {{actividad.actividad.responsabilidad.nombre}}.</b></td>
               </tr>
               {%endif%}              
               
@@ -84,7 +84,7 @@
                  {{num}}   
                 </td>
                 <td>
-               {{ actividad.actividad.descripcion }}     
+               {{ actividad.actividad.descripcion }}.     
                 </td>
                </tr>
         {% endfor %}

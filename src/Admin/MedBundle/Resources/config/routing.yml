@@ -77,6 +77,10 @@ _hetero:
     resource: "@AdminMedBundle/Controller/HeteroController.php"
     type:     annotation   
 
+_dofe:
+    resource: "@AdminMedBundle/Controller/DofeController.php"
+    type:     annotation   
+
 accionespm_editdoc:
     path:  /doc/planm/acc/{id}/edit
     defaults: { _controller: "AdminMedBundle:Accionespm:editdoc" }

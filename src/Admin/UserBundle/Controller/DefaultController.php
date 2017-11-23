@@ -61,10 +61,12 @@ class DefaultController extends Controller {
                 $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para el periodo de evaluación Vigente ' . $this->container->getParameter('appmed.periodo') . ', es posible que aún no este activo por favor revise las fechas del cronograma de evaluación');
             } else {
                 $session->set('docenteid', $docente->getId());
-                return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
-                            'entity' => $docente,
-                            'instrumentos' => $instrumentos,
-                ));
+           
+          return $this->redirect($this->generateUrl('docente_inicio'));      
+            //     return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
+           //                 'entity' => $docente,
+           //                 'instrumentos' => $instrumentos,
+           //     ));
             }
         } else {
             $docente = null;

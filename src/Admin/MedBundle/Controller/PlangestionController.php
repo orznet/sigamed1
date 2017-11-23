@@ -110,6 +110,24 @@ class PlangestionController extends Controller {
     }
 
     /**
+     * @Route("/{id}/dofe", name="plangestion_dofe")
+     * @Method("GET")
+     * @Template()
+     */
+    public function dofeAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Entidad no encontrada');
+        }
+        return array(
+            'entity' => $entity,
+        );
+    }
+
+    /**
      * @Route("/conf/plan", name="plangestion_conf")
      * @Method("GET")
      * @Template()
@@ -170,11 +188,10 @@ class PlangestionController extends Controller {
             return $this->render('AdminMedBundle:Plangestion:info.html.twig', array('entity' => $entity));
         } else if ($docente->getVinculacion() == 'DOFE') {
             return $this->render('AdminMedBundle:Plangestion:plandofe.html.twig', array('entity' => $entity));
-        } else { 
+        } else {
             return $this->render('AdminMedBundle:Plangestion:planactividades.html.twig', array('docente' => $docente,
-                'entity' => $entity,
-                'periodo' => $periodo));
-            
+                        'entity' => $entity,
+                        'periodo' => $periodo));
         }
     }
 
@@ -246,9 +263,9 @@ class PlangestionController extends Controller {
      */
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-
+        $session = $this->getRequest()->getSession();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
-
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Plangestion entity.');
         }
@@ -269,8 +286,19 @@ class PlangestionController extends Controller {
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $em->flush();
-            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
+
+            if ($docente->getVinculacion() == 'DOFE') {
+                return $this->redirect($this->generateUrl('plangestion_dofe', array(
+                                    'id' => $entity->getId()
+                )));
+            } else {
+                return $this->redirect($this->generateUrl('plangestion_show', array(
+                                    'id' => $entity->getId()
+                )));
+            }
         }
+
+
 
         return array(
             'entity' => $entity,

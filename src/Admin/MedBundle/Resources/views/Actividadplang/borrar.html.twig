@@ -29,8 +29,10 @@
                    <tr>
 		    <td>Evidencia</td>
 		    <td>
+             {%if entity.webpath%}   
 		    <a href="../../{{entity.webpath}}" target="_blank"><i class="fa fa-download"></i> Evidencia</a>
-		    </td>
+		    {%endif%}
+            </td>
 		  </tr>
 		     <tr>
 		    <td>Autoevaluación</td>

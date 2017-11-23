@@ -230,7 +230,19 @@
                         </li>
                     {%endif%}
 
-
+                   {% if is_granted('ROLE_DOFE')  %}
+                       
+                       <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">DOFEs</span></a>
+                            <ul style="display: block;">
+                                <li>
+                                </li>
+                                <li>
+                                    <a href="{{ path('dofe_evaluar') }}"><i class="fa fa-book"></i> Evaluación a DOFEs</a>
+                                </li> 
+                            </ul>
+                       </li>
+                        {%endif%}  
 
                     {% if is_granted('ROLE_DIRC')  %} 
                         <ul style="display: block;">
