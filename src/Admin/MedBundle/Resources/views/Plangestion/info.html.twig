@@ -138,5 +138,73 @@ Sin revisar
     </tr>
     
 </table>
+ {%if entity.fechaautoevaluacion %}         
+   <h2>2. Auto Evaluación</h2> 
+        <table class="table table-bordered hidden-mobile" style="width: 95%">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Evidencia</th>
+                    <th>Auto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set temp = 'temp' %} {% set num = 0 %} {% set totalhoras = 0 %}
+                {% set termino = 1 %}
+                {% for actividad in entity.actividades %}
+                    <tr>
+                        {%if temp != actividad.actividad.rol.nombre %} 
+                            <td>
+                                <b>Rol:
+                                    {{actividad.actividad.rol.nombre}}
+                                    {% set temp = actividad.actividad.rol.nombre %}        
+                                </b>
+                                <br>{{actividad.actividad.rol.descripcion}}
+                            </td>
+                            <td></td>
+                            <td></td>
+                        {%endif%}
+                    </tr>     
+                    <tr>
+                        {% set num = num+1 %}
+                        <td>{{num}}.     
+                            {{ actividad.actividad.descripcion }}
+                            {%if actividad.actividad.textoampliacion %}
+                                <font color="#a57225">{{actividad.descripcion}}</font>
+                            {%endif%}
+                            {%if actividad.observaciones %}
+                                <br>DESCRIPCIÓN DEL AVANCE: <font color="#058dc7">{{actividad.observaciones}}</font><br>
+                            {%endif%}
+                        </td>
+                        <td>
+                            {%if actividad.path %}
+                                {{actividad.id}}    
+                                <a href="../../../{{actividad.webpath}}" target="_blank"><i class="fa fa-download"></i>Ver...</a>
+                            {%endif%}
+                        </td>
+                        <td>
+                            {%if actividad.plang.autoevaluacion %}
+                                {{actividad.autoevaluacion}}
+                            {%elseif actividad.autoevaluacion is null%}
+                                {% set termino = 0 %}
+
+                            {%else%}  
+                            {%endif%}   
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td  colspan="2" align="right">Autoevaluación:</td>
+                    <td>{{ entity.autoevaluacion }}</td>
+                </tr> 
+                <tr>
+                    <td colspan="3"><b>Observaciones: </b>{{ entity.observaciones }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><b>Fecha autoevaluación: </b>{{ entity.fechaautoevaluacion? entity.fechaautoevaluacion|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>   
+            </tbody>
+        </table>           
+{%endif%}                
     </body>
 {% endblock %}
