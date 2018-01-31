@@ -346,7 +346,7 @@ class CursoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Oferta')->find($id);
         if (!$entity) {
-            throw $this->createNotFoundException('NO se encotro oferta');
+            throw $this->createNotFoundException('NO se encontro oferta');
         }
        $cedula = new Cedula();     
        $Form = $this->createForm(new CedulaType(), $cedula, array(
@@ -416,7 +416,7 @@ class CursoController extends Controller
       
       $ncedula = $Form->get('cedula')->getData();
       $user = $em->getRepository('AdminUserBundle:User')->find($ncedula);
-      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array ('user' => $user));      
+      $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array ('user' => $user, 'periodo' => $this->container->getParameter('appmed.periodo') ));      
       if (!$docente) {
       $this->get('session')->getFlashBag()->add('error', 'El número no corresponde a un docente');          
       return $this->redirect($this->generateUrl('oferta_edit', array('id' => $id)));          

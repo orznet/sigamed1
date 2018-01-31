@@ -185,9 +185,15 @@ class PlangestionController extends Controller {
         }
 
         if ($docente->getVinculacion() == 'De Carrera') {
-            return $this->render('AdminMedBundle:Plangestion:info.html.twig', array('entity' => $entity));
+            return $this->render('AdminMedBundle:Plangestion:info.html.twig', array(
+                        'entity' => $entity,
+                        'docente' => $docente,
+            ));
         } else if ($docente->getVinculacion() == 'DOFE') {
-            return $this->render('AdminMedBundle:Plangestion:plandofe.html.twig', array('entity' => $entity));
+            return $this->render('AdminMedBundle:Plangestion:plandofe.html.twig', array(
+                        'entity' => $entity,
+                        'docente' => $docente
+            ));
         } else {
             return $this->render('AdminMedBundle:Plangestion:planactividades.html.twig', array('docente' => $docente,
                         'entity' => $entity,
@@ -205,9 +211,16 @@ class PlangestionController extends Controller {
         if (!$docente) {
             throw $this->createNotFoundException('No se encuentra docente entity.');
         }
-        return array(
-            'entity' => $docente,
-        );
+        if ($docente->getVinculacion() == 'DOFE') {
+            return $this->render('AdminMedBundle:Plangestion:registrodofe.html.twig', array(
+                        'entity' => $docente,
+            ));
+        } else {
+
+            return array(
+                'entity' => $docente,
+            );
+        }
     }
 
     /**
@@ -333,7 +346,7 @@ class PlangestionController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Entidad No encontrada');
         }
-
+        if (count($entity->getActividades()) == 0 ){
         foreach ($entity->getRoles() as $rol) {
             foreach ($rol->getRol()->getActividades() as $actividad) {
                 $actividadplan = new Actividadplang();
@@ -342,9 +355,14 @@ class PlangestionController extends Controller {
                 $em->persist($actividadplan);
             }
         }
+
         $entity->setEstado(5);
         $em->flush();
         return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
+        }
+        else{
+        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));   
+        }
     }
 
     /**

@@ -17,25 +17,49 @@
   <table class="table table-bordered hidden-mobile" style="width: 95%">
       <tr>
           <th>Instrumento</th>
-          <th>Descripción</th>
           <th>Acción</th>
-          <th>Estado</th>
+          <th>Evaluadores DOFE</th>
+          <th>Evaluación</th>
       </tr>
       <tr>
-    <th>Plan de Trabajo</th>
-    <td>Plan de Trabajo SOCA
+    <th>Plan de Trabajo SOCA
     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Ver Plan...)</a>
-    </td>    
+    </th>    
     <td>
     {%if entity.plangestion.autoevaluacion is null %}
-     {%if instrumentos[1].estado%} 
     <a href="{{ path('plangestion_dofe', { 'id': entity.id }) }}" class="btn btn-primary btn-xs">Registrar cumplimiento <i class="fa fa-sign-in"></i></a>
-    {%else%}<i>Ver cronograma</i>{%endif%}
+
     {%else%}
     <i>Ver Resultados</i>
     {%endif%}    
     </td>
-
+    <td>
+              {% for eval in red %}
+                  {{eval.perfil}}: {{eval.evaluador.nombres}} {{eval.evaluador.apellidos}} <br>
+                  {%endfor%}
+    </td>
+    <td>
+                 {% for eval in red %}
+                     
+                  
+                {%if eval.calificacion is not null %}
+                 {%if eval.calificacion >= 25%}
+                 <span class="center-block padding-5 label label-success">Superior</span>   
+                 {%elseif eval.calificacion < 25 and eval.calificacion > 15 %}
+                    <span class="center-block padding-5 label label-warning">Medio</span>   
+                     {%elseif eval.calificacion <= 15 and eval.calificacion > 0%}   
+                       <span class="center-block padding-5 label label-default">Bajo</span>
+                       {%else%}
+                          {%endif%}
+          
+                {%else%}
+                    -
+                {%endif%}
+                  
+                  
+                 
+                 {%endfor%}
+    </td>
     </tr>  
   {%if entity.tutoria|length > 0%}
     <tr>
@@ -107,13 +131,13 @@ Coevaluación - Director de curso a tutores
 <table class="table table-bordered hidden-mobile" style="width: 95%">
     <tr>
     <th>
-    1. Plan de Gestión (Autoevaluación)
+    1. Plan de Trabajo (Cumplimiento)
         </th>
         <td>
         </td>    
     <td>
 {%if entity.plangestion.autoevaluacion is not null %}
-        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Autoevaluación <i class="fa fa-sign-in"></i></a>
+        <a href="javascript:popUp('{{ path('plangestion_autoeval', { 'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver registro <i class="fa fa-sign-in"></i></a>
    {%endif%}
     </td>
     </tr>
@@ -141,11 +165,11 @@ Coevaluación - Director de curso a tutores
   </tr>
           <tr>
     <th>
-4. Informe de Evaluación Final
+4. Informe de Evaluación DOFE
         </th>
         <td>
         {%if entity.evaluacion%}        
-            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Calificaciones <i class="fa fa-sign-in"></i></a>
+            <a href="javascript:popUp('{{ path('docente_final', {'id': entity.id }) }}')" class="btn btn-primary btn-xs">Ver Informe <i class="fa fa-sign-in"></i></a>
         {%endif%}
         </td> 
     <td></td>

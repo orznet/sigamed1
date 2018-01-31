@@ -54,7 +54,7 @@
     <td>Plan de Gestión Aprobado en PDF. (Este es cargado por el Decano Nacional)</td>
     <td>
     {%if entity.plangestion.pdf%}
-    <a href="javascript:popUp('../../../{{entity.plangestion.pdf.webpath}}')"><i class="fa fa-file-o"></i> Ver Archivo...</a>
+    <a href="javascript:popUp('../../../uploads/{{entity.plangestion.docente.periodo}}{{entity.plangestion.pdf.webpath}}')"><i class="fa fa-file-o"></i> Ver Archivo...</a>
     {%else%}
     No cargado
     {%endif%}     
@@ -151,7 +151,7 @@ Coevaluación - Director de curso a tutores
            </th>
            <td>Evaluación de la terna a los pares acádemicos</td>
            <td>
-           {%if instrumentos[6].estado%} 
+           {%if instrumentos[5].estado%} 
                <a href="{{ path('docente_coevalpares') }}" class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>  
            {%endif%}
            </td>       

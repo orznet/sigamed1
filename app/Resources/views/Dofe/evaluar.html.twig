@@ -71,17 +71,16 @@
                  <span class="center-block padding-5 label label-success">Superior</span>   
                  {%elseif entity.calificacion < 25 and entity.calificacion > 15 %}
                     <span class="center-block padding-5 label label-warning">Medio</span>   
-                     {%else%}   
-                       <span class="center-block padding-5 label label-default">Bajo</span>    
+                     {%elseif entity.calificacion <= 15 and entity.calificacion > 0%}   
+                       <span class="center-block padding-5 label label-default">Bajo</span>
+                       {%else%}
                           {%endif%}
           
                 {%else%}
-                    {%if  entity.docente.plangestion.fechaautoevaluacion is not null %}
+                    {%if  entity.docente.plangestion.autoevaluacion == 10 %}
                  <a  href="{{ path('dofe_eval', { 'id': entity.id }) }}"  class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Evaluar </a>
                     {%endif%}
                 {%endif%}
-                    
-                    
                 </td>
             </tr>
         {% endfor %}

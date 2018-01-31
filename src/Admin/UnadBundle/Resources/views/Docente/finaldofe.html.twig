@@ -11,7 +11,7 @@
  <table  class="data" widtd="100%" border="0">
   <tr>
     <td colspan="4" align="center"><img src="/img/logo-med-unad.png" alt="MED">
-        <h3>INFORME FINAL DE EVALUACIÓN INDIVIDUAL</h3>
+        <h3>INFORME FINAL DE EVALUACIÓN INDIVIDUAL DOFE</h3>
     </td>
   </tr>
   <tr>
@@ -92,9 +92,51 @@
   </tr>
 </table>
 {%endif%}
+
  <table  widtd="100%" border="0">
         <tr>
-      <td class="titulo" colspan="5">RESULTADOS POR INSTRUMENTOS</td>
+      <td class="titulo" colspan="5">RESULTADOS EVALUACION DOFE</td>
+  </tr>
+        <tr>
+          <th>Instrumento</th>
+          <th>Evaluadores DOFE</th>
+          <th>Evaluación</th>
+      </tr>
+      <td>Cumplimiento plan de trabajo</td>
+    <td>
+              {% for eval in red %}
+                  {{eval.perfil}}: {{eval.evaluador.nombres}} {{eval.evaluador.apellidos}} <br>
+                  {%endfor%}
+    </td>
+    <td>
+                 {% for eval in red %}
+                     
+                  
+                {%if eval.calificacion is not null %}
+                 {%if eval.calificacion >= 25%}
+                 <span class="center-block padding-5 label label-success">Superior</span>   
+                 {%elseif eval.calificacion < 25 and eval.calificacion > 15 %}
+                    <span class="center-block padding-5 label label-warning">Medio</span>   
+                     {%elseif eval.calificacion <= 15 and eval.calificacion > 0%}   
+                       <span class="center-block padding-5 label label-default">Bajo</span>
+                       {%else%}
+                          {%endif%}
+          
+                {%else%}
+                    -
+                {%endif%}
+                  
+                  
+                 
+                 {%endfor%}
+    </td>
+
+</table>
+
+
+ <table  widtd="100%" border="0">
+        <tr>
+      <td class="titulo" colspan="5">RESULTADOS CO EVALUACIONES</td>
   </tr>
      <tr>
     <td class="centro">Item</td>
@@ -102,20 +144,6 @@
     <td class="centro">Tipo</td>
     <td class="centro">Evaluó</td>
     <td class="centro">Calificación</td>
-  </tr>
-  <tr>
-    <td>A1</td>
-    <td>Plan de Gestión</td>
-    <td>Autoevaluación</td>
-    <td>Docente</td>
-    <td class="centro">{{docente.evaluacion.auto? docente.evaluacion.auto : 'Sin Autoevaluación' }}</td>
-  </tr>
-  <tr>
-    <td>H1</td>
-    <td>Evaluación de Estudiantes</td>
-    <td>Heteroevaluación</td>
-    <td>Estudiante</td>
-    <td class="centro">{{docente.evaluacion.hetero1? docente.evaluacion.hetero1 : 'Sin registros'}}</td>
   </tr>
    {%if  docente.evaluacion.co5%}
   <tr>
@@ -144,15 +172,6 @@
     <td class="centro">{{docente.evaluacion.co3}}</td>
   </tr>
   {%endif%}
-    {%if  docente.evaluacion.co4%}
-    <tr>
-    <td>C5</td>
-    <td>Coevaluación Lider de Programa</td>
-    <td>Coevaluación</td>
-    <td>Decano Nacional</td>
-    <td class="centro">{{docente.evaluacion.co4}}</td>
-  </tr>
-  {%endif%}
 </table>
        
 <table widtd="100%" border="0">
@@ -165,18 +184,18 @@
     <td class="centro">Porcentil</td>
   </tr>
   <tr>
-    <td>Autoevaluación (A1)</td>
-    <td>25%</td>
+    <td>Cumplimiento plan de trabajo (C1)</td>
+    <td>70%</td>
     <td class="centro">{{(docente.evaluacion.auto*0.25)|number_format(2, '.', ',')}}</td>
   </tr>
   <tr>
     <td>Heteroevaluación (H1)</td>
-    <td>50%</td>
+    <td>15%</td>
     <td class="centro">{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : ''}}</td>
   </tr>
   <tr>
     <td>Coevaluación (C2,C3,C4 y C5)</td>
-    <td>25%</td>
+    <td>15%</td>
     <td class="centro">{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): ''}}</td>
   </tr>
   <tr>

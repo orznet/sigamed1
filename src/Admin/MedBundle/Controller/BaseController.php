@@ -26,7 +26,16 @@ class BaseController extends Controller {
     public function heteroevalAction($id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
-        $evaluaciones = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId(), 'semestre' => $this->container->getParameter('appmed.periodo')));
+        $evaluaciones = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId(), 'semestre' => $entity->getPeriodo()));
+        
+        
+        if ($entity->getVinculacion()=='DOFE'){
+        $evaluaciones1 = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId(), 'semestre' => $entity->getPeriodo()-1)); 
+        $evaluaciones = array_merge($evaluaciones1,$evaluaciones);
+        }
+       
+        
+        
         return array(
             'entity' => $entity,
             'evaluaciones' => $evaluaciones

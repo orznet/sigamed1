@@ -57,13 +57,17 @@
 
                 <div class="row">
                 {% if error %}   
-                <div class="alert alert-danger alert-block">
+                <div class="alert alert-warning fade in">
                 <a class="close" data-dismiss="alert" href="#">×</a>
-                <h4 class="alert-heading">Error de Ingreso!</h4>
-                <h5>1. El número de identificación {{last_username}} no se encuentra como usuario en el MED.</h5>
-                Recuerde que para estar habilitado en el módulo MED debe estar vinculado desde antes de la mitad del periodo acádemico en curso, si ingreso posterior a esta fecha y no puede ingresar por favor envie un correo a siga@unad.edu.co. 
-                <p>Si Director de Centro o de Zona es posible que aún no se encuentre como inscrito por favor envie un correo a siga@unad.edu.co.</p>
-                <h5>2. Si esta ingresando con contraseña MED esta digitanto la contraseña incorrecta.</h5>
+                <h4 class="alert-heading">Error de ingreso desde intranet (Credenciales del Sistema Único de Autenticación)</h4>
+                <h5>1. El número de identificación:  "{{last_username}}" no corresponde a un número valido para ingreso al MED o usted recibio una contraseña de ingreso directo y esta intentando ingresar desde intranet.</h5>
+                <h5>Si está intentando ingresar desde intranet y vuelve a esta pantalla por favor:<br>
+                    <br>
+                 1. Envié un correo a siga@unad.edu.co en el asunto coloque únicamente su número de cedula.<br>
+                2. Recibirá en su correo institucional la contraseña para el ingreso directo al MED. Siga las instrucciones en el correo.</h5>
+
+            
+                
                 </div>
                 {%endif%}
                                     

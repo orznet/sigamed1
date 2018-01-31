@@ -49,9 +49,8 @@ class DofeController extends Controller {
             'entities' => $entities,
         );
     }
-    
-    
-        /**
+
+    /**
      * Lists all evaluaciones dofe entities
      * @Route("/eval/{id}", name="dofe_eval")
      * @Method("GET")
@@ -66,9 +65,8 @@ class DofeController extends Controller {
             'actividades' => $actividades
         );
     }
-    
-    
-      /**
+
+    /**
      * @Route("/calificar/{id}", name="dofe_calificaredit")
      * @Method("GET")
      * @Template("Dofe/calificar.html.twig")
@@ -80,7 +78,7 @@ class DofeController extends Controller {
         $docente = $entity->getEvaluacion()->getDocente();
 
         $actividad = $em->getRepository('AdminMedBundle:Actividadplang')->findOneBy(array('plang' => $docente->getPlangestion(), 'actividad' => $entity->getActividad()));
-            
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividadplang entity.');
         }
@@ -93,11 +91,8 @@ class DofeController extends Controller {
             'actividad' => $actividad
         );
     }
-    
-    
-    
-    
-     /**
+
+    /**
      * Edits an existing Actividadplang entity.
      * @Route("/calificar/{id}", name="dofe_calificarupdate")
      * @Method("PUT")
@@ -110,31 +105,79 @@ class DofeController extends Controller {
             throw $this->createNotFoundException('Unable to find Actividadplang entity.');
         }
         $editForm = $this->createEditForm($entity);
-     
+
         $editForm->handleRequest($request);
-        
+
         if ($editForm->isValid()) {
             $em->flush();
-        return $this->redirect($this->generateUrl('dofe_eval', array('id' => $entity->getEvaluacion()->getId())));
+            return $this->redirect($this->generateUrl('dofe_eval', array('id' => $entity->getEvaluacion()->getId())));
         }
         return array(
             'entity' => $entity,
             'edit_form' => $editForm->createView()
         );
     }
-    
-    
-     /**
+
+    /**
      * Creates a form to edit a Actividadplang entity.
      * @param Actividadplang $entity The entity
      * @return \Symfony\Component\Form\Form The form
      */
-    
     private function createEditForm(evalDofe $entity) {
         $form = $this->createForm(new CalificarDofeType(), $entity, array(
-          //  'action' => $this->generateUrl('dofe_calificarupdate', array('id' => $entity->getId())),
+            //  'action' => $this->generateUrl('dofe_calificarupdate', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
+        $form->add('submit', 'submit', array('label' => 'Update'));
+        return $form;
+    }
+
+    /**
+     * Edits an existing reddofe entity.
+     *
+     * @Route("/cerrar/{id}", name="dofe_cerrar")
+     * @Method("GET")
+     * @Template("Dofe/calificar.html.twig")
+     */
+    public function cerrarAction( $id) {
+        $em = $this->getDoctrine()->getManager();
+        //$session = $this->getRequest()->getSession();
+        $entity = $em->getRepository('AdminMedBundle:RedDofe')->findOneBy(array('id' => $id));
+       // $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+        $actividades = $em->getRepository('AdminMedBundle:evalDofe')->findBy(array('evaluacion' => $entity));
+        $suma = $aux = 0;
+        foreach ($actividades as $actividad) {
+                $suma = $suma + $actividad->getCalificacion();
+                $aux++;
+        }
+
+        //$editForm = $this->createCerrarForm($entity);
+        //$editForm->handleRequest($request);
+        if ($entity) {
+        $entity->setCalificacion($suma / $aux);
+        $entity->setFecha(new \DateTime());
+        $em->flush();
+                return $this->redirect($this->generateUrl('dofe_evaluar', array(
+                'id' => $entity->getId()
+                )));
+        }
+    }
+    
+     /**
+     * Creates a form to cerrar eval Dofe entity
+     * @param Plangestion $entity The entity
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCerrarForm(Plangestion $entity) {
+        $form = $this->createForm(new DofeType(), $entity, array(
+            'action' => $this->generateUrl('dofe_cerrar', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
         $form->add('submit', 'submit', array('label' => 'Update'));
         return $form;
     }

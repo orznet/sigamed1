@@ -50,37 +50,37 @@ protected $periodo;
 protected $estudiantes;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia1;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia2;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia3;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia4;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia5;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $competencia6;
 
 /**
-  * @ORM\Column(type="decimal", scale=1, nullable=true)
+  * @ORM\Column(type="decimal", scale=2, nullable=true)
   */
 protected $calificacion;
    

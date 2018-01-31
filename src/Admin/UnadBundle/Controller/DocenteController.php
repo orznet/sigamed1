@@ -262,9 +262,11 @@ class DocenteController extends Controller {
         }
         
         if ($entity->getVinculacion() == 'DOFE') {
+            $red = $em->getRepository('AdminMedBundle:RedDofe')->findBy(array('docente' => $entity));
             return $this->render('AdminUnadBundle:Docente:iniciodofe.html.twig', array(
                         'entity' => $entity,
-                        'instrumentos' => $instrumentos
+                        'instrumentos' => $instrumentos,
+                        'red' => $red
             ));
         } else {
             return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
@@ -473,7 +475,16 @@ class DocenteController extends Controller {
             return $this->render('AdminUnadBundle:Docente:finaldc.html.twig', array(
                         'docente' => $entity,
             ));
-        } else {
+        }
+        else if ($entity->getVinculacion() == 'DOFE') {
+            $red = $em->getRepository('AdminMedBundle:RedDofe')->findBy(array('docente' => $entity));
+            return $this->render('AdminUnadBundle:Docente:finaldofe.html.twig', array(
+                        'docente' => $entity,
+                        'red' => $red
+            ));
+        }
+        
+        else {
             return array(
                 'docente' => $entity,
             );

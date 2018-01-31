@@ -71,7 +71,7 @@
             <tr>
                 <td colspan="2">
                 {%if termino == 1 and entity.calificacion is null %}
-                <a data-toggle="modal" href="{{ path('plangestion_edit', { 'id': entity.id }) }}" data-target="#myModal" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Finalizar Evaluación</a>
+                <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Finalizar Evaluación</a>
                 {%elseif entity.calificacion is  null %}
                 <div class="alert alert-danger fade in">
                 <button class="close" data-dismiss="alert">×</button>
@@ -103,4 +103,30 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 </div></div></div>
+                         
+                         
+ <div class="modal fade" data-refresh="true" id="ModalCerrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title">Cerrar Evaluación</h4>
+                </div>			<!-- /modal-header -->
+                <div class="modal-body">
+                IMPORTANTE: 
+Para finalizar la evaluación de {{ entity.docente.user.nombres}} {{ entity.docente.user.apellidos}}, oprima el bóton confirmar: <br>
+                </div>
+                <div class="modal-footer">
+               <form  action="{{ path('dofe_cerrar', { 'id': entity.id }) }}" method="get">     
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                </button>
+               <td><button type="hidden" class="btn btn-primary">Confirmar</button></td>    
+               </form> 
+                </div>
+</div></div>
+ </div>                         
+                         
+                         
+                         
 {% endblock %}

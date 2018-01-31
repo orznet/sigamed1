@@ -36,7 +36,7 @@ class evalDofe {
      */
     protected $actividad;
     
-        /**
+     /** 
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $calificacion;
@@ -51,28 +51,6 @@ class evalDofe {
         return $this->id;
     }
 
-    /**
-     * Set calificacion
-     *
-     * @param string $calificacion
-     * @return evalDofe
-     */
-    public function setCalificacion($calificacion)
-    {
-        $this->calificacion = $calificacion;
-
-        return $this;
-    }
-
-    /**
-     * Get calificacion
-     *
-     * @return string 
-     */
-    public function getCalificacion()
-    {
-        return $this->calificacion;
-    }
 
     /**
      * Set evaluacion
@@ -118,5 +96,28 @@ class evalDofe {
     public function getActividad()
     {
         return $this->actividad;
+    }
+
+    /**
+     * Set calificacion
+     *
+     * @param integer $calificacion
+     * @return evalDofe
+     */
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return integer 
+     */
+    public function getCalificacion()
+    {
+        return $this->calificacion;
     }
 }
