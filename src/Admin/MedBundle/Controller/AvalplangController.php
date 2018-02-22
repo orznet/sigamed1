@@ -69,17 +69,31 @@ class AvalplangController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $session = new Session();
         $session->migrate();
+        //$session = $request->getSession();
+          if (!$this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')
-                ->findBy(
+              $docentes = $em->getRepository('AdminUnadBundle:Docente')
+        ->findBy(
                 array('periodo' => $this->container->getParameter('appmed.periodo'),
-                    'vinculacion' => 'DC', 'escuela' => $escuela)
-        );
+                    'vinculacion' => 'DC', 'escuela' => $escuela));
+        return array(
+            'entities' => $docentes,
+            'periodo' => $this->container->getParameter('appmed.periodo'),
+            'escuela' => $escuela
+        ); 
+        }else{
+        $escuela = null;
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')
+        ->findBy(
+                array('periodo' => $this->container->getParameter('appmed.periodo'),
+                    'vinculacion' => 'DC'));
         return array(
             'entities' => $docentes,
             'periodo' => $this->container->getParameter('appmed.periodo'),
             'escuela' => $escuela
         );
+        }
+
     }
     
     
