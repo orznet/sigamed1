@@ -186,7 +186,6 @@ class PlangestionController extends Controller {
 
         if ($docente->getVinculacion() == 'De Carrera') {
             return $this->render('AdminMedBundle:Plangestion:info.html.twig', array(
-<<<<<<< HEAD
                         'entity' => $entity,
                         'docente' => $docente,
             ));
@@ -195,16 +194,6 @@ class PlangestionController extends Controller {
                         'entity' => $entity,
                         'docente' => $docente
             ));
-=======
-                'entity' => $entity,
-                'docente' => $docente,
-                    ));
-        } else if ($docente->getVinculacion() == 'DOFE') {
-            return $this->render('AdminMedBundle:Plangestion:plandofe.html.twig', array(
-                'entity' => $entity,
-                'docente' => $docente
-                ));
->>>>>>> 19acc8dc74aa74551612bbb2f8084b3763015739
         } else {
             return $this->render('AdminMedBundle:Plangestion:planactividades.html.twig', array('docente' => $docente,
                         'entity' => $entity,

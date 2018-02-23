@@ -27,7 +27,6 @@ class BaseController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminUnadBundle:Docente')->find($id);
         $evaluaciones = $em->getRepository('AdminMedBundle:Heterocursos')->findBy(array('cedula' => $entity->getUser()->getId(), 'semestre' => $entity->getPeriodo()));
-<<<<<<< HEAD
         
         
         if ($entity->getVinculacion()=='DOFE'){
@@ -37,8 +36,6 @@ class BaseController extends Controller {
        
         
         
-=======
->>>>>>> 19acc8dc74aa74551612bbb2f8084b3763015739
         return array(
             'entity' => $entity,
             'evaluaciones' => $evaluaciones
