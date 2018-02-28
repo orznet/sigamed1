@@ -78,7 +78,12 @@ class Plangestion {
      * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
      */
     protected $avales;
-
+    
+    
+        /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Productividad", mappedBy="plang")
+     */
+    protected $productos;
 
             
     /**
@@ -408,5 +413,38 @@ class Plangestion {
     public function getDias()
     {
         return $this->dias;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param \Admin\MedBundle\Entity\Productividad $productos
+     * @return Plangestion
+     */
+    public function addProducto(\Admin\MedBundle\Entity\Productividad $productos)
+    {
+        $this->productos[] = $productos;
+
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param \Admin\MedBundle\Entity\Productividad $productos
+     */
+    public function removeProducto(\Admin\MedBundle\Entity\Productividad $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
     }
 }

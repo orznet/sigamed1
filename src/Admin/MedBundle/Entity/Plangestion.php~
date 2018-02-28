@@ -78,12 +78,20 @@ class Plangestion {
      * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Avalplang", mappedBy="plan")
      */
     protected $avales;
-
     
-    /**
-     * @ORM\oneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang")
+    
+        /**
+     * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\Productividad", mappedBy="plang")
      */
-    protected $pdf;
+    protected $productos;
+
+            
+    /**
+    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\pdfPlang", cascade={"persist", "merge", "remove"})
+    * @ORM\JoinColumn(name="pdf_id", referencedColumnName="id")
+    */
+    private $pdf;
+    
     
 
     /**

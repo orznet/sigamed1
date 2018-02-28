@@ -44,8 +44,11 @@
     </td>
   </tr>
 </table>
-  <table>
+<table>
         <thead>
+            <tr>
+    <th colspan="6"><b>1. Roles</b></th>
+                </tr>
             <tr>
                 <th>Rol</th>
                 <th>Descripción de la Actividad</th>
@@ -89,7 +92,43 @@
                    </tr>
         </tbody>
     </table>
-    
+                   
+                   
+<table>
+<thead>
+<tr>
+    <th colspan="4"><b>2. Productividad</b></th>
+                </tr>
+                <tr>
+                    <th>No</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Vinculado a:</th>
+                
+                </tr>
+                </thead>
+                <tbody>
+                    {% for key, producto in entity.productos %}
+                        <tr>
+                            <td>{{key+1}}</td>
+                            <td>
+                                {{producto.tipo}}
+                            </td>
+                            <td>
+                                {{producto.descripcion}}
+                            </td>
+                            <td>
+                                {%if producto.proyecto%}   
+                                    Proyecto: {{producto.proyecto.nombre}} ({{producto.proyecto.linea}})
+                                {%else%}
+                                    Responsabilidad Sustantiva: {{producto.articulacion}}
+                                {%endif%}
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+                </table>
+
 <table>
   <tr>
     <th>Avalador</th>
@@ -114,7 +153,7 @@ Sin revisar
     </td>
   </tr>
     <tr>
-    <td  colspan="5"><b>Observaciones Generales:</b><br>
+    <td  colspan="4"><b>Observaciones Generales:</b><br>
    {% set texto = aval.observaciones|split('|') %} 
    {% for obs in texto%}
    {{obs}}<br>
