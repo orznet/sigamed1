@@ -22,7 +22,7 @@
                         -->
                     <header>
                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                    <h2>Programas Académicos</h2>
+                    <h2>Programas Académicos por Periodo</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -39,10 +39,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Código</th>
                 <th>Nivel</th>
                 <th>Nombre</th>
                 <th>Escuela</th>
+                <th>Lider</th>
 
 
             </tr>
@@ -50,11 +50,11 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('programa_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.programa.id }}</td>
+                <td><a href="{{ path('programa_show', { 'id': entity.programa.id }) }}">{{ entity.programa.id }}</a></td>
                       <td>{{ entity.programa.nivel }}</td>
                 <td>{{ entity.programa.nombre }}</td>
                 <td>{{ entity.programa.escuela? entity.programa.escuela.sigla : 'sin' }}</td>
+                <td>{{ entity.lider? entity.lider.usurio.nombres : 'sin' }}</td>
 
           
             </tr>

@@ -3,14 +3,14 @@
            <td colspan="4"><h4>Código: {{ entity.id }} Nombre: {{ entity.nombre }} </h4></td>
             <tr>
                 <th>Programa</th>
-                <td>{{ entity.programa? entity.programa.id : ' ' }} {{ entity.programa? entity.programa.nombre : 'Sin' }} - {{ entity.escuela }}</td>
+                <td>{{ entity.programa? entity.programa.id : ' ' }} {{ entity.programa? entity.programa.nombre : 'Sin' }} - {{ entity.programa.escuela.sigla }}</td>
             </tr>
             <tr>
                 <td colspan="2"><b>Nivel:</b> {{ entity.nivel }} <b>Tipologia:</b> {{ entity.tipologia }} <b>Creditos:</b> {{ entity.creditos }}</td>
             </tr>
         </tbody>
     </table>
-            {%for oferta in entity.oferta %}
+            {%for oferta in cursooferta %}
         <b>Oferta:</b> {{oferta.periodo}}  <b>Director:</b> {{oferta.director.user.id}} {{oferta.director.user.nombres}} {{oferta.director.user.apellidos}}
 
         <a href="{{ path('oferta', {'id': oferta.id }) }}" class="btn btn-success btn-xs">Editar Red <i class="fa fa-edit"></i></a>  

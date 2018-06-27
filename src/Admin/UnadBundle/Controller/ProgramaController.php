@@ -29,21 +29,42 @@ class ProgramaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$entities = $em->getRepository('AdminUnadBundle:Programa')->findAll();
+
         if ($this->container->get('security.context')->isGranted('ROLE_SECA')){
         $session = $this->getRequest()->getSession();
-       // $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
-       // $entities = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela));   
+ 
         $entities = $em->getRepository('AdminUnadBundle:Programa')->getPorEscuela($session->get('escuelaid'));
-        
         }
         else{
-        $entities = $em->getRepository('AdminUnadBundle:Programa')->ordenEscuela();
+       $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findBy(array('id' => $this->container->getParameter('appmed.periodo')));   
+       $entities = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findBy(array('periodo' => $periodo));     
+       // $entities = $em->getRepository('AdminUnadBundle:Programa')->ordenEscuela();
         }
         return array(
             'entities' => $entities,
         );
     }
+    
+        /**
+     * Lists all Programa entities.
+     *
+     * @Route("/pe/{id}", name="programa_periodo")
+     * @Method("GET")
+     * @Template("Programa/porperiodo.html.twig")
+     */
+    public function porperiodoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+       $entities = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findBy(array('periodo' => $id));     
+        
+        return array(
+            'entities' => $entities,
+        );
+    }
+    
+    
+    
     /**
      * Creates a new Programa entity.
      *
@@ -119,8 +140,11 @@ class ProgramaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
-
+        $entity = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->find($id);
+       // $entity = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findBy(array('periodo' => $id));     
+        $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('programa' => $entity->getPrograma()));
+        $oferta = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('curso' => $cursos));
+                
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Programa entity.');
         }
@@ -129,6 +153,7 @@ class ProgramaController extends Controller
 
         return array(
             'entity'      => $entity,
+            'oferta'      => $oferta,        
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -210,6 +235,8 @@ class ProgramaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        $periodo = $em->getRepository('AdminMedBundle:Periodoe')->find($this->container->getParameter('appmed.periodo'));
+        $programa = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findOneBy(array('programa' => $entity,'periodo' => $periodo));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Programa entity.');
@@ -220,13 +247,12 @@ class ProgramaController extends Controller
         $editForm->handleRequest($request);
         if ($editForm["lider"]->getData() != null){
         $lider = $em->getRepository('AdminUnadBundle:Docente')->find($editForm["lider"]->getData());
-        $entity->setLider($lider);  
+        $entity->setLider($lider);
+        $programa->setLider($lider);
         }
         if ($editForm->isValid()) {
             $em->flush();
-         
             return $this->redirect($this->generateUrl('escuela_info')); 
-        
        
         }
 

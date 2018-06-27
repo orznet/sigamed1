@@ -12,6 +12,8 @@ use Admin\UserBundle\Entity\Parabuscar;
 use Admin\UserBundle\Entity\User;
 use Admin\UserBundle\Form\UserType;
 use Admin\UserBundle\Form\BuscarType;
+use Admin\UserBundle\Form\PassType;
+use Admin\UserBundle\Entity\Newpass;
 
 /**
  * User controller.
@@ -252,8 +254,8 @@ class UserController extends Controller {
      * @Template("AdminUserBundle:User:show.html.twig")
      */
     public function newpassAction(Request $request, $id) {
-         if (!$request->isXmlHttpRequest()) {
-        //     return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        if (!$request->isXmlHttpRequest()) {
+            //     return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -265,7 +267,7 @@ class UserController extends Controller {
 
         $passForm = $this->createPassForm($id);
         #$passForm->handleRequest($request);
-        $passForm->bind($request); 
+        $passForm->bind($request);
         if ($passForm->isValid()) {
             $currentpass = $this->generateRandomString();
             $entity->setPassword($currentpass);
@@ -371,8 +373,82 @@ class UserController extends Controller {
         $this->get('mailer')->send($message);
     }
 
-    public function homepass() {
+    public function passmedAction() {
+
+        $valores = new Newpass();
+        $Form = $this->createForm(new PassType(), $valores);
+        return $this->render('AdminUserBundle:Default:passmed.html.twig', array(
+                    'form' => $Form->createView(),
+        ));
+    }
+
+    public function setpassAction(Request $request) {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $valores = new Newpass();
+        $Form = $this->createForm(new PassType(), $valores);
         
+        $Form->handleRequest($request);
+
+        if ($Form->isValid()) {
+
+            $username = $Form["username"]->getData();
+            $email = $Form["email"]->getData();
+            $vinculacion = $Form["vinculacion"]->getData();
+            $unidad = $Form["unidad"]->getData();
+
+
+            $user = $em->getRepository('AdminUserBundle:User')->find($username);
+            $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $user, 'periodo' => $this->container->getParameter('appmed.periodo')));
+
+            if ($user && $docente && $user->getEmail() == $email) {
+                if ($docente->getVinculacion() == $vinculacion && $docente->getEscuela()->getSigla() == $unidad) {
+
+                    $currentpass = $this->generateRandomString();
+                    $user->setPassword($currentpass);
+                    $this->setSecurePassword($user);
+                    $em->persist($user);
+                    $em->flush();
+                    $this->enviarMail($user, $currentpass);
+
+
+                    $Form = $this->createForm(new PassType(), $valores);
+                    $response = new JsonResponse(
+                            array(
+                        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional, por favor siga las instrucciones que estan en el correo. <a href="../login">Continuar..</a></div>',
+                        'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
+                            'form' => $Form->createView(),
+                        ))), 200);
+                    return $response;
+                } else {
+                    $Form = $this->createForm(new PassType(), $valores);
+                    $response = new JsonResponse(
+                            array(
+                        'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
+                        'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+                            'form' => $Form->createView(),
+                        ))), 400);
+                    return $response;
+                }
+            } else {
+                $Form = $this->createForm(new PassType(), $valores);
+                $response = new JsonResponse(
+                        array(
+                    'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
+                    'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+                        'form' => $Form->createView(),
+                    ))), 400);
+                return $response;
+            }
+        }
+        $response = new JsonResponse(
+        array(
+         'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+         'form' => $Form->createView(),
+          ))), 400);
+         return $response;
     }
 
 }

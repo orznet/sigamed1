@@ -5,9 +5,11 @@ namespace Admin\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Admin\MedBundle\Entity\Instrumento;
 use Admin\MedBundle\Entity\Periodoe;
 use Admin\UnadBundle\Entity\Docente;
+
 
 class DefaultController extends Controller {
 
@@ -16,13 +18,13 @@ class DefaultController extends Controller {
         $periodos = $em->getRepository('AdminMedBundle:Periodoe')->findAll();
         $periodoe = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo')));
         $instrumentos = $em->getRepository('AdminMedBundle:Instrumentos')->findBy(array('periodoe' => $periodoe));
-        
+
         $diff = date_diff($periodoe->getFechainicio(), $periodoe->getFechafin());
         $diff2 = date_diff($periodoe->getFechainicio(), new \DateTime('now'));
         $dias = $diff->format("%a");
         $hoy = $diff2->format("%a");
 
-        
+
         $session = $request->getSession();
         $session->set('periodoe', $this->container->getParameter('appmed.periodo'));
         if (true === $this->container->get('security.authorization_checker')->isGranted('ROLE_DEC')) {
@@ -61,12 +63,12 @@ class DefaultController extends Controller {
                 $this->get('session')->getFlashBag()->add('warning', 'Usted no se encuentra registrado como Docente para el periodo de evaluación Vigente ' . $this->container->getParameter('appmed.periodo') . ', es posible que aún no este activo por favor revise las fechas del cronograma de evaluación');
             } else {
                 $session->set('docenteid', $docente->getId());
-           
-          return $this->redirect($this->generateUrl('docente_inicio'));      
-            //     return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
-           //                 'entity' => $docente,
-           //                 'instrumentos' => $instrumentos,
-           //     ));
+
+                return $this->redirect($this->generateUrl('docente_inicio'));
+                //     return $this->render('AdminUnadBundle:Docente:show.html.twig', array(
+                //                 'entity' => $docente,
+                //                 'instrumentos' => $instrumentos,
+                //     ));
             }
         } else {
             $docente = null;
@@ -161,5 +163,7 @@ class DefaultController extends Controller {
         $formulario .= "<script>document.forms[0].submit(); </script>";
         echo $formulario;
     }
+
+   
 
 }

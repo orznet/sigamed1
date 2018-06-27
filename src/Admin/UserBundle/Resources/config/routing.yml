@@ -29,4 +29,13 @@ admon_user_buscarpor:
     
 home_user_info:
     path:  /home/info
-    defaults: { _controller: "AdminUserBundle:User:info" }   
+    defaults: { _controller: "AdminUserBundle:User:info" }
+    
+home_pass:
+    path:  /getpass
+    defaults: { _controller: "AdminUserBundle:User:passmed" }
+    
+home_pass2:
+    path:  /setpass
+    defaults: { _controller: "AdminUserBundle:User:setpass" } 
+    methods: [POST]      

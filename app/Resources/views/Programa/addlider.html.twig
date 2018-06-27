@@ -44,7 +44,7 @@
               
         <thead>
             <tr>
-
+                <th>Cédula</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Modalidad</th>
@@ -56,7 +56,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-
+                <td>{{ entity.user.username }}</td>
                 <td>{{ entity.user.nombres }}</td>
                 <td>{{ entity.user.apellidos }}</td>
                 <td>{{ entity.modalidad }}</td>

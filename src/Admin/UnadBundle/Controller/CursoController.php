@@ -136,6 +136,12 @@ class CursoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Curso entity.');
         }
+        
+        
+       $periodos = $em->getRepository('AdminMedBundle:Periodoa')->findby(array('periodoe' => $this->container->getParameter('appmed.periodo')));
+       $cursooferta = $em->getRepository('AdminMedBundle:Oferta')->findby(array('periodo' => $periodos, 'curso' => $entity));
+        
+        
        $datos = new \Admin\MedBundle\Entity\OfertaDatos();     
        $Form = $this->createForm(new ofertaType(), $datos, array(
             'action' => $this->generateUrl('oferta_curso', array('id' => $entity->getId())),
@@ -144,6 +150,7 @@ class CursoController extends Controller
         
         return array(
             'entity'      => $entity,
+            'cursooferta'      =>$cursooferta,
             'form'      => $Form->createView(),
         );
     }

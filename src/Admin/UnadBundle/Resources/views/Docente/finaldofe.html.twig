@@ -114,20 +114,18 @@
                   
                 {%if eval.calificacion is not null %}
                  {%if eval.calificacion >= 25%}
-                 <span class="center-block padding-5 label label-success">Superior</span>   
+                 <span class="center-block padding-5 label label-success">Superior</span><br>   
                  {%elseif eval.calificacion < 25 and eval.calificacion > 15 %}
-                    <span class="center-block padding-5 label label-warning">Medio</span>   
+                    <span class="center-block padding-5 label label-warning">Medio</span><br>
                      {%elseif eval.calificacion <= 15 and eval.calificacion > 0%}   
-                       <span class="center-block padding-5 label label-default">Bajo</span>
+                       <span class="center-block padding-5 label label-default">Bajo</span><br>
                        {%else%}
                           {%endif%}
-          
                 {%else%}
                     -
                 {%endif%}
                   
-                  
-                 
+      
                  {%endfor%}
     </td>
 
@@ -181,22 +179,22 @@
     <tr>
     <td class="centro">Tipo de Evaluación</td>
     <td class="centro">Ponderación:</td>
-    <td class="centro">Porcentil</td>
+    <td class="centro">Resultado</td>
   </tr>
   <tr>
-    <td>Cumplimiento plan de trabajo (C1)</td>
+    <td>Cumplimiento plan de trabajo</td>
     <td>70%</td>
-    <td class="centro">{{(docente.evaluacion.auto*0.25)|number_format(2, '.', ',')}}</td>
+    <td class="centro">{{(docente.evaluacion.auto)|number_format(2, '.', ',')}}</td>
   </tr>
   <tr>
-    <td>Heteroevaluación (H1)</td>
+    <td>Heteroevaluación</td>
     <td>15%</td>
-    <td class="centro">{{docente.evaluacion.hetero? (docente.evaluacion.hetero*0.50)|number_format(2, '.', ',') : ''}}</td>
+    <td class="centro">{{docente.evaluacion.hetero? (docente.evaluacion.hetero*6)|number_format(0, '.', ',') : ''}}</td>
   </tr>
   <tr>
-    <td>Coevaluación (C2,C3,C4 y C5)</td>
+    <td>Coevaluación (C2,C3 y C4)</td>
     <td>15%</td>
-    <td class="centro">{{docente.evaluacion.co? (docente.evaluacion.co*0.25)|number_format(2, '.', ','): ''}}</td>
+    <td class="centro">{{docente.evaluacion.co? (docente.evaluacion.co*6)|number_format(0, '.', ','): ''}}</td>
   </tr>
   <tr>
     <td>Fecha de consolidación: {{docente.evaluacion.fecha|date('d/m/Y')}}</td>

@@ -148,12 +148,15 @@ class EscuelaController extends Controller
         $periodose = $em->getRepository('AdminMedBundle:Periodoe')->findby(array(),array('id' => 'DESC'));
         $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela),array('nivel' => 'DESC'));
         
+        $ofertado = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findby(array('programa' => $programas, 'periodo' => $this->container->getParameter('appmed.periodo')));
+
+        
         if (!$escuela) {
             throw $this->createNotFoundException('Unable to find Escuela entity.');
         }
         return array(
         'entity'      => $escuela,
-        'programas'   => $programas,
+        'ofertado'   => $ofertado,
         'periodos'    => $periodose
         );
     }

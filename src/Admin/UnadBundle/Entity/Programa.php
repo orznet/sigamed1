@@ -64,11 +64,6 @@ protected $lider;
     protected $cursos;
     
     
-    /**
-    * @ORM\OneToOne(targetEntity="Admin\MedBundle\Entity\coevalLider", mappedBy="programa") 
-    */
-   protected $coeval;
-    
     
     /**
      * Get id

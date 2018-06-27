@@ -93,7 +93,7 @@ protected $observaciones;
 
 /**
  * @var Programa 
- * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Programa", inversedBy="coeval")
+ * @ORM\OneToOne(targetEntity="Admin\UnadBundle\Entity\Programa")
  * @ORM\JoinColumn(name="programa_id",referencedColumnName="id") 
  */
  protected $programa;  
