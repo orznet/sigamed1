@@ -30,7 +30,7 @@
             <tr>
                 <th>Terna de Pares</th>
                 <td>
-                     {%for ternado in entity.ternados %}
+                     {%for ternado in terna %}
                     {{ternado.docente.user.id}}: {{ternado.docente.user.nombres}} {{ternado.docente.user.apellidos}}
                     {%if not ternado.principal %}
                     - Suplente

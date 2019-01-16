@@ -34,6 +34,14 @@ protected $docente;
 protected $escuela;
 
 
+/** 
+* @var Periodoe
+* @ORM\ManyToOne(targetEntity="Admin\MedBundle\Entity\Periodoe")
+* @ORM\JoinColumn(name="periodo_id", referencedColumnName="id")
+*/
+protected $periodo;
+
+
 /**
 * @ORM\OneToMany(targetEntity="Admin\MedBundle\Entity\coevalPares", mappedBy="evaluador") 
 */
@@ -176,5 +184,28 @@ protected $principal;
     public function getEvaluacion()
     {
         return $this->evaluacion;
+    }
+
+    /**
+     * Set periodo
+     *
+     * @param \Admin\MedBundle\Entity\Periodoe $periodo
+     * @return Terna
+     */
+    public function setPeriodo(\Admin\MedBundle\Entity\Periodoe $periodo = null)
+    {
+        $this->periodo = $periodo;
+
+        return $this;
+    }
+
+    /**
+     * Get periodo
+     *
+     * @return \Admin\MedBundle\Entity\Periodoe 
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
     }
 }

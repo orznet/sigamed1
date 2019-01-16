@@ -15,8 +15,7 @@ use Admin\MedBundle\Form\coevalParesType;
  *
  * @Route("/doc/coevalpares")
  */
-class coevalParesController extends Controller
-{
+class coevalParesController extends Controller {
 
     /**
      * Lists all coevalPares entities.
@@ -25,17 +24,17 @@ class coevalParesController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
-        $terna =  $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
-        
+        $terna = $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
+
         return array(
-        'terna' => $terna
+            'terna' => $terna
         );
     }
+
     /**
      * Creates a new coevalPares entity.
      *
@@ -43,8 +42,7 @@ class coevalParesController extends Controller
      * @Method("POST")
      * @Template("AdminMedBundle:coevalPares:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new coevalPares();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -59,19 +57,18 @@ class coevalParesController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a coevalPares entity.
-    *
-    * @param coevalPares $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(coevalPares $entity)
-    {
+     * Creates a form to create a coevalPares entity.
+     *
+     * @param coevalPares $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(coevalPares $entity) {
         $form = $this->createForm(new coevalParesType(), $entity, array(
             'action' => $this->generateUrl('coevalpares_create'),
             'method' => 'POST',
@@ -89,14 +86,13 @@ class coevalParesController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new coevalPares();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -107,8 +103,7 @@ class coevalParesController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:coevalPares')->find($id);
@@ -120,7 +115,7 @@ class coevalParesController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -132,8 +127,7 @@ class coevalParesController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:coevalPares')->find($id);
         if (!$entity) {
@@ -141,20 +135,19 @@ class coevalParesController extends Controller
         }
         $editForm = $this->createEditForm($entity);
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a coevalPares entity.
-    *
-    * @param coevalPares $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(coevalPares $entity)
-    {
+     * Creates a form to edit a coevalPares entity.
+     *
+     * @param coevalPares $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(coevalPares $entity) {
         $form = $this->createForm(new coevalParesType(), $entity, array(
             'action' => $this->generateUrl('coevalpares_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -164,6 +157,7 @@ class coevalParesController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing coevalPares entity.
      *
@@ -171,8 +165,7 @@ class coevalParesController extends Controller
      * @Method("PUT")
      * @Template("AdminMedBundle:coevalPares:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:coevalPares')->find($id);
@@ -184,16 +177,17 @@ class coevalParesController extends Controller
         //$deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-        
+
         $entity->setFecha(new \DateTime());
-        $suma = 0; $tot = 0;
-        for($i=1; $i<31; $i++){   
-        if($editForm["f".$i]->getData()>0){
-         $suma = $suma + $editForm["f".$i]->getData();
-         $tot = $tot + 1;
+        $suma = 0;
+        $tot = 0;
+        for ($i = 1; $i < 31; $i++) {
+            if ($editForm["f" . $i]->getData() > 0) {
+                $suma = $suma + $editForm["f" . $i]->getData();
+                $tot = $tot + 1;
+            }
         }
-        }
-       $entity->setF0($suma/$tot);
+        $entity->setF0($suma / $tot);
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -202,19 +196,19 @@ class coevalParesController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-           // 'delete_form' => $deleteForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+                // 'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a coevalPares entity.
      *
      * @Route("/{id}", name="coevalpares_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -240,51 +234,49 @@ class coevalParesController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('coevalpares_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('coevalpares_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
-    
-     /**
+
+    /**
      * Crear Evaluaciones
      * @Route("/crear/eval", name="coevalpares_crear")
      * @Method("GET")
      * @Template()
      */
-    public function crearAction()
-    {
-     $em = $this->getDoctrine()->getManager();
-     $session = $this->getRequest()->getSession();
-     $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
-     $ternado =  $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
-     $ternados =  $em->getRepository('AdminUnadBundle:Terna')->findBy(array('escuela' => $ternado->getEscuela(), 'principal' => 1));
-     $pares = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('vinculacion' => 'DC', 'escuela' => $ternado->getEscuela(), 'periodo' => $this->container->getParameter('appmed.periodo')));
-      
-    if($ternado->getPrincipal()){
-            foreach ($pares as $par){
-            if($par != $docente){
-            $entity = new coevalPares();
-            $entity->setEvaluado($par);
-            $entity->setEvaluador($ternado);
-            $em->persist($entity);    
+    public function crearAction() {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        $ternado = $em->getRepository('AdminUnadBundle:Terna')->findOneBy(array('docente' => $docente));
+        $ternados = $em->getRepository('AdminUnadBundle:Terna')->findBy(array('escuela' => $ternado->getEscuela(), 'principal' => 1,'periodo' => $this->container->getParameter('appmed.periodo')));
+        $pares = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('vinculacion' => 'DC', 'escuela' => $ternado->getEscuela(), 'periodo' => $this->container->getParameter('appmed.periodo')));
+
+        if ($ternado->getPrincipal()) {
+            foreach ($pares as $par) {
+                if ($par != $docente) {
+                    $entity = new coevalPares();
+                    $entity->setEvaluado($par);
+                    $entity->setEvaluador($ternado);
+                    $em->persist($entity);
+                }
             }
+        } else {
+            foreach ($ternados as $par) {
+                $entity = new coevalPares();
+                $entity->setEvaluado($par->getDocente());
+                $entity->setEvaluador($ternado);
+                $em->persist($entity);
             }
+        }
+
+        $em->flush();
+        return $this->redirect($this->generateUrl('docente_coevalpares'));
     }
-     else{
-            foreach ($ternados as $par){
-            $entity = new coevalPares();
-            $entity->setEvaluado($par->getDocente());
-            $entity->setEvaluador($ternado);
-            $em->persist($entity);    
-            }  
-     }
-     
-     $em->flush();
-     return $this->redirect($this->generateUrl('docente_coevalpares'));
-    }
+
 }

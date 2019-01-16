@@ -106,7 +106,7 @@ protected $centro;
     
 
     /**
-     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\Programa", mappedBy="lider")
+     * @ORM\OneToMany(targetEntity="Admin\UnadBundle\Entity\ProgramaPeriodo", mappedBy="lider")
      */
     protected $lider;
     
@@ -442,38 +442,6 @@ protected $centro;
         return $this->planmejoramiento;
     }
 
-    /**
-     * Add lider
-     *
-     * @param \Admin\UnadBundle\Entity\Programa $lider
-     * @return Docente
-     */
-    public function addLider(\Admin\UnadBundle\Entity\Programa $lider)
-    {
-        $this->lider[] = $lider;
-
-        return $this;
-    }
-
-    /**
-     * Remove lider
-     *
-     * @param \Admin\UnadBundle\Entity\Programa $lider
-     */
-    public function removeLider(\Admin\UnadBundle\Entity\Programa $lider)
-    {
-        $this->lider->removeElement($lider);
-    }
-
-    /**
-     * Get lider
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getLider()
-    {
-        return $this->lider;
-    }
 
     /**
      * Add director
@@ -700,5 +668,51 @@ protected $centro;
     public function getTernado()
     {
         return $this->ternado;
+    }
+
+    /**
+     * Set fecha_inicio
+     *
+     * @param \DateTime $fechaInicio
+     * @return Docente
+     */
+    public function setFechaInicio($fechaInicio)
+    {
+        $this->fecha_inicio = $fechaInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_inicio
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInicio()
+    {
+        return $this->fecha_inicio;
+    }
+
+    /**
+     * Set fecha_fin
+     *
+     * @param \DateTime $fechaFin
+     * @return Docente
+     */
+    public function setFechaFin($fechaFin)
+    {
+        $this->fecha_fin = $fechaFin;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_fin
+     *
+     * @return \DateTime 
+     */
+    public function getFechaFin()
+    {
+        return $this->fecha_fin;
     }
 }

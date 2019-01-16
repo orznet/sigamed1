@@ -118,6 +118,8 @@ class EscuelaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminUnadBundle:Escuela')->find($id);
+        $terna = $em->getRepository('AdminUnadBundle:Terna')->findBy(array('escuela' => $entity, 'periodo' => $this->container->getParameter('appmed.periodo')));
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Escuela entity.');
@@ -127,6 +129,7 @@ class EscuelaController extends Controller
 
         return array(
             'entity'      => $entity,
+            'terna'       => $terna,
             'delete_form' => $deleteForm->createView(),
         );
     }

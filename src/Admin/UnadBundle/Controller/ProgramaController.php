@@ -141,9 +141,11 @@ class ProgramaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->find($id);
-       // $entity = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->findBy(array('periodo' => $id));     
+    
         $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('programa' => $entity->getPrograma()));
-        $oferta = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('curso' => $cursos));
+        $periodoa = $em->getRepository('AdminMedBundle:Periodoa')->findBy(array('periodoe' => $entity->getPeriodo()->getId()));
+        
+        $oferta = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('curso' => $cursos, 'periodo' => $periodoa));
                 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Programa entity.');
@@ -153,7 +155,7 @@ class ProgramaController extends Controller
 
         return array(
             'entity'      => $entity,
-            'oferta'      => $oferta,        
+            'oferta'      => $oferta,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -168,13 +170,23 @@ class ProgramaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AdminUnadBundle:Programa')->find($id);
+        $entity = $em->getRepository('AdminUnadBundle:ProgramaPeriodo')->find($id);
+    
+        $cursos = $em->getRepository('AdminUnadBundle:Curso')->findBy(array('programa' => $entity->getPrograma()));
+        $periodoa = $em->getRepository('AdminMedBundle:Periodoa')->findBy(array('periodoe' => $entity->getPeriodo()->getId()));
+        
+        $oferta = $em->getRepository('AdminMedBundle:Oferta')->findBy(array('curso' => $cursos, 'periodo' => $periodoa));
+        
+        
+        
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Programa entity.');
         }
 
         return array(
             'entity'      => $entity,
+            'oferta'      => $oferta
         );
     }
 

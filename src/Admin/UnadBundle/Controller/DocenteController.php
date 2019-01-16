@@ -297,7 +297,7 @@ class DocenteController extends Controller {
             ));
         } else {
             return array(
-                'entity' => $entity,
+                'entity' => $entity
             );
         }
     }

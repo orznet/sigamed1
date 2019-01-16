@@ -44,7 +44,7 @@ class DofeController extends Controller {
      */
     public function evaluarAction() {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AdminMedBundle:RedDofe')->findBy(array('evaluador' => $this->getUser()));
+        $entities = $em->getRepository('AdminMedBundle:RedDofe')->findBy(array('evaluador' => $this->getUser(), 'periodo'=> $this->container->getParameter('appmed.periodo')));
         return array(
             'entities' => $entities,
         );

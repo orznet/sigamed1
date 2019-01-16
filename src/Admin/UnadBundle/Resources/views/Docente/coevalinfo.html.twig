@@ -24,7 +24,13 @@
                {{evaluacion.observaciones}} 
             </td>
 
-             <td>{{evaluacion.f0}}</td>
+             <td>
+                  {%if evaluacion.evaluador.docente.user.id == entity.user.id %}
+                 No Aplica
+                 {%else%}
+                     {{evaluacion.f0}}
+                 {%endif%}
+             </td>
             </tr>
                
         {%endfor%}
@@ -51,7 +57,13 @@
                 <td>{{oferta.curso.nombre}} - {{oferta.periodo}} </td> 
                             <td>{{tutor.docente.user.nombres}} {{tutor.docente.user.apellidos}}</td>
                             <td>{{tutor.coevaldirector? tutor.coevaldirector.observaciones : ' ' }}</td>
-                            <td>{{tutor.coevaldirector? '*.*' : 'Sin Evaluación'}}</td>
+                            <td>
+                                {%if tutor.docente.user.id == entity.user.id %}
+                                No Aplica
+                                {%else%}
+                                {{tutor.coevaldirector? '*.*' : 'Sin Evaluar'}}
+                                {%endif%}
+                            </td>
             </tr>
             {%if tutor.coevaldirector%}{%set final=final+tutor.coevaldirector.f0%}{%set aux=aux+1%}{%endif%}  
             {%endfor%}
@@ -63,7 +75,10 @@
             </tbody>
 </table>
   {%endif%}
-
+  
+  
+{% if is_granted('ROLE_ADMIN') or entity.vinculacion !='De Carrera' %}    
+    
    {%if entity.tutoria|length > 0 %}
 
 <h2>Director de Curso a Tutores</h2>
@@ -84,10 +99,21 @@
             {{tutor.oferta.director.user.nombres}} {{tutor.oferta.director.user.apellidos}}
          {%endif%}
             </td>
-             {%if tutor.coevaltutor%}
-             <td>{{tutor.coevaltutor.observaciones}}</td>
-             <td>{{tutor.coevaltutor.f0}}</td>
-             {%endif%}
+                
+                    {%if tutor.oferta.director.user.id == entity.user.id %}
+                    <td></td>
+                    <td>No Aplica</td> 
+                    {%else%}
+                        
+                    {%if tutor.coevaltutor%}
+                    <td>{{tutor.coevaltutor.observaciones}}</td>
+                    <td>
+                    {{tutor.coevaltutor.f0}}
+                    </td>
+                    {%endif%}
+                    
+                    {%endif%}
+            
             </tr>
                
         {%endfor%}
@@ -121,36 +147,21 @@
                  {%endif%}
              </td>
              <td>{{oferta.coeval? oferta.coeval.observaciones : ' '}}</td>
-             <td>{{oferta.coeval? oferta.coeval.f0 : 'Sin Evaluación'}}</td>
+             <td>
+                {%if oferta.curso.programa.lider%}
+                {%if oferta.curso.programa.lider.user.id == entity.user.id %}
+                No Aplica
+                {%else%}
+                {{oferta.coeval? oferta.coeval.f0 : 'Sin Evaluación'}}
+                {%endif%}
+                {%endif%}
+             </td>
             </tr>
         {%endfor%}
   
         </tbody>
         </table>
 {%endif%}
-            
-    {%if entity.lider|length > 0 %}
-       <h2>Decano a Lideres de Programa</h2> 
-       <table>
-            <tr>
-                <th>Programa</th>
-              
-                <th>Observaciones</th>
-                <th>Calificación</th>
-            </tr>
-            <tbody>     
-            {%for programa in entity.lider%}
-            <tr>
-            <td>{{programa.nombre}}</td>
-            
-             <td>{{programa.coeval? programa.coeval.observaciones : 'Sin Evaluación'}}</td>
-             <td>{{programa.coeval? programa.coeval.f0 : 'Sin Evaluación'}}</td>
-            </tr>
-        {%endfor%}
-  
-        </tbody>
-        </table>
-   {%endif%}
-             
+{%endif%}
 
 {% endblock %}

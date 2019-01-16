@@ -255,7 +255,7 @@ class CentroController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $centros = $user->getDirectorcentro();
         $centro = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('id' => $id));
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro, 'periodo' => $this->container->getParameter('appmed.periodo')));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centro));
 
         return array(
             'docentes'      => $docentes,
@@ -268,7 +268,7 @@ class CentroController extends Controller
     /**
      * @Route("/docs/index", name="centro_index")
      * @Method("GET")
-     * @Template()
+     * @Template("Centro/lista.html.twig")
      */
     public function listaAction()
     {

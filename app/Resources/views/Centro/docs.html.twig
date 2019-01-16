@@ -45,7 +45,7 @@
                 <th>Vinculación</th>
                 <th>Modalidad</th>
                 <th>Escuela</th>
-                <th>Centro</th>
+                <th>Periodo</th>
                 <th>Evaluación</th>
             </tr>
         </thead>
@@ -59,7 +59,7 @@
             <td>{{ entity.vinculacion }}</td>
             <td>{{ entity.modalidad }}</td>
             <td>{{ entity.escuela.sigla }}</td>
-            <td>{{ entity.centro.nombre }}</td>
+            <td>{{ entity.periodo }}</td>
             <td>
                 {%if entity.evaluacion%}
 {{ entity.evaluacion.final }}

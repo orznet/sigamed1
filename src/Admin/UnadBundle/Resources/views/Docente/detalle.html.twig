@@ -86,8 +86,8 @@
    </td>
       <td colspan="3">
       {%for programa in entity.lider%}
-      <a data-toggle="modal" href="{{ path('programa_modal', { 'id': programa.id }) }}" data-target="#myModal">{{programa.id}}</a>    
-      {{programa.nombre}} <br> {%endfor%}
+      <a data-toggle="modal" href="{{ path('programa_modal', { 'id': programa.id }) }}" data-target="#myModal">{{programa.programa.id}}</a>    
+      {{programa.programa.nombre}} <br> {%endfor%}
    </td>
    <td></td>
   </tr>

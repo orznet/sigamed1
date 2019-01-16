@@ -41,7 +41,7 @@ class ProgramaPeriodo {
 
     /**
      * @var Lider 
-     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente")
+     * @ORM\ManyToOne(targetEntity="Admin\UnadBundle\Entity\Docente", inversedBy="lider")
      * @ORM\JoinColumn(name="lider_id", referencedColumnName="id",
      * nullable=true
      * )
