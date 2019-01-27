@@ -58,7 +58,7 @@ class DocenteController extends Controller {
     }
 
     /**
-     * Lists all Docente entities.
+     * Lists all Docente entities por escuela y periodo
      *
      * @Route("/esc/{id}/{periodo}", name="docente_escuela")
      * @Method("GET")
