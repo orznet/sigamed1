@@ -2,8 +2,8 @@
 
 namespace Admin\MedBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -200,7 +200,7 @@ class InstrumentoController extends Controller
              array(
             'entity' => $entity,
             'form' => $editForm->createView(),
-             ))), 404);
+             ))), 200);
             return $response;        
         }
 
@@ -214,6 +214,7 @@ class InstrumentoController extends Controller
              ))), 400);
             return $response;
     }
+
     /**
      * Deletes a Instrumento entity.
      *

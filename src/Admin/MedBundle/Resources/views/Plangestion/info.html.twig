@@ -168,7 +168,12 @@ Sin revisar
           </td>
     </tr>
         <tr>
-          <td  colspan="2" align="center"><br><br><br>____________________________<br>Firma Director CEAD<br><b>{%if docente.centro.director %}{{docente.centro.director.nombres}} {{docente.centro.director.apellidos}}{%endif%}</b><br>
+          <td  colspan="2" align="center"><br><br><br>____________________________<br>
+              {%if docente.centro.director %}
+              Firma Director CEAD<br><b>{{docente.centro.director.nombres}} {{docente.centro.director.apellidos}}
+              {%else%}
+                  Firma Director Zonal<br><b>{{docente.centro.zona.director.nombres}} {{docente.centro.zona.director.apellidos}}
+                  {%endif%}</b><br>
               
           </td>
           <td  colspan="2" align="center"><br><br><br>____________________________<br>Firma Decano<br><b>{{docente.escuela.decano.nombres}} {{docente.escuela.decano.apellidos}}</b><br>

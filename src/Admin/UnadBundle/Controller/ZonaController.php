@@ -3,6 +3,7 @@
 namespace Admin\UnadBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -142,11 +143,13 @@ class ZonaController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
+        $editForm["director"]->setData($entity->getDirector()->getId());
         $deleteForm = $this->createDeleteForm($id);
+        $editForm["director_nom"]->setData($entity->getDirector()->getNombres().' '.$entity->getDirector()->getApellidos());
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -162,10 +165,8 @@ class ZonaController extends Controller
     {
         $form = $this->createForm(new ZonaType(), $entity, array(
             'action' => $this->generateUrl('zona_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
@@ -173,35 +174,65 @@ class ZonaController extends Controller
      * Edits an existing Zona entity.
      *
      * @Route("/{id}", name="zona_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("Zona/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }
 
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminUnadBundle:Zona')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Zona entity.');
+            return new JsonResponse(array('message' => 'Unable to find Zona entity'), 500);
+           // throw $this->createNotFoundException('Unable to find Zona entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        $director = $em->getRepository('AdminUserBundle:User')->find($editForm["director"]->getData());
 
-        if ($editForm->isValid()) {
-            $em->flush();
+        if (count($director) == 0){
+            return new JsonResponse(
+                array(
+                    'message' => '<div class="alert alert-warning fade in"><i class="fa-fw fa fa-check"></i><strong>Error !</strong> Director no encontrado.</div>'
+                ), 500);
 
-            return $this->redirect($this->generateUrl('zona_edit', array('id' => $id)));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        $entity->setDirector($director);
+
+        if ($editForm->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+            $editForm = $this->createEditForm($entity);
+            $editForm["director"]->setData($entity->getDirector()->getId());
+            $editForm["director_nom"]->setData($entity->getDirector()->getNombres().' '.$entity->getDirector()->getApellidos());
+            $response = new JsonResponse(
+                array(
+                    'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Registro actualizado.</div>',
+                    'form' => $this->renderView('Zona/form.html.twig',
+                        array(
+                            'entity' => $entity,
+                            'form' => $editForm->createView(),
+                        ))), 200);
+            return $response;
+        }
+
+        $response = new JsonResponse(
+            array(
+                'message' => 'Error desde Json',
+                'form' => $this->renderView('Zona/form.html.twig',
+                    array(
+                        'entity' => $entity,
+                        'form' => $editForm->createView(),
+                    ))), 400);
+        return $response;
     }
+
+
     /**
      * Deletes a Zona entity.
      *

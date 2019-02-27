@@ -16,7 +16,15 @@ class ZonaType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('director')
+            ->add("director", "text", array(
+                "mapped" => false,
+                'required'  => true,
+            ))
+            ->add("director_nom", "text", array(
+                "mapped" => false,
+                'required'  => true,
+                'disabled' => true
+            ))
         ;
     }
     
