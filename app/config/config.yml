@@ -79,4 +79,4 @@ swiftmailer:
     transport:  gmail
     host:       smtp.gmail.com
     username:   'siga@unad.edu.co'
-    password:   'Unad1527'
+    password:   '%env(string:MED_PKW)%'

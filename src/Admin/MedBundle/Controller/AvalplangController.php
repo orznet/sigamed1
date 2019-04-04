@@ -286,7 +286,7 @@ class AvalplangController extends Controller {
         }
         if ($editForm->get('avalado')->getData() == 2) {
             $plan->setEstado(0);
-            #$this->enviarMail($entity);
+            $this->enviarMail($entity);
         }
 
         if ($editForm->isValid()) {
@@ -343,22 +343,22 @@ class AvalplangController extends Controller {
         ;
     }
 
-    public function enviarMail(\Admin\MedBundle\Entity\Avalplang $aval) {
-
-        $docente = $aval->getPlan()->getId();
+    public function enviarMail(\Admin\MedBundle\Entity\Avalplang $aval)
+    {
+        $docente = $aval->getPlan()->getDocente();
         $message = \Swift_Message::newInstance()
-                ->setSubject('Plan de Gestión ' . $docente->getUser()->getId() . '-' . $docente->getPeriodo())
-                ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
-                ->setTo(array($docente->getUser()->getEmail() => $docente->getUser()->getNombres() . ' ' . $docente->getUser()->getApellidos()))
-                ->setBody(
+            ->setSubject('Plan de Gestión ' . $docente->getUser()->getId() . '-' . $docente->getPeriodo())
+            ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
+            ->setTo(array($docente->getUser()->getEmail() => $docente->getUser()->getNombres() . ' ' . $docente->getUser()->getApellidos()))
+            ->setBody(
                 $this->renderView('AdminMedBundle:Avalplang:noaprobado.txt.twig', array('aval' => $aval)
                 )
-                )
-        ;
+            );
         $this->get('mailer')->send($message);
     }
 
-    public function addAvales() {
+    public function addAvales()
+    {
         $em = $this->getDoctrine()->getManager();
         $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('periodo' => $this->container->getParameter('appmed.periodo'), 'vinculacion' => 'DC'));
 
