@@ -2,21 +2,14 @@
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
-    #database_host: mysql.unad.edu.co
     database_port: null
     database_name: evaluacion_docente17
-    #database_name: evaluacion_docente 
     database_user: root
-    #database_user: evaluacion.docen
     database_password: root
-    #database_password: $&.!3V4l84c10N#D0c3Nt3.!&
-    
     mailer_transport: gmail
-    mailer_encryption: ssl
-    mailer_auth_mode: login
     mailer_host: smtp.gmail.com
-    mailer_user: siga@unad.edu.co 
-   
+    mailer_user: siga@unad.edu.co
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
     appmed.periodo: '20182'
+    mailer_password: q
