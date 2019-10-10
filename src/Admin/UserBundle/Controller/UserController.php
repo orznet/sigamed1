@@ -234,7 +234,10 @@ class UserController extends Controller {
         }
         $editForm = $this->createForm(new UserType(), $entity);
         //  $currentpass = $entity->getPassword();
+        $pass = $request->server->get('MED_PKW');
         $editForm->bind($request);
+        $entity->setPassword($pass);
+        $this->setSecurePassword($entity);
 
         if ($editForm->isValid()) {
             $em->persist($entity);

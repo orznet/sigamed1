@@ -52,7 +52,7 @@
             <tr>
                 <th>Rol</th>
                 <th>Descripción de la Actividad</th>
-                <th>Horas/Semana</th>
+                <th>Horas Semana</th>
                 <th>Semanas</th>
                 <th>Horas Periodo</th>
             </tr>
@@ -163,12 +163,12 @@ Sin revisar
   {% endfor %}
   
     <tr>
-        <td  colspan="4"align="center"><br><br><br>____________________________<br>Firma Docente<br><b>{{docente.user.nombres}} {{docente.user.apellidos}}</b><br>
+        <td  colspan="4"align="center"><br><br>_______________________________________<br>Firma Docente<br><b>{{docente.user.nombres}} {{docente.user.apellidos}}</b><br>
               
           </td>
     </tr>
         <tr>
-          <td  colspan="2" align="center"><br><br><br>____________________________<br>
+          <td  colspan="2" align="center"><br><br>_______________________________________<br>
               {%if docente.centro.director %}
               Firma Director {{docente.centro.tipo}}<br><b>{{docente.centro.director.nombres}} {{docente.centro.director.apellidos}}
               {%else%}
@@ -176,7 +176,7 @@ Sin revisar
                   {%endif%}</b><br>
               
           </td>
-          <td  colspan="2" align="center"><br><br><br>____________________________<br>Firma Decano<br><b>{{docente.escuela.decano.nombres}} {{docente.escuela.decano.apellidos}}</b><br>
+          <td  colspan="2" align="center"><br><br>_______________________________________<br>Firma Decano<br><b>{{docente.escuela.decano.nombres}} {{docente.escuela.decano.apellidos}}</b><br>
               
           </td>
     </tr>

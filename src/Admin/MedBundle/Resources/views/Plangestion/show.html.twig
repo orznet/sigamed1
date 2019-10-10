@@ -44,7 +44,7 @@
             <tr>
                 {% set num = num+1 %}
                 <td>{{num}}.     
-                {{ actividad.actividad.descripcion }}
+                {{ actividad.actividad.descripcion }} {{ actividad.descripcion }}
                 {%if actividad.actividad.textoampliacion %}
                 <font color="#a57225">{{actividad.descripcion}}</font>
                 {%endif%}

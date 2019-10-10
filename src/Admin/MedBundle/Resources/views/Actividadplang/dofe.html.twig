@@ -14,7 +14,7 @@
                    </tr> 
 		  		   <tr>
 		    <td>Responsabilidad</td>
-		    <td>{{ entity.actividad.responsabilidad.nombre }}</td>
+		    <td>{{ entity.actividad.responsabilidad? entity.actividad.responsabilidad.nombre : '-'  }}</td>
 		    </tr>
             <tr>
 		    <td>Actividad</td>

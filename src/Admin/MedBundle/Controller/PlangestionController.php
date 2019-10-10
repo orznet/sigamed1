@@ -352,6 +352,9 @@ class PlangestionController extends Controller {
                 $actividadplan = new Actividadplang();
                 $actividadplan->setPlang($entity);
                 $actividadplan->setActividad($actividad);
+                if ($rol->getRol()->getId() == 13){
+                    $actividadplan->setDescripcion($rol->getDescripcion());
+                }
                 $em->persist($actividadplan);
             }
         }
