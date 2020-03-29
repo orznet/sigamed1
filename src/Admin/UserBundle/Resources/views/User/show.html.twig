@@ -22,12 +22,12 @@
       <table class="table table-bordered table-striped hidden-mobile">
         <tbody>
             <tr>
-                <td>Nombres: {{ entity.nombres }} </td>
-                <td>Apellidos: {{ entity.apellidos }}</td>
+                <td>Nombre : {{ entity.nombres }} {{  entity.apellidos }}</td>
+                <td>Roles: {% for rol in entity.roles %} {{rol.descripcion}}, {%endfor%}</td>
             </tr>
             <tr>
-                <td>Email: {{ entity.email }}</td>
-                <td>Roles: {% for rol in entity.roles %} {{rol.descripcion}}, {%endfor%} </td>
+                <td>Email Unad: {{ entity.email }}</td>
+                <td>Email Personal: {{ entity.emailp }}</td>
             </tr>
             <tr>
                 <td>Fecha Creación: {{entity.created|date('Y-m-d H:i')}}</td>

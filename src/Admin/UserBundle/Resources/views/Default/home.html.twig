@@ -163,13 +163,13 @@
                         {% endfor %}     
                            </td>
                            </tr>
-                               {%if autenticacion == 'Aceptada' and user|length == 0%}
+                               {%if autenticacion == 'Aceptada' and user %}
                                                 <div class="alert alert-warning fade in">
                      <button class="close" data-dismiss="alert">
                       ×
                                     </button>
                                     <i class="fa-fw fa fa-warning"></i>
-                                    <strong>Advertencia!</strong> No se encontro el numero de cédula: {{cedula_usuario}} en el sistema, si considera que extiste alguna inconsistencia por favor escriba a omar.rodriguez@unad.edu.co
+                                    <strong>Advertencia!</strong>{{ ucount }} No se encontro el numero de cédula: {{cedula_usuario}} en el sistema, si considera que extiste alguna inconsistencia por favor escriba a omar.rodriguez@unad.edu.co
                                                 </div>
                      {%endif%}
                            

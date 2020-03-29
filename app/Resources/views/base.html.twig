@@ -273,7 +273,7 @@
                         {% if is_granted('ROLE_DIRZ') %} 
                             <ul style="display: block;">
                                 <li>
-                                    <a href="{{ path('zona_index') }}"><i class="fa fa-book"></i> Docentes por Zona</a>
+                                    <a href="{{ path('zona_index',  { 'id': 1 }) }}"><i class="fa fa-book"></i> Docentes por Zona</a>
                                 </li>
                                 <li>
                                     <a href="{{ path('avalplang') }}"><i class="fa fa-book"></i> Avalar Plan Gestión</a>

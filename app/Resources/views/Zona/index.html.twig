@@ -77,7 +77,11 @@
             <td>{{ centro.nombre}}</td>
             <td>{{ centro.tipo }}</td>
             <td>{{ centro.zona.nombre }}</td>
-            <td>{{ centro.departamento.nombre }}</td>
+                <td>
+                    {% if centro.departamento %}
+                        {{ centro.departamento.nombre }}
+                    {% endif %}
+                </td>
             <td>{{ centro.director? centro.director.nombres }} {{ centro.director? centro.director.apellidos }}</td>
             <td><a href="{{ path('centro_docs', { 'id': centro.id }) }}">Ver...</a></td>
             </tr>

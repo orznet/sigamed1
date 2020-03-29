@@ -328,9 +328,10 @@ class ProgramaController extends Controller
     public function addliderAction()
     {
        $em = $this->getDoctrine()->getManager();
-       $session = new Session();
-       $session->migrate();
-       $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
+//       $session = new Session();
+//       $session->migrate();
+        $session = $this->getRequest()->getSession();
+        $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
        $entities = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('escuela' => $escuela, 'periodo' => $this->container->getParameter('appmed.periodo')));
         return array(
         'entities' => $entities,

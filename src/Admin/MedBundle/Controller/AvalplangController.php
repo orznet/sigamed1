@@ -67,9 +67,10 @@ class AvalplangController extends Controller {
      */
     public function porescuelaAction() {
         $em = $this->getDoctrine()->getManager();
-        $session = new Session();
-        $session->migrate();
-        //$session = $request->getSession();
+        //$session = new Session();
+        //$session->migrate();
+        $session = $this->getRequest()->getSession();
+
           if (!$this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
               $docentes = $em->getRepository('AdminUnadBundle:Docente')

@@ -279,22 +279,27 @@ class ZonaController extends Controller
     
     
         /**
-     * @Route("/docs/index", name="zona_index")
+     * @Route("/docs/{id}", name="zona_index")
      * @Method("GET")
      * @Template("Zona/docs.html.twig")
      */
-    public function listaAction()
+    public function listaAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
         $zona = $user->getDirectorzona();
+        $periodos = $em->getRepository('AdminMedBundle:Periodoe')->findAll();
+        if ($id == 1){
+            $id = $this->container->getParameter('appmed.periodo');
+        }
         $centros = $em->getRepository('AdminUnadBundle:Centro')->findBy(array('zona' => $zona[0]));
-        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros, 'periodo' => $this->container->getParameter('appmed.periodo')));
+        $docentes = $em->getRepository('AdminUnadBundle:Docente')->findBy(array('centro' => $centros, 'periodo' => $id));
         
         return array(
             'docentes'      => $docentes,
             'zona'        => $zona[0],
-            'periodo'     => $this->container->getParameter('appmed.periodo'),
+            'periodos'    => $periodos,
+            'periodo'     => $id,
         );
     }
 }

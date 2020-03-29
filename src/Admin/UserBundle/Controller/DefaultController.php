@@ -119,7 +119,9 @@ class DefaultController extends Controller {
         //
         //-----------------------------------------------------------------------------------------
 
-        if ($autenticacion == "Aceptada" && count($user) == 1) {
+        $ucount = (isset($user)) ? 1 : 0;
+
+        if ($autenticacion == "Aceptada" && $ucount == 1) {
             $this->ingresoAction($cedula_usuario);
         } else {
             # $this->ingresoAction($cedula_usuario);    
@@ -135,7 +137,8 @@ class DefaultController extends Controller {
                         'periodo' => $periodo,
                         'user' => $user,
                         'login_usuario' => $login_usuario,
-                        'direccion_ip' => $direccion_ip
+                        'direccion_ip' => $direccion_ip,
+                        'ucount' => $ucount
             ));
         }
     }

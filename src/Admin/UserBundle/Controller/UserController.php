@@ -277,7 +277,7 @@ class UserController extends Controller {
             $this->setSecurePassword($entity);
             $em->persist($entity);
             $em->flush();
-            $this->enviarMail($entity, $currentpass);
+            //$this->enviarMail($entity, $currentpass);
             return new JsonResponse(array(
                 'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
         }
@@ -412,11 +412,25 @@ class UserController extends Controller {
                     $currentpass = $this->generateRandomString();
                     $user->setPassword($currentpass);
                     $this->setSecurePassword($user);
+                    try{
+                        $this->enviarMail($user, $currentpass);
+                    } catch (\Exception $e){
+                        $pass = $request->server->get('MED_PKW');
+                        $user->setPassword($pass);
+                        $this->setSecurePassword($user);
+                        $em->persist($user);
+                        $em->flush();
+                        $response = new JsonResponse(
+                            array(
+                                'message' => '<div class="alert alert-warning fade in"><i class="fa-fw fa fa-check"></i><strong>Error !</strong> Error al enviar el correo. Se restablecio su ingreso mediante intranet.<a href="http://intranet.unad.edu.co/"> Continuar..</a></div>',
+                                'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
+                                    'form' => $Form->createView(),
+                                ))), 200);
+                        return $response;
+                    }
+
                     $em->persist($user);
                     $em->flush();
-                    $this->enviarMail($user, $currentpass);
-
-
                     $Form = $this->createForm(new PassType(), $valores);
                     $response = new JsonResponse(
                             array(

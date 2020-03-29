@@ -48,11 +48,11 @@
                 <td>
                 {%if actividad.calificacion is not null %}
                  {%if actividad.calificacion == 30%}
-                 <span class="center-block padding-5 label label-success">Superior</span>   
+                     <a data-toggle="modal" href="{{ path('dofe_calificaredit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-success btn-xs"> Superior </a>
                  {%elseif actividad.calificacion == 20%}
-                    <span class="center-block padding-5 label label-warning">Medio</span>   
-                     {%else%}   
-                       <span class="center-block padding-5 label label-default">Bajo</span>    
+                     <a data-toggle="modal" href="{{ path('dofe_calificaredit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-warning btn-xs"> Medio </a>
+                     {%else%}
+                     <a data-toggle="modal" href="{{ path('dofe_calificaredit', { 'id': actividad.id }) }}" data-target="#myModal" class="btn btn-default btn-xs"> Bajo </a>
                           {%endif%}
           
                 {%else%}

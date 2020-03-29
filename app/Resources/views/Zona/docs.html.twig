@@ -1,6 +1,19 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="row">
+<div class="col-sm-4 text-align-left">
+<h4 style="line-height: 32px;">Periodos de evaluación: </h4>
+</div>
+<div class="col-sm-8">
+{% for periodo in periodos %}
+<a href="{{ path('zona_index', { 'id': periodo.id }) }}">
+<button type="button" class="btn btn-primary btn-sm">{{periodo.id}}</button> 
+</a>
+{% endfor %}
+</div>
+</div>
+<br>
                     <!-- widget grid -->
                     <section id="widget-grid" class="">
                     <!-- row -->
@@ -8,7 +21,7 @@
                     <!-- NEW WIDGET START -->
                     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <!-- Widget ID (each widget will need unique ID)-->
-                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-43" data-widget-editbutton="false">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-{{periodo}}" data-widget-editbutton="false">
                          <!-- widget options:
                          usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                         data-widget-colorbutton="false"

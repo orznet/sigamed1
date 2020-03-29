@@ -144,9 +144,9 @@ class EscuelaController extends Controller
     public function infoAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$session = $this->getRequest()->getSession();
-            $session = new Session();
-       $session->migrate();
+        $session = $this->getRequest()->getSession();
+        //$session = new Session();
+        //$session->migrate();
         $escuela = $em->getRepository('AdminUnadBundle:Escuela')->find($session->get('escuelaid'));
         $periodose = $em->getRepository('AdminMedBundle:Periodoe')->findby(array(),array('id' => 'DESC'));
         $programas = $em->getRepository('AdminUnadBundle:Programa')->findBy(array('escuela' => $escuela),array('nivel' => 'DESC'));

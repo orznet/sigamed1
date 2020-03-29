@@ -75,6 +75,7 @@ class DofeController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:evalDofe')->find($id);
+        $eval = $entity->getEvaluacion();
         $docente = $entity->getEvaluacion()->getDocente();
 
         $actividad = $em->getRepository('AdminMedBundle:Actividadplang')->findOneBy(array('plang' => $docente->getPlangestion(), 'actividad' => $entity->getActividad()));
@@ -87,6 +88,7 @@ class DofeController extends Controller {
 
         return array(
             'entity' => $entity,
+            'eval' => $eval,
             'edit_form' => $editForm->createView(),
             'actividad' => $actividad
         );
@@ -101,6 +103,7 @@ class DofeController extends Controller {
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:evalDofe')->find($id);
+        $eval = $entity->getEvaluacion();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividadplang entity.');
         }
@@ -114,6 +117,7 @@ class DofeController extends Controller {
         }
         return array(
             'entity' => $entity,
+            'eval' => $eval,
             'edit_form' => $editForm->createView()
         );
     }
