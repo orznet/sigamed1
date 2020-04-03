@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Templating;
 
-use Symfony\Component\Templating\Storage\Storage;
-use Symfony\Component\Templating\Storage\FileStorage;
-use Symfony\Component\Templating\Storage\StringStorage;
 use Symfony\Component\Templating\Helper\HelperInterface;
 use Symfony\Component\Templating\Loader\LoaderInterface;
+use Symfony\Component\Templating\Storage\FileStorage;
+use Symfony\Component\Templating\Storage\Storage;
+use Symfony\Component\Templating\Storage\StringStorage;
 
 /**
  * PhpEngine is an engine able to render PHP templates.
@@ -43,8 +43,6 @@ class PhpEngine implements EngineInterface, \ArrayAccess
     private $evalParameters;
 
     /**
-     * Constructor.
-     *
      * @param TemplateNameParserInterface $parser  A TemplateNameParserInterface instance
      * @param LoaderInterface             $loader  A loader instance
      * @param HelperInterface[]           $helpers An array of helper instances
@@ -226,7 +224,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
     public function addHelpers(array $helpers)
     {
         foreach ($helpers as $alias => $helper) {
-            $this->set($helper, is_int($alias) ? null : $alias);
+            $this->set($helper, \is_int($alias) ? null : $alias);
         }
     }
 
@@ -315,13 +313,13 @@ class PhpEngine implements EngineInterface, \ArrayAccess
         // the performance when the same value is escaped multiple times (e.g. loops)
         if (is_scalar($value)) {
             if (!isset(self::$escaperCache[$context][$value])) {
-                self::$escaperCache[$context][$value] = call_user_func($this->getEscaper($context), $value);
+                self::$escaperCache[$context][$value] = \call_user_func($this->getEscaper($context), $value);
             }
 
             return self::$escaperCache[$context][$value];
         }
 
-        return call_user_func($this->getEscaper($context), $value);
+        return \call_user_func($this->getEscaper($context), $value);
     }
 
     /**
@@ -368,7 +366,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
      *
      * @param string $context The context name
      *
-     * @return callable $escaper A PHP callable
+     * @return callable A PHP callable
      *
      * @throws \InvalidArgumentException
      */
@@ -420,7 +418,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
     protected function initializeEscapers()
     {
         $that = $this;
-        if (PHP_VERSION_ID >= 50400) {
+        if (\PHP_VERSION_ID >= 50400) {
             $flags = ENT_QUOTES | ENT_SUBSTITUTE;
         } else {
             $flags = ENT_QUOTES;
@@ -431,14 +429,14 @@ class PhpEngine implements EngineInterface, \ArrayAccess
                 /**
                  * Runs the PHP function htmlspecialchars on the value passed.
                  *
-                 * @param string $value the value to escape
+                 * @param string $value The value to escape
                  *
                  * @return string the escaped value
                  */
                 function ($value) use ($that, $flags) {
                     // Numbers and Boolean values get turned into strings which can cause problems
                     // with type comparisons (e.g. === or is_int() etc).
-                    return is_string($value) ? htmlspecialchars($value, $flags, $that->getCharset(), false) : $value;
+                    return \is_string($value) ? htmlspecialchars($value, $flags, $that->getCharset(), false) : $value;
                 },
 
             'js' =>
@@ -446,7 +444,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
                  * A function that escape all non-alphanumeric characters
                  * into their \xHH or \uHHHH representations.
                  *
-                 * @param string $value the value to escape
+                 * @param string $value The value to escape
                  *
                  * @return string the escaped value
                  */
@@ -455,7 +453,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
                         $value = iconv($that->getCharset(), 'UTF-8', $value);
                     }
 
-                    $callback = function ($matches) use ($that) {
+                    $callback = function ($matches) {
                         $char = $matches[0];
 
                         // \xHH
@@ -497,7 +495,7 @@ class PhpEngine implements EngineInterface, \ArrayAccess
      */
     public function convertEncoding($string, $to, $from)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.8 and will be removed in 3.0. Use iconv() instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.8 and will be removed in 3.0. Use iconv() instead.', E_USER_DEPRECATED);
 
         return iconv($from, $to, $string);
     }

@@ -11,13 +11,13 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Command;
 
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Translation\Catalogue\TargetOperation;
-use Symfony\Component\Translation\Catalogue\MergeOperation;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Translation\Catalogue\MergeOperation;
+use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
 /**
@@ -73,7 +73,7 @@ EOF
         $io = new SymfonyStyle($input, $output);
 
         // check presence of force or dump-message
-        if ($input->getOption('force') !== true && $input->getOption('dump-messages') !== true) {
+        if (true !== $input->getOption('force') && true !== $input->getOption('dump-messages')) {
             $io->error('You must choose one of --force or --dump-messages');
 
             return 1;
@@ -82,7 +82,7 @@ EOF
         // check format
         $writer = $this->getContainer()->get('translation.writer');
         $supportedFormats = $writer->getFormats();
-        if (!in_array($input->getOption('output-format'), $supportedFormats)) {
+        if (!\in_array($input->getOption('output-format'), $supportedFormats)) {
             $io->error(array('Wrong output format', 'Supported formats are: '.implode(', ', $supportedFormats).'.'));
 
             return 1;
@@ -108,7 +108,7 @@ EOF
                 $currentName = $transPaths[0];
 
                 if (!is_dir($transPaths[0])) {
-                    throw new \InvalidArgumentException(sprintf('<error>"%s" is neither an enabled bundle nor a directory.</error>', $transPaths[0]));
+                    throw new \InvalidArgumentException(sprintf('"%s" is neither an enabled bundle nor a directory.', $transPaths[0]));
                 }
             }
         }
@@ -119,9 +119,8 @@ EOF
         // load any messages from templates
         $extractedCatalogue = new MessageCatalogue($input->getArgument('locale'));
         $io->comment('Parsing templates...');
-        $prefix = $input->getOption('prefix');
         $extractor = $this->getContainer()->get('translation.extractor');
-        $extractor->setPrefix(null === $prefix ? '' : $prefix);
+        $extractor->setPrefix($input->getOption('prefix'));
         foreach ($transPaths as $path) {
             $path .= 'views';
             if (is_dir($path)) {
@@ -146,7 +145,7 @@ EOF
             : new MergeOperation($currentCatalogue, $extractedCatalogue);
 
         // Exit if no messages found.
-        if (!count($operation->getDomains())) {
+        if (!\count($operation->getDomains())) {
             $io->warning('No translation messages were found.');
 
             return;
@@ -172,7 +171,7 @@ EOF
                     }, array_keys($operation->getObsoleteMessages($domain)))
                 );
 
-                $domainMessagesCount = count($list);
+                $domainMessagesCount = \count($list);
 
                 $io->section(sprintf('Messages extracted for domain "<info>%s</info>" (%d message%s)', $domain, $domainMessagesCount, $domainMessagesCount > 1 ? 's' : ''));
                 $io->listing($list);
@@ -180,19 +179,19 @@ EOF
                 $extractedMessagesCount += $domainMessagesCount;
             }
 
-            if ($input->getOption('output-format') == 'xlf') {
+            if ('xlf' == $input->getOption('output-format')) {
                 $io->comment('Xliff output version is <info>1.2</info>');
             }
 
             $resultMessage = sprintf('%d message%s successfully extracted', $extractedMessagesCount, $extractedMessagesCount > 1 ? 's were' : ' was');
         }
 
-        if ($input->getOption('no-backup') === true) {
+        if (true === $input->getOption('no-backup')) {
             $writer->disableBackup();
         }
 
         // save the files
-        if ($input->getOption('force') === true) {
+        if (true === $input->getOption('force')) {
             $io->comment('Writing files...');
 
             $bundleTransPath = false;

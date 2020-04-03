@@ -11,24 +11,25 @@
 
 namespace Symfony\Component\Form\Tests;
 
+use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
+use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
-abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormIntegrationTestCase
+abstract class AbstractLayoutTest extends FormIntegrationTestCase
 {
     protected $csrfTokenManager;
     protected $testableFeatures = array();
 
     protected function setUp()
     {
-        if (!extension_loaded('intl')) {
+        if (!\extension_loaded('intl')) {
             $this->markTestSkipped('Extension intl is required.');
         }
 
         \Locale::setDefault('en');
 
-        $this->csrfTokenManager = $this->getMock('Symfony\Component\Security\Csrf\CsrfTokenManagerInterface');
+        $this->csrfTokenManager = $this->getMockBuilder('Symfony\Component\Security\Csrf\CsrfTokenManagerInterface')->getMock();
 
         parent::setUp();
     }
@@ -57,7 +58,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
     protected function assertMatchesXpath($html, $expression, $count = 1)
     {
-        $dom = new \DomDocument('UTF-8');
+        $dom = new \DOMDocument('UTF-8');
         try {
             // Wrap in <root> node so we can load HTML with multiple tags at
             // the top level
@@ -77,11 +78,13 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             $this->fail(sprintf(
                 "Failed asserting that \n\n%s\n\nmatches exactly %s. Matches %s in \n\n%s",
                 $expression,
-                $count == 1 ? 'once' : $count.' times',
-                $nodeList->length == 1 ? 'once' : $nodeList->length.' times',
+                1 == $count ? 'once' : $count.' times',
+                1 == $nodeList->length ? 'once' : $nodeList->length.' times',
                 // strip away <root> and </root>
                 substr($dom->saveHTML(), 6, -8)
             ));
+        } else {
+            $this->addToAssertionCount(1);
         }
     }
 
@@ -110,7 +113,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
     protected function renderEnctype(FormView $view)
     {
-        $this->markTestSkipped(sprintf('Legacy %s::renderEnctype() is not implemented.', get_class($this)));
+        $this->markTestSkipped(sprintf('Legacy %s::renderEnctype() is not implemented.', \get_class($this)));
     }
 
     abstract protected function renderLabel(FormView $view, $label = null, array $vars = array());
@@ -626,7 +629,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             'expanded' => false,
         ));
 
-        $classPart = in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
+        $classPart = \in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/select
@@ -972,7 +975,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             'expanded' => false,
         ));
 
-        $classPart = in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
+        $classPart = \in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/select
@@ -1092,7 +1095,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             'expanded' => true,
         ));
 
-        $classPart = in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
+        $classPart = \in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/div
@@ -1250,7 +1253,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             'required' => true,
         ));
 
-        $classPart = in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
+        $classPart = \in_array('choice_attr', $this->testableFeatures) ? '[@class="foo&bar"]' : '';
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/div
@@ -1300,7 +1303,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
     public function testDateTime()
     {
-        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', '2011-02-03 04:05:06', array(
+        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', date('Y').'-02-03 04:05:06', array(
             'input' => 'string',
             'with_seconds' => false,
         ));
@@ -1319,7 +1322,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
                     [./option[@value="3"][@selected="selected"]]
                 /following-sibling::select
                     [@id="name_date_year"]
-                    [./option[@value="2011"][@selected="selected"]]
+                    [./option[@value="'.date('Y').'"][@selected="selected"]]
             ]
         /following-sibling::div
             [@id="name_time"]
@@ -1379,7 +1382,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
     public function testDateTimeWithHourAndMinute()
     {
-        $data = array('year' => '2011', 'month' => '2', 'day' => '3', 'hour' => '4', 'minute' => '5');
+        $data = array('year' => date('Y'), 'month' => '2', 'day' => '3', 'hour' => '4', 'minute' => '5');
 
         $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', $data, array(
             'input' => 'array',
@@ -1400,7 +1403,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
                     [./option[@value="3"][@selected="selected"]]
                 /following-sibling::select
                     [@id="name_date_year"]
-                    [./option[@value="2011"][@selected="selected"]]
+                    [./option[@value="'.date('Y').'"][@selected="selected"]]
             ]
         /following-sibling::div
             [@id="name_time"]
@@ -1420,7 +1423,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
     public function testDateTimeWithSeconds()
     {
-        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', '2011-02-03 04:05:06', array(
+        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateTimeType', date('Y').'-02-03 04:05:06', array(
             'input' => 'string',
             'with_seconds' => true,
         ));
@@ -1439,7 +1442,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
                     [./option[@value="3"][@selected="selected"]]
                 /following-sibling::select
                     [@id="name_date_year"]
-                    [./option[@value="2011"][@selected="selected"]]
+                    [./option[@value="'.date('Y').'"][@selected="selected"]]
             ]
         /following-sibling::div
             [@id="name_time"]
@@ -1497,9 +1500,9 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/input
-    [@type="datetime"]
+    [@type="datetime-local"]
     [@name="name"]
-    [@value="2011-02-03T04:05:06Z"]
+    [@value="2011-02-03T04:05:06"]
 '
         );
     }
@@ -1517,16 +1520,16 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
 '/input
-    [@type="datetime"]
+    [@type="datetime-local"]
     [@name="name"]
-    [@value="2011-02-03T04:05:06Z"]
+    [@value="2011-02-03T04:05:06"]
 '
         );
     }
 
     public function testDateChoice()
     {
-        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateType', '2011-02-03', array(
+        $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\DateType', date('Y').'-02-03', array(
             'input' => 'string',
             'widget' => 'choice',
         ));
@@ -1542,7 +1545,7 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
             [./option[@value="3"][@selected="selected"]]
         /following-sibling::select
             [@id="name_year"]
-            [./option[@value="2011"][@selected="selected"]]
+            [./option[@value="'.date('Y').'"][@selected="selected"]]
     ]
     [count(./select)=3]
 '
@@ -2422,7 +2425,13 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
         $html = $this->renderWidget($form->createView());
 
         // compare plain HTML to check the whitespace
-        $this->assertSame('<input type="text" id="text" name="text" readonly="readonly" disabled="disabled" required="required" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />', $html);
+        try {
+            $this->assertSame('<input type="text" id="text" name="text" readonly="readonly" disabled="disabled" required="required" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />', $html);
+        } catch (\PHPUnit\Framework\AssertionFailedError $e) {
+            $this->assertSame('<input type="text" id="text" name="text" disabled="disabled" required="required" readonly="readonly" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />', $html);
+        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
+            $this->assertSame('<input type="text" id="text" name="text" disabled="disabled" required="required" readonly="readonly" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />', $html);
+        }
     }
 
     public function testWidgetAttributeNameRepeatedIfTrue()

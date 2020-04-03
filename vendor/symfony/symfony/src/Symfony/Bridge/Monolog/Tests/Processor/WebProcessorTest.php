@@ -12,10 +12,11 @@
 namespace Symfony\Bridge\Monolog\Tests\Processor;
 
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Monolog\Processor\WebProcessor;
 use Symfony\Component\HttpFoundation\Request;
 
-class WebProcessorTest extends \PHPUnit_Framework_TestCase
+class WebProcessorTest extends TestCase
 {
     public function testUsesRequestServerData()
     {
@@ -48,6 +49,8 @@ class WebProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($server['REQUEST_METHOD'], $record['extra']['http_method']);
         $this->assertEquals($server['SERVER_NAME'], $record['extra']['server']);
         $this->assertEquals($server['HTTP_REFERER'], $record['extra']['referrer']);
+
+        Request::setTrustedProxies(array());
     }
 
     public function testCanBeConstructedWithExtraFields()

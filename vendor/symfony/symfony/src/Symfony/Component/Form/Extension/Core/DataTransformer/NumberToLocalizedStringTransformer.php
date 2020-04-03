@@ -124,8 +124,8 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
      *
      * @return string Localized value
      *
-     * @throws TransformationFailedException If the given value is not numeric
-     *                                       or if the value can not be transformed.
+     * @throws TransformationFailedException if the given value is not numeric
+     *                                       or if the value can not be transformed
      */
     public function transform($value)
     {
@@ -157,12 +157,12 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
      *
      * @return int|float The numeric value
      *
-     * @throws TransformationFailedException If the given value is not a string
-     *                                       or if the value can not be transformed.
+     * @throws TransformationFailedException if the given value is not a string
+     *                                       or if the value can not be transformed
      */
     public function reverseTransform($value)
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             throw new TransformationFailedException('Expected a string.');
         }
 
@@ -205,7 +205,7 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
             throw new TransformationFailedException('I don\'t have a clear idea what infinity looks like');
         }
 
-        if (is_int($result) && $result === (int) $float = (float) $result) {
+        if (\is_int($result) && $result === (int) $float = (float) $result) {
             $result = $float;
         }
 
@@ -213,7 +213,7 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
             $length = mb_strlen($value, $encoding);
             $remainder = mb_substr($value, $position, $length, $encoding);
         } else {
-            $length = strlen($value);
+            $length = \strlen($value);
             $remainder = substr($value, $position, $length);
         }
 
@@ -225,9 +225,7 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
             $remainder = trim($remainder, " \t\n\r\0\x0b\xc2\xa0");
 
             if ('' !== $remainder) {
-                throw new TransformationFailedException(
-                    sprintf('The number contains unrecognized characters: "%s"', $remainder)
-                );
+                throw new TransformationFailedException(sprintf('The number contains unrecognized characters: "%s"', $remainder));
             }
         }
 
@@ -266,7 +264,8 @@ class NumberToLocalizedStringTransformer implements DataTransformerInterface
         if (null !== $this->precision && null !== $this->roundingMode) {
             // shift number to maintain the correct scale during rounding
             $roundingCoef = pow(10, $this->precision);
-            $number *= $roundingCoef;
+            // string representation to avoid rounding errors, similar to bcmul()
+            $number = (string) ($number * $roundingCoef);
 
             switch ($this->roundingMode) {
                 case self::ROUND_CEILING:

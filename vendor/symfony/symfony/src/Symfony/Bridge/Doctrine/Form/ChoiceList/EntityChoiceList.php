@@ -11,7 +11,7 @@
 
 namespace Symfony\Bridge\Doctrine\Form\ChoiceList;
 
-@trigger_error('The '.__NAMESPACE__.'\EntityChoiceList class is deprecated since version 2.7 and will be removed in 3.0. Use Symfony\Bridge\Doctrine\Form\ChoiceList\DoctrineChoiceLoader instead.', E_USER_DEPRECATED);
+@trigger_error('The '.__NAMESPACE__.'\EntityChoiceList class is deprecated since Symfony 2.7 and will be removed in 3.0. Use Symfony\Bridge\Doctrine\Form\ChoiceList\DoctrineChoiceLoader instead.', E_USER_DEPRECATED);
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -117,7 +117,7 @@ class EntityChoiceList extends ObjectChoiceList
         $this->entityLoader = $entityLoader;
         $this->classMetadata = $manager->getClassMetadata($class);
         $this->class = $this->classMetadata->getName();
-        $this->loaded = is_array($entities) || $entities instanceof \Traversable;
+        $this->loaded = \is_array($entities) || $entities instanceof \Traversable;
         $this->preferredEntities = $preferredEntities;
         list(
             $this->idAsIndex,
@@ -214,8 +214,6 @@ class EntityChoiceList extends ObjectChoiceList
     /**
      * Returns the entities corresponding to the given values.
      *
-     * @param array $values
-     *
      * @return array
      *
      * @see ChoiceListInterface
@@ -267,8 +265,6 @@ class EntityChoiceList extends ObjectChoiceList
     /**
      * Returns the values corresponding to the given entities.
      *
-     * @param array $entities
-     *
      * @return array
      *
      * @see ChoiceListInterface
@@ -316,7 +312,7 @@ class EntityChoiceList extends ObjectChoiceList
      */
     public function getIndicesForChoices(array $entities)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         // Performance optimization
         if (empty($entities)) {
@@ -359,7 +355,7 @@ class EntityChoiceList extends ObjectChoiceList
      */
     public function getIndicesForValues(array $values)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.4 and will be removed in 3.0.', E_USER_DEPRECATED);
 
         // Performance optimization
         if (empty($values)) {
@@ -389,8 +385,8 @@ class EntityChoiceList extends ObjectChoiceList
      *
      * @param mixed $entity The choice to create an index for
      *
-     * @return int|string A unique index containing only ASCII letters,
-     *                    digits and underscores.
+     * @return int|string a unique index containing only ASCII letters,
+     *                    digits and underscores
      */
     protected function createIndex($entity)
     {
@@ -453,13 +449,13 @@ class EntityChoiceList extends ObjectChoiceList
 
         $identifiers = $classMetadata->getIdentifierFieldNames();
 
-        if (1 === count($identifiers)) {
+        if (1 === \count($identifiers)) {
             $identifier = $identifiers[0];
 
             if (!$classMetadata->hasAssociation($identifier)) {
                 $idAsValue = true;
 
-                if (in_array($classMetadata->getTypeOfField($identifier), array('integer', 'smallint', 'bigint'))) {
+                if (\in_array($classMetadata->getTypeOfField($identifier), array('integer', 'smallint', 'bigint'))) {
                     $idAsIndex = true;
                 }
             }
@@ -534,10 +530,7 @@ class EntityChoiceList extends ObjectChoiceList
     private function getIdentifierValues($entity)
     {
         if (!$this->em->contains($entity)) {
-            throw new RuntimeException(
-                'Entities passed to the choice field must be managed. Maybe '.
-                'persist them in the entity manager?'
-            );
+            throw new RuntimeException('Entities passed to the choice field must be managed. Maybe persist them in the entity manager?');
         }
 
         $this->em->initializeObject($entity);

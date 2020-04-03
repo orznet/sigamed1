@@ -12,8 +12,8 @@
 namespace Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -59,7 +59,7 @@ class FormLoginFactory extends AbstractFactory
             ->beforeNormalization()
                 ->ifTrue(function ($v) { return isset($v['csrf_provider']); })
                 ->then(function ($v) {
-                    @trigger_error("Setting the 'csrf_provider' configuration key on a security firewall is deprecated since version 2.8 and will be removed in 3.0. Use the 'csrf_token_generator' configuration key instead.", E_USER_DEPRECATED);
+                    @trigger_error("Setting the 'csrf_provider' configuration key on a security firewall is deprecated since Symfony 2.8 and will be removed in 3.0. Use the 'csrf_token_generator' configuration key instead.", E_USER_DEPRECATED);
 
                     $v['csrf_token_generator'] = $v['csrf_provider'];
                     unset($v['csrf_provider']);
@@ -70,7 +70,7 @@ class FormLoginFactory extends AbstractFactory
             ->beforeNormalization()
                 ->ifTrue(function ($v) { return isset($v['intention']); })
                 ->then(function ($v) {
-                    @trigger_error("Setting the 'intention' configuration key on a security firewall is deprecated since version 2.8 and will be removed in 3.0. Use the 'csrf_token_id' key instead.", E_USER_DEPRECATED);
+                    @trigger_error("Setting the 'intention' configuration key on a security firewall is deprecated since Symfony 2.8 and will be removed in 3.0. Use the 'csrf_token_id' key instead.", E_USER_DEPRECATED);
 
                     $v['csrf_token_id'] = $v['intention'];
                     unset($v['intention']);

@@ -11,9 +11,10 @@
 
 namespace Symfony\Component\BrowserKit\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\BrowserKit\Client;
-use Symfony\Component\BrowserKit\History;
 use Symfony\Component\BrowserKit\CookieJar;
+use Symfony\Component\BrowserKit\History;
 use Symfony\Component\BrowserKit\Response;
 
 class SpecialResponse extends Response
@@ -71,7 +72,7 @@ EOF;
     }
 }
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     public function testGetHistory()
     {
@@ -637,7 +638,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $client->getServerParameter('HTTP_HOST'));
         $this->assertEquals('Symfony2 BrowserKit', $client->getServerParameter('HTTP_USER_AGENT'));
 
-        $this->assertEquals('http://www.example.com/https/www.example.com', $client->getRequest()->getUri());
+        $this->assertEquals('https://www.example.com/https/www.example.com', $client->getRequest()->getUri());
 
         $server = $client->getRequest()->getServer();
 
@@ -651,7 +652,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('new-server-key-value', $server['NEW_SERVER_KEY']);
 
         $this->assertArrayHasKey('HTTPS', $server);
-        $this->assertFalse($server['HTTPS']);
+        $this->assertTrue($server['HTTPS']);
+    }
+
+    public function testRequestWithRelativeUri()
+    {
+        $client = new TestClient();
+
+        $client->request('GET', '/', array(), array(), array(
+            'HTTP_HOST' => 'testhost',
+            'HTTPS' => true,
+        ));
+        $this->assertEquals('https://testhost/', $client->getRequest()->getUri());
+
+        $client->request('GET', 'https://www.example.com/', array(), array(), array(
+            'HTTP_HOST' => 'testhost',
+            'HTTPS' => false,
+        ));
+        $this->assertEquals('https://www.example.com/', $client->getRequest()->getUri());
     }
 
     public function testInternalRequest()
