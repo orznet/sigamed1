@@ -422,7 +422,7 @@ class UserController extends Controller {
                         $em->flush();
                         $response = new JsonResponse(
                             array(
-                                'message' => '<div class="alert alert-warning fade in"><i class="fa-fw fa fa-check"></i><strong>Error !</strong> Error al enviar el correo. Se restablecio su ingreso mediante intranet.<a href="http://intranet.unad.edu.co/"> Continuar..</a></div>',
+                                'message' => '<div class="alert alert-warning fade in"><i class="fa-fw fa fa-check"></i><strong>Error !</strong> Error al enviar el correo. Se restablecio su ingreso mediante intranet<a href="http://intranet.unad.edu.co/"> Continuar..</a></div>',
                                 'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
                                     'form' => $Form->createView(),
                                 ))), 200);
@@ -434,7 +434,7 @@ class UserController extends Controller {
                     $Form = $this->createForm(new PassType(), $valores);
                     $response = new JsonResponse(
                             array(
-                        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional, por favor siga las instrucciones que estan en el correo. <a href="../login">Continuar..</a></div>',
+                        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional con las instrucciones. <a href="../login">Continuar..</a></div>',
                         'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
                             'form' => $Form->createView(),
                         ))), 200);
