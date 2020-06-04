@@ -277,7 +277,7 @@ class UserController extends Controller {
             $this->setSecurePassword($entity);
             $em->persist($entity);
             $em->flush();
-            //$this->enviarMail($entity, $currentpass);
+            $this->enviarMail($entity, $currentpass);
             return new JsonResponse(array(
                 'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
         }
