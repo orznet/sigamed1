@@ -731,7 +731,7 @@ $parts = array();
 $order = array();
 foreach (explode('&', $qs) as $param) {
 if (''=== $param ||'='=== $param[0]) {
-continue;
+break;
 }
 $keyValuePair = explode('=', $param, 2);
 $parts[] = isset($keyValuePair[1]) ?
@@ -2257,7 +2257,7 @@ if (isset($this->methodMap[$id])) {
 $method = $this->methodMap[$id];
 } elseif (--$i && $id !== $lcId = strtolower($id)) {
 $id = $lcId;
-continue;
+break;
 } elseif (method_exists($this, $method ='get'.strtr($id, $this->underscoreMap).'Service')) {
 } else {
 if (self::EXCEPTION_ON_INVALID_REFERENCE === $invalidBehavior) {
@@ -2906,7 +2906,7 @@ $rawChunk ='';
 } elseif (T_WHITESPACE === $token[0]) {
 if ($ignoreSpace) {
 $ignoreSpace = false;
-continue;
+break;
 }
 $rawChunk .= preg_replace(array('/\n{2,}/S'),"\n", $token[1]);
 } elseif (\in_array($token[0], array(T_COMMENT, T_DOC_COMMENT))) {
@@ -3048,7 +3048,7 @@ $class = $ns.'\\'.$file->getBasename('.php');
 if ($this->container) {
 $alias ='console.command.'.strtolower(str_replace('\\','_', $class));
 if ($this->container->has($alias)) {
-continue;
+break;
 }
 }
 $r = new \ReflectionClass($class);
@@ -3136,7 +3136,7 @@ return false;
 foreach ($meta as $resource) {
 foreach ($this->resourceCheckers as $checker) {
 if (!$checker->supports($resource)) {
-continue; }
+break; }
 if ($checker->isFresh($resource, $time)) {
 break; }
 return false; }
