@@ -352,17 +352,17 @@ protected $actividad;
         if ($this->autoevaluacion == null )
         return ' ';
         elseif ($this->autoevaluacion == 0)
-        return 'NA';
+        return 'No Aplica';
         elseif ($this->autoevaluacion == 1)
-        return 'N';
+        return 'Nunca';
         elseif ($this->autoevaluacion == 2)
-        return 'CN';
+        return 'Casi Nunca';
         elseif ($this->autoevaluacion == 3)
-        return 'AV';  
+        return 'Aveces';
         elseif ($this->autoevaluacion == 4)
-        return 'CS';
+        return 'Casi Siempre';
         elseif ($this->autoevaluacion == 5)
-        return 'S';   
+        return 'Siempre';
                 
         else
          return $this->estado;   

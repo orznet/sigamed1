@@ -293,11 +293,11 @@ class ActividadplangController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:Actividadplang')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividadplang entity.');
         }
-
+        $entity->setPath(null);
+        //$em->flush();
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
