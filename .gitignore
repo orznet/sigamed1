@@ -9,7 +9,7 @@
 /bin/
 /composer.phar
 /src/Acme/*
-/nbproject/
+/nbproject/*
 /nbproject/private/
 
 app/config/deploy.rb
