@@ -140,6 +140,11 @@ class PlangestionController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Plangestion no encontrado');
         }
+
+        if (count($entity->getActividades()) != 0 ){
+            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $session->get('docenteid'))));
+        }
+
         return array(
             'entity' => $entity,
         );
