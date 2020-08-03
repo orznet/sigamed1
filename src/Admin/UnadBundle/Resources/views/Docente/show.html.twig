@@ -102,14 +102,10 @@
                     <a href="javascript:popUp('{{ path('plangestion_info', { 'id': entity.id }) }}')">(Ver Plan...)</a>
                 </td>
                 <td>
-                    {% if entity.plangestion.autoevaluacion is null %}
                         {% if instrumentos[1].estado %}
                             <a href="{{ path('plangestion_conf', { 'id': entity.id }) }}"
                                class="btn btn-primary btn-xs">Ingresar <i class="fa fa-sign-in"></i></a>
                         {% else %}<i>Ver cronograma</i>{% endif %}
-                    {% else %}
-                        <i>Ver Resultados</i>
-                    {% endif %}
                 </td>
 
             </tr>
