@@ -250,6 +250,32 @@ class PlangestionController extends Controller {
     }
 
     /**
+     * Displays a form to edit an existing Plangestion entity.
+     *
+     * @Route("/{id}/abrir", name="plangestion_abrir")
+     * @Method("GET")
+     * @Template()
+     */
+    public function abrirAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+        $entity->setObservaciones(null);
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
      * Creates a form to edit a Plangestion entity.
      *
      * @param Plangestion $entity The entity
@@ -310,14 +336,51 @@ class PlangestionController extends Controller {
                 )));
             }
         }
-
-
-
         return array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         );
     }
+
+
+    /**
+     * Abrir an existing Plangestion entity.
+     *
+     * @Route("/{id}/abrir", name="plangestion_abrir_registro")
+     * @Method("PUT")
+     * @Template("AdminMedBundle:Plangestion:edit.html.twig")
+     */
+    public function abrirRegistroAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
+        $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Plangestion entity.');
+        }
+
+        $entity->setAutoevaluacion(null);
+        $entity->setEstado(5);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+        if ($editForm->isValid()) {
+            $em->flush();
+            if ($docente->getVinculacion() == 'DOFE') {
+                return $this->redirect($this->generateUrl('plangestion_dofe', array(
+                    'id' => $entity->getId()
+                )));
+            } else {
+                return $this->redirect($this->generateUrl('plangestion_show', array(
+                    'id' => $entity->getId()
+                )));
+            }
+        }
+        return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+        );
+    }
+
 
     /** Cerrar plan
      * @Route("/{id}/cerrar", name="plangestion_cerrar")
