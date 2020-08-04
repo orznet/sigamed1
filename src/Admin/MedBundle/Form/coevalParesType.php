@@ -73,8 +73,8 @@ class coevalParesType extends AbstractType
             'choices'   => array( '5' => 'Siempre', '4' => 'Casi Siempre', '3' => 'Aveces', '2' => 'Casi Nunca', '1' => 'Nunca'), 'required'  => true,))
             ->add('f30', 'choice', array('empty_value' => ' ','label' => ' ',    
             'choices'   => array( '5' => 'Siempre', '4' => 'Casi Siempre', '3' => 'Aveces', '2' => 'Casi Nunca', '1' => 'Nunca'), 'required'  => true,))
-          
-            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '90')))     
+
+            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '120', 'maxlength' => '512')))
         ;
     }
     

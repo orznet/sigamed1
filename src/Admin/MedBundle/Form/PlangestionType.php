@@ -14,7 +14,7 @@ class PlangestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '60')))
+            ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '120', 'maxlength' => '512')))
         ;
     }
     
