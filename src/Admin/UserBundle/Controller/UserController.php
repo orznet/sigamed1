@@ -282,26 +282,20 @@ class UserController extends Controller
         }
 
         $passForm = $this->createPassForm($id);
-        #$passForm->handleRequest($request);
         $passForm->bind($request);
         if ($passForm->isValid()) {
-            $currentpass = $this->generateRandomString();
-            $entity->setPassword($currentpass);
+            $currentPass = $this->generateRandomString();
+            $entity->setPassword($currentPass);
             $this->setSecurePassword($entity);
-            try {
-                $this->enviarMail($entity, $currentpass);
-            } catch (\Exception $e) {
-                $em->persist($entity);
-                $em->flush();
-                return new JsonResponse(array(
-                    'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
-            }
-
+            $this->enviarMail($entity, $currentPass);
+            $em->persist($entity);
+            $em->flush();
+            return new JsonResponse(array(
+                'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
         }
-        $response = new JsonResponse(
+        return new JsonResponse(
             array(
                 'message' => 'Error desde Json'), 400);
-        return $response;
     }
 
     /**
