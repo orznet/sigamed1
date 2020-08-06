@@ -20,7 +20,8 @@ use Admin\UserBundle\Entity\Newpass;
  *
  * @Route("/admin/user")
  */
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     /**
      * Lists all Usuarios entities.
@@ -28,7 +29,8 @@ class UserController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
         //  $entities = $em->getRepository('AdminUserBundle:User')->findAll(array ($orderBy = null, $maxResults = 500, $firstResult = null));
 
@@ -42,8 +44,8 @@ class UserController extends Controller {
         // $entities = $em->getRepository('AdminUserBundle:User')->findAll();
 
         return $this->render('AdminUserBundle:User:index.html.twig', array(
-                    'entities' => $entities,
-                    'buscar_form' => $Form->createView(),
+            'entities' => $entities,
+            'buscar_form' => $Form->createView(),
         ));
     }
 
@@ -52,7 +54,8 @@ class UserController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function infoAction() {
+    public function infoAction()
+    {
         return $this->render('AdminUserBundle:User:info.html.twig');
     }
 
@@ -62,7 +65,8 @@ class UserController extends Controller {
      * @Method("PUT")
      * @Template()
      */
-    public function buscarporAction(Request $request) {
+    public function buscarporAction(Request $request)
+    {
         $valores = new Parabuscar();
         $Form = $this->createForm(new BuscarType(), $valores);
         $Form->bind($request);
@@ -84,7 +88,8 @@ class UserController extends Controller {
         return $this->redirect($this->generateUrl('_welcome'));
     }
 
-    public function buscarapellidoAction($text) {
+    public function buscarapellidoAction($text)
+    {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT a FROM AdminUserBundle:User a WHERE a.apellidos LIKE :text ');
         $query->setParameters(array(
@@ -94,12 +99,13 @@ class UserController extends Controller {
         $valores = new Parabuscar();
         $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
-                    'entities' => $docentes,
-                    'buscar_form' => $Form->createView(),
+            'entities' => $docentes,
+            'buscar_form' => $Form->createView(),
         ));
     }
 
-    public function buscarnombreAction($text) {
+    public function buscarnombreAction($text)
+    {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT a FROM AdminUserBundle:User a WHERE a.nombres LIKE :text');
         $query->setParameters(array(
@@ -109,12 +115,13 @@ class UserController extends Controller {
         $valores = new Parabuscar();
         $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
-                    'entities' => $docentes,
-                    'buscar_form' => $Form->createView(),
+            'entities' => $docentes,
+            'buscar_form' => $Form->createView(),
         ));
     }
 
-    public function buscarcedulaAction($text) {
+    public function buscarcedulaAction($text)
+    {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT a FROM AdminUserBundle:User a WHERE a.id LIKE :text');
         $query->setParameters(array(
@@ -124,8 +131,8 @@ class UserController extends Controller {
         $valores = new Parabuscar();
         $Form = $this->createForm(new BuscarType(), $valores);
         return $this->render('AdminUserBundle:User:index.html.twig', array(
-                    'entities' => $docentes,
-                    'buscar_form' => $Form->createView(),
+            'entities' => $docentes,
+            'buscar_form' => $Form->createView(),
         ));
     }
 
@@ -135,7 +142,8 @@ class UserController extends Controller {
      * @Method("POST")
      * @Template()
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $entity = new User();
         $form = $this->createForm(new UserType(), $entity);
         $form->bind($request);
@@ -150,8 +158,8 @@ class UserController extends Controller {
         }
 
         return $this->render('AdminUserBundle:User:new.html.twig', array(
-                    'entity' => $entity,
-                    'form' => $form->createView(),
+            'entity' => $entity,
+            'form' => $form->createView(),
         ));
     }
 
@@ -161,13 +169,14 @@ class UserController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function newAction() {
+    public function newAction()
+    {
         $entity = new User();
         $form = $this->createForm(new UserType(), $entity);
 
         return $this->render('AdminUserBundle:User:new.html.twig', array(
-                    'entity' => $entity,
-                    'form' => $form->createView(),
+            'entity' => $entity,
+            'form' => $form->createView(),
         ));
     }
 
@@ -176,7 +185,8 @@ class UserController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
 
@@ -191,9 +201,9 @@ class UserController extends Controller {
         $passForm = $this->createPassForm($id);
 
         return $this->render('AdminUserBundle:User:show.html.twig', array(
-                    'entity' => $entity,
-                    'newpass_form' => $passForm->createView(),
-                    'archivo' => $archivo,
+            'entity' => $entity,
+            'newpass_form' => $passForm->createView(),
+            'archivo' => $archivo,
         ));
     }
 
@@ -203,7 +213,8 @@ class UserController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminUserBundle:User')->find($id);
@@ -215,8 +226,8 @@ class UserController extends Controller {
         $editForm = $this->createForm(new UserType(), $entity);
 
         return $this->render('AdminUserBundle:User:edit.html.twig', array(
-                    'entity' => $entity,
-                    'edit_form' => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
         ));
     }
 
@@ -226,7 +237,8 @@ class UserController extends Controller {
      * @Method("PUT")
      * @Template()
      */
-    public function updateAction(Request $request, $id) {
+    public function updateAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminUserBundle:User')->find($id);
         if (!$entity) {
@@ -244,8 +256,8 @@ class UserController extends Controller {
             $em->flush();
             //  return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
             return $this->render('AdminUserBundle:User:edit.html.twig', array(
-                        'entity' => $entity,
-                        'edit_form' => $editForm->createView(),
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
             ));
         }
     }
@@ -256,7 +268,8 @@ class UserController extends Controller {
      * @Method("POST")
      * @Template("AdminUserBundle:User:show.html.twig")
      */
-    public function newpassAction(Request $request, $id) {
+    public function newpassAction(Request $request, $id)
+    {
         if (!$request->isXmlHttpRequest()) {
             //     return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
         }
@@ -275,15 +288,19 @@ class UserController extends Controller {
             $currentpass = $this->generateRandomString();
             $entity->setPassword($currentpass);
             $this->setSecurePassword($entity);
-            $this->enviarMail($entity, $currentpass);
-            $em->persist($entity);
-            $em->flush();
-            return new JsonResponse(array(
-                'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
+            try {
+                $this->enviarMail($entity, $currentpass);
+            } catch (\Exception $e) {
+                $em->persist($entity);
+                $em->flush();
+                return new JsonResponse(array(
+                    'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
+            }
+
         }
         $response = new JsonResponse(
-                array(
-            'message' => 'Error desde Json'), 400);
+            array(
+                'message' => 'Error desde Json'), 400);
         return $response;
     }
 
@@ -293,7 +310,8 @@ class UserController extends Controller {
      * @Method("DELETE")
      * @Template()
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -319,11 +337,11 @@ class UserController extends Controller {
      *
      * @return Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder(array('id' => $id))
-                        ->add('id', 'hidden')
-                        ->getForm()
-        ;
+            ->add('id', 'hidden')
+            ->getForm();
     }
 
     /**
@@ -333,22 +351,24 @@ class UserController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createPassForm($id) {
+    private function createPassForm($id)
+    {
         return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('admin_user_newpass', array('id' => $id)))
-                        ->setMethod('POST')
-                        ->getForm()
-        ;
+            ->setAction($this->generateUrl('admin_user_newpass', array('id' => $id)))
+            ->setMethod('POST')
+            ->getForm();
     }
 
-    private function setSecurePassword(&$entity) {
+    private function setSecurePassword(&$entity)
+    {
         $entity->setSalt(md5(time()));
         $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
         $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
         $entity->setPassword($password);
     }
 
-    private function generateRandomString($length = 6) {
+    private function generateRandomString($length = 6)
+    {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -358,41 +378,44 @@ class UserController extends Controller {
         return $randomString;
     }
 
-    public function enviarMail(\Admin\UserBundle\Entity\User $user, $newpass) {
+    public function enviarMail(\Admin\UserBundle\Entity\User $user, $newpass)
+    {
 
         $message = \Swift_Message::newInstance()
-                ->setSubject('Contraseña del Módulo MED para ' . $user->getId())
-                ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
-                ->setTo(array($user->getEmail() => $user->getNombres() . ' ' . $user->getApellidos()))
-                ->setBody(
+            ->setSubject('Contraseña del Módulo MED para ' . $user->getId())
+            ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
+            ->setTo(array($user->getEmail() => $user->getNombres() . ' ' . $user->getApellidos()))
+            ->setBody(
                 $this->renderView('AdminUserBundle:User:newpass.txt.twig', array('user' => $user,
-                    'newpass' => $newpass
-                        )
+                        'newpass' => $newpass
+                    )
                 )
-        );
+            );
         if ($user->getEmailp() != '') {
             $message->setCc(array($user->getEmailp() => $user->getNombres() . ' ' . $user->getApellidos()));
         }
         $this->get('mailer')->send($message);
     }
 
-    public function passmedAction() {
+    public function passmedAction()
+    {
 
         $valores = new Newpass();
         $Form = $this->createForm(new PassType(), $valores);
         return $this->render('AdminUserBundle:Default:passmed.html.twig', array(
-                    'form' => $Form->createView(),
+            'form' => $Form->createView(),
         ));
     }
 
-    public function setpassAction(Request $request) {
+    public function setpassAction(Request $request)
+    {
         if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
         }
         $em = $this->getDoctrine()->getManager();
         $valores = new Newpass();
         $Form = $this->createForm(new PassType(), $valores);
-        
+
         $Form->handleRequest($request);
 
         if ($Form->isValid()) {
@@ -412,9 +435,9 @@ class UserController extends Controller {
                     $currentpass = $this->generateRandomString();
                     $user->setPassword($currentpass);
                     $this->setSecurePassword($user);
-                    try{
+                    try {
                         $this->enviarMail($user, $currentpass);
-                    } catch (\Exception $e){
+                    } catch (\Exception $e) {
                         $pass = $request->server->get('MED_PKW');
                         $user->setPassword($pass);
                         $this->setSecurePassword($user);
@@ -433,39 +456,39 @@ class UserController extends Controller {
                     $em->flush();
                     $Form = $this->createForm(new PassType(), $valores);
                     $response = new JsonResponse(
-                            array(
-                        'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional con las instrucciones. <a href="../login">Continuar..</a></div>',
-                        'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
-                            'form' => $Form->createView(),
-                        ))), 200);
+                        array(
+                            'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional con las instrucciones. <a href="../login">Continuar..</a></div>',
+                            'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
+                                'form' => $Form->createView(),
+                            ))), 200);
                     return $response;
                 } else {
                     $Form = $this->createForm(new PassType(), $valores);
                     $response = new JsonResponse(
-                            array(
-                        'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
-                        'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
-                            'form' => $Form->createView(),
-                        ))), 400);
+                        array(
+                            'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
+                            'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+                                'form' => $Form->createView(),
+                            ))), 400);
                     return $response;
                 }
             } else {
                 $Form = $this->createForm(new PassType(), $valores);
                 $response = new JsonResponse(
-                        array(
-                    'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
-                    'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
-                        'form' => $Form->createView(),
-                    ))), 400);
+                    array(
+                        'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
+                        'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+                            'form' => $Form->createView(),
+                        ))), 400);
                 return $response;
             }
         }
         $response = new JsonResponse(
-        array(
-         'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
-         'form' => $Form->createView(),
-          ))), 400);
-         return $response;
+            array(
+                'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
+                    'form' => $Form->createView(),
+                ))), 400);
+        return $response;
     }
 
 }
