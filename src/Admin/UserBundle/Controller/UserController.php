@@ -78,10 +78,10 @@ class UserController extends Controller
         if ($param == 'ced') {
             //return $this->redirect($this->generateUrl('admin_user_cedula', array('text' => $cadena)));
             return $this->buscarcedulaAction($cadena);
-        } else if ($param == 'nom') {
+        } elseif ($param == 'nom') {
             //return $this->redirect($this->generateUrl('admin_user_nombres', array('text' => $cadena)));
             return $this->buscarnombreAction($cadena);
-        } else if ($param == 'apell') {
+        } elseif ($param == 'apell') {
             return $this->buscarapellidoAction($cadena);
             //return $this->redirect($this->generateUrl('admin_user_apellidos', array('text' => $cadena)));
         }
@@ -291,11 +291,13 @@ class UserController extends Controller
             $em->persist($entity);
             $em->flush();
             return new JsonResponse(array(
-                'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentpass . '</div>'), 200);
+                'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Nueva Contraseña: ' . $currentPass . '</div>'), 200);
         }
         return new JsonResponse(
             array(
-                'message' => 'Error desde Json'), 400);
+                'message' => 'Error desde Json'),
+            400
+        );
     }
 
     /**
@@ -374,13 +376,14 @@ class UserController extends Controller
 
     public function enviarMail(\Admin\UserBundle\Entity\User $user, $newpass)
     {
-
         $message = \Swift_Message::newInstance()
             ->setSubject('Contraseña del Módulo MED para ' . $user->getId())
             ->setFrom(array('siga@unad.edu.co' => 'Módulo de Evaluación Docente MED'))
             ->setTo(array($user->getEmail() => $user->getNombres() . ' ' . $user->getApellidos()))
             ->setBody(
-                $this->renderView('AdminUserBundle:User:newpass.txt.twig', array('user' => $user,
+                $this->renderView(
+                    'AdminUserBundle:User:newpass.txt.twig',
+                    array('user' => $user,
                         'newpass' => $newpass
                     )
                 )
@@ -393,7 +396,6 @@ class UserController extends Controller
 
     public function passmedAction()
     {
-
         $valores = new Newpass();
         $Form = $this->createForm(new PassType(), $valores);
         return $this->render('AdminUserBundle:Default:passmed.html.twig', array(
@@ -413,19 +415,19 @@ class UserController extends Controller
         $Form->handleRequest($request);
 
         if ($Form->isValid()) {
-
             $username = $Form["username"]->getData();
             $email = $Form["email"]->getData();
             $vinculacion = $Form["vinculacion"]->getData();
-            $unidad = $Form["unidad"]->getData();
+            $unidad = (int)$Form["unidad"]->getData();
 
 
             $user = $em->getRepository('AdminUserBundle:User')->find($username);
             $docente = $em->getRepository('AdminUnadBundle:Docente')->findOneBy(array('user' => $user, 'periodo' => $this->container->getParameter('appmed.periodo')));
+            $escuela_id = $docente->getEscuela()->getId();
+            $docente_vinculacion = $docente->getVinculacion();
 
-            if ($user && $docente && $user->getEmail() == $email) {
-                if ($docente->getVinculacion() == $vinculacion && $docente->getEscuela()->getSigla() == $unidad) {
-
+            if (isset($docente) && (strcmp($user->getEmail(), $email)==0)) {
+                if ((strcmp($docente_vinculacion, $vinculacion)==0) && $escuela_id == $unidad) {
                     $currentpass = $this->generateRandomString();
                     $user->setPassword($currentpass);
                     $this->setSecurePassword($user);
@@ -442,7 +444,9 @@ class UserController extends Controller
                                 'message' => '<div class="alert alert-warning fade in"><i class="fa-fw fa fa-check"></i><strong>Error !</strong> Error al enviar el correo. Se restablecio su ingreso mediante intranet<a href="http://intranet.unad.edu.co/"> Continuar..</a></div>',
                                 'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
                                     'form' => $Form->createView(),
-                                ))), 200);
+                                ))),
+                            200
+                        );
                         return $response;
                     }
 
@@ -454,7 +458,9 @@ class UserController extends Controller
                             'message' => '<div class="alert alert-success fade in"><i class="fa-fw fa fa-check"></i><strong>Hecho !</strong> Se genero una nueva contraseña de ingreso al MED y se envio a su correo institucional con las instrucciones. <a href="../login">Continuar..</a></div>',
                             'form' => $this->renderView('AdminUserBundle:Default:passmed.html.twig', array(
                                 'form' => $Form->createView(),
-                            ))), 200);
+                            ))),
+                        200
+                    );
                     return $response;
                 } else {
                     $Form = $this->createForm(new PassType(), $valores);
@@ -463,7 +469,9 @@ class UserController extends Controller
                             'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
                             'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
                                 'form' => $Form->createView(),
-                            ))), 400);
+                            ))),
+                        400
+                    );
                     return $response;
                 }
             } else {
@@ -473,7 +481,9 @@ class UserController extends Controller
                         'message' => '<div class="alert alert-danger fade in"><i class="fa-fw fa fa-times"></i><strong>Error !</strong> La información suministrada no coincide con la información registrada.</div>',
                         'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
                             'form' => $Form->createView(),
-                        ))), 400);
+                        ))),
+                    400
+                );
                 return $response;
             }
         }
@@ -481,8 +491,9 @@ class UserController extends Controller
             array(
                 'form' => $this->renderView('AdminUserBundle:Default:passform.html.twig', array(
                     'form' => $Form->createView(),
-                ))), 400);
+                ))),
+            400
+        );
         return $response;
     }
-
 }

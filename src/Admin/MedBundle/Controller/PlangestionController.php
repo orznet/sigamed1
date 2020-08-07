@@ -18,7 +18,8 @@ use Admin\MedBundle\Form\PlangestionType;
  *
  * @Route("/doc/plangestion")
  */
-class PlangestionController extends Controller {
+class PlangestionController extends Controller
+{
 
     /**
      * Creates a new Plangestion entity.
@@ -27,7 +28,8 @@ class PlangestionController extends Controller {
      * @Method("POST")
      * @Template("AdminMedBundle:Plangestion:new.html.twig")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $entity = new Plangestion();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -52,7 +54,8 @@ class PlangestionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Plangestion $entity) {
+    private function createCreateForm(Plangestion $entity)
+    {
         $form = $this->createForm(new PlangestionType(), $entity, array(
             'action' => $this->generateUrl('plangestion_create'),
             'method' => 'POST',
@@ -69,7 +72,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function addAction() {
+    public function addAction()
+    {
         $entity = new Plangestion();
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
@@ -96,7 +100,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -114,7 +119,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function dofeAction($id) {
+    public function dofeAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -132,7 +138,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function confAction() {
+    public function confAction()
+    {
         $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getManager();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
@@ -141,7 +148,7 @@ class PlangestionController extends Controller {
             throw $this->createNotFoundException('Plangestion no encontrado');
         }
 
-        if (count($entity->getActividades()) != 0 ){
+        if (count($entity->getActividades()) != 0) {
             return $this->redirect($this->generateUrl('plangestion_show', array('id' => $session->get('docenteid'))));
         }
 
@@ -155,7 +162,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function crearAction() {
+    public function crearAction()
+    {
         $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getManager();
         $periodo = $em->getRepository('AdminMedBundle:Periodoe')->findOneBy(array('id' => $this->container->getParameter('appmed.periodo')));
@@ -180,7 +188,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function infoAction($id) {
+    public function infoAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
         $entity = $docente->getPlangestion();
@@ -194,7 +203,7 @@ class PlangestionController extends Controller {
                         'entity' => $entity,
                         'docente' => $docente,
             ));
-        } else if ($docente->getVinculacion() == 'DOFE') {
+        } elseif ($docente->getVinculacion() == 'DOFE') {
             return $this->render('AdminMedBundle:Plangestion:plandofe.html.twig', array(
                         'entity' => $entity,
                         'docente' => $docente
@@ -210,7 +219,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function autoevalAction($id) {
+    public function autoevalAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($id);
         if (!$docente) {
@@ -221,7 +231,6 @@ class PlangestionController extends Controller {
                         'entity' => $docente,
             ));
         } else {
-
             return array(
                 'entity' => $docente,
             );
@@ -235,7 +244,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -261,7 +271,8 @@ class PlangestionController extends Controller {
      * @Method("GET")
      * @Template()
      */
-    public function abrirAction($id) {
+    public function abrirAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -287,7 +298,8 @@ class PlangestionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Plangestion $entity) {
+    private function createEditForm(Plangestion $entity)
+    {
         $form = $this->createForm(new PlangestionType(), $entity, array(
             'action' => $this->generateUrl('plangestion_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -305,7 +317,8 @@ class PlangestionController extends Controller {
      * @Method("PUT")
      * @Template("AdminMedBundle:Plangestion:edit.html.twig")
      */
-    public function updateAction(Request $request, $id) {
+    public function updateAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -317,7 +330,6 @@ class PlangestionController extends Controller {
         $actividades = $entity->getActividades();
         $suma = $aux = 0;
         foreach ($actividades as $actividad) {
-
             if ($actividad->getAutoevaluacion() > 0) {
                 $suma = $suma + $actividad->getAutoevaluacion();
                 $aux++;
@@ -355,7 +367,8 @@ class PlangestionController extends Controller {
      * @Method("PUT")
      * @Template("AdminMedBundle:Plangestion:edit.html.twig")
      */
-    public function abrirRegistroAction(Request $request, $id) {
+    public function abrirRegistroAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
@@ -391,7 +404,8 @@ class PlangestionController extends Controller {
      * @Route("/{id}/cerrar", name="plangestion_cerrar")
      * @Method("GET")
      */
-    public function cerrarAction($id) {
+    public function cerrarAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
         if (!$entity) {
@@ -408,31 +422,31 @@ class PlangestionController extends Controller {
      * @Route("/{id}/confirm", name="plangestion_confirm")
      * @Method("GET")
      */
-    public function confirmAction($id) {
+    public function confirmAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AdminMedBundle:Plangestion')->find($id);
         if (!$entity) {
             throw $this->createNotFoundException('Entidad No encontrada');
         }
-        if (count($entity->getActividades()) == 0 ){
-        foreach ($entity->getRoles() as $rol) {
-            foreach ($rol->getRol()->getActividades() as $actividad) {
-                $actividadplan = new Actividadplang();
-                $actividadplan->setPlang($entity);
-                $actividadplan->setActividad($actividad);
-                if ($rol->getRol()->getId() == 13){
-                    $actividadplan->setDescripcion($rol->getDescripcion());
+        if (count($entity->getActividades()) == 0) {
+            foreach ($entity->getRoles() as $rol) {
+                foreach ($rol->getRol()->getActividades() as $actividad) {
+                    $actividadplan = new Actividadplang();
+                    $actividadplan->setPlang($entity);
+                    $actividadplan->setActividad($actividad);
+                    if ($rol->getRol()->getId() == 13) {
+                        $actividadplan->setDescripcion($rol->getDescripcion());
+                    }
+                    $em->persist($actividadplan);
                 }
-                $em->persist($actividadplan);
             }
-        }
 
-        $entity->setEstado(5);
-        $em->flush();
-        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
-        }
-        else{
-        return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));   
+            $entity->setEstado(5);
+            $em->flush();
+            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
+        } else {
+            return $this->redirect($this->generateUrl('plangestion_show', array('id' => $id)));
         }
     }
 
@@ -442,7 +456,8 @@ class PlangestionController extends Controller {
      * @Route("/{id}", name="plangestion_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -468,7 +483,8 @@ class PlangestionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder()
                         ->setAction($this->generateUrl('plangestion_delete', array('id' => $id)))
                         ->setMethod('DELETE')
@@ -477,7 +493,8 @@ class PlangestionController extends Controller {
         ;
     }
 
-    public function addAvales() {
+    public function addAvales()
+    {
         $em = $this->getDoctrine()->getManager();
         $session = $this->getRequest()->getSession();
         $docente = $em->getRepository('AdminUnadBundle:Docente')->find($session->get('docenteid'));
@@ -499,5 +516,4 @@ class PlangestionController extends Controller {
         }
         $em->flush();
     }
-
 }
