@@ -34,11 +34,11 @@
                 <td>Fecha Actualización: {{entity.updated|date('Y-m-d H:i')}}</td>
             </tr>
             <tr>
-                <th>Docente del periodo en curso:</th>
+                <th>Registro por periodo de evaluación:</th>
                 <td>
                     {% for entity in entity.getDocente %}
-     <a href="{{ path('docente_info', { 'id': entity.id }) }}">
-    {{entity.id}}
+     <a class="btn btn-primary btn-sm" href="{{ path('docente_info', { 'id': entity.id }) }}">
+    {{entity.periodo}}
      </a>
     {%endfor%}    
                 </td>
