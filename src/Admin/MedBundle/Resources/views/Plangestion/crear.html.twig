@@ -61,7 +61,7 @@
                                                 {%if totalhoras > (entity.dias*8)  or totalhoras < (entity.dias*8) %}
                                             <div class="alert alert-danger fade in">
                                                 <i class="fa-fw fa fa-warning"></i>
-                                                <strong>ATENCIÓN</strong> Para cerrar su plan en número de horas a registrar es de  {{entity.dias*8}}.
+                                                <strong>ATENCIÓN</strong> Para cerrar su plan el número de horas a registrar es de  {{entity.dias*8}}.
                                             {%else%}
                                                 <a data-toggle="modal" data-target="#ModalCerrar" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-thumbs-up"></i></span>Cerrar Registro de Roles</a>
                                                     {%endif%}

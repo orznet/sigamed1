@@ -20,6 +20,10 @@
 		    <td>Actividad</td>
 		    <td>{{ entity.actividad.descripcion }}</td>
 		    </tr>
+			   <tr>
+				   <td>Estado</td>
+				   <td>{{ form_widget(edit_form.autoevaluacion) }} {{ form_errors(edit_form.autoevaluacion) }}</td>
+			   </tr>
 		   <tr>
 		    <td>Descripción del cumplimiento</td>
 		    <td>

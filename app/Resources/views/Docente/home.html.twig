@@ -86,7 +86,7 @@
                 Periodos de evaluación: 
                 
                 {%for periodo in periodos %}
-                      <a href="{{ path('docente_home', { 'periodo': periodo.id }) }}">{{periodo.id}} </a>
+                      <a class="btn btn-primary btn-sm" href="{{ path('docente_home', { 'periodo': periodo.id }) }}">{{periodo.id}} </a>
                       {%endfor%}  
 
         </div>
