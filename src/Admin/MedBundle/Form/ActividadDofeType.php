@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ActividadDofeType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -17,11 +17,11 @@ class ActividadDofeType extends AbstractType
         $builder
             ->add('observaciones', 'textarea', array('required'  => true, 'attr' => array('cols' => '110')))
             ->add('autoevaluacion', 'choice', array('choices'   => array('2' => 'Realizado', '1' => 'No Realizado', '0' => 'No Aplica'),
-            'required'  => true,))
-           ->add('file')     
+                'required'  => true,))
+            ->add('file')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

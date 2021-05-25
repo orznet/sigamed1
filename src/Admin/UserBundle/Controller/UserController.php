@@ -427,7 +427,7 @@ class UserController extends Controller
             $docente_vinculacion = $docente->getVinculacion();
 
             if (isset($docente) && (strcmp($user->getEmail(), $email)==0)) {
-                if ((strcmp($docente_vinculacion, $vinculacion)==0) && $escuela_id == $unidad) {
+                if ((strcmp($docente_vinculacion, $vinculacion)==0) && strcmp($escuela_id, $unidad)==0) {
                     $currentpass = $this->generateRandomString();
                     $user->setPassword($currentpass);
                     $this->setSecurePassword($user);

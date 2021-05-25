@@ -333,7 +333,6 @@ class ActividadplangController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createDofeForm($entity);
         $editForm->handleRequest($request);
-        $entity->setAutoevaluacion(10);
         if ($editForm->isValid()) {
             $em->flush();
 
